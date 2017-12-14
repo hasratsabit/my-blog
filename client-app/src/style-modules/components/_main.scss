@@ -1,0 +1,29 @@
+.main-wrapper {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	@include clearfix;
+}
+
+.content {
+	width: 91%;
+	padding: 20px;
+	margin-top: 50px;
+	@include atSmall {
+		float: right;
+		width: 79%;
+		margin-top: 50px;
+	}
+
+	@include atLarge {
+		width: 84%;
+	}
+
+}
+
+.box {
+	width: 100%;
+	background: $white;
+	box-shadow: $shadow;
+	@include clearfix;
+}

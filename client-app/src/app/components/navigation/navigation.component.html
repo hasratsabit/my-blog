@@ -1,0 +1,51 @@
+<!-- Top Nav -->
+<nav class="top-nav">
+	<ul class="top-right-navbar">
+		<li routerLink="/login" [routerLinkActive]="['active']"><a>Login</a></li>
+		<li routerLink="/register" [routerLinkActive]="['active']"><a>Register</a></li>
+		<li class="user-nav">
+			<!-- Right Corner Menu -->
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<img class="img img-border img-small img-circle" src="/assets/images/profile.jpg" alt="">
+			</button>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item  routerLink="/profile" [routerLinkActive]="['active']">
+					<mat-icon>account_box</mat-icon>
+					<span>Profile</span>
+				</button>
+				<button mat-menu-item  routerLink="/logout" [routerLinkActive]="['active']">
+					<mat-icon>exit_to_app</mat-icon>
+					<span>Logout</span>
+				</button>
+				<button mat-menu-item  routerLink="/login" [routerLinkActive]="['active']">
+					<mat-icon>verified_user</mat-icon>
+					<span>Login</span>
+				</button>
+			</mat-menu>
+			<!-- Right Corner Ends -->
+		</li>
+	</ul>
+	<div class="logo">
+		<span>LOGO</span>
+	</div>
+	<div class="menu">
+		<span>Menu</span>
+	</div>
+</nav><!-- Top Nav Ends-->
+
+
+<!-- Side Nav -->
+<div class="side-navbar">
+	<ul class="navbar">
+		<li routerLink="/" [routerLinkActive]="['active']"><mat-icon>home</mat-icon><a href="#">Home</a></li>
+		<li routerLink="/blog" [routerLinkActive]="['active']"><mat-icon>description</mat-icon><a>Blogs</a></li>
+		<li routerLink="/comment" [routerLinkActive]="['active']"><mat-icon>comment</mat-icon><a >Comments</a></li>
+		<li routerLink="/category" [routerLinkActive]="['active']"><mat-icon>dns</mat-icon><a>Categories</a></li>
+		<li routerLink="/user" [routerLinkActive]="['active']"><mat-icon>account_box</mat-icon><a >Users</a></li>
+		<li routerLink="/forum" [routerLinkActive]="['active']"><mat-icon>forum</mat-icon><a >Forum</a></li>
+		<li routerLink="/email" [routerLinkActive]="['active']"><mat-icon>email</mat-icon><a >Email</a></li>
+		<li routerLink="/parts" [routerLinkActive]="['active']"><mat-icon>settings_input_component</mat-icon><a >Components</a></li>
+		<li routerLink="/dashboard" [routerLinkActive]="['active']"><mat-icon>dashboard</mat-icon><a >Dashboard</a></li>
+		<li routerLink="/profile" [routerLinkActive]="['active']"><mat-icon>perm_contact_calendar</mat-icon><a >Profile</a></li>
+	</ul>
+</div><!-- Side Nav Ends -->

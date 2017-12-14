@@ -1,0 +1,103 @@
+.side-navbar {
+	position: fixed;
+	left: 0;
+	top: 64px;
+	height: 100vh;
+	width: 45%;
+	z-index: 100;
+	float: left;
+	background: $white;
+	box-shadow: $shadow;
+	overflow: scroll;
+	@include atSmall {
+		width: 18%;
+		z-index: 0;
+	}
+
+	@include atLarge {
+		width: 14%;
+	}
+}
+
+
+
+
+.navbar {
+	width: 100%;
+	cursor: pointer;
+
+	li {
+		position: relative;
+		margin: 0;
+		padding: 20px 0;
+		border-bottom: $LightBorder;
+		transition: $SmoothTrasition;
+		&:hover {
+			background: $LightGray;
+			transition: $SmoothTrasition;
+		}
+	}
+
+	li:focus,
+	li:active,
+	li:hover mat-icon,
+	li:hover a {
+		color: $Green !important;
+		opacity: 1;
+		background: $LightGray;
+		outline: none;
+		transition: $SmoothTrasition;
+	}
+
+	a,
+	mat-icon {
+		transition: $SmoothTrasition;
+		color: $Gray;
+	}
+
+	a {
+		text-decoration: none;
+		font-family: $GeneralFont;
+		font-size: 0.9rem;
+		margin-left: 45px;
+		opacity: 0.8;
+		@include atSmall {
+			font-size: 1.1rem;
+		}
+	}
+
+	mat-icon {
+		position: absolute;
+		top: 22px;
+		left: 10px;
+		font-size: 1.1rem;
+		@include atSmall {
+			font-size: 1.4rem;
+		}
+	}
+}
+
+
+// Scrollbar
+
+::-webkit-scrollbar {
+	height: 5px;
+	width: 3px;
+	background: darken($LightGreen, 3%);
+	display: none;
+	transition: all 200ms linear;
+}
+
+.side-navbar:hover::-webkit-scrollbar {
+	display: block;
+	transition: all 200ms linear;
+}
+
+::-webkit-scrollbar-corner {
+	background: #444;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: $LightGray;
+	background: lighten($LightGray, 100%);
+}

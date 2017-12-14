@@ -1,0 +1,75 @@
+.top-nav {
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+	float: right;
+	background: $white;
+	box-shadow: $shadow;
+}
+
+
+.logo,
+.menu {
+	width: 22.5%;
+	position: absolute;
+	height: 100%;
+	@include atSmall {
+		width: 9%;
+	}
+
+	@include atLarge {
+		width: 7%;
+	}
+}
+
+.logo {
+	left: 0;
+	border-right: $LightBorder;
+}
+
+
+.menu {
+	left: 22.5%;
+	@include atSmall {
+		left: 9%;
+		border-right: $LightBorder;
+	}
+
+	@include atLarge {
+		left: 7%;
+	}
+}
+
+
+.top-right-navbar {
+	float: right;
+	font-family: $GeneralFont;
+	li {
+		display: inline-block;
+		transition: $SmoothTrasition;
+		cursor: pointer;
+		border-left: $LightBorder;
+		&:focus,
+		&:active,
+		&:hover a,
+		&:hover {
+			background: $LightGray;
+			transition: $SmoothTrasition;
+			color: $Green;
+			outline: none;
+		}
+	}
+
+	a {
+		padding: 20px;
+		display: inline-block;
+		text-decoration: none;
+		font-size: 1.1rem;
+		color: $Gray;
+		transition: $SmoothTrasition;
+	}
+}
+
+.user-nav {
+	padding: 9px;
+}

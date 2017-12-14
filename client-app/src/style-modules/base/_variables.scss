@@ -1,0 +1,54 @@
+// ===============
+// 	VARIABLES
+// ===============
+$shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+// Colors
+$white: #FFF;
+$smoky: whitesmoke;
+$Blue: #0096a9;
+$LightBlue: #00bcd4;
+$Green: #a8c583;
+$LightGreen: #bbdb92;
+$Yellow: #e1b74c;
+$LightYellow: #daa520;
+$Red: #cc6565;
+$LightRed: #ff7f7f;
+$Gray: #666666;
+$LightGray:	#E5E5E5;
+$IconsColor: #999999;
+$BodyBgColor: #e5e5e5;
+$DarkGreen: linear-gradient(60deg, #66bb6a, #43a047);
+$DarkOrange: linear-gradient(60deg, #ffa726, #fb8c00);
+$DarkRed: linear-gradient(60deg, #ef5350, #e53935);
+$DarkPurple: linear-gradient(60deg, #ab47bc, #8e24aa);
+
+// Fonts
+$TitleFont: 'Oswald', sans-serif;
+$ParagraphFont:'Source Sans Pro', sans-serif;
+$TableFont: "Roboto", "Helvetica", "Arial";
+$GeneralFont: 'Source Sans Pro', sans-serif;
+$WidgetFont: "Roboto", "Helvetica", "Arial";
+
+$LightBorder: 1px solid $LightGray;
+$SmoothTrasition: all 300ms linear;
+
+
+// Image
+$ImgBorderColor: #00bcd4;
+
+// Lists
+$ListHeadBlue: #00bcd4;
+$ListHeadGreen: #a8c583;
+$ListHead: #E5E5E5;
+$ListTextColor: #666666;
+$ListHover: whitesmoke;
+
+// Buttons
+$ButtonBlue: #0096a9;
+$ButtonBlueHover: #00bcd4;
+$ButtonGreen: #a8c583;
+$ButtonGreenHover: #bbdb92;
+$ButtonYellow: #e1b74c;
+$ButtonYellowHover: #daa520;
+$ButtonRed: #cc6565;
+$ButtonRedHover: #ff7f7f;

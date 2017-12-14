@@ -1,18 +1,77 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+// Material Modules
+
+import {MatButtonModule,
+        MatCheckboxModule,
+        MatSelectModule,
+        MatInputModule,
+        MatSidenavModule,
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatMenuModule,
+        MatIconModule,
+        MatListModule
+      } from '@angular/material';
 
 
+import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
-import { WebComponentsComponent } from './components/web-components/web-components.component';
-
+import { PartsComponent } from './components/parts/parts.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { CategoryComponent } from './components/category/category.component';
+import { UserComponent } from './components/user/user.component';
+import { ForumComponent } from './components/forum/forum.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { EmailComponent } from './components/email/email.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WebComponentsComponent
+    PartsComponent,
+    HomeComponent,
+    NavigationComponent,
+    BlogComponent,
+    CategoryComponent,
+    UserComponent,
+    ForumComponent,
+    DashboardComponent,
+    ProfileComponent,
+    EmailComponent,
+    CommentComponent,
+    RegisterComponent,
+    LoginComponent,
+    LogoutComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+
+    // Material Modules
+    MatButtonModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatMenuModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

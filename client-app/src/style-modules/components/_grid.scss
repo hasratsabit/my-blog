@@ -1,0 +1,78 @@
+.row {
+	width: 100%;
+	@include clearfix;
+}
+
+// Four columns row
+.col-4 {
+	width: 100%;
+	margin: 15px 0;
+	@include atSmall {
+		width: 44%;
+		float: left;
+		margin-left: 4%;
+
+	}
+	@include atMedium {
+		width: 24%;
+		margin-left: 1%;
+		&:first-child {
+			margin-left: 0.5%;
+		}
+	}
+}
+
+
+// Three columns row
+.col-3 {
+	width: 90%;
+	margin-top: 15px;
+	margin-left: 5%;
+	@include atSmall {
+		width: 44%;
+		float: left;
+		margin-left: 4%;
+	}
+
+	@include atMedium {
+		width: 32%;
+		margin-left: 1.3%;
+		&:first-child {
+			margin-left: 0.7%;
+		}
+	}
+}
+
+.col-2 {
+	width: 100%;
+	margin: 15px 0;
+	@include atMedium {
+		width: 46%;
+		float: left;
+		margin-left: 4%;
+		&:first-child {
+			margin-left: 1%;
+		}
+	}
+	@include atLarge {
+		width: 48%;
+		margin-left: 1%;
+	}
+}
+
+.col-1 {
+	width: 100%;
+	margin: 15px 0;
+	@include atMedium {
+		width: 60%;
+		float: left;
+		margin-left: 4%;
+		&:first-child {
+			margin-left: 2%;
+		}
+	}
+
+	@include atLarge {
+		width: 63%;
+	}
+}

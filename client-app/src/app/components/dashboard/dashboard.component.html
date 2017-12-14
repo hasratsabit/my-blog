@@ -1,0 +1,200 @@
+<div class="dashboard">
+  <!-- Row Dashboard Widgets-->
+  <div class="row dashboard__top-row">
+    <div class="col-4">
+      <!-- Widget -->
+      <div class="widget widget-green">
+        <div class="widget-icon">
+          <mat-icon>comment</mat-icon>
+        </div>
+        <div class="widget-box">
+          <div class="widget-data">
+            <h1 class="widget-title">Comments</h1><br>
+            <span class="data">343</span>
+          </div>
+          <div class="widget-footer">
+            <span class="date">View Comments</span>
+          </div>
+        </div>
+      </div><!-- Widget Ends-->
+    </div>
+
+    <div class="col-4">
+      <!-- Widget -->
+      <div class="widget widget-orange">
+        <div class="widget-icon">
+          <mat-icon>assignment</mat-icon>
+        </div>
+        <div class="widget-box">
+          <div class="widget-data">
+            <h1 class="widget-title">Blogs</h1><br>
+            <span class="data">343</span>
+          </div>
+          <div class="widget-footer">
+            <span class="date">View Blogs</span>
+          </div>
+        </div>
+      </div><!-- Widget Ends-->
+    </div>
+
+    <div class="col-4">
+      <!-- Widget -->
+      <div class="widget widget-red">
+        <div class="widget-icon">
+          <mat-icon>forum</mat-icon>
+        </div>
+        <div class="widget-box">
+          <div class="widget-data">
+            <h1 class="widget-title">Forum</h1><br>
+            <span class="data">343</span>
+          </div>
+          <div class="widget-footer">
+            <span class="date">View Forum</span>
+          </div>
+        </div>
+      </div><!-- Widget Ends-->
+    </div>
+
+    <div class="col-4">
+      <!-- Widget -->
+      <div class="widget widget-purple">
+        <div class="widget-icon">
+          <mat-icon>account_box</mat-icon>
+        </div>
+        <div class="widget-box">
+          <div class="widget-data">
+            <h1 class="widget-title">Users</h1><br>
+            <span class="data">343</span>
+          </div>
+          <div class="widget-footer">
+            <span class="date">View Users</span>
+          </div>
+        </div>
+      </div><!-- Widget Ends-->
+    </div>
+  </div><!-- Row Ends -->
+
+  <!-- User and Comment Row -->
+  <div class="row dashboard__middle-row">
+      <div class="col-2"><!-- Col  -->
+        <!-- Table  -->
+        <table class="table table-hover table-red table-center custom-table">
+          <div class="custom-head">
+            <mat-icon class="custom-icon">account_box</mat-icon>
+            <h1 class="custom-title">Users</h1>
+            <a class="custom-btn" mat-button routerLink=".">Add User</a>
+          </div>
+          <thead>
+
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>John Doe</td>
+              <td>john@gmail.com</td>
+              <td>Subscriber</td>
+              <td><a class="edit" href="">Edit</a></td>
+              <td><a class="delete" href="">Delete</a></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>John Doe</td>
+              <td>john@gmail.com</td>
+              <td>Subscriber</td>
+              <td><a class="edit" href="">Edit</a></td>
+              <td><a class="delete" href="">Delete</a></td>
+            </tr>
+            <tr>
+              <td>01</td>
+              <td>John Doe</td>
+              <td>john@gmail.com</td>
+              <td>Subscriber</td>
+              <td><a class="edit" href="">Edit</a></td>
+              <td><a class="delete" href="">Delete</a></td>
+            </tr>
+          </tbody>
+        </table><!-- Table Ends  -->
+      </div><!-- Col Ends  -->
+
+      <div class="col-2"><!-- Col  -->
+        <!-- Table  -->
+        <table class="table table-hover table-purple table-center custom-table">
+          <div class="custom-head">
+            <mat-icon class="custom-icon">comment</mat-icon>
+            <h1 class="custom-title">Comment</h1>
+          </div>
+          <thead>
+
+          </thead>
+          <tbody>
+            <tr>
+              <td>01</td>
+              <td>John Doe</td>
+              <td>Nov 13, 2017</td>
+              <td>Closures</td>
+              <td>33</td>
+              <td><a class="view" href="">View</a></td>
+              <td><a class="edit" href="">Unapprove</a></td>
+              <td><a class="edit" href="">Approve</a></td>
+              <td><a class="delete" href="">Delete</a></td>
+            </tr>
+            <tr>
+          </tbody>
+        </table><!-- Table Ends  -->
+      </div><!-- Col Ends  -->
+  </div><!-- Row Ends  -->
+
+  <!-- Blog and Category Row -->
+  <div class="row dashboard__bottom-row">
+    <div class="col-1"><!-- Col  -->
+      <!-- Table  -->
+      <table class="table table-hover table-orange table-center custom-table">
+        <div class="custom-head">
+          <mat-icon class="custom-icon">assignment</mat-icon>
+          <h1 class="custom-title">Blogs</h1>
+          <a class="custom-btn" mat-button routerLink=".">Add Blog</a>
+        </div>
+        <thead>
+
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>This is the blog title</td>
+            <td>John Doe</td>
+            <td>Nov 13, 2017</td>
+            <td>22 <br> Likes</td>
+            <td>22 <br> Comments</td>
+            <td><a class="view" href="">View</a></td>
+            <td><a class="view" href="">Published</a></td>
+            <td><a class="edit" href="">Edit</a></td>
+            <td><a class="delete" href="">Delete</a></td>
+          </tr>
+          <tr>
+        </tbody>
+      </table><!-- Table Ends  -->
+    </div><!-- Col Ends  -->
+    <div class="col-3"><!-- Col  -->
+      <!-- Table  -->
+      <table class="table table-hover table-green table-center custom-table">
+        <div class="custom-head">
+          <mat-icon class="custom-icon">category</mat-icon>
+          <h1 class="custom-title">Categories</h1>
+          <a class="custom-btn" mat-button routerLink=".">Add Category</a>
+        </div>
+        <thead>
+
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td>JavaScript</td>
+            <td><a class="edit" href="">Edit</a></td>
+            <td><a class="delete" href="">Delete</a></td>
+          </tr>
+          <tr>
+        </tbody>
+      </table><!-- Table Ends  -->
+    </div><!-- Col Ends  -->
+  </div>
+</div>

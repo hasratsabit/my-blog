@@ -1,0 +1,992 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./variables";
+@import "./mixins";
+@import "./global";
+
+
+
+// ===============
+// 	BOX
+// ===============
+
+
+
+// ===============
+// 	BOX
+// ===============
+
+.img {
+	box-sizing: border-box;
+	height: auto;
+}
+
+.img-square {
+	border-radius: 5px;
+}
+
+.img-circle {
+	border-radius: 50%;
+}
+
+.img-large {
+	height: auto;
+	width: auto;
+}
+
+.img-medium {
+	height: 60px;
+	width: 60px;
+}
+
+.img-small {
+	height: 40px;
+	width: 40px;
+}
+
+.img-tiny {
+	height: 30px;
+	width: 30px;
+}
+
+.img-border {
+	border: 3px solid $ImgBorderColor;
+}
+
+
+// ===============
+// 	ITEM LISTS
+// ===============
+.list-group {
+	width: 100%;
+	font-family: $GeneralFont;
+}
+
+// Hover Head
+.list-head {
+	width: 100%;
+	padding: 10px 0;
+	background: $ListHead;
+}
+
+
+
+// Hover Title
+.list-title {
+	padding: 0;
+	margin: 0;
+	padding-left: 10px;
+	font-size: 1.1rem;
+	color: $ListTextColor;
+	text-transform: capitalize;
+}
+
+
+// Hover Body
+.list-body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+// Hover Items
+.list-item {
+	position: relative;
+	padding: 10px 5px;
+	margin: 0;
+	display: block;
+	color: $ListTextColor;
+	border-bottom: 1px solid $ListHead;
+	border-right: 1px solid $ListHead;
+	border-left: 1px solid $ListHead;
+	transition: all 300ms linear;
+	.badge-label {
+		position: absolute;
+		padding: 5px 8px;
+		right: 10px;
+		bottom: 5px;
+	}
+}
+
+// Hover List
+.list-hover {
+	.list-item:hover {
+		cursor: pointer;
+		background: $ListHover;
+	}
+}
+
+
+// Blue List
+.list-blue {
+	.list-head {
+		background: $ListHeadBlue;
+	}
+	.list-title {
+		color: $white;
+	}
+}
+
+// Green List
+.list-green {
+	.list-head {
+		background: $ListHeadGreen;
+	}
+	.list-title {
+		color: $white;
+	}
+}
+
+
+// ===============
+// 	BUTTONS
+// ===============
+
+.button {
+	padding: 0;
+	margin: 0;
+	border: none;
+	cursor: pointer;
+	font-family: $GeneralFont;
+	&:disabled,
+	[disabled] {
+	opacity: 0.5;
+	cursor: not-allowed;
+	}
+	&:focus,
+	&:active {
+		outline: none;
+		background: transparent;
+	}
+}
+
+
+// Button Shapes
+.button-flat {
+	border-radius: 0;
+}
+
+.button-circle {
+	padding: 20px 10px !important;
+	border-radius: 50%;
+}
+
+
+// Transparent Buttons
+.button-blue-clear,
+.button-red-clear,
+.button-yellow-clear,
+.button-green-clear {
+	transition: all 300ms linear;
+	background: transparent;
+	&:hover,
+	&:active,
+	&:focus {
+		color: $white;
+		transition: all 300ms linear;
+	}
+}
+
+.button-blue-clear {
+	color: $LightBlue;
+	border: 1px solid $LightBlue;
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: $LightBlue;
+	}
+}
+
+.button-green-clear {
+	color: $LightGreen;
+	border: 1px solid $LightGreen;
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: $LightGreen;
+	}
+}
+
+.button-red-clear {
+	color: $LightRed;
+	border: 1px solid $LightRed;
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: $LightRed;
+	}
+}
+
+.button-yellow-clear {
+	color: $LightYellow;
+	border: 1px solid $LightYellow;
+	&:hover,
+	&:active,
+	&:focus{
+		background-color: $LightYellow;
+	}
+}
+
+
+// Button Colors
+.button-blue,
+.button-green,
+.button-red,
+.button-yellow {
+	transition: all 300ms linear;
+	color: $white;
+	font-weight: 900;
+	&:hover,
+	&:active,
+	&:focus {
+		color: $white;
+		transition: all 300ms linear;
+	}
+}
+
+
+.button-blue {
+	background: $ButtonBlue;
+	&:hover,
+	&:active,
+	&:focus {
+		background: $ButtonBlueHover;
+	}
+}
+
+
+.button-red {
+	background: $ButtonRed;
+	&:hover,
+	&:active,
+	&:focus  {
+		background: $ButtonRedHover;
+	}
+}
+
+.button-yellow {
+	background: $ButtonYellow;
+	&:hover,
+	&:active,
+	&:focus  {
+		background: $ButtonYellowHover;
+	}
+}
+
+
+.button-green{
+	background: $ButtonGreen;
+	&:hover,
+	&:active,
+	&:focus  {
+		background: $ButtonGreenHover;
+	}
+}
+
+
+// Button Sizes
+.button-small {
+	padding: 8px 15px;
+	font-size: 0.9rem;
+}
+
+
+.button-medium {
+	padding: 8px 15px;
+	font-size: 0.9rem;
+	@include atSmall {
+		padding: 10px 17px;
+		font-size: 1rem;
+	}
+}
+
+.button-large {
+	padding: 10px 0;
+	width: 100%;
+	@include atSmall {
+		width: auto;
+		padding: 15px 25px;
+		font-size: 1.2rem;
+	}
+}
+
+
+// ===============
+// 	BADGES
+// ===============
+
+
+.badge-label {
+	font-size: 0.9rem;
+	font-weight: 900;
+}
+
+// Badge Colors
+.badge-blue,
+.badge-yellow,
+.badge-green,
+.badge-red {
+	color: $white;
+}
+
+.badge-blue { background: $LightBlue }
+.badge-yellow { background: $LightYellow }
+.badge-green { background: $LightGreen }
+.badge-red  { background: $LightRed }
+
+// Badge Shapes
+.badge-circle {
+	padding: 8px 9px;
+	border-radius: 50%;
+}
+
+.badge-square {
+	padding: 6px 13px;
+	border-radius: 10%;
+}
+
+
+// ===============
+// 	ICONS GROUP
+// ===============
+
+.icons-group {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+.icon-large {
+	font-size: 2rem;
+	color: $Gray;
+}
+
+.icon-small,
+.icon-data {
+	font-size: 0.9rem;
+	color: $IconsColor;
+}
+
+.icons-list {
+	display: inline;
+	font-family: $GeneralFont;
+}
+
+.icon-data {
+	margin-left: 6px;
+}
+
+
+// ===============
+// 	NOTIFICATIONS
+// ===============
+
+	.alert {
+		position: relative;
+		width: 100%;
+		padding: 15px;
+		color: $white;
+		font-family: $GeneralFont;
+
+		i {
+			color: $white;
+			font-weight: 100 !important;
+			background: transparent;
+		}
+
+	}
+
+	// Notification Colors.
+	.alert-green { background: $LightGreen }
+	.alert-red { background: $LightRed }
+	.alert-yellow { background: $LightYellow }
+
+	// Notification Icons
+	.alert-icon {
+		position: absolute;
+		left: 15px;
+		@include atSmall {
+			left: 30px;
+		}
+	}
+
+	// Notification Close.
+	.alert-close {
+		position: absolute;
+		right: 20px;
+		bottom: 17px;
+	}
+
+	// Notification Inner Text.
+	.alert-text {
+		display: inline;
+		font-weight: 100;
+		margin-left: 40px;
+		@include atSmall {
+			font-size: 1.2rem;
+			margin-left: 60px;
+		}
+	}
+
+
+// ===============
+// 	TITLES
+// ===============
+
+	.title {
+		font-family: $TitleFont;
+		font-weight: 900;
+		text-transform: capitalize;
+		margin: 0;
+		padding: 0;
+	}
+
+	// Title Sizes
+	.title-small {
+		font-size: 0.8rem;
+		@include atSmall {
+			font-size: 0.8rem;
+		}
+	}
+
+	.title-medium {
+		font-size: 1rem;
+		@include atSmall {
+			font-size: 1.5rem;
+		}
+	}
+
+	.title-large {
+		font-size: 1.5rem;
+		@include atSmall {
+			font-size: 3rem;
+		}
+	}
+
+	// Title Style
+	.title-hover:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+
+	// Title Colors
+	.title-green { color: $Green }
+	.title-gray { color: $Gray}
+	.title-yellow { color: $Yellow}
+	.title-blue { color: $Blue}
+	.title-red { color: $Red}
+
+
+// ===============
+// 	    TEXT
+// ===============
+
+	.text {
+		font-size: 1.5rem;
+		font-weight: 400;
+		line-height: 1.43;
+		letter-spacing: -.013em;
+		font-family: $ParagraphFont;
+	}
+
+	.text-gray {
+		color: $ListTextColor;
+	}
+
+
+	// ===============
+	// 	    TABLE
+	// ===============
+	.table {
+		width: 100%;
+		box-shadow: $shadow;
+		padding: 0 10px;
+		border-collapse: collapse;
+		font-family: $TableFont;
+		font-size: 0.8rem;
+		@include atSmall {
+			font-size: 1rem;
+		}
+		th, td {
+			color: $Gray;
+			font-weight: 100;
+			font-size: 0.9rem;
+			padding: 10px;
+			border-bottom: 1px solid $LightGray;
+		}
+
+	}
+
+	.table tbody {
+		.edit,
+		.reply,
+		.view,
+		.delete {
+			text-decoration: none;
+			font-size: 0.8rem;
+		}
+
+		.view,
+		.reply {
+			color: $Blue;
+		}
+
+		.edit {
+			color: $Green;
+		}
+
+		.delete {
+			color: $Red;
+		}
+	}
+
+ // Customized Table No thead
+	.custom-table {
+		position: relative;
+		border-radius: 5px;
+		background: $white;
+		tr:first-child td {
+			padding-top: 70px;
+		}
+	}
+
+	.custom-head {
+		position: absolute;
+		width: 100%;
+		height: 50px;
+		border-bottom: $LightBorder;
+		z-index: 4;
+		border-radius: 3px 3px 0 0;
+
+		.custom-icon {
+			position: absolute;
+			left: 10px;
+			top: 11px;
+			font-size: 2rem;
+		}
+
+		.custom-btn {
+			position: absolute;
+			right: 3px;
+			top: 6px;
+			font-size: 0.8rem;
+			background: rgba($white, 0.5);
+			font-weight: 100;
+		}
+
+		.custom-title {
+			position: absolute;
+			font-size: 1rem;
+			left: 50px;
+			top: 18px;
+			font-weight: 200;
+		}
+	}
+
+	// Table Hover
+	.table-hover {
+		transition: all 300ms linear;
+		tbody tr:hover {
+			cursor: pointer;
+			background: $LightGray;
+			transition: all 300ms linear;
+		}
+	}
+
+	// Table Position
+	.table-center {
+		text-align: center;
+	}
+
+	.table-left {
+		text-align: left;
+	}
+
+	// Table Colors
+	.table-gray {
+		thead,
+		.custom-head {
+			background: $LightGray;
+		}
+	}
+
+	.table-blue {
+		thead,
+		.custom-head {
+			color: $white;
+			background: $LightBlue;
+		}
+	}
+
+	.table-purple {
+		thead,
+		.custom-head {
+			color: $white;
+			background: $DarkPurple;
+		}
+	}
+
+	.table-red {
+		thead,
+		.custom-head {
+			color: $white;
+			background: $DarkRed;
+		}
+	}
+
+	.table-orange {
+		thead,
+		.custom-head {
+			color: $white;
+			background: $DarkOrange;
+		}
+	}
+
+	.table-green {
+		thead,
+		.custom-head {
+			color: $white;
+			background: $DarkGreen;
+		}
+	}
+
+
+// ===============
+// 	INPUT FIELDS
+// ===============
+
+ .input {
+	 position: relative;
+ }
+
+ .input-control {
+	 border: 0;
+	 border-bottom: 1px solid $IconsColor;
+	 width: 100%;
+	 height: 50px;
+	 outline: none;
+	 font-size: 1rem;
+	 font-weight: 200;
+	 background: $LightGray;
+	 padding: 0;
+	 &:focus,
+	 &:active {
+		 background: transparent;
+	 }
+
+	 &::placeholder {
+		 position: absolute;
+		 z-index: 10;
+		 transform: translateX(10px);
+	 }
+ }
+
+ .input-control:active,
+ .input-control:focus  {
+	 &::placeholder {
+		 transform: translateY(-30px);
+	 }
+ }
+
+
+// ===============
+// 	BUCKET
+// ===============
+
+	.bucket {
+
+	}
+
+	.bucket-img,
+	.bucket-title,
+	.bucket-text {
+		display: inline;
+	}
+
+	.bucket-img {
+		margin: 0 5px;
+		padding: 0;
+		float: left;
+	}
+
+	.bucket-title {
+		margin: 0;
+
+	}
+
+	.bucket-text {
+		margin: 0;
+		padding: 0;
+		font-size: 0.8rem;
+	}
+
+// ===============
+// 	Card
+// ===============
+
+	.card {
+		position: relative;
+		box-shadow: $shadow;
+		background: $white;
+		width: 100%;
+	}
+
+	// Card Header
+	.card-header {
+		width: 100%;
+		padding: 8px 0;
+		position: relative;
+		@include clearfix;
+		.card-author,
+		.card-author-img,
+		.card-date {
+			float: left;
+			display: inline;
+		}
+
+		.card-user {
+			margin-left: 10px;
+		}
+
+		// Card Rgiht Corner Menu
+		.card-menu {
+			position: absolute;
+			right: 10px;
+			top: 8px;
+		}
+	}
+
+	// Card Image
+	.card-img {
+		height: 200px;
+		@include atLarge {
+			height: 300px;
+		}
+
+		img {
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+	// Card Content
+	.card-content {
+		padding: 20px;
+		@include atLarge {
+			padding: 30px;
+		}
+
+		.card-title {
+			padding-bottom: 10px;
+		}
+
+		.card-text {
+			margin: 0;
+			padding: 0;
+			font-size: 0.8rem;
+		}
+	}
+
+	// Card Footer
+	.card-footer {
+		padding: 15px 0;
+		border-top: 1px solid $LightGray;
+
+		.icons-list {
+			margin-left: 15px;
+			@include atLarge {
+				margin-left: 30px;
+			}
+		}
+
+		.footer-read {
+			float: right;
+			margin-right: 15px;
+			a {
+				font-size: 0.9rem;
+				color: $Green;
+				text-decoration: none;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+
+// ===============
+// 	USER
+// ===============
+
+.user {
+	position: relative;
+}
+
+.user-img,
+.user-name,
+.user-info {
+	display: inline;
+}
+
+.user-name,
+.user-info {
+	position: absolute;
+	left: 35px;
+}
+
+.user-name {
+	top: 0;
+}
+.user-info {
+	top: 16px;
+	font-size: 0.7rem;
+	font-family: $GeneralFont;
+	color: $IconsColor;
+}
+
+
+// ===============
+// 	COMMENTS
+// ===============
+
+	.comment {
+		padding: 15px 0;
+		border-bottom: 1px solid $LightGray;
+		position: relative;
+		width: 100%;
+		.text {
+			font-size: 0.8rem;
+			margin: 0;
+			padding: 0;
+			@include atSmall {
+				font-size: 1rem;
+			}
+		}
+	}
+
+
+	.comment-reply,
+	.comment-footer,
+	.comment-text {
+		width: 91%;
+		margin-left: 9%;
+		@include atSmall {
+			width: 97.5%;
+			margin-left: 2.5%;
+		}
+	}
+	.comment-footer {
+		margin-top: 10px;
+	}
+
+	// Reply Comment
+	.comment-reply {
+		padding: 10px 0;
+	}
+
+	.reply-text {
+		width: 80%;
+		margin-left: 10%;
+		@include atSmall {
+			width: 97%;
+			margin-left: 2.5%;
+		}
+	}
+
+
+
+
+// ===============
+// 	WIDGETS
+// ===============
+
+	.widget {
+		width: 100%;
+		font-family: $WidgetFont;
+		position: relative;
+		@include clearfix;
+	}
+
+	.widget-icon {
+		position: absolute;
+		top: 5px;
+		left: 15px;
+		height: 80px;
+		width: 80px;
+		color: $white;
+		z-index: 10;
+		border-radius: 3px;
+		text-align: center;
+
+		mat-icon {
+			position: absolute;
+			left: 30%;
+			top: 30%;
+			font-size: 2rem;
+		}
+	}
+
+	.widget-box {
+		position: relative;
+		height: 130px;
+		max-width: 100%;
+		transform: translateY(20px);
+		background: $white;
+		box-shadow: $shadow;
+		border-radius: 3px;
+		padding: 10px;
+	}
+
+	.widget-data {
+		position: absolute;
+		right: 15px;
+		top: 20px;
+		text-align: center;
+
+		.data {
+			font-size: 2rem;
+			font-weight: 100;
+			padding-top: 20px;
+		}
+
+		.widget-title {
+			color: $IconsColor;
+			font-weight: 100;
+			font-size: 1rem;
+		}
+	}
+
+	.widget-footer {
+		position: absolute;
+		bottom: 0;
+		left: 15px;
+		width: 90%;
+		padding: 15px 0;
+		border-top: $LightBorder;
+		color: $IconsColor;
+		font-size: 0.8rem;
+	}
+
+
+	// Widget Colors
+	.widget-green {
+		.widget-icon {
+			background: $DarkGreen;
+		}
+	}
+
+	.widget-orange {
+		.widget-icon {
+			background: $DarkOrange;
+		}
+	}
+
+	.widget-red {
+		.widget-icon {
+			background: $DarkRed;
+		}
+	}
+
+	.widget-purple {
+		.widget-icon {
+			background: $DarkPurple;
+		}
+	}
