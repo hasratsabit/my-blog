@@ -49,7 +49,7 @@
 }
 
 .img-border {
-	border: 3px solid $ImgBorderColor;
+	border: 3px solid $LightGreen;
 }
 
 
@@ -98,7 +98,7 @@
 	border-bottom: 1px solid $ListHead;
 	border-right: 1px solid $ListHead;
 	border-left: 1px solid $ListHead;
-	transition: all 300ms linear;
+	transition: $SmoothTrasition;
 	.badge-label {
 		position: absolute;
 		padding: 5px 8px;
@@ -146,7 +146,8 @@
 	margin: 0;
 	border: none;
 	cursor: pointer;
-	font-family: $GeneralFont;
+	font-family: $ButtonFont;
+	border-radius: 3px;
 	&:disabled,
 	[disabled] {
 	opacity: 0.5;
@@ -176,13 +177,13 @@
 .button-red-clear,
 .button-yellow-clear,
 .button-green-clear {
-	transition: all 300ms linear;
+	transition: $SmoothTrasition;
 	background: transparent;
 	&:hover,
 	&:active,
 	&:focus {
 		color: $white;
-		transition: all 300ms linear;
+		transition: $SmoothTrasition;
 	}
 }
 
@@ -197,12 +198,12 @@
 }
 
 .button-green-clear {
-	color: $LightGreen;
-	border: 1px solid $LightGreen;
+	color: $ButtonGreen;
+	border: 1px solid $ButtonGreen;
 	&:hover,
 	&:active,
 	&:focus {
-		background-color: $LightGreen;
+		background-color: $ButtonGreen;
 	}
 }
 
@@ -232,14 +233,14 @@
 .button-green,
 .button-red,
 .button-yellow {
-	transition: all 300ms linear;
+	transition: $SmoothTrasition;
 	color: $white;
-	font-weight: 900;
+	font-weight: 100;
 	&:hover,
 	&:active,
 	&:focus {
 		color: $white;
-		transition: all 300ms linear;
+		transition: $SmoothTrasition;
 	}
 }
 
@@ -273,7 +274,7 @@
 }
 
 
-.button-green{
+.button-green {
 	background: $ButtonGreen;
 	&:hover,
 	&:active,
@@ -300,12 +301,13 @@
 }
 
 .button-large {
-	padding: 10px 0;
+	font-size: 1.2rem;
+	font-weight: 100;
+	padding: 20px 0;
 	width: 100%;
 	@include atSmall {
 		width: auto;
 		padding: 15px 25px;
-		font-size: 1.2rem;
 	}
 }
 
@@ -395,9 +397,9 @@
 	}
 
 	// Notification Colors.
-	.alert-green { background: $LightGreen }
-	.alert-red { background: $LightRed }
-	.alert-yellow { background: $LightYellow }
+	.alert-green { background: $DarkGreen }
+	.alert-red { background: $DarkRed }
+	.alert-yellow { background: $DarkOrange }
 
 	// Notification Icons
 	.alert-icon {
@@ -501,16 +503,20 @@
 		padding: 0 10px;
 		border-collapse: collapse;
 		font-family: $TableFont;
-		font-size: 0.8rem;
+		font-size: 0.6rem;
 		@include atSmall {
 			font-size: 1rem;
 		}
 		th, td {
+			font-size: 0.8rem;
+			padding: 6px;
 			color: $Gray;
 			font-weight: 100;
-			font-size: 0.9rem;
-			padding: 10px;
 			border-bottom: 1px solid $LightGray;
+			@include atSmall {
+				font-size: 0.9rem;
+				padding: 10px;
+			}
 		}
 
 	}
@@ -520,8 +526,11 @@
 		.reply,
 		.view,
 		.delete {
+			font-size: 0.6rem;
 			text-decoration: none;
-			font-size: 0.8rem;
+			@include atSmall {
+				font-size: 0.8rem;
+			}
 		}
 
 		.view,
@@ -541,7 +550,7 @@
  // Customized Table No thead
 	.custom-table {
 		position: relative;
-		border-radius: 5px;
+		border-radius: 3px;
 		background: $white;
 		tr:first-child td {
 			padding-top: 70px;
@@ -559,8 +568,8 @@
 		.custom-icon {
 			position: absolute;
 			left: 10px;
-			top: 11px;
-			font-size: 2rem;
+			top: 13px;
+			font-size: 1.7rem;
 		}
 
 		.custom-btn {
@@ -575,7 +584,7 @@
 		.custom-title {
 			position: absolute;
 			font-size: 1rem;
-			left: 50px;
+			left: 45px;
 			top: 18px;
 			font-weight: 200;
 		}
@@ -583,11 +592,11 @@
 
 	// Table Hover
 	.table-hover {
-		transition: all 300ms linear;
+		transition: $SmoothTrasition;
 		tbody tr:hover {
 			cursor: pointer;
 			background: $LightGray;
-			transition: all 300ms linear;
+			transition: $SmoothTrasition;
 		}
 	}
 
@@ -647,44 +656,57 @@
 			background: $DarkGreen;
 		}
 	}
+	.table-white {
+		thead,
+		.custom-head {
+			color: $Gray;
+			background: $white;
+		}
+	}
 
 
 // ===============
 // 	INPUT FIELDS
 // ===============
 
- .input {
-	 position: relative;
- }
+.input-field {
+	width: 100%;
+}
+.mat-input-flex.mat-form-field-flex{
+   border-bottom: 1px solid $IconsColor;
+}
+ // .input {
+	//  position: relative;
+ // }
 
- .input-control {
-	 border: 0;
-	 border-bottom: 1px solid $IconsColor;
-	 width: 100%;
-	 height: 50px;
-	 outline: none;
-	 font-size: 1rem;
-	 font-weight: 200;
-	 background: $LightGray;
-	 padding: 0;
-	 &:focus,
-	 &:active {
-		 background: transparent;
-	 }
-
-	 &::placeholder {
-		 position: absolute;
-		 z-index: 10;
-		 transform: translateX(10px);
-	 }
- }
-
- .input-control:active,
- .input-control:focus  {
-	 &::placeholder {
-		 transform: translateY(-30px);
-	 }
- }
+ // .input-control {
+	//  border: 0;
+	//  border-bottom: 1px solid $IconsColor;
+	//  width: 100%;
+	//  height: 50px;
+	//  outline: none;
+	//  font-size: 1rem;
+	//  font-weight: 200;
+	//  background: $LightGray;
+	//  padding: 0;
+	//  &:focus,
+	//  &:active {
+	// 	 background: transparent;
+	//  }
+ //
+	//  &::placeholder {
+	// 	 position: absolute;
+	// 	 z-index: 10;
+	// 	 transform: translateX(10px);
+	//  }
+ // }
+ //
+ // .input-control:active,
+ // .input-control:focus  {
+	//  &::placeholder {
+	// 	 transform: translateY(-30px);
+	//  }
+ // }
 
 
 // ===============
@@ -726,7 +748,10 @@
 		position: relative;
 		box-shadow: $shadow;
 		background: $white;
-		width: 100%;
+		width: 90%;
+		@include atSmall {
+			width: 100%;
+		}
 	}
 
 	// Card Header
@@ -756,7 +781,7 @@
 
 	// Card Image
 	.card-img {
-		height: 200px;
+		height: 250px;
 		@include atLarge {
 			height: 300px;
 		}
@@ -912,6 +937,7 @@
 		height: 80px;
 		width: 80px;
 		color: $white;
+		transform: translateY(-20px);
 		z-index: 10;
 		border-radius: 3px;
 		text-align: center;
@@ -927,8 +953,6 @@
 	.widget-box {
 		position: relative;
 		height: 130px;
-		max-width: 100%;
-		transform: translateY(20px);
 		background: $white;
 		box-shadow: $shadow;
 		border-radius: 3px;
@@ -942,9 +966,12 @@
 		text-align: center;
 
 		.data {
-			font-size: 2rem;
+			font-size: 1.3rem;
 			font-weight: 100;
 			padding-top: 20px;
+			@include atSmall {
+				font-size: 2rem;
+			}
 		}
 
 		.widget-title {
