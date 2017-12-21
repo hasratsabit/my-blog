@@ -1,3 +1,38 @@
 .blog {
 
+	&__menu-tab {
+		margin-bottom: 10px;
+	}
+
+	&__filter {
+		float: right;
+		margin-right: 20px;
+	}
+
+	&__search {
+		margin-top: 10px;
+	}
+
+	&__add-post {
+		margin-bottom: 10px;
+	}
+
+	&__title {
+		text-align: center;
+	}
+
+	&__icon {
+		margin-left: 43%;
+		@include atSmall {
+			margin-left: 46%;
+		}
+	}
+
+	&__buttons {
+		margin: 5px 0;
+		@include atSmall {
+			margin: 0 10px;
+		}
+	}
+
 }

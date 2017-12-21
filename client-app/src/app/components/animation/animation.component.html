@@ -1,0 +1,23 @@
+<div [@clickEvent]="animateBox" (click)="onBoxAnimation()" class="anim-box">
+
+</div>
+
+<!-- <button type="button" class="button button-large button-blue" name="button" >Click Me</button> -->
+
+<div class="box-1"
+	(click)="boxCliked = true"
+	[ngClass]="{changed: boxCliked}"
+	[ngStyle]="{backgroundColor: boxCliked ? 'green' : 'yellow'}"></div>
+
+	<hr class="divider">
+
+<div id="box-2"
+	(click)="startAnimate = true"
+	[ngClass]="{animatebox: startAnimate}"></div>
+
+<hr class="divider">
+
+<button (click)="openBox = true" class="button button-large button-green">Open</button>
+<button (click)="openBox = false" class="button button-large button-red">Close</button>
+
+<div [ngClass]="{isOpen: openBox, isClose: !openBox }" id="box-3"></div>

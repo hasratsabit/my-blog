@@ -1,11 +1,59 @@
 <div class="blog">
-  <div class="row">
+  <!-- Add Post Form -->
+  <div *ngIf="postFormLoaded" class="blog__add-post box">
+    <div class="blog__icon icon-round icon-green">
+      <mat-icon>send</mat-icon>
+    </div>
+    <h1 class="title title-medium blog__title">Add New Post</h1>
+  	<form class="">
+  		<mat-form-field class="input-field input">
+  			<input matInput type="text" placeholder="Title">
+  		</mat-form-field>
+      <mat-form-field  class="input-field input">
+        <mat-select placeholder="Select Category">
+        <mat-option>JavaScript</mat-option>
+        <mat-option>Python</mat-option>
+      </mat-select>
+      </mat-form-field>
+      <mat-form-field class="input-field input">
+        <textarea matInput placeholder="Body"></textarea>
+      </mat-form-field>
+  		<button  class="blog__buttons button button-large button-green-clear">Add Post</button>
+  		<button  (click)="cancelPostForm()" class="blog__buttons button button-large button-red-clear">Cancel</button>
+  	</form>
+  </div><!-- Add Post Form Ends-->
+
+  <!-- Add Post Menu Tab -->
+  <div *ngIf="!postFormLoaded" class="blog__menu-tab box">
+    <button (click)="loadPostForm()" class="button button-medium button-green-clear">Add Post</button>
+    <div class="blog__filter">
+      <button mat-icon-button [matMenuTriggerFor]="menu">Filter
+        <mat-icon>equalizer</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          Newest
+        </button>
+        <button mat-menu-item>
+          Oldest
+        </button>
+        <button mat-menu-item>
+          Most Viewed
+        </button>
+      </mat-menu>
+    </div><!-- Right Corner Ends -->
+    <mat-form-field class="blog__search input-field input">
+      <input matInput type="text" placeholder="Search">
+    </mat-form-field>
+  </div><!-- Add Post Menu Tab Ends-->
+
+  <!-- Table Row -->
+  <div *ngIf="!postFormLoaded" class="row">
     <!-- Table  -->
     <table class="blog__table table table-hover table-green table-center custom-table">
       <div class="custom-head">
         <mat-icon class="custom-icon">assignment</mat-icon>
         <h1 class="custom-title">Blogs</h1>
-        <a class="custom-btn" mat-button routerLink=".">Add Blog</a>
       </div>
       <thead>
 
@@ -73,5 +121,6 @@
         </tr>
       </tbody>
     </table><!-- Table Ends  -->
-  </div>
+  </div><!-- Table Row Ends-->  <!-- Table Row Ends-->
+
 </div>

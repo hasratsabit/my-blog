@@ -1,0 +1,90 @@
+.anim-box {
+	height: 100px;
+	width: 100px;
+	background: orange;
+}
+
+.box-1 {
+	height: 100px;
+	width: 100px;
+	background-color: red;
+	transition: background-color 0.5s ease-out 1s, width 0.5s linear 1.4s;
+}
+
+.changed {
+	width: 400px;
+}
+
+
+#box-2 {
+	height: 100px;
+	width: 100px;
+	background-color: purple;
+}
+
+.animatebox {
+	animation: moved ease-in 1.5s infinite forwards;
+}
+
+@keyframes moved {
+	0% {
+		transform: translateX(0) scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(200px) scale(1.3) rotate(45deg);
+		opacity: 0.5;
+	}
+	75% {
+		transform: translateX(400px) scale(1.5) rotate(90deg);
+		opacity: 0.8;
+	}
+
+	100% {
+		transform: translateX(0) scale(1) rotate(-90deg);
+		opacity: 1;
+	}
+}
+
+
+#box-3 {
+
+}
+
+.isOpen {
+	height: 100px;
+	width: 100px;
+	margin-top: 20px;
+	background-color: yellow;
+	animation: isOpen ease-in 1.5s forwards;
+}
+
+.isClose {
+	transform: scale(0);
+	transition: all 1.5s ease-in;
+	// animation: isClose ease-in 1.5s forwards;
+}
+
+@keyframes isOpen {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+
+	100% {
+		transform: scale(1.5);
+		opacity: 1;
+	}
+}
+
+
+@keyframes isClose {
+	0% {
+		transform: scale(0);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(0);
+		opacity: 0;
+	}
+}

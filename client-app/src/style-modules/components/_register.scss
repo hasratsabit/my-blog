@@ -1,15 +1,13 @@
 .register {
-
+	text-align: center;
+	&__title {
+		margin: 10px 0;
+	}
 	&__form {
 		@include atSmall {
 			width: 60%;
 			margin-left: 20%;
 		}
-	}
-
-	&__title {
-		text-align: center;
-		font-weight: 100;
 	}
 
 	&__input {

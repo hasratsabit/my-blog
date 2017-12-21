@@ -301,12 +301,13 @@
 }
 
 .button-large {
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-weight: 100;
-	padding: 20px 0;
+	padding: 12px 0;
 	width: 100%;
 	@include atSmall {
 		width: auto;
+		font-size: 1.2rem;
 		padding: 15px 25px;
 	}
 }
@@ -356,6 +357,8 @@
 	padding: 0;
 	margin: 0;
 }
+
+
 .icon-large {
 	font-size: 2rem;
 	color: $Gray;
@@ -374,6 +377,36 @@
 
 .icon-data {
 	margin-left: 6px;
+}
+
+// Round Icons
+.icon-round {
+	display: inline-block;
+	position: relative;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	text-align: center;
+	@include atSmall {
+		width: 70px;
+		height: 70px;
+	}
+
+	mat-icon {
+		position: absolute;
+		top: 28%;
+		left: 28%;
+		@include atSmall {
+			top: 23%;
+			left: 23%;
+			font-size: 2.5rem;
+		}
+	}
+}
+
+.icon-green {
+	border: 2px solid $Green;
+	color: $Green !important;
 }
 
 
@@ -746,11 +779,17 @@
 
 	.card {
 		position: relative;
-		box-shadow: $shadow;
 		background: $white;
 		width: 90%;
+		transition: $SmoothTrasition;
 		@include atSmall {
 			width: 100%;
+		}
+
+		&:hover {
+			box-shadow: $shadow;
+			transform: scale(1.01);
+			transition: $SmoothTrasition;
 		}
 	}
 

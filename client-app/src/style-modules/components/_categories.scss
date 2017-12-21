@@ -1,0 +1,31 @@
+.categories {
+
+	&__add-category {
+		margin-bottom: 10px;
+	}
+
+	&__form {
+		@include atSmall {
+			width: 60%;
+			margin-left: 20%;
+		}
+	}
+
+	&__title {
+		text-align: center;
+	}
+
+	&__icon {
+		margin-left: 40%;
+		@include atSmall {
+			margin-left: 46%;
+		}
+	}
+
+	&__buttons {
+		margin-top: 10px;
+		@include atSmall {
+			margin-top: 0;
+		}
+	}
+}

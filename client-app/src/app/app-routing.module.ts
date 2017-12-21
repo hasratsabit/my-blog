@@ -14,6 +14,7 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { LoginComponent } from "./components/login/login.component";
 import { LogoutComponent } from "./components/logout/logout.component";
+import { AnimationComponent } from "./components/animation/animation.component";
 
 
 
@@ -74,6 +75,10 @@ const appRoutes: Routes = [
 	{
 		path: 'logout',
 		component: LogoutComponent
+	},
+	{
+		path: 'animation',
+		component: AnimationComponent
 	}
 
 ]

@@ -35,6 +35,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AnimationComponent } from './components/animation/animation.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
+    AnimationComponent,
   ],
   imports: [
     BrowserModule,

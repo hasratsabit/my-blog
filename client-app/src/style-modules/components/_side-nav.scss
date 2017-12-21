@@ -8,7 +8,9 @@
 	float: left;
 	background: $white;
 	box-shadow: $shadow;
-	overflow: scroll;
+	&:hover {
+		overflow-y: scroll;
+	}
 	@include atSmall {
 		width: 18%;
 		z-index: 0;
@@ -94,7 +96,7 @@
 }
 
 ::-webkit-scrollbar-corner {
-	background: #444;
+	background: $LightGreen;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -7,7 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryComponent implements OnInit {
 
+  loadedCategoryForm: Boolean = false;
+
   constructor() { }
+
+
+  loadCategoryForm() {
+    this.loadedCategoryForm = true;
+  }
+
+  cancelCategoryForm() {
+    this.loadedCategoryForm = false;
+  }
 
   ngOnInit() {
   }

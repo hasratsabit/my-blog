@@ -1,11 +1,26 @@
 <div class="categories">
+  <!-- Category-->
+  <div *ngIf="loadedCategoryForm"  class="categories__add-category box">
+    <div class="categories__icon icon-round icon-green">
+      <mat-icon>category</mat-icon>
+    </div>
+    <h1 class="title title-medium categories__title">Add Category</h1>
+    <form class="categories__form">
+      <mat-form-field class="input-field input">
+        <input matInput type="text" placeholder="Add Category">
+      </mat-form-field>
+      <button  class="categories__buttons button button-large button-green-clear">Add Category</button>
+      <button  (click)="cancelCategoryForm()" class="categories__buttons button button-large button-red-clear">Cancel</button>
+    </form>
+  </div><!-- Add Category Form Ends-->
+
   <div class="row">
     <!-- Table  -->
     <table class="table table-hover table-green table-center custom-table">
       <div class="custom-head">
         <mat-icon class="custom-icon">category</mat-icon>
         <h1 class="custom-title">Categories</h1>
-        <a class="custom-btn" mat-button routerLink=".">Add Category</a>
+        <a class="custom-btn" mat-button routerLink="." (click)="loadCategoryForm()">Add Category</a>
       </div>
       <thead>
 
