@@ -135,19 +135,31 @@ module.exports = (router) => {
 // ==========================================================
 
 	router.post('/login', (req, res) => {
+		// Check if the user provided username.
 		if(!req.body.username){
+			// Respond if the user didn't provide username.
 			res.json({ success: false, message: 'Please provide a username.'});
+			// Check if the user provided password.
 		}else if(!req.body.password){
+			// Respond if the user didn't provide password.
 			res.json({ success: false, message: 'Please provide a password.'});
 		}else {
+			// Find the user by username provided by user.
 			User.findOne({ username: req.body.username.toLowerCase()}, (err, user) => {
+				// Check if there is any error.
 				if(err){
+					// Respond if there is any error.
 					res.json({ success: false, message: 'Error occured finding username', err });
+					// Check if the user exist in the database.
 				}else if (!user) {
+					// Respond if the user is not found in database.
 					res.json({ success: false, message: 'The username was not found. Try again.'});
 				}else {
+					// Compare the password provided by user with one in database.
 					const validPassword = user.comparePassword(req.body.password);
+					// Check if the password matches the password in database.
 					if(!validPassword){
+						// Respond if the password does not match one in database.
 						res.json({ success: false, message: 'Password does not match. Try again.'});
 					}else {
 						const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24' });
