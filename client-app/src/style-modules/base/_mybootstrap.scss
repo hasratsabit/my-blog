@@ -416,10 +416,11 @@
 
 	.alert {
 		position: relative;
-		width: 100%;
+		max-width: 100%;
 		padding: 15px;
 		color: $white;
 		font-family: $GeneralFont;
+		text-align: left;
 
 		i {
 			color: $white;
@@ -460,6 +461,9 @@
 			margin-left: 60px;
 		}
 	}
+
+.hint-green { color: $Green}
+.hint-red { color: $Red}
 
 
 // ===============

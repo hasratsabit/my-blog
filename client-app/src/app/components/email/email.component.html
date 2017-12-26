@@ -1,3 +1,24 @@
-<p>
-  email works!
-</p>
+<div class="email">
+  <!-- Add Post Form -->
+  <div class="email__send-email box">
+    <div class="email__icon icon-round icon-green">
+      <mat-icon>mail</mat-icon>
+    </div>
+    <h1 class="title title-medium email__title">Send New Mail</h1>
+    <form class="">
+      <mat-form-field class="input-field input">
+        <input matInput type="text" placeholder="To:">
+      </mat-form-field>
+      <mat-form-field class="input-field input">
+        <input matInput type="text" placeholder="Subject">
+      </mat-form-field>
+
+      <mat-form-field class="input-field input">
+        <textarea matInput placeholder="Body"></textarea>
+      </mat-form-field>
+      <button  class="email__buttons button button-large button-green-clear">Send</button>
+      <button class="email__buttons button button-large button-red-clear">Cancel</button>
+    </form>
+  </div><!-- Add Post Form Ends-->
+
+</div>

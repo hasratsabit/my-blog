@@ -1,4 +1,9 @@
 .login {
+	text-align: center;
+
+	&__icon {
+		margin-top: 20px;
+	}
 	&__form {
 		@include atSmall {
 			width: 60%;

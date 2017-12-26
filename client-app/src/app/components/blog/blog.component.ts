@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate } from "@angular/animations";
+import { fadeInDown, fadeInLeft, fadeIn } from '../../animations/animation';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  styleUrls: ['./blog.component.scss'],
+  animations: [fadeInDown, fadeInLeft, fadeIn]
 })
 export class BlogComponent implements OnInit {
 

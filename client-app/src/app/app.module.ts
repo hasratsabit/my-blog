@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from "@angular/http";
 
 // Material Modules
 
@@ -37,6 +40,9 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AnimationComponent } from './components/animation/animation.component';
 
+// Services
+import { UserService } from './services/user.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,12 +60,15 @@ import { AnimationComponent } from './components/animation/animation.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    AnimationComponent,
+    AnimationComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpModule,
 
     // Material Modules
     MatButtonModule,
@@ -75,7 +84,7 @@ import { AnimationComponent } from './components/animation/animation.component';
     MatIconModule,
     MatListModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

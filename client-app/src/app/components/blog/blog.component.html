@@ -1,6 +1,6 @@
 <div class="blog">
   <!-- Add Post Form -->
-  <div *ngIf="postFormLoaded" class="blog__add-post box">
+  <div @fadeInDown *ngIf="postFormLoaded" class="blog__add-post box">
     <div class="blog__icon icon-round icon-green">
       <mat-icon>send</mat-icon>
     </div>
@@ -18,13 +18,13 @@
       <mat-form-field class="input-field input">
         <textarea matInput placeholder="Body"></textarea>
       </mat-form-field>
-  		<button  class="blog__buttons button button-large button-green-clear">Add Post</button>
-  		<button  (click)="cancelPostForm()" class="blog__buttons button button-large button-red-clear">Cancel</button>
+  		<button  class="blog__buttons button button-medium button-green-clear">Add Post</button>
+  		<button  (click)="cancelPostForm()" class="blog__buttons button button-medium button-red-clear">Cancel</button>
   	</form>
   </div><!-- Add Post Form Ends-->
 
   <!-- Add Post Menu Tab -->
-  <div *ngIf="!postFormLoaded" class="blog__menu-tab box">
+  <div @fadeIn  *ngIf="!postFormLoaded" class="blog__menu-tab box">
     <button (click)="loadPostForm()" class="button button-medium button-green-clear">Add Post</button>
     <div class="blog__filter">
       <button mat-icon-button [matMenuTriggerFor]="menu">Filter
@@ -48,7 +48,7 @@
   </div><!-- Add Post Menu Tab Ends-->
 
   <!-- Table Row -->
-  <div *ngIf="!postFormLoaded" class="row">
+  <div @fadeIn *ngIf="!postFormLoaded" class="row">
     <!-- Table  -->
     <table class="blog__table table table-hover table-green table-center custom-table">
       <div class="custom-head">

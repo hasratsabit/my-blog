@@ -1,12 +1,48 @@
 <div class="login box">
-	<h1 class="title title-large login__title">Login</h1>
-	<form class="login__form">
+
+	<!-- Success or Error Message -->
+	<div @fadeIn *ngIf="alertMessage">
+		<div [ngClass]="alertMessageClass">
+			<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
+		</div>
+	</div><!-- Success or Error Message Ends -->
+
+	<!-- User Icon -->
+	<div @fadeIn class="login__icon icon-round icon-green">
+		<mat-icon>lock_open</mat-icon>
+	</div><!-- User Icon Ends-->
+
+	<h1 @fadeIn class="title title-medium login__title">Login</h1>
+
+	<!-- Login Form -->
+	<form [formGroup]="form" class="login__form" (submit)="onLoginUser()">
+
+		<!-- Username Input -->
 		<mat-form-field class="input-field login__input">
-			<input matInput type="text" placeholder="Username">
-		</mat-form-field>
+			<input
+			matInput
+			type="text"
+			name="username"
+			formControlName="username"
+			placeholder="Username"
+			required>
+			<mat-error *ngIf="form.controls.username.errors?.required">Username is required.</mat-error>
+		</mat-form-field><!-- Username Input Ends-->
+
+		<!-- Password Input -->
 		<mat-form-field class="input-field login__input">
-			<input matInput type="password" placeholder="Password">
+			<input
+			matInput
+			type="password"
+			name="password"
+			formControlName="password"
+			placeholder="Password"
+			required><!-- Password Input Ends -->
+			<mat-error *ngIf="form.controls.password.errors?.required">Password is required.</mat-error>
 		</mat-form-field>
-		<button  class="button button-large button-green-clear">Login</button>
-	</form>
+
+		<button [disabled]="!form.valid || proccessing" type="submit"  class="button button-large button-green-clear">Login</button>
+
+	</form><!-- Login Form Ends -->
+
 </div>

@@ -1,24 +1,108 @@
 <div class="register box">
-	<div class="register__icon icon-round icon-green">
+
+	<!-- Success or Error Message -->
+	<div @fadeIn *ngIf="alertMessage">
+		<div [ngClass]="alertMessageClass">
+			<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
+		</div>
+	</div><!-- Success or Error Message Ends -->
+
+	<!-- User Icon -->
+	<div @fadeIn class="register__icon icon-round icon-green">
 		<mat-icon>account_circle</mat-icon>
-	</div>
-	<h1 class="title title-medium register__title">Create New Account</h1>
-	<form class="login__form">
+	</div><!-- User Icon Ends-->
+
+	<h1 @fadeIn class="title title-medium register__title">Create New Account</h1>
+
+	<!-- Register Form -->
+	<form @fadeIn [formGroup]="form" class="login__form" (submit)="onRegisterUser()">
+
+
+		<!-- Name Input -->
 		<mat-form-field class="input-field register__input">
-			<input matInput type="text" placeholder="Name">
-		</mat-form-field>
+			<input matInput
+			type="text"
+			 placeholder="Name"
+			 formControlName="name"
+			 name="name"
+			 required>
+			 <!-- Name Error Block -->
+			<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.required">The name field is required.</mat-error>
+			<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.minlength">The name must be at least 2 characters.</mat-error>
+			<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.maxlength">The name can not excceed 15 characters</mat-error>
+			<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.validateName">The name must not contain special characters</mat-error>
+		</mat-form-field><!-- Name Input Ends-->
+
+
+		<!-- Email Input -->
 		<mat-form-field class="input-field register__input">
-			<input matInput type="email" placeholder="Email">
-		</mat-form-field>
+			<input matInput
+			(blur)="checkEmail()"
+			 placeholder="Email"
+			 type="email"
+			 formControlName="email"
+			 name="email"
+			 required>
+			 <!-- Email Error Block -->
+			<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.required">The email field is required.</mat-error>
+			<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.minlength">The email must be at least 3 characters.</mat-error>
+			<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.maxlength">The email can not excceed 30 characters</mat-error>
+			<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.validateEmail">It must be a valid email.</mat-error>
+			<mat-hint *ngIf="availableEmailMessage" [ngClass]="availableEmailClass">{{ availableEmailMessage }}</mat-hint>
+		</mat-form-field><!-- Email Input Ends-->
+
+
+		<!-- Username Input -->
 		<mat-form-field class="input-field register__input">
-			<input matInput type="text" placeholder="Username">
-		</mat-form-field>
+			<input matInput
+			(blur)="checkUsername()"
+			type="text"
+			 placeholder="Username"
+			 formControlName="username"
+			 name="username"
+			 required>
+			 <!-- Userusername Error Block -->
+			<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.required">The username field is required.</mat-error>
+			<mat-error *ngIf="form.controls.username.dirty && form.controls.username.dirty && form.controls.username.errors?.minlength">The username must be at least 5 characters.</mat-error>
+			<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.maxlength">The username can not excceed 15 characters</mat-error>
+			<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.validateUsername">The username must not contain special characters</mat-error>
+			<mat-hint *ngIf="availableUsernameMessage" [ngClass]="availableUsernameClass">{{ availableUsernameMessage }}</mat-hint>
+		</mat-form-field><!-- Username Input Ends-->
+
+
+		<!-- Password Input -->
 		<mat-form-field class="input-field register__input">
-			<input matInput type="password" placeholder="Password">
-		</mat-form-field>
+			<input matInput
+			type="password"
+			 placeholder="Password"
+			 formControlName="password"
+			 name="password"
+			 required>
+			 <!-- Password Error Block -->
+			<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.required">The password field is required.</mat-error>
+			<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.minlength">The password must be at least 5 characters.</mat-error>
+			<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.maxlength">The password can not excceed 35 characters</mat-error>
+			<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.validatePassword">The password must contain at least 1 number, 1 special character, 1 lowercase, and 1 uppercase letter</mat-error>
+		</mat-form-field><!-- Password Input Ends-->
+
+
+		<!-- Confirm Input -->
 		<mat-form-field class="input-field register__input">
-			<input matInput type="password" placeholder="Confirm Password">
-		</mat-form-field>
-		<button  class="button button-large button-green-clear">Create Account</button>
-	</form>
+			<input matInput
+			type="password"
+			 placeholder="Confirm"
+			 formControlName="confirm"
+			 name="confirm"
+			 required>
+			 <!-- Confirm Error Block -->
+			<mat-error *ngIf="form.controls.confirm.dirty && form.controls.confirm.errors?.required">The confirm field is required.</mat-error>
+			<mat-error *ngIf="form.controls.confirm.dirty && form.errors?.matchingPasswords">The passwords do not match</mat-error>
+		</mat-form-field><!-- Confirm Input Ends-->
+
+
+		<!-- Submit Button -->
+		<button type="submit" [disabled]="!form.valid || proccessing || !emailAvailable || !usernameAvailable" class="register__button button button-large button-green-clear">Create Account</button>
+		<button type="button" [disabled]="proccessing" (click)="goBack()" class="register__button button button-large button-red-clear">Cancel</button>
+
+	</form><!-- Register Form Ends-->
 </div>

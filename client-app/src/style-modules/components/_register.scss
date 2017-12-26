@@ -1,5 +1,10 @@
 .register {
 	text-align: center;
+
+	&__icon {
+		margin-top: 20px;
+	}
+
 	&__title {
 		margin: 10px 0;
 	}
@@ -12,6 +17,12 @@
 
 	&__input {
 		margin: 5px 0;
+	}
+
+	&__button {
+		margin-top: 5px;
+		float: left;
+		margin-right: 10px;
 	}
 
 	// button {
