@@ -1,7 +1,7 @@
-<div class="register box">
+<div class="register box" @rainFall>
 
 	<!-- Success or Error Message -->
-	<div @fadeIn *ngIf="alertMessage">
+	<div *ngIf="alertMessage">
 		<div [ngClass]="alertMessageClass">
 			<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
 		</div>
@@ -15,11 +15,11 @@
 	<h1 @fadeIn class="title title-medium register__title">Create New Account</h1>
 
 	<!-- Register Form -->
-	<form @fadeIn [formGroup]="form" class="login__form" (submit)="onRegisterUser()">
+	<form [formGroup]="form" class="login__form" (submit)="onRegisterUser()">
 
 
 		<!-- Name Input -->
-		<mat-form-field class="input-field register__input">
+		<mat-form-field @fadeIn class="input-field register__input">
 			<input matInput
 			type="text"
 			 placeholder="Name"
@@ -35,7 +35,7 @@
 
 
 		<!-- Email Input -->
-		<mat-form-field class="input-field register__input">
+		<mat-form-field @fadeIn class="input-field register__input">
 			<input matInput
 			(blur)="checkEmail()"
 			 placeholder="Email"
@@ -53,7 +53,7 @@
 
 
 		<!-- Username Input -->
-		<mat-form-field class="input-field register__input">
+		<mat-form-field @fadeIn class="input-field register__input">
 			<input matInput
 			(blur)="checkUsername()"
 			type="text"
@@ -71,7 +71,7 @@
 
 
 		<!-- Password Input -->
-		<mat-form-field class="input-field register__input">
+		<mat-form-field @fadeIn class="input-field register__input">
 			<input matInput
 			type="password"
 			 placeholder="Password"
@@ -87,7 +87,7 @@
 
 
 		<!-- Confirm Input -->
-		<mat-form-field class="input-field register__input">
+		<mat-form-field @fadeIn class="input-field register__input">
 			<input matInput
 			type="password"
 			 placeholder="Confirm"
@@ -101,8 +101,8 @@
 
 
 		<!-- Submit Button -->
-		<button type="submit" [disabled]="!form.valid || proccessing || !emailAvailable || !usernameAvailable" class="register__button button button-large button-green-clear">Create Account</button>
-		<button type="button" [disabled]="proccessing" (click)="goBack()" class="register__button button button-large button-red-clear">Cancel</button>
+		<button @fadeIn type="submit" [disabled]="!form.valid || proccessing || !emailAvailable || !usernameAvailable" class="register__button button button-large button-green-clear">Create Account</button>
+		<button @fadeIn type="button" [disabled]="proccessing" (click)="goBack()" class="register__button button button-large button-red-clear">Cancel</button>
 
 	</form><!-- Register Form Ends-->
 </div>

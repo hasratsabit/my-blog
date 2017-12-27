@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { fadeIn } from '../../animations/animation';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  styleUrls: ['./category.component.scss'],
+  animations: [ fadeIn]
 })
 export class CategoryComponent implements OnInit {
 

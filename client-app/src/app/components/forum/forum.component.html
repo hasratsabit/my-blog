@@ -1,3 +1,11 @@
-<p>
-  forum works!
-</p>
+<div class="box">
+  <div class="zippy">
+    <div class="zippy-heading" [class.expanded]="isExpanded" (click)="toggle()">
+      Open Zippy
+      <span class="fa" [ngClass]="{'fa-chevron-up': isExpanded,'fa-chevron-down': !isExpanded}"></span>
+    </div>
+    <div [@expandCollapse]="isExpanded ? 'expanded' : 'collapsed'" class="zippy-body">
+      <p>{{ content }}</p>
+    </div>
+  </div>
+</div>

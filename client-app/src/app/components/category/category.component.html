@@ -1,6 +1,6 @@
 <div class="categories">
   <!-- Category-->
-  <div *ngIf="loadedCategoryForm"  class="categories__add-category box">
+  <div @fadeIn *ngIf="loadedCategoryForm"  class="categories__add-category box">
     <div class="categories__icon icon-round icon-green">
       <mat-icon>category</mat-icon>
     </div>
@@ -14,7 +14,7 @@
     </form>
   </div><!-- Add Category Form Ends-->
 
-  <div class="row">
+  <div @fadeIn class="row">
     <!-- Table  -->
     <table class="table table-hover table-green table-center custom-table">
       <div class="custom-head">

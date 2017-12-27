@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from "@angular/animations";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { fadeIn, fadeInDown } from '../../animations/animation';
+import { fadeIn, fadeInDown, rainFall } from '../../animations/animation';
 
 import { UserService } from '../../services/user.service';
 
@@ -12,7 +12,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: [ fadeIn, fadeInDown ]
+  animations: [ fadeIn, fadeInDown, rainFall]
 })
 export class RegisterComponent implements OnInit {
 

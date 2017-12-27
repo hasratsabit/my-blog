@@ -1,4 +1,4 @@
-import { trigger, state, style, transition, animate, keyframes, query, stagger, animateChild } from "@angular/animations";
+import { trigger, state, style, transition, animate, keyframes, query, stagger, animateChild, group } from "@angular/animations";
 
 export const fade = trigger('fade', [
   state('void', style({ opacity: 0 })),
@@ -94,3 +94,44 @@ export const fadeIn = trigger('fadeIn', [
 		]))
 	])
 ])
+
+
+export const rainFall = trigger('rainFall', [
+  transition(':enter', [
+    query('@fadeIn', stagger(200, animateChild()))
+  ])
+])
+// export const rainFall = trigger('rainFall', [
+//   transition(':enter', [
+//     group([
+//       query('h1', [
+//         style({ transform: 'translateY(-20px)'}),
+//         animate(1000)
+//       ]),
+//       query('@fadeIn', stagger(500, animateChild()))
+//     ])
+//   ])
+// ])
+
+
+export const expandCollapse = trigger('expandCollapse', [
+  state('collapsed', style({
+    height: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    opacity: 0
+  })),
+
+  transition('collapsed => expanded', [
+    animate('300ms ease-out', style({
+      height: '*',
+      paddingTop: '*',
+      paddingBottom: '*'
+    })),
+    animate('1s', style({ opacity: 1 }))
+  ]),
+
+  transition('expanded => collapsed', [
+    animate('300ms ease-in')
+  ])
+]);
