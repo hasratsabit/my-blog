@@ -177,5 +177,30 @@ module.exports = (router) => {
 		}
 	})
 
+
+// ==========================================================
+// 		 									HEADER MIDDLEWARE
+// ==========================================================
+
+	router.use((req, res, next) => {
+		const token = req.headers['authorization'];
+		if(!token){
+			res.json({ success: false, message: 'No token was provided'});
+		}else {
+			jwt.verify(token, config.secret, (err, decoded) => {
+				if(err){
+					res.json({ success: false, message: 'Error occured verifying token' + err });
+				}else {
+					req.decoded = token;
+				}
+			})
+		}
+	})
+
+
+
+
+
+
 return router;
 }

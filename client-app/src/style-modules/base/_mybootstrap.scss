@@ -1060,3 +1060,240 @@
 			background: $DarkPurple;
 		}
 	}
+
+
+// ===============
+// 	DISCUSSION
+// ===============
+.discussion {
+	background: $white;
+	box-shadow: $shadow;
+	@include clearfix;
+	// These rules apply to answer and main content.
+	&__user,
+	&__content,
+	&__info,
+	&__footer,
+	&__body {
+		float: left;
+	}
+
+	img {
+		height: 30px;
+		width: 30px;
+		margin: 30px 0;
+		padding: 0;
+		margin: 0;
+		@include atSmall {
+			width: 40px;
+			height: 40px;
+		}
+	}
+
+	.name {
+		font-size: 0.8rem;
+		margin: 0;
+		padding: 0;
+		color: $IconsColor;
+	}
+
+
+	.content-title {
+		padding: 6px 10px;
+		font-size: 1.1rem;
+		text-transform: capitalize;
+		font-family: $TitleFont;
+		font-weight: 100;
+		@include atSmall {
+			padding-top: 20px;
+			font-size: 1.2rem;
+		}
+	}
+
+	.content-text {
+		padding: 5px 10px;
+		font-size: 0.9rem;
+		@include atSmall {
+			padding-bottom: 0;
+			font-size: 1rem;
+		}
+	}
+
+
+	.footer-list {
+		padding: 15px;
+		display: inline-block;
+		font-size: 0.9rem;
+		color: $IconsColor;
+		@include atSmall {
+			font-size: 1rem;
+			padding-left: 20px;
+		}
+	}
+
+	.footer-data {
+		margin-left: 5px;
+		font-size: 0.8rem;
+		font-family: $GeneralFont;
+		font-weight: 100;
+	}
+
+	.footer-buttons {
+		float: right;
+		display: inline;
+		margin: 7px;
+
+		.button {
+			margin-left: 10px;
+			background: $white;
+			color: $Gray;
+			font-size: 0.8rem;
+			font-weight: 100;
+		}
+	}
+
+	// Icons
+	.fa:hover { transition: $SmoothTrasition; cursor: pointer}
+	.fa-thumbs-up:hover,
+	.fa-thumbs-up:focus { color: $LightGreen;}
+	.fa-thumbs-down:hover,
+	.fa-thumbs-down:focus { color: $LightRed;}
+	.fa-share-alt:hover,
+	.fa-share-alt:focus { color: $LightYellow;}
+	.fa-reply { color: $LightYellow }
+	.fa-eye { color: $LightRed }
+	.info-list .fa-clock-o { color: $LightGreen }
+
+	// User
+	&__user {
+		width: 10%;
+		text-align: center;
+		padding-top: 30px;
+	}
+
+	// content
+	&__content {
+		width: 70%;
+		@include atSmall {
+			width: 75%;
+		}
+	}
+
+	// Info
+	&__info {
+		width: 20%;
+		text-align: center;
+		@include atSmall {
+			width: 15%;
+		}
+
+
+		.info-list {
+			padding: 7px 0;
+			border: $LightBorder;
+			font-size: 0.8rem;
+			color: $IconsColor;
+			@include atSmall {
+				padding: 5px 0;
+				font-size: 1rem;
+			}
+		}
+
+		.info-data {
+			font-size: 0.8rem;
+			font-weight: 100;
+		}
+	}
+
+	// Footer
+	&__footer {
+		position: relative;
+		width: 100%;
+		background: $LightGray;
+	}
+
+	&__body {
+		width: 100%;
+		border-top: $LightBorder;
+	}
+
+	&__answer {
+		width: 90%;
+		background: $LightGray;
+		transform: translateX(6%);
+		margin: 20px 0;
+		@include clearfix;
+	}
+
+	// All Answer Styles
+
+	.answer-user,
+	.answer-content,
+	.answer-footer {
+		float: left;
+	}
+
+
+	.answer-user {
+		width: 10%;
+		text-align: center;
+		padding-top: 20px;
+	}
+
+	.answer-content {
+		width: 90%;
+		padding: 10px 0;
+		margin-top: 5px;
+	}
+
+	.answer-footer {
+		width: 100%;
+		border-top: 1px solid #dbdbdb;
+		margin-top: 10px;
+	}
+
+
+	// All Input Styles
+	&__input {
+		width: 90%;
+		background: $LightGray;
+		transform: translateX(6%);
+		margin: 20px 0;
+		@include clearfix;
+
+		.input-form {
+			padding: 40px;
+		}
+
+		.input-buttons {
+			float: right;
+			transform: translateY(-10px);
+		}
+
+		.button {
+			background: $white;
+			color: $Gray;
+			font-size: 0.8rem;
+			font-weight: 100;
+			margin-left: 10px;
+		}
+	}
+
+	// Bottom End Buttons
+	.body-buttons {
+		float: right;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		@include atSmall {
+			margin: 15px;
+		}
+
+		.button {
+			background: $LightGray;
+			color: $Gray;
+			font-size: 0.8rem;
+			font-weight: 100;
+			margin-left: 10px;
+		}
+	}
+}

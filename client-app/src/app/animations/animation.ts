@@ -119,19 +119,21 @@ export const expandCollapse = trigger('expandCollapse', [
     height: 0,
     paddingTop: 0,
     paddingBottom: 0,
-    opacity: 0
+    opacity: 0,
+    display: 'none'
   })),
 
   transition('collapsed => expanded', [
-    animate('300ms ease-out', style({
+    animate('200ms ease-out', style({
       height: '*',
       paddingTop: '*',
-      paddingBottom: '*'
+      paddingBottom: '*',
+      display: '*'
     })),
     animate('1s', style({ opacity: 1 }))
   ]),
 
   transition('expanded => collapsed', [
-    animate('300ms ease-in')
+    animate('200ms ease-in')
   ])
 ]);

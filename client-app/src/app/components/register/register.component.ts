@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { fadeIn, fadeInDown, rainFall } from '../../animations/animation';
 
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private location: Location,
-    private userService: UserService
+    private authService: AuthService
   ) {
       this.createRegisterForm();
     }
@@ -188,7 +188,7 @@ export class RegisterComponent implements OnInit {
 // ==========================================================
   checkEmail() {
     const email = this.form.get('email').value;
-    this.userService.checkEmail(email).subscribe(data => {
+    this.authService.checkEmail(email).subscribe(data => {
       if(!data.success){
         this.availableEmailMessage = data.message;
         this.availableEmailClass = 'hint-red';
@@ -207,7 +207,7 @@ export class RegisterComponent implements OnInit {
   checkUsername() {
     // Store the username value in a variable.
     const username = this.form.get('username').value;
-    this.userService.checkUsername(username).subscribe(data => {
+    this.authService.checkUsername(username).subscribe(data => {
       if(!data.success){
         this.availableUsernameMessage = data.message;
         this.availableUsernameClass = 'hint-red';
@@ -236,7 +236,7 @@ export class RegisterComponent implements OnInit {
     }
 
     // Using the http register service to register user.
-    this.userService.registerUser(user).subscribe(data => {
+    this.authService.registerUser(user).subscribe(data => {
       // Check if the API responded with success.
       if(!data.success) {
         this.proccessing = false; // If not success.

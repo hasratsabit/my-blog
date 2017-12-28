@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { fadeIn, fadeInDown } from '../../animations/animation';
 
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private location: Location,
-    private userService: UserService
+    private authService: AuthService
   ) {
 
       this.createLoginForm();
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
     }
 
     // Making the http request to login using user service.
-    this.userService.loginUser(user).subscribe(data => {
+    this.authService.loginUser(user).subscribe(data => {
       if(!data.success){
         this.proccessing = false;
         this.enableForm();
@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-green';
         this.successIcon = true;
-        this.userService.storeUserData(data.token, data.user);
+        this.authService.storeUserData(data.token, data.user);
         setTimeout(() => {
           this.router.navigate(['/profile']);
         }, 2000);

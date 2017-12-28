@@ -4,15 +4,36 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class UserService {
+export class AuthService {
 
   domain = 'http://localhost:8080';
   user;
   authToken;
+  options;
 
   constructor(
-    private http: Http
+    private http: Http,
   ) { }
+
+// ==========================================================
+// 		                AUTHORIZATIONS
+// ==========================================================
+
+  authorizationHeaders() {
+    this.loadToken(); // Trigger function to lead the token from browser localStorage.
+    // Creating options.
+    this.options = new RequestOptions({
+      headers = new Headers({
+        'Content-Type': 'application/json',
+        'authorization': this.authToken // The token contains the user information loaded loadToken method.
+      })
+    });
+  }
+
+  // The method loads the token from localStorage.
+  loadToken() {
+    this.authToken = localStorage.getItem('token');
+  }
 
 
 // ==========================================================
