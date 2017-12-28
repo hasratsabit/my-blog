@@ -162,7 +162,7 @@ module.exports = (router) => {
 						// Respond if the password does not match one in database.
 						res.json({ success: false, message: 'Password does not match. Try again.'});
 					}else {
-						const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24' });
+						const token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' });
 						res.json({
 							success: true,
 							message: 'You are successfully logged in.',
@@ -183,19 +183,26 @@ module.exports = (router) => {
 // ==========================================================
 
 	router.use((req, res, next) => {
+		// Assign the headers coming from client to variable.
 		const token = req.headers['authorization'];
+		// Check if the token is passed.
 		if(!token){
+			// Respond if the token is not provided.
 			res.json({ success: false, message: 'No token was provided'});
 		}else {
+			// Verify the token using jwt verify method.
 			jwt.verify(token, config.secret, (err, decoded) => {
+				// Check if any error verifying token.
 				if(err){
-					res.json({ success: false, message: 'Error occured verifying token' + err });
+					// Respond if the token is not varified.
+					res.json({ success: false, message: 'Invalid token:' + err });
 				}else {
-					req.decoded = token;
+					req.decoded = decoded; // Assign the decrypted token to a global variable.
+					next(); // Exit the function.
 				}
-			})
+			});
 		}
-	})
+	});
 
 
 
