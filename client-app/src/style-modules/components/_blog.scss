@@ -1,7 +1,5 @@
 .blog {
 
-	z-index: 1;
-
 	&__menu-tab {
 		margin-bottom: 10px;
 	}
@@ -36,5 +34,8 @@
 			margin: 0 10px;
 		}
 	}
-
 }
+
+// .blog-layer-hide {
+// 	display: none;
+// }

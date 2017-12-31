@@ -11,29 +11,13 @@
 
       </thead>
       <tbody>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>john@gmail.com</td>
-          <td>Subscriber</td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>john@gmail.com</td>
-          <td>Subscriber</td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>john@gmail.com</td>
-          <td>Subscriber</td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
+        <tr *ngFor="let user of users; index as i">
+          <td>{{ i }}</td>
+          <td>{{ user.name }}</td>
+          <td> {{ user.email }}</td>
+          <td>{{ user.userRole }}</td>
+          <td (click)="loadEdit()"><a class="edit" [routerLink]="['/edit-user/', user._id]">Edit</a></td>
+          <td><a class="delete" [routerLink]="['/delete-user/', user._id]">Delete</a></td>
         </tr>
       </tbody>
     </table><!-- Table Ends  -->

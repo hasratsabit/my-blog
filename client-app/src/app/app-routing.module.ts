@@ -16,6 +16,9 @@ import { LoginComponent } from "./components/login/login.component";
 import { LogoutComponent } from "./components/logout/logout.component";
 import { AnimationComponent } from "./components/animation/animation.component";
 
+import { EditUserComponent } from './components/user/edit-user/edit-user.component';
+import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
+
 
 
 const appRoutes: Routes = [
@@ -43,6 +46,18 @@ const appRoutes: Routes = [
 	{
 		path: 'user',
 		component: UserComponent
+	},
+	{
+		path: 'user/:id',
+		component: UserComponent
+	},
+	{
+		path: 'edit-user/:id',
+		component: EditUserComponent
+	},
+	{
+		path: 'delete-user/:id',
+		component: DeleteUserComponent
 	},
 	{
 		path: 'forum',

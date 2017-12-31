@@ -10,19 +10,37 @@ export const fade = trigger('fade', [
 // Fade In Down
 export const fadeInDown = trigger('fadeInDown', [
 	state('void', style({
-		opacity: 0
+		opacity: 0,
+    display: 'none',
+    transform: 'translateY(-100%)'
 	})),
 	transition(':enter', [
-		animate('0.5s ease-in-out', keyframes([
+		animate('1s ease-in-out', keyframes([
 			style({
 				offset: 0,
 				opacity: 0,
-	    	transform: 'translate3d(0, -100%, 0)'
+        display: 'none',
+	    	transform: 'translateY(-100%)'
 			}),
 			style({
 				offset: 1,
 				opacity: 1,
-	    	transform: 'none'
+        display: 'block',
+	    	transform: 'translateY(300px)'
+			})
+		]))
+	]),
+	transition(':leave', [
+		animate('1s ease-in-out', keyframes([
+			style({
+				offset: 0,
+				opacity: 1,
+	    	transform: 'translateY(300px)'
+			}),
+			style({
+				offset: 1,
+				opacity: 0,
+	    	transform: 'translateY(-100%)'
 			})
 		]))
 	])
@@ -135,5 +153,49 @@ export const expandCollapse = trigger('expandCollapse', [
 
   transition('expanded => collapsed', [
     animate('200ms ease-in')
+  ])
+]);
+
+// Open Dialog
+export const dialogCloseOpen = trigger('dialogCloseOpen', [
+  state('isClosed', style({
+    opacity: 0,
+    display: 'none'
+  })),
+
+  transition('isClosed => isOpened', [
+    animate('200ms ease-out', style({
+      display: '*'
+    })),
+    animate('0.3s', style({ opacity: 1 }))
+  ]),
+
+  transition('isOpened => isClosed', [
+    animate('200ms ease-in', style({
+      opacity: 0
+    }))
+  ])
+]);
+
+// Fade Dialog
+export const dropDownBox = trigger('dropDownBox', [
+  state('isClosed', style({
+    opacity: 0,
+    display: 'none',
+    transform: 'translateY(-100%)'
+  })),
+
+  transition('isClosed => isOpened', [
+    animate('200ms ease-out', style({
+      display: '*'
+    })),
+    animate('0.3s', style({ opacity: 1, transform: 'translateY(0)' }))
+  ]),
+
+  transition('isOpened => isClosed', [
+    animate('200ms ease-out', style({
+      transform: 'translateY(-100%)',
+      opacity: 0
+    }))
   ])
 ]);

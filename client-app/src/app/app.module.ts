@@ -42,6 +42,9 @@ import { AnimationComponent } from './components/animation/animation.component';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { EditUserComponent } from './components/user/edit-user/edit-user.component';
+import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,9 @@ import { AuthService } from './services/auth.service';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    AnimationComponent
+    AnimationComponent,
+    EditUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +89,7 @@ import { AuthService } from './services/auth.service';
     MatIconModule,
     MatListModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

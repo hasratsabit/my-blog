@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   availableUsernameMessage;
   availableUsernameClass;
   usernameAvailable = false;
+  registerIsLoaded = true;
 
 // ==========================================================
 // 		 					CONSTRUCTOR
@@ -42,6 +43,13 @@ export class RegisterComponent implements OnInit {
   ) {
       this.createRegisterForm();
     }
+
+  toggleRegisterForm() {
+    this.registerIsLoaded = !this.registerIsLoaded;
+    setTimeout(() => {
+      this.location.back();
+    }, 500)
+  }
 
 
 // ==========================================================

@@ -160,10 +160,40 @@
 	}
 }
 
+.button-default {
+	background: transparent;
+	border: $LightBorder;
+	color: $Gray;
+}
+
+.button-round-purple {
+	position: relative;
+	padding: 12px 30px;
+	margin: 10px 1px;
+	font-size: 12px;
+	font-weight: 400;
+	text-transform: uppercase;
+	border-radius: 30px;
+	background-color: #9c27b0;
+	color: #FFFFFF;
+	transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	&:hover,
+	&:focus,
+	&:active  {
+		box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.22);
+		background-color: #9c27b0;
+		color: #FFFFFF;
+	}
+}
+
 
 // Button Shapes
 .button-flat {
 	border-radius: 0;
+}
+
+.button-round {
+	border-radius: 30px;
 }
 
 .button-circle {
@@ -1297,3 +1327,425 @@
 		}
 	}
 }
+
+
+
+// ===============
+// 	DIALOG
+// ===============
+
+	.dialog {
+		width: 100%;
+		box-shadow: $largekShadow;
+		font-family: $GeneralFont;
+		background: $white;
+		border-radius: 3px;
+		@include clearfix;
+
+		&__header,
+		&__body,
+		&__footer {
+			width: 100%;
+			float: left;
+		}
+
+		&__header {
+			border-bottom: $LightBorder;
+			margin-bottom: 20px;
+
+			.header-title {
+				padding: 15px;
+				display: inline-block;
+				font-size: 0.9rem;
+				@include atSmall {
+					padding: 20px;
+				}
+			}
+
+			.header-warning {
+				font-size: 1.1rem;
+				margin-right: 10px;
+				color: $Gray;
+			}
+
+			.header-close {
+				float: right;
+				padding: 15px;
+				font-weight: 100;
+				font-size: 1.2rem;
+				cursor: pointer;
+				color: $IconsColor;
+				@include atSmall {
+					padding: 20px;
+				}
+			}
+		}
+
+		&__body {
+			padding: 30px 0;
+			text-align: center;
+			@include atSmall {
+				padding: 40px 0;
+			}
+
+			.body-text {
+				font-size: 0.9rem;
+			}
+
+			.body-target {
+				font-size: 1rem;
+			}
+		}
+
+		&__footer {
+			text-align: center;
+			padding: 15px 0;
+			border-top: $LightBorder;
+			@include atSmall {
+				padding: 20px 0;
+			}
+
+			.button {
+				width: 40%;
+				display: inline-block;
+				margin: 0 10px;
+			}
+		}
+	}
+
+// ===============
+// 	DARK LAYER
+// ===============
+
+	.dark-layer {
+		position: fixed;
+		top: 0;
+		left: 0;
+		background: rgba(#000, 0.5);
+		height: 100vh;
+		width: 100%;
+		transition: $SmoothTrasition;
+
+		&__close {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			padding: 10px 20px;
+			font-size: 1.2rem;
+			color: $white;
+			font-family: $GeneralFont;
+			cursor: pointer;
+			@include atSmall {
+				padding: 20px 30px;
+				font-size: 2rem;
+			}
+		}
+
+		&__modal {
+			@include atSmall {
+				transform: translateY(100px) translateX(25%);
+			}
+		}
+
+		&__login-trasnlate-left {
+			@include atSmall {
+				transform: translateX(30%) translateY(20%);
+			}
+		}
+	}
+
+	.collapse-layer {
+		z-index: -100;
+		animation: collapseLayer 1s ease-out forwards;
+	}
+
+	@keyframes collapseLayer {
+		0% {
+			opacity: 1;
+			display: block;
+		},
+		100% {
+			opacity: 0;
+			display: none;
+		}
+	}
+
+	.expand-layer {
+		z-index: 100;
+		animation: expandLayer 1s ease-out forwards;
+	}
+
+	@keyframes expandLayer {
+		0% {
+			opacity: 0;
+			display: none;
+		},
+		100% {
+			opacity: 1;
+			display: block;
+		}
+	}
+
+
+	.expand-dialog {
+		animation: expandDialog 0.5s ease-in forwards;
+	}
+
+	@keyframes expandDialog {
+		0% {
+			opacity: 0;
+			transform: translateY(-100%);
+
+		}
+
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+
+	.collapse-dialog {
+		animation: collapseDialog 0.5s ease-out forwards;
+	}
+
+	@keyframes collapseDialog {
+		0% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		100% {
+			opacity: 0;
+			transform: translateY(-100%);
+		}
+	}
+
+// ===============
+// 	MODAL
+// ===============
+
+	.modal {
+		position: relative;
+		width: 87%;
+		margin-left: 2%;
+		padding: 20px;
+		font-family: $GeneralFont;
+		background: $white;
+		box-shadow: $largekShadow;
+		border-radius: 5px;
+		@include clearfix;
+		@include atSmall {
+			margin-left: 0;
+			width: 100%;
+			padding: 30px;
+		}
+
+		&__close {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			cursor: pointer;
+			font-size: 1.2rem;
+			color: $IconsColor;
+			font-weight: 100;
+		}
+
+		&__title {
+			width: 100%;
+			text-align: center;
+			padding: 20px 0;
+			font-weight: 900;
+			font-size: 1.5rem;
+			@include atSmall {
+				font-size: 2rem;
+			}
+		}
+
+	&__form {
+		width: 100%;
+		margin-left: 0;
+		text-align: center;
+
+		.form-input {
+			width: 100%;
+		}
+	}
+}
+
+
+// ===============
+// 	SIGNUP
+// ===============
+
+	.signup {
+		position: relative;
+		width: 87%;
+		margin-left: 2%;
+		padding: 20px;
+		font-family: $GeneralFont;
+		background: $white;
+		box-shadow: $largekShadow;
+		border-radius: 5px;
+		@include clearfix;
+		@include atSmall {
+			margin-left: 0;
+			width: 100%;
+			padding: 30px;
+		}
+
+		&__close {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			cursor: pointer;
+			font-size: 1.2rem;
+			color: $IconsColor;
+			font-weight: 100;
+		}
+
+
+
+		&__title,
+		&__promo,
+		&__form {
+			float: left;
+		}
+
+
+		&__title {
+			width: 100%;
+			text-align: center;
+			padding: 20px 0;
+			font-weight: 900;
+			font-size: 1.5rem;
+			@include atSmall {
+				font-size: 2rem;
+			}
+		}
+
+		&__promo {
+			width: 45%;
+			display: none;
+			@include atSmall {
+				display: block;
+			}
+
+			.promo-widget {
+				padding: 20px 0;
+			}
+
+			.fa { margin-right: 10px}
+			.fa-share-alt { color: $Purple }
+			.fa-comments { color: $LightBlue }
+			.fa-code { color: $LightRed }
+
+			.promo-title {
+				font-size: 1.2rem;
+			}
+
+			.promo-text {
+				color: $IconsColor;
+				margin-left: 32px;
+				line-height: 25px;
+			}
+		}
+
+		&__form {
+			width: 100%;
+			margin-left: 0;
+			text-align: center;
+			@include atSmall {
+				width: 45%;
+				margin-left: 5%;
+			}
+
+			.form-input {
+				width: 100%;
+			}
+		}
+
+	}
+
+
+// ===============
+// 	LOGIN
+// ===============
+	.login {
+		position: relative;
+		width: 86%;
+		margin-left: 2.5%;
+		padding: 20px;
+		border-radius: 3px;
+		background: $white;
+		box-shadow: $largekShadow;
+		text-align: center;
+		font-family: $GeneralFont;
+		@include clearfix;
+		@include atSmall {
+			padding: 40px;
+			width: 100%;
+			margin-left: 0;
+		}
+
+		&__close {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			cursor: pointer;
+		}
+
+		&__welcome,
+		&__title,
+		&__form,
+		&__buttons {
+			width: 100%;
+			float: left;
+		}
+
+		&__welcome {
+			font-size: 1.2rem;
+			color: $IconsColor;
+			padding: 15px 0;
+		}
+
+		&__title {
+			font-size: 1.5rem;
+			color: $Gray;
+			padding-bottom: 5px;
+		}
+
+		&__text {
+			font-size: 0.8rem;
+			color: $IconsColor;
+			text-transform: capitalize;
+		}
+
+		&__form {
+			padding-top: 20px;
+
+			.form-input {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+
+
+		&__buttons {
+			padding: 30px 0;
+
+			span {
+				color: $Gray;
+				margin-right: 5px;
+			}
+
+			.button {
+				margin-bottom: 15px;
+			}
+		}
+
+		&__create {
+			color: $Green;
+			text-decoration: none;
+		}
+	}

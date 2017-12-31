@@ -179,7 +179,7 @@ module.exports = (router) => {
 
 
 // ==========================================================
-// 		 									HEADER MIDDLEWARE
+// 		 									TOKEN MIDDLEWARE
 // ==========================================================
 
 	router.use((req, res, next) => {

@@ -23,7 +23,7 @@ export class AuthService {
     this.loadToken(); // Trigger function to lead the token from browser localStorage.
     // Creating options.
     this.options = new RequestOptions({
-      headers = new Headers({
+      headers: new Headers({
         'Content-Type': 'application/json',
         'authorization': this.authToken // The token contains the user information loaded loadToken method.
       })

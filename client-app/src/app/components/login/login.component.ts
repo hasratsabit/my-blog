@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   alertMessageClass
   successIcon = false;
   proccessing = false;
+  loginIsLoaded = true;
 
 // ==========================================================
 // 		 					     CONSTRUCTOR
@@ -36,6 +37,13 @@ export class LoginComponent implements OnInit {
 
       this.createLoginForm();
     }
+
+  toggleLoginForm() {
+    this.loginIsLoaded = !this.loginIsLoaded;
+    setTimeout(() => {
+      this.location.back();
+    }, 500);
+  }
 
 // ==========================================================
 // 		 					     CREATE FORM

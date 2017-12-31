@@ -1,0 +1,36 @@
+<div [ngClass]="{'expand-layer': deleteIsLoaded, 'collapse-layer': !deleteIsLoaded}" class="dark-layer">
+
+	<span class="dark-layer__close" (click)="toggleDelete()">X</span>
+
+	<!-- Success or Error Message -->
+	<div @fadeIn *ngIf="alertMessage">
+		<div [ngClass]="alertMessageClass">
+			<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
+		</div>
+	</div><!-- Success or Error Message Ends -->
+
+  <div class="dark-layer__modal row">
+    <div class="col-2">
+
+      <!-- Dialog -->
+      <div [ngClass]="{'expand-dialog': deleteIsLoaded, 'collapse-dialog': !deleteIsLoaded}" class="dialog">
+        <!-- Header -->
+        <div class="dialog__header">
+          <div class="header-title"><i class="fa fa-exclamation-triangle header-warning" aria-hidden="true"></i> Confirm</div>
+          <i class="fa fa-times header-close" aria-hidden="true"></i>
+        </div><!-- Header Ends -->
+        <!-- Body -->
+        <div class="dialog__body">
+          <h3 class="body-text"> Are you sure you want to delete:</h3><br>
+          <h2 class="body-target">{{ deletedUser }}</h2>
+        </div><!-- Body Ends -->
+        <!-- Footer -->
+        <div class="dialog__footer">
+          <button  (click)="onDeleteUser()" class="button button-small button-red">Delete</button>
+          <button (click)="toggleDelete()" class="button button-small button-default">Cancel</button>
+        </div><!-- Footer Ends -->
+      </div><!-- Dialog Ends -->
+
+    </div>
+  </div>
+</div>

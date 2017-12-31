@@ -1,48 +1,62 @@
-<div class="login box">
 
-	<!-- Success or Error Message -->
-	<div @fadeIn *ngIf="alertMessage">
-		<div [ngClass]="alertMessageClass">
-			<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
-		</div>
-	</div><!-- Success or Error Message Ends -->
+<div [ngClass]="{'expand-layer': loginIsLoaded, 'collapse-layer': !loginIsLoaded}" class="dark-layer">
+  <span (click)="toggleLoginForm()" class="dark-layer__close">X</span>
+  <div class="dark-layer__modal dark-layer__login-trasnlate-left row">
+    <div class="col-3">
 
-	<!-- User Icon -->
-	<div @fadeIn class="login__icon icon-round icon-green">
-		<mat-icon>lock_open</mat-icon>
-	</div><!-- User Icon Ends-->
+      <!-- Login -->
+      <div [ngClass]="{'expand-dialog': loginIsLoaded, 'collapse-dialog': !loginIsLoaded}" class="login">
 
-	<h1 @fadeIn class="title title-medium login__title">Login</h1>
+				<!-- Success or Error Message -->
+				<div @fadeIn *ngIf="alertMessage">
+					<div [ngClass]="alertMessageClass">
+						<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
+					</div>
+				</div><!-- Success or Error Message Ends -->
 
-	<!-- Login Form -->
-	<form [formGroup]="form" class="login__form" (submit)="onLoginUser()">
+        <span (click)="toggleLoginForm()" class="login__close">X</span>
+        <h1 class="login__welcome">Welcome</h1>
+        <h1 class="login__title">Login</h1>
+        <span class="login__text">Login to your account</span>
+        <!-- Form -->
+        <div class="login__form">
+					<!-- Login Form -->
+				<form [formGroup]="form" class="login__form" (submit)="onLoginUser()">
 
-		<!-- Username Input -->
-		<mat-form-field class="input-field login__input">
-			<input
-			matInput
-			type="text"
-			name="username"
-			formControlName="username"
-			placeholder="Username"
-			required>
-			<mat-error *ngIf="form.controls.username.errors?.required">Username is required.</mat-error>
-		</mat-form-field><!-- Username Input Ends-->
+						<!-- Username Input -->
+						<mat-form-field class="input-field login__input">
+							<input
+							matInput
+							type="text"
+							name="username"
+							formControlName="username"
+							placeholder="Username"
+							required>
+							<mat-error *ngIf="form.controls.username.errors?.required">Username is required.</mat-error>
+						</mat-form-field><!-- Username Input Ends-->
 
-		<!-- Password Input -->
-		<mat-form-field class="input-field login__input">
-			<input
-			matInput
-			type="password"
-			name="password"
-			formControlName="password"
-			placeholder="Password"
-			required><!-- Password Input Ends -->
-			<mat-error *ngIf="form.controls.password.errors?.required">Password is required.</mat-error>
-		</mat-form-field>
+						<!-- Password Input -->
+						<mat-form-field class="input-field login__input">
+							<input
+							matInput
+							type="password"
+							name="password"
+							formControlName="password"
+							placeholder="Password"
+							required><!-- Password Input Ends -->
+							<mat-error *ngIf="form.controls.password.errors?.required">Password is required.</mat-error>
+						</mat-form-field>
 
-		<button [disabled]="!form.valid || proccessing" type="submit"  class="button button-large button-green-clear">Login</button>
+						<!-- Buttons -->
+						<div class="login__buttons">
+							<button [disabled]="!form.valid || proccessing" type="submit"class="button button-medium button-green button-round">Login</button><br>
+							<span>Don't have account?</span><a [routerLink]="['/register']" href="#" class="login__create">Create One</a>
+						</div><!-- Button Ends -->
 
-	</form><!-- Login Form Ends -->
+					</form>
+        </div><!-- Form Ends -->
+      </div><!-- Login Ends -->
 
-</div>
+    </div>
+  </div>
+</div><!-- Dark Layer Ens -->

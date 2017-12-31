@@ -1,28 +1,4 @@
 <div class="blog">
-  <!-- Add Post Form -->
-  <div @rainFall *ngIf="postFormLoaded" class="blog__add-post box">
-    <div @fadeIn class="blog__icon icon-round icon-green">
-      <mat-icon>send</mat-icon>
-    </div>
-    <h1 @fadeIn class="title title-medium blog__title">Add New Post</h1>
-  	<form class="">
-  		<mat-form-field class="input-field input" @fadeIn>
-  			<input matInput type="text" placeholder="Title">
-  		</mat-form-field>
-      <mat-form-field  class="input-field input" @fadeIn>
-        <mat-select placeholder="Select Category">
-        <mat-option>JavaScript</mat-option>
-        <mat-option>Python</mat-option>
-      </mat-select>
-      </mat-form-field>
-      <mat-form-field class="input-field input" @fadeIn>
-        <textarea matInput placeholder="Body"></textarea>
-      </mat-form-field>
-  		<button @fadeIn  class="blog__buttons button button-medium button-green-clear">Add Post</button>
-  		<button @fadeIn  (click)="cancelPostForm()" class="blog__buttons button button-medium button-red-clear">Cancel</button>
-  	</form>
-  </div><!-- Add Post Form Ends-->
-
   <!-- Add Post Menu Tab -->
   <div @fadeIn  *ngIf="!postFormLoaded" class="blog__menu-tab box">
     <button (click)="loadPostForm()" class="button button-medium button-green-clear">Add Post</button>
@@ -124,3 +100,45 @@
   </div><!-- Table Row Ends-->  <!-- Table Row Ends-->
 
 </div>
+
+<!-- Dark Layer -->
+<div [ngClass]="{'expand-layer': postFormLoaded, 'collapse-layer': !postFormLoaded}" class="dark-layer">
+  <span (click)="loadPostForm()" class="dark-layer__close">X</span>
+  <!-- Row -->
+  <div class="dark-layer__modal row">
+    <!-- Col -->
+    <div class="col-2">
+
+      <!-- Modal -->
+      <div [ngClass]="{'expand-dialog': postFormLoaded, 'collapse-dialog': !postFormLoaded}" class="modal">
+        <h1 class="modal__title">Add Post</h1>
+        <span (click)="loadPostForm()" class="modal__close">X</span>
+
+        <!-- Form -->
+        <div class="modal__form">
+
+          <form action="">
+            <mat-form-field class="form-input">
+              <input matInput type="text" placeholder="Title">
+            </mat-form-field>
+            <mat-form-field  class="form-input">
+            <mat-select placeholder="Select Category">
+              <mat-option>JavaScript</mat-option>
+              <mat-option>Python</mat-option>
+            </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-input">
+              <textarea matInput placeholder="Body"></textarea>
+            </mat-form-field>
+
+            <!-- Buttons -->
+            <div class="modal__buttons">
+              <button class="button button-large button-round button-green">Submit</button>
+            </div><!-- Buttons Ends -->
+          </form>
+
+        </div><!-- Form Ends -->
+      </div><!-- Modal Ends -->
+    </div><!-- Col Ends -->
+  </div><!-- Row Ends -->
+</div><!-- Dark Layer Ends -->

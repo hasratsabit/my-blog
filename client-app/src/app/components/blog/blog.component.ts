@@ -9,16 +9,13 @@ import { fadeInDown, fadeInLeft, fadeIn, rainFall} from '../../animations/animat
 })
 export class BlogComponent implements OnInit {
 
-  postFormLoaded: boolean = false;
+  postFormLoaded = false;
+  layerHideClass;
 
   constructor() { }
 
   loadPostForm() {
-    this.postFormLoaded = true;
-  }
-
-  cancelPostForm() {
-    this.postFormLoaded = false;
+    this.postFormLoaded = !this.postFormLoaded;
   }
 
   ngOnInit() {

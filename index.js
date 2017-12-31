@@ -7,7 +7,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const config = require('./config/database');
 
+const publicRoute = require('./routes/public')(router);
 const authRoute = require('./routes/authentication')(router);
+const usersRoute = require('./routes/users')(router);
 // const blogsRoute = require('./routes/blogs')(router);
 // const contactRoute = require('./routes/contact')(router);
 
@@ -44,7 +46,9 @@ const authRoute = require('./routes/authentication')(router);
 // 		 									ROUTES
 // ==========================================================
 
+	app.use('/public', publicRoute);
 	app.use('/authentication', authRoute);
+	app.use('/users', usersRoute);
 	// app.use('/blogs', blogsRoute);
 	// app.use('/contact', contactRoute)
 
