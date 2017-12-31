@@ -45,6 +45,9 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
+import { AddBlogComponent } from './components/blog/add-blog/add-blog.component';
+import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';
+import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,11 @@ import { DeleteUserComponent } from './components/user/delete-user/delete-user.c
     LogoutComponent,
     AnimationComponent,
     EditUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    AddBlogComponent,
+    EditBlogComponent,
+    DeleteBlogComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,41 @@
+<!-- Dark Layer -->
+<div [ngClass]="{'expand-layer': deleteBlogIsLoaded, 'collapse-layer': !deleteBlogIsLoaded}" class="dark-layer">
+  <span (click)="loadBlogDelete()" class="dark-layer__close">X</span>
+  <!-- Row -->
+  <div class="dark-layer__modal row">
+    <!-- Col -->
+    <div class="col-2">
+
+      <!-- Dialog -->
+      <div [ngClass]="{'expand-dialog': deleteBlogIsLoaded, 'collapse-dialog': !deleteBlogIsLoaded}" class="dialog">
+
+        <!-- Header -->
+        <div class="dialog__header">
+
+          <div class="header-title"><i class="fa fa-exclamation-triangle header-warning" aria-hidden="true"></i> Confirm</div>
+
+          <span (click)="loadBlogDelete()" class="header-close">
+            <i class="fa fa-times " aria-hidden="true"></i>
+          </span>
+
+        </div><!-- Header Ends -->
+
+        <!-- Body -->
+        <div class="dialog__body">
+          <h3 class="body-text"> Are you sure you want to delete:</h3><br>
+          <h2 class="body-target">Hasrat Sabit</h2>
+        </div><!-- Body Ends -->
+
+        <!-- Footer -->
+        <div class="dialog__footer">
+
+          <button class="button button-small button-red">Delete</button>
+          <button (click)="loadBlogDelete()" class="button button-small button-default">Cancel</button>
+
+        </div><!-- Footer Ends -->
+
+      </div><!-- Dialog Ends -->
+
+    </div><!-- Col Ends -->
+  </div><!-- Row Ends -->
+</div><!-- Dark Layer Ens -->

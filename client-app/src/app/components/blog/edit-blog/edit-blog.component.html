@@ -1,0 +1,43 @@
+<!-- Dark Layer -->
+<div [ngClass]="{'expand-layer': editFormLoaded, 'collapse-layer': !editFormLoaded}" class="dark-layer">
+  <span (click)="loadEditBlogForm()" class="dark-layer__close">X</span>
+  <!-- Row -->
+  <div class="dark-layer__modal row">
+    <!-- Col -->
+    <div class="col-2">
+
+      <!-- Modal -->
+      <div [ngClass]="{'expand-dialog': editFormLoaded, 'collapse-dialog': !editFormLoaded}" class="modal">
+        <h1 class="modal__title">Edit Blog</h1>
+        <span (click)="loadEditBlogForm()" class="modal__close">X</span>
+
+        <!-- Form -->
+        <div class="modal__form">
+
+          <form action="">
+            <mat-form-field class="form-input">
+              <input matInput type="text" placeholder="Title">
+            </mat-form-field>
+            <mat-form-field  class="form-input">
+            <mat-select placeholder="Select Category">
+              <mat-option>JavaScript</mat-option>
+              <mat-option>Python</mat-option>
+            </mat-select>
+            </mat-form-field>
+            <mat-form-field class="form-input">
+              <textarea matInput placeholder="Body"></textarea>
+            </mat-form-field>
+
+            <!-- Buttons -->
+            <div class="modal__buttons">
+              <button class="button button-medium button-round button-green">Update</button>
+              <button class="button button-medium button-round button-red">Delete</button>
+              <button (click)="loadEditBlogForm()" class="button button-medium button-round button-yellow">Cancel</button>
+            </div><!-- Buttons Ends -->
+          </form>
+
+        </div><!-- Form Ends -->
+      </div><!-- Modal Ends -->
+    </div><!-- Col Ends -->
+  </div><!-- Row Ends -->
+</div><!-- Dark Layer Ends -->

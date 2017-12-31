@@ -1,7 +1,7 @@
 <div class="blog">
   <!-- Add Post Menu Tab -->
   <div @fadeIn  *ngIf="!postFormLoaded" class="blog__menu-tab box">
-    <button (click)="loadPostForm()" class="button button-medium button-green-clear">Add Post</button>
+    <button [routerLink]="['/add-blog']" class="button button-medium button-green-clear">Add Post</button>
     <div class="blog__filter">
       <button mat-icon-button [matMenuTriggerFor]="menu">Filter
         <mat-icon>equalizer</mat-icon>
@@ -44,8 +44,8 @@
           <td>22 <br> Comments</td>
           <td><a class="view" href="">View</a></td>
           <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
+          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
+          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
         </tr>
         <tr>
           <td>01</td>
@@ -56,8 +56,8 @@
           <td>22 <br> Comments</td>
           <td><a class="view" href="">View</a></td>
           <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
+          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
+          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
         </tr>
         <tr>
           <td>01</td>
@@ -68,8 +68,8 @@
           <td>22 <br> Comments</td>
           <td><a class="view" href="">View</a></td>
           <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
+          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
+          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
         </tr>
         <tr>
           <td>01</td>
@@ -80,8 +80,8 @@
           <td>22 <br> Comments</td>
           <td><a class="view" href="">View</a></td>
           <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
+          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
+          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
         </tr>
         <tr>
           <td>01</td>
@@ -92,53 +92,11 @@
           <td>22 <br> Comments</td>
           <td><a class="view" href="">View</a></td>
           <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" href="">Edit</a></td>
-          <td><a class="delete" href="">Delete</a></td>
+          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
+          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
         </tr>
       </tbody>
     </table><!-- Table Ends  -->
   </div><!-- Table Row Ends-->  <!-- Table Row Ends-->
 
 </div>
-
-<!-- Dark Layer -->
-<div [ngClass]="{'expand-layer': postFormLoaded, 'collapse-layer': !postFormLoaded}" class="dark-layer">
-  <span (click)="loadPostForm()" class="dark-layer__close">X</span>
-  <!-- Row -->
-  <div class="dark-layer__modal row">
-    <!-- Col -->
-    <div class="col-2">
-
-      <!-- Modal -->
-      <div [ngClass]="{'expand-dialog': postFormLoaded, 'collapse-dialog': !postFormLoaded}" class="modal">
-        <h1 class="modal__title">Add Post</h1>
-        <span (click)="loadPostForm()" class="modal__close">X</span>
-
-        <!-- Form -->
-        <div class="modal__form">
-
-          <form action="">
-            <mat-form-field class="form-input">
-              <input matInput type="text" placeholder="Title">
-            </mat-form-field>
-            <mat-form-field  class="form-input">
-            <mat-select placeholder="Select Category">
-              <mat-option>JavaScript</mat-option>
-              <mat-option>Python</mat-option>
-            </mat-select>
-            </mat-form-field>
-            <mat-form-field class="form-input">
-              <textarea matInput placeholder="Body"></textarea>
-            </mat-form-field>
-
-            <!-- Buttons -->
-            <div class="modal__buttons">
-              <button class="button button-large button-round button-green">Submit</button>
-            </div><!-- Buttons Ends -->
-          </form>
-
-        </div><!-- Form Ends -->
-      </div><!-- Modal Ends -->
-    </div><!-- Col Ends -->
-  </div><!-- Row Ends -->
-</div><!-- Dark Layer Ends -->
