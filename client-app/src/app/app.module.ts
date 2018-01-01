@@ -42,6 +42,9 @@ import { AnimationComponent } from './components/animation/animation.component';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { AddForumComponent } from './components/forum/add-forum/add-forum.component';
+import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
+import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,10 @@ import { AuthService } from './services/auth.service';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    AnimationComponent
+    AnimationComponent,
+    AddForumComponent,
+    EditForumComponent,
+    DeleteForumComponent
   ],
   imports: [
     BrowserModule,

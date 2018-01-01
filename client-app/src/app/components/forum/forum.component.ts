@@ -11,6 +11,7 @@ import { fadeIn, rainFall} from '../../animations/animation';
 export class ForumComponent implements OnInit {
 
   isExpanded;
+  isAnswering;
   constructor() { }
 
 
