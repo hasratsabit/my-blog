@@ -42,6 +42,7 @@ import { AnimationComponent } from './components/animation/animation.component';
 
 // Services
 import { AuthService } from './services/auth.service';
+<<<<<<< HEAD
 import { UserService } from './services/user.service';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
@@ -51,6 +52,11 @@ import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.c
 import { DeleteCategoryComponent } from './components/category/delete-category/delete-category.component';
 import { EditCategoryComponent } from './components/category/edit-category/edit-category.component';
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
+=======
+import { AddForumComponent } from './components/forum/add-forum/add-forum.component';
+import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
+import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
+>>>>>>> forum
 
 @NgModule({
   declarations: [
@@ -70,6 +76,7 @@ import { AddCategoryComponent } from './components/category/add-category/add-cat
     LoginComponent,
     LogoutComponent,
     AnimationComponent,
+<<<<<<< HEAD
     EditUserComponent,
     DeleteUserComponent,
     AddBlogComponent,
@@ -79,6 +86,11 @@ import { AddCategoryComponent } from './components/category/add-category/add-cat
     EditCategoryComponent,
     AddCategoryComponent,
 
+=======
+    AddForumComponent,
+    EditForumComponent,
+    DeleteForumComponent
+>>>>>>> forum
   ],
   imports: [
     BrowserModule,
