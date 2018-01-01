@@ -895,43 +895,154 @@
 <hr class="divider">
 <h4>Dark Layer</h4>
 <!-- Dark Layer -->
-<div class="dark-layer">
+
+
+
+<!-- <div class="dark-layer">
   <span class="dark-layer__close">X</span>
-  <!-- Row -->
+
   <div class="dark-layer__modal row">
-    <!-- Col -->
+
     <div class="col-2">
 
-      <!-- Modal -->
-      <div class="modal">
-        <h1 class="modal__title">Title</h1>
-        <span class="modal__close">X</span>
 
-        <!-- Form -->
-        <div class="modal__form">
 
-          <form action="">
-            <mat-form-field class="form-input">
-              <input matInput placeholder="Confirm">
-            </mat-form-field>
-
-            <!-- Buttons -->
-            <div class="modal__buttons">
-              <button class="button button-large button-round button-green">Submit</button>
-              <button class="button button-large button-round button-green">Cancel</button>
-            </div><!-- Buttons Ends -->
-          </form>
-
-        </div><!-- Form Ends -->
-      </div><!-- Modal Ends -->
-    </div><!-- Col Ends -->
-  </div><!-- Row Ends -->
-</div><!-- Dark Layer Ens -->
+    </div>
+  </div>
+</div> -->
 
 
 <hr class="divider">
 <h4>Modal</h4>
 
+<div class="modal">
+  <h1 class="modal__title">Title</h1>
+  <span class="modal__close">X</span>
+
+  <!-- Form -->
+  <div class="modal__form">
+
+    <form action="">
+      <mat-form-field class="form-input">
+        <input matInput placeholder="Confirm">
+      </mat-form-field>
+
+      <!-- Buttons -->
+      <div class="modal__buttons">
+        <button class="button button-large button-round button-green">Submit</button>
+        <button class="button button-large button-round button-green">Cancel</button>
+      </div><!-- Buttons Ends -->
+    </form>
+
+  </div><!-- Form Ends -->
+</div><!-- Modal Ends -->
+
+
+
+<div class="row">
+  <div class="col-3">
+    <div class="card">
+      <!-- Card Header -->
+      <div class="card-header">
+        <!-- Card User -->
+        <div class="user card-user">
+            <img class="img img-border img-tiny img-circle user-img" src="/assets/images/profile.jpg" alt="">
+            <h1 class="title title-small title-gray title-hover user-name">Hasrat Sabit</h1><br>
+            <span class="user-info">Nov 10, 2017</span>
+        </div><!-- Card User Ends -->
+          <!-- Right Corner Menu -->
+          <div class="card-menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>save</mat-icon>
+                <span>Save</span>
+              </button>
+            </mat-menu>
+          </div><!-- Right Corner Ends -->
+      </div><!-- Card Header Ends -->
+      <!-- Card Image -->
+      <div class="card-img">
+          <img class="img" src="/assets/images/corn.jpg" alt="">
+      </div>
+      <!-- Card Content -->
+      <div class="card-content">
+        <h1 class="title title-medium title-hover title-gray card-title">This is the title for the card that we use</h1>
+        <p class="text text-gray card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div><!-- Card Content Ends-->
+      <!-- Card Footer -->
+      <div class="card-footer">
+        <ul class="icons-group">
+          <li class="icons-list"><button class="button"><i class="fa fa-heart icon-small" aria-hidden="true"></i></button><span class="icon-data">33</span></li>
+          <li class="icons-list"><button class="button"><i class="fa fa-share-alt icon-small" aria-hidden="true"></i></button><span class="icon-data">33</span></li>
+          <li class="icons-list"><button class="button"><i class="fa fa-eye icon-small" aria-hidden="true"></i></button><span class="icon-data">33</span></li>
+          <li class="icons-list footer-read"><a href="">Read More</a></li>
+        </ul>
+      </div><!-- Card Footer Ends -->
+
+    </div><!-- Card Ends -->
+  </div>
+</div>
+
+<hr class="divider">
+
+
+<!-- LARGE CARD -->
+
+<!-- Large Card -->
+<div class="large-card">
+
+  <!-- Header -->
+  <div class="large-card__header">
+    <img class="img img-border img-medium img-circle header-img" src="/assets/images/profile.jpg" alt="">
+    <h1 class="header-author">Hasrat Sabit</h1>
+    <span class="header-date">January 01, 2018</span>
+    <div class="header-menu">
+      <button mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div><!-- Header Ends-->
+
+  <!-- Image -->
+  <div class="large-card__img">
+    <img class="img" src="/assets/images/car-img.jpg" alt="">
+  </div><!-- Image Ends -->
+
+  <!-- Content -->
+  <div class="large-card__content">
+    <h1 class="content-title">This title is about writing code in JavaScript</h1>
+    <p class="content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+  </div><!-- Content Ends -->
+
+  <!-- Footer -->
+  <div class="large-card__footer">
+    <a href="#" class="footer-icons">
+      <i class="fa fa-heart" aria-hidden="true"></i>
+      <span class="footer-data">33</span>
+    </a>
+    <a href="#" class="footer-icons">
+      <i class="fa fa-comment" aria-hidden="true"></i>
+      <span class="footer-data">33</span>
+    </a>
+    <a href="#" class="footer-icons">
+      <i class="fa fa-share-alt" aria-hidden="true"></i>
+      <span class="footer-data">33</span>
+    </a>
+    <button class="footer-button button button-medium button-round button-green-clear">Read More</button>
+  </div>
+
+</div><!-- Large Card Ends-->
 
 
 

@@ -8,14 +8,14 @@ import { Location } from '@angular/common';
 })
 export class AddBlogComponent implements OnInit {
 
-  postFormLoaded = true;
+  addBlogFormLoaded = true;
 
   constructor(
     private location: Location
   ) { }
 
-  loadPostForm() {
-    this.postFormLoaded = !this.postFormLoaded;
+  toggleAddBlog() {
+    this.addBlogFormLoaded = !this.addBlogFormLoaded;
     setTimeout(() => {
       this.location.back();
     }, 500);

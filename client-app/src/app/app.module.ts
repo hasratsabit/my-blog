@@ -48,6 +48,9 @@ import { DeleteUserComponent } from './components/user/delete-user/delete-user.c
 import { AddBlogComponent } from './components/blog/add-blog/add-blog.component';
 import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';
 import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
+import { DeleteCategoryComponent } from './components/category/delete-category/delete-category.component';
+import { EditCategoryComponent } from './components/category/edit-category/edit-category.component';
+import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,9 @@ import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.c
     AddBlogComponent,
     EditBlogComponent,
     DeleteBlogComponent,
+    DeleteCategoryComponent,
+    EditCategoryComponent,
+    AddCategoryComponent,
 
   ],
   imports: [

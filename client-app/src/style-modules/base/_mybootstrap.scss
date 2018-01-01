@@ -1749,3 +1749,177 @@
 			text-decoration: none;
 		}
 	}
+
+
+// ===============
+// 	LARGE CARD
+// ===============
+
+	.large-card {
+		width: 100%;
+		background: $white;
+		font-family: $GeneralFont;
+		transition: $SmoothTrasition;
+		border-radius: 5px;
+		margin-top: 20px;
+		&:hover {
+			box-shadow: $shadow;
+		}
+		@include clearfix;
+		@include atMedium {
+			width: 80%;
+			transform: translateX(13%);
+		}
+
+		// General Style
+		&__header,
+		&__footer {
+			width: 100%;
+			float: left;
+		}
+
+		// Header
+		&__header {
+			position: relative;
+			padding: 10px 0;
+			@include atMedium {
+				border-bottom: $LightBorder;
+			}
+
+			.header-img,
+			.header-author {
+				float: left;
+				display: inline;
+			}
+
+			.header-img {
+				height: 40px;
+				width: 40px;
+				margin: 0 5px 0 10px;
+			}
+
+			.header-author {
+				font-size: 1rem;
+				font-weight: 900;
+				font-family: $TitleFont;
+				margin-top: 2px;
+				color: $Gray;
+				cursor: pointer;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			.header-date {
+				position: absolute;
+				left: 55px;
+				top: 35px;
+				font-size: 0.8rem;
+				color: $IconsColor;
+			}
+
+			.header-menu {
+				position: absolute;
+				right: 10px;
+				top: 10px;
+			}
+		}
+
+		&__img {
+			@include atMedium {
+				width: 30%;
+				float: left;
+				padding: 45px 0 30px 30px;
+
+				.img {
+					border-radius: 3px;
+					// box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 10px 18px 0 rgba(0, 0, 0, 0.22);
+				}
+			}
+		}
+
+		// Content
+		&__content {
+			padding: 20px 0;
+			float: left;
+			@include atMedium {
+				width: 65%;
+				padding: 30px 0;
+			}
+
+			// General Style
+			.content-title,
+			.content-text {
+				padding: 5px 20px;
+
+			}
+
+			.content-title {
+				color: $Gray;
+				font-family: $TitleFont;
+				font-size: 1.5rem;
+				text-transform: capitalize;
+				transition: $SmoothTrasition;
+				cursor: pointer;
+				&:hover {
+					text-decoration: underline;
+				}
+				@include atMedium {
+					font-size: 2rem;
+				}
+			}
+
+			.content-text {
+				color: $IconsColor;
+				@include atMedium {
+					font-size: 1.3rem;
+					line-height: 30px;
+				}
+			}
+		}
+
+		// Footer
+		&__footer {
+			position: relative;
+			padding: 20px 0;
+			border-top: $LightBorder;
+			@include atMedium {
+				padding: 15px 0;
+			}
+
+			.footer-icons {
+				text-decoration: none;
+				margin-left: 15px;
+				margin-right: 10px;
+				display: inline;
+				color: $IconsColor;
+				opacity: 0.8;
+				@include atMedium {
+					font-size: 1.2rem;
+					margin-left: 30px;
+					margin-right: 50px;
+				}
+			}
+
+			.footer-data {
+				font-size: 0.9rem;
+				font-weight: 900;
+				opacity: 0.5;
+				margin-left: 5px;
+				@include atMedium {
+					font-size: 1.2rem;
+				}
+			}
+
+			.footer-button {
+				position: absolute;
+				top: 12px;
+				right: 10px;
+				border: none;
+				@include atMedium {
+					top: 10px;
+					right: 15px;
+				}
+			}
+		}
+	}

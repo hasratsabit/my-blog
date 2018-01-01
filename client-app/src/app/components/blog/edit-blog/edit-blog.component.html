@@ -1,6 +1,6 @@
 <!-- Dark Layer -->
 <div [ngClass]="{'expand-layer': editFormLoaded, 'collapse-layer': !editFormLoaded}" class="dark-layer">
-  <span (click)="loadEditBlogForm()" class="dark-layer__close">X</span>
+  <span (click)="toggleEditBlog()" class="dark-layer__close">X</span>
   <!-- Row -->
   <div class="dark-layer__modal row">
     <!-- Col -->
@@ -9,7 +9,7 @@
       <!-- Modal -->
       <div [ngClass]="{'expand-dialog': editFormLoaded, 'collapse-dialog': !editFormLoaded}" class="modal">
         <h1 class="modal__title">Edit Blog</h1>
-        <span (click)="loadEditBlogForm()" class="modal__close">X</span>
+        <span (click)="toggleEditBlog()" class="modal__close">X</span>
 
         <!-- Form -->
         <div class="modal__form">
@@ -32,7 +32,7 @@
             <div class="modal__buttons">
               <button class="button button-medium button-round button-green">Update</button>
               <button class="button button-medium button-round button-red">Delete</button>
-              <button (click)="loadEditBlogForm()" class="button button-medium button-round button-yellow">Cancel</button>
+              <button (click)="toggleEditBlog()" class="button button-medium button-round button-yellow">Cancel</button>
             </div><!-- Buttons Ends -->
           </form>
 

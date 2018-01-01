@@ -1,20 +1,20 @@
 <!-- Dark Layer -->
-<div [ngClass]="{'expand-layer': deleteBlogIsLoaded, 'collapse-layer': !deleteBlogIsLoaded}" class="dark-layer">
-  <span (click)="toggleDelete()" class="dark-layer__close">X</span>
+<div [ngClass]="{'expand-layer': deleteCategoryIsLoaded, 'collapse-layer': !deleteCategoryIsLoaded}" class="dark-layer">
+  <span (click)="toggleDeleteCategory()" class="dark-layer__close">X</span>
   <!-- Row -->
   <div class="dark-layer__modal row">
     <!-- Col -->
     <div class="col-2">
 
       <!-- Dialog -->
-      <div [ngClass]="{'expand-dialog': deleteBlogIsLoaded, 'collapse-dialog': !deleteBlogIsLoaded}" class="dialog">
+      <div [ngClass]="{'expand-dialog': deleteCategoryIsLoaded, 'collapse-dialog': !deleteCategoryIsLoaded}" class="dialog">
 
         <!-- Header -->
         <div class="dialog__header">
 
           <div class="header-title"><i class="fa fa-exclamation-triangle header-warning" aria-hidden="true"></i> Confirm</div>
 
-          <span (click)="toggleDelete()" class="header-close">
+          <span (click)="toggleDeleteCategory()" class="header-close">
             <i class="fa fa-times " aria-hidden="true"></i>
           </span>
 
@@ -30,7 +30,7 @@
         <div class="dialog__footer">
 
           <button class="button button-small button-red">Delete</button>
-          <button (click)="loadBlogDelete()" class="button button-small button-default">Cancel</button>
+          <button (click)="toggleDeleteCategory()" class="button button-small button-default">Cancel</button>
 
         </div><!-- Footer Ends -->
 

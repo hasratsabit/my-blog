@@ -1,0 +1,33 @@
+<!-- Dark Layer -->
+<div [ngClass]="{'expand-layer': categoryFormLoaded, 'collapse-layer': !categoryFormLoaded}" class="dark-layer">
+  <span (click)="toggleCategoryForm()" class="dark-layer__close">X</span>
+  <!-- Row -->
+  <div class="dark-layer__modal row">
+    <!-- Col -->
+    <div class="col-2">
+
+      <!-- Modal -->
+      <div [ngClass]="{'expand-dialog': categoryFormLoaded, 'collapse-dialog': !categoryFormLoaded}" class="modal">
+        <h1 class="modal__title">Create Category</h1>
+        <span (click)="toggleCategoryForm()" class="modal__close">X</span>
+
+        <!-- Form -->
+        <div class="modal__form">
+
+          <form action="">
+            <mat-form-field class="form-input">
+              <input matInput type="text" placeholder="Add Category">
+            </mat-form-field>
+
+            <!-- Buttons -->
+            <div class="modal__buttons">
+              <button class="button button-medium button-round button-green">Create Category</button>
+              <button (click)="toggleCategoryForm()" class="button button-medium button-round button-default">Cancel</button>
+            </div><!-- Buttons Ends -->
+          </form>
+
+        </div><!-- Form Ends -->
+      </div><!-- Modal Ends -->
+    </div><!-- Col Ends -->
+  </div><!-- Row Ends -->
+</div><!-- Dark Layer Ens -->

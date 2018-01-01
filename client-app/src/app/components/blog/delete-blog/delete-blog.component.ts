@@ -14,7 +14,7 @@ export class DeleteBlogComponent implements OnInit {
     private location: Location
   ) { }
 
-  loadBlogDelete() {
+  toggleDelete() {
     this.deleteBlogIsLoaded = !this.deleteBlogIsLoaded;
     setTimeout(() => {
       this.location.back();

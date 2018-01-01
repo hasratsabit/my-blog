@@ -23,6 +23,10 @@ import { AddBlogComponent } from './components/blog/add-blog/add-blog.component'
 import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';
 import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
 
+// Categories
+import { AddCategoryComponent } from './components/category/add-category/add-category.component';
+import { EditCategoryComponent } from './components/category/edit-category/edit-category.component';
+import { DeleteCategoryComponent } from './components/category/delete-category/delete-category.component';
 
 
 const appRoutes: Routes = [
@@ -58,6 +62,18 @@ const appRoutes: Routes = [
 	{
 		path: 'category',
 		component: CategoryComponent
+	},
+	{
+		path: 'add-category',
+		component: AddCategoryComponent
+	},
+	{
+		path: 'edit-category',
+		component: EditCategoryComponent
+	},
+	{
+		path: 'delete-category',
+		component: DeleteCategoryComponent
 	},
 	{
 		path: 'user',

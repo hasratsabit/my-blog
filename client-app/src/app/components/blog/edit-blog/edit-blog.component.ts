@@ -14,7 +14,7 @@ export class EditBlogComponent implements OnInit {
     private location: Location
   ) { }
 
-  loadEditBlogForm() {
+  toggleEditBlog() {
     this.editFormLoaded = !this.editFormLoaded;
     setTimeout(() => {
       this.location.back();
