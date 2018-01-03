@@ -18,7 +18,7 @@ export class EditCategoryComponent implements OnInit {
     this.editCategoryLoaded = !this.editCategoryLoaded;
     setTimeout(() => {
       this.location.back();
-    } 500)
+    }, 500)
   }
 
   ngOnInit() {

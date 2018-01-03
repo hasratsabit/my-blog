@@ -1763,7 +1763,7 @@
 		border-radius: 5px;
 		margin-top: 20px;
 		&:hover {
-			box-shadow: $shadow;
+			box-shadow: $MediumShadow;
 		}
 		@include clearfix;
 		@include atMedium {
@@ -1907,7 +1907,7 @@
 				opacity: 0.5;
 				margin-left: 5px;
 				@include atMedium {
-					font-size: 1.2rem;
+					font-size: 1rem;
 				}
 			}
 
@@ -1920,6 +1920,76 @@
 					top: 10px;
 					right: 15px;
 				}
+			}
+		}
+	}
+
+
+// ===============
+// 	TABS
+// ===============
+
+	.tab {
+		width: 200px;
+		font-family: $GeneralFont;
+		background: $white;
+		@include atMedium {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		&__list {
+			position: relative;
+			border-bottom: $LightBorder;
+			transition: $SmoothTrasition;
+			@include atMedium {
+				display: inline-block;
+				border-bottom: none;
+			}
+
+			&:hover {
+				background: $LightGray;
+			}
+
+			&:hover .tab__link,
+			&:focus .tab__link,
+			&:hover .tab__icon,
+			&:focus .tab__icon {
+				color: $LightGreen;
+			}
+		}
+
+	&__list:hover &__link::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 3px;
+		height: 100%;
+		background: $LightGreen;
+		transition: $SmoothTrasition;
+
+		@include atMedium {
+			width: 100%;
+			height: 3px;
+		}
+
+	}
+		&__icon {
+			color: $IconsColor;
+			margin-right: 8px;
+			transition: $SmoothTrasition;
+		}
+
+		&__link {
+			display: block;
+			padding: 20px;
+			text-decoration: none;
+			color: $Gray;
+			transition: $SmoothTrasition;
+			@include atMedium {
+				flex: 1;
 			}
 		}
 	}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-forum',
@@ -7,7 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddForumComponent implements OnInit {
 
-  constructor() { }
+  newForumIsLoaded = true;
+
+  constructor(
+    private location: Location
+  ) { }
+
+  toggleNewForum() {
+    this.newForumIsLoaded = !this.newForumIsLoaded;
+    setTimeout(() => {
+      this.location.back();
+    }, 500);
+  }
 
   ngOnInit() {
   }

@@ -1,15 +1,63 @@
-<!-- <div class="box">
-  <div class="zippy">
-    <div class="zippy-heading" [class.expanded]="isExpanded" (click)="toggle()">
-      Open Zippy
-      <span class="fa" [ngClass]="{'fa-chevron-up': isExpanded,'fa-chevron-down': !isExpanded}"></span>
-    </div>
-    <div [@expandCollapse]="isExpanded ? 'expanded' : 'collapsed'" class="zippy-body">
-      <p>{{ content }}</p>
-    </div>
-  </div>
-</div> -->
+<!-- TABS -->
+<div class="tab">
 
+  <li class="tab__list">
+    <a [routerLink]="['/add-forum']" href="#" class="tab__link">
+      <span class="tab__icon">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+      </span>
+        Start Descussion
+    </a>
+  </li>
+  <li class="tab__list">
+    <a href="#" class="tab__link">
+      <span class="tab__icon">
+        <i class="fa fa-eye" aria-hidden="true"></i>
+      </span>
+       Most Viewed
+    </a>
+  </li>
+  <li class="tab__list">
+    <a href="#" class="tab__link">
+      <span class="tab__icon">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </span>
+       Most Liked
+    </a>
+  </li>
+  <li class="tab__list">
+    <a href="#" class="tab__link">
+      <span class="tab__icon">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </span>
+       Most Shared
+    </a>
+  </li>
+  <li class="tab__list">
+    <a href="#" class="tab__link">
+      <span class="tab__icon">
+        <i class="fa fa-comments" aria-hidden="true"></i>
+      </span>
+     Most Discussed
+    </a>
+  </li>
+  <li class="tab__list">
+    <a href="#" class="tab__link">
+      <span class="tab__icon">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+      </span>
+      Most Recent
+    </a>
+  </li>
+  <li class="tab__list">
+    <a href="#" class="tab__link">
+      <span class="tab__icon">
+        <i class="fa fa-tasks" aria-hidden="true"></i>
+      </span>
+      Category
+    </a>
+  </li>
+</div><!-- TABS Ends-->
 <!-- Discussion -->
 <div class="forum">
   <div @fadeIn class="forum__discussion discussion">
@@ -42,7 +90,7 @@
         <li class="footer-list"><i class="fa fa-thumbs-down" aria-hidden="true"></i><span class="footer-data">33</span></li>
         <li class="footer-list"><i class="fa fa-share-alt" aria-hidden="true"></i><span class="footer-data">33</span></li>
         <li class=" footer-buttons">
-          <button class="button button-small" (click)="toggleAnswer()">Answer</button>
+          <button class="button button-small">Answer</button>
           <button class="button button-small" (click)="toggleForum()">
             <span *ngIf="!isExpanded">Expand</span>
             <span *ngIf="isExpanded">Collapse</span>
@@ -55,7 +103,7 @@
     <div [@expandCollapse]="isExpanded ? 'expanded' : 'collapsed'" class="discussion__body">
 
       <!-- Input -->
-      <div [class.collapsed]="!isAnswering" [@expandCollapse]="isAnswering ? 'expanded' : 'collapsed'" class="discussion__input">
+      <!-- <div [class.collapsed]="!isAnswering" [@expandCollapse]="isAnswering ? 'expanded' : 'collapsed'" class="discussion__input">
       <form class="input-form">
         <mat-form-field class="input-field input">
           <textarea matInput placeholder="Write Answer"></textarea>
@@ -65,7 +113,7 @@
           <button class="button button-small" (click)="toggleAnswer()">Cancel</button>
         </div>
       </form>
-      </div><!-- Input -->
+      </div> -->
 
       <!-- Answer -->
        <div class="discussion__answer">

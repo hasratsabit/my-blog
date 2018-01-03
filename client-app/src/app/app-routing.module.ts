@@ -28,6 +28,11 @@ import { AddCategoryComponent } from './components/category/add-category/add-cat
 import { EditCategoryComponent } from './components/category/edit-category/edit-category.component';
 import { DeleteCategoryComponent } from './components/category/delete-category/delete-category.component';
 
+// Forum
+import { AddForumComponent } from './components/forum/add-forum/add-forum.component';
+import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
+import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
+
 
 const appRoutes: Routes = [
 
@@ -94,6 +99,18 @@ const appRoutes: Routes = [
 	{
 		path: 'forum',
 		component: ForumComponent
+	},
+	{
+		path: 'add-forum',
+		component: AddForumComponent
+	},
+	{
+		path: 'edit-forum',
+		component: EditForumComponent
+	},
+	{
+		path: 'delete-forum',
+		component: DeleteForumComponent
 	},
 	{
 		path: 'email',
