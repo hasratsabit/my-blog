@@ -41,10 +41,13 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { AnimationComponent } from './components/animation/animation.component';
 
 // Services
+import { ProfileService } from './services/profile.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
-
+import { AuthGuard } from './guard/auth.guard';
+import { AdminGuard } from './guard/admin.guard';
+import { NotAuthGuard } from './guard/notAuth.guard';
 
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
@@ -57,6 +60,7 @@ import { AddCategoryComponent } from './components/category/add-category/add-cat
 import { AddForumComponent } from './components/forum/add-forum/add-forum.component';
 import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
 import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
+
 
 @NgModule({
   declarations: [
@@ -111,7 +115,15 @@ import { DeleteForumComponent } from './components/forum/delete-forum/delete-for
     MatIconModule,
     MatListModule
   ],
-  providers: [AuthService, UserService, CategoryService],
+  providers: [
+    AuthService,
+    UserService,
+    CategoryService,
+    ProfileService,
+    AuthGuard,
+    AdminGuard,
+    NotAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

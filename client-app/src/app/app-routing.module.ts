@@ -33,6 +33,9 @@ import { AddForumComponent } from './components/forum/add-forum/add-forum.compon
 import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
 import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
 
+import { AuthGuard } from './guard/auth.guard';
+import { NotAuthGuard } from './guard/notAuth.guard';
+
 
 const appRoutes: Routes = [
 
@@ -126,19 +129,23 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'profile',
-		component: ProfileComponent
+		component: ProfileComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 'register',
-		component: RegisterComponent
+		component: RegisterComponent,
+		canActivate: [NotAuthGuard]
 	},
 	{
 		path: 'login',
-		component: LoginComponent
+		component: LoginComponent,
+		canActivate: [NotAuthGuard]
 	},
 	{
 		path: 'logout',
-		component: LogoutComponent
+		component: LogoutComponent,
+		canActivate: [AuthGuard]
 	},
 	{
 		path: 'animation',

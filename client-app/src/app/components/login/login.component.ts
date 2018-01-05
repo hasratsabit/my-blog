@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { fadeIn, fadeInDown } from '../../animations/animation';
 
 import { AuthService } from '../../services/auth.service';
+import { AuthGuard } from '../../guard/auth.guard';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   form;
   alertMessage
   alertMessageClass
+  previousUrl;
   successIcon = false;
   proccessing = false;
   loginIsLoaded = true;
@@ -32,7 +34,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private location: Location,
-    private authService: AuthService
+    private authService: AuthService,
+    private authGuard: AuthGuard
   ) {
 
       this.createLoginForm();
@@ -95,13 +98,24 @@ export class LoginComponent implements OnInit {
         this.successIcon = true;
         this.authService.storeUserData(data.token, data.user);
         setTimeout(() => {
-          this.router.navigate(['/profile']);
+          if(this.previousUrl){
+            this.router.navigate([this.previousUrl]);
+          }else {
+            this.router.navigate(['/']);
+          }
         }, 2000);
       }
     })
   }
 
   ngOnInit() {
+
+    if(this.authGuard.redirectUrl){
+      this.alertMessageClass = 'alert alert-red';
+      this.alertMessage = 'You must be logged in to view this message.';
+      this.previousUrl = this.authGuard.redirectUrl;
+      this.authGuard.redirectUrl = undefined;
+    }
   }
 
 }

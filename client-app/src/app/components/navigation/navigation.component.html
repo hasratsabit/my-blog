@@ -1,23 +1,24 @@
 <!-- Top Nav -->
 <nav class="top-nav">
 	<ul class="top-right-navbar">
-		<li routerLink="/login" [routerLinkActive]="['active']"><a>Login</a></li>
-		<li routerLink="/register" [routerLinkActive]="['active']"><a>Register</a></li>
+		<li *ngIf="!authService.userLoggedIn()" routerLink="/login" [routerLinkActive]="['active']"><a>Login</a></li>
+		<li *ngIf="!authService.userLoggedIn()" routerLink="/register" [routerLinkActive]="['active']"><a>Register</a></li>
+		<li *ngIf="authService.userLoggedIn()" (click)="onLogout()"><a>Logout</a></li>
 		<li class="user-nav">
 			<!-- Right Corner Menu -->
 			<button mat-icon-button [matMenuTriggerFor]="menu">
 				<img class="img img-border img-small img-circle" src="/assets/images/profile.jpg" alt="">
 			</button>
 			<mat-menu #menu="matMenu">
-				<button mat-menu-item  routerLink="/profile" [routerLinkActive]="['active']">
+				<button *ngIf="authService.userLoggedIn()" mat-menu-item  routerLink="/profile" [routerLinkActive]="['active']">
 					<mat-icon>account_box</mat-icon>
 					<span>Profile</span>
 				</button>
-				<button mat-menu-item  routerLink="/logout" [routerLinkActive]="['active']">
+				<button *ngIf="authService.userLoggedIn()" mat-menu-item  routerLink="/logout" [routerLinkActive]="['active']">
 					<mat-icon>exit_to_app</mat-icon>
 					<span>Logout</span>
 				</button>
-				<button mat-menu-item  routerLink="/login" [routerLinkActive]="['active']">
+				<button *ngIf="!authService.userLoggedIn()" mat-menu-item  routerLink="/login" [routerLinkActive]="['active']">
 					<mat-icon>verified_user</mat-icon>
 					<span>Login</span>
 				</button>
@@ -48,7 +49,19 @@
 		<li routerLink="/forum" [routerLinkActive]="['active']"><mat-icon>forum</mat-icon><a >Forum</a></li>
 		<li routerLink="/email" [routerLinkActive]="['active']"><mat-icon>email</mat-icon><a >Email</a></li>
 		<li routerLink="/parts" [routerLinkActive]="['active']"><mat-icon>settings_input_component</mat-icon><a >Components</a></li>
-		<li routerLink="/profile" [routerLinkActive]="['active']"><mat-icon>perm_contact_calendar</mat-icon><a >Profile</a></li>
+		<li *ngIf="authService.userLoggedIn()" routerLink="/profile" [routerLinkActive]="['active']"><mat-icon>perm_contact_calendar</mat-icon><a >Profile</a></li>
 		<li routerLink="/animation" [routerLinkActive]="['active']"><mat-icon>assessment</mat-icon><a >Animation</a></li>
 	</ul>
 </div><!-- Side Nav Ends -->
+
+
+
+
+<!-- Loggout message -->
+<div *ngIf="loggedOutLoaded">
+	<div [ngClass]="{'expand-layer': loggedOutLoaded, 'collapse-layer': !loggedOutLoaded}" class="dark-layer">
+		<div @fadeIn class="alert alert-green">
+			<i class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><p class="alert-text"> You are successfully logged out.</p>
+		</div>
+	</div>
+</div>
