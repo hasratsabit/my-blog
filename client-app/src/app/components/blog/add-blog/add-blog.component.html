@@ -20,8 +20,10 @@
             </mat-form-field>
             <mat-form-field  class="form-input">
             <mat-select placeholder="Select Category">
-              <mat-option>JavaScript</mat-option>
-              <mat-option>Python</mat-option>
+              <mat-option
+              *ngFor="let cat of categories"
+              [value]="cat._id">
+              {{ cat.category }}</mat-option>
             </mat-select>
             </mat-form-field>
             <mat-form-field class="form-input">

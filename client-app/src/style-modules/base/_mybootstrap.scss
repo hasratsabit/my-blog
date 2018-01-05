@@ -580,6 +580,7 @@
 			color: $Gray;
 			font-weight: 100;
 			border-bottom: 1px solid $LightGray;
+			text-transform: capitalize;
 			@include atSmall {
 				font-size: 0.9rem;
 				padding: 10px;
@@ -1394,6 +1395,7 @@
 
 			.body-target {
 				font-size: 1rem;
+				text-transform: capitalize;
 			}
 		}
 
@@ -1433,6 +1435,7 @@
 			padding: 10px 20px;
 			font-size: 1.2rem;
 			color: $white;
+			z-index: 1000;
 			font-family: $GeneralFont;
 			cursor: pointer;
 			@include atSmall {
@@ -1447,7 +1450,7 @@
 			}
 		}
 
-		&__login-trasnlate-left {
+		&__modal-small {
 			@include atSmall {
 				transform: translateX(30%) translateY(20%);
 			}
@@ -1992,4 +1995,16 @@
 				flex: 1;
 			}
 		}
+	}
+
+// ===============
+// 	LARGE CARD
+// ===============
+	mat-select {
+		max-width: 100%;
+	}
+
+
+	mat-option {
+		text-transform: capitalize;
 	}

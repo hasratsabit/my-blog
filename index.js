@@ -10,6 +10,7 @@ const config = require('./config/database');
 const publicRoute = require('./routes/public')(router);
 const authRoute = require('./routes/authentication')(router);
 const usersRoute = require('./routes/users')(router);
+const categoryRoute = require('./routes/categories')(router);
 // const blogsRoute = require('./routes/blogs')(router);
 // const contactRoute = require('./routes/contact')(router);
 
@@ -49,6 +50,7 @@ const usersRoute = require('./routes/users')(router);
 	app.use('/public', publicRoute);
 	app.use('/authentication', authRoute);
 	app.use('/users', usersRoute);
+	app.use('/categories', categoryRoute);
 	// app.use('/blogs', blogsRoute);
 	// app.use('/contact', contactRoute)
 

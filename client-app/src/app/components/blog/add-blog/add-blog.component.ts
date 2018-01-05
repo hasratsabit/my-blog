@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-add-blog',
@@ -9,9 +10,11 @@ import { Location } from '@angular/common';
 export class AddBlogComponent implements OnInit {
 
   addBlogFormLoaded = true;
+  categories;
 
   constructor(
-    private location: Location
+    private location: Location,
+    private categoryService: CategoryService
   ) { }
 
   toggleAddBlog() {
@@ -22,6 +25,9 @@ export class AddBlogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categoryService.getAllCategories().subscribe(data => {
+      this.categories = data.cat;
+    })
   }
 
 }

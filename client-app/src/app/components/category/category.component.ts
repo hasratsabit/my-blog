@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { fadeIn } from '../../animations/animation';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-category',
@@ -9,20 +10,17 @@ import { fadeIn } from '../../animations/animation';
 })
 export class CategoryComponent implements OnInit {
 
-  loadedCategoryForm: Boolean = false;
+  categoreis;
 
-  constructor() { }
+  constructor(
+    private categoryService: CategoryService
+  ) { }
 
-
-  loadCategoryForm() {
-    this.loadedCategoryForm = true;
-  }
-
-  cancelCategoryForm() {
-    this.loadedCategoryForm = false;
-  }
 
   ngOnInit() {
+    this.categoryService.getAllCategories().subscribe(data => {
+      this.categoreis = data.cat;
+    })
   }
 
 }

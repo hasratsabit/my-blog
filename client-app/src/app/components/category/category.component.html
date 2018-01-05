@@ -12,43 +12,12 @@
 
       </thead>
       <tbody>
-        <tr>
-          <td>01</td>
-          <td>JavaScript</td>
-          <td><a class="edit" [routerLink]="['/edit-category']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-category']">Delete</a></td>
+        <tr *ngFor="let cat of categoreis; index as i">
+          <td>{{ i }}</td>
+          <td>{{ cat.category }}</td>
+          <td><a class="edit" [routerLink]="['/edit-category', cat._id]">Edit</a></td>
+          <td><a class="delete" [routerLink]="['/delete-category', cat._id]">Delete</a></td>
         </tr>
-        <tr>
-          <td>01</td>
-          <td>JavaScript</td>
-          <td><a class="edit" [routerLink]="['/edit-category']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-category']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>JavaScript</td>
-          <td><a class="edit" [routerLink]="['/edit-category']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-category']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>JavaScript</td>
-          <td><a class="edit" [routerLink]="['/edit-category']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-category']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>JavaScript</td>
-          <td><a class="edit" [routerLink]="['/edit-category']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-category']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>JavaScript</td>
-          <td><a class="edit" [routerLink]="['/edit-category']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-category']">Delete</a></td>
-        </tr>
-        <tr>
       </tbody>
     </table><!-- Table Ends  -->
   </div>

@@ -2,27 +2,46 @@
 <div [ngClass]="{'expand-layer': categoryFormLoaded, 'collapse-layer': !categoryFormLoaded}" class="dark-layer">
   <span (click)="toggleCategoryForm()" class="dark-layer__close">X</span>
   <!-- Row -->
-  <div class="dark-layer__modal row">
+  <div class="dark-layer__modal-small row">
     <!-- Col -->
-    <div class="col-2">
+    <div class="col-3">
 
       <!-- Modal -->
       <div [ngClass]="{'expand-dialog': categoryFormLoaded, 'collapse-dialog': !categoryFormLoaded}" class="modal">
         <h1 class="modal__title">Create Category</h1>
         <span (click)="toggleCategoryForm()" class="modal__close">X</span>
 
+        <!-- Success or Error Message -->
+        <div @fadeIn *ngIf="alertMessage">
+          <div [ngClass]="alertMessageClass">
+            <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
+          </div>
+        </div><!-- Success or Error Message Ends -->
+
         <!-- Form -->
         <div class="modal__form">
 
-          <form action="">
+          <form [formGroup]="form" (submit)="onCategorySubmit()">
+
+            <!-- Category Field -->
             <mat-form-field class="form-input">
-              <input matInput type="text" placeholder="Add Category">
-            </mat-form-field>
+              <!-- Category Input -->
+              <input
+                matInput
+                type="text"
+                placeholder="Add Category"
+                formControlName="category"
+                name="category"
+                required>
+                <mat-error *ngIf="form.controls.category.errors?.required">The category field is required.</mat-error>
+                <mat-error *ngIf="form.controls.category.errors?.minlength">The category can not be less than 3 character</mat-error>
+                <mat-error *ngIf="form.controls.category.errors?.maxlength">The category can not be more than 15 character</mat-error>
+                <mat-error *ngIf="form.controls.category.errors?.validCategory">The category cannot contain special characters.</mat-error><!-- Category Input Ends -->
+            </mat-form-field><!-- Category Field Ends -->
 
             <!-- Buttons -->
             <div class="modal__buttons">
-              <button class="button button-medium button-round button-green">Create Category</button>
-              <button (click)="toggleCategoryForm()" class="button button-medium button-round button-default">Cancel</button>
+              <button [disabled]="!form.valid || !validCategory || processing " type="submit" class="button button-medium button-round button-green">Create Category</button>
             </div><!-- Buttons Ends -->
           </form>
 

@@ -73,11 +73,11 @@ const appRoutes: Routes = [
 		component: AddCategoryComponent
 	},
 	{
-		path: 'edit-category',
+		path: 'edit-category/:id',
 		component: EditCategoryComponent
 	},
 	{
-		path: 'delete-category',
+		path: 'delete-category/:id',
 		component: DeleteCategoryComponent
 	},
 	{

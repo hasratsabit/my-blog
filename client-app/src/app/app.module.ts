@@ -43,6 +43,9 @@ import { AnimationComponent } from './components/animation/animation.component';
 // Services
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { CategoryService } from './services/category.service';
+
+
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
 import { AddBlogComponent } from './components/blog/add-blog/add-blog.component';
@@ -108,7 +111,7 @@ import { DeleteForumComponent } from './components/forum/delete-forum/delete-for
     MatIconModule,
     MatListModule
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
