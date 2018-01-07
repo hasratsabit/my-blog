@@ -1,10 +1,19 @@
 .top-nav {
 	position: fixed;
+	right: 0;
+	top: 0;
 	z-index: 100;
 	width: 100%;
-	float: right;
 	background: $white;
 	box-shadow: $shadow;
+
+	@include atSmall {
+		width: 82%;
+	}
+
+	@include atLarge {
+		width: 86%;
+	}
 }
 
 

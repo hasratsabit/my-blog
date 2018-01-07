@@ -33,8 +33,10 @@ import { AddForumComponent } from './components/forum/add-forum/add-forum.compon
 import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
 import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
 
+// User Access
 import { AuthGuard } from './guard/auth.guard';
 import { NotAuthGuard } from './guard/notAuth.guard';
+import { AdminGuard } from './guard/admin.guard';
 
 
 const appRoutes: Routes = [
@@ -125,7 +127,8 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'dashboard',
-		component: DashboardComponent
+		component: DashboardComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'profile',

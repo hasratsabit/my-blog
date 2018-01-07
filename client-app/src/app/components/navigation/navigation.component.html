@@ -39,18 +39,23 @@
 <div class="side-navbar">
 	<ul class="navbar">
 		<li routerLink="/" [routerLinkActive]="['active']"><mat-icon>home</mat-icon><a href="#">Home</a></li>
-		<li routerLink="/dashboard" [routerLinkActive]="['active']"><mat-icon>dashboard</mat-icon><a >Dashboard</a></li>
-		<li routerLink="/blog" [routerLinkActive]="['active']"><mat-icon>description</mat-icon><a>Blogs</a></li>
 		<li routerLink="/" [routerLinkActive]="['active']"><mat-icon>code</mat-icon><a>Tutorials</a></li>
-		<li routerLink="/" [routerLinkActive]="['active']"><mat-icon>build</mat-icon><a>Projects</a></li>
-		<li routerLink="/comment" [routerLinkActive]="['active']"><mat-icon>comment</mat-icon><a >Comments</a></li>
-		<li routerLink="/category" [routerLinkActive]="['active']"><mat-icon>dns</mat-icon><a>Categories</a></li>
-		<li routerLink="/user" [routerLinkActive]="['active']"><mat-icon>account_box</mat-icon><a >Users</a></li>
 		<li routerLink="/forum" [routerLinkActive]="['active']"><mat-icon>forum</mat-icon><a >Forum</a></li>
-		<li routerLink="/email" [routerLinkActive]="['active']"><mat-icon>email</mat-icon><a >Email</a></li>
-		<li routerLink="/parts" [routerLinkActive]="['active']"><mat-icon>settings_input_component</mat-icon><a >Components</a></li>
 		<li *ngIf="authService.userLoggedIn()" routerLink="/profile" [routerLinkActive]="['active']"><mat-icon>perm_contact_calendar</mat-icon><a >Profile</a></li>
-		<li routerLink="/animation" [routerLinkActive]="['active']"><mat-icon>assessment</mat-icon><a >Animation</a></li>
+		<ul>
+			<li>
+				<mat-icon>dashboard</mat-icon>
+				<a routerLink="/dashboard" [routerLinkActive]="['active']">Dashboard</a>
+			</li>
+			<li routerLink="/blog" [routerLinkActive]="['active']"><mat-icon>description</mat-icon><a>Blogs</a></li>
+			<li routerLink="/" [routerLinkActive]="['active']"><mat-icon>build</mat-icon><a>Projects</a></li>
+			<li routerLink="/comment" [routerLinkActive]="['active']"><mat-icon>comment</mat-icon><a >Comments</a></li>
+			<li routerLink="/category" [routerLinkActive]="['active']"><mat-icon>dns</mat-icon><a>Categories</a></li>
+			<li routerLink="/user" [routerLinkActive]="['active']"><mat-icon>account_box</mat-icon><a >Users</a></li>
+			<li routerLink="/email" [routerLinkActive]="['active']"><mat-icon>email</mat-icon><a >Email</a></li>
+			<li routerLink="/parts" [routerLinkActive]="['active']"><mat-icon>settings_input_component</mat-icon><a >Components</a></li>
+			<li routerLink="/animation" [routerLinkActive]="['active']"><mat-icon>assessment</mat-icon><a >Animation</a></li>
+		</ul>
 	</ul>
 </div><!-- Side Nav Ends -->
 

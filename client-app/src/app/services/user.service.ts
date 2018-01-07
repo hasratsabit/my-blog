@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 import { AuthService } from './auth.service';
+import { ProfileUser } from '../modals/app-user';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
@@ -68,5 +71,10 @@ export class UserService {
   deleteUser(id){
     this.authorizationHeaders();
     return this.http.delete(this.domain + '/users/deleteUser/' + id, this.options).map(res => res.json());
+  }
+
+  getUserProfile():Observable<ProfileUser> {
+    this.authorizationHeaders();
+    return this.http.get(this.domain + '/users/getUserProfile', this.options).map(res => res.json());
   }
 }

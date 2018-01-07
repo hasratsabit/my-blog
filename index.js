@@ -11,6 +11,7 @@ const publicRoute = require('./routes/public')(router);
 const authRoute = require('./routes/authentication')(router);
 const usersRoute = require('./routes/users')(router);
 const categoryRoute = require('./routes/categories')(router);
+const profileRoute = require('./routes/profile')(router);
 // const blogsRoute = require('./routes/blogs')(router);
 // const contactRoute = require('./routes/contact')(router);
 
@@ -51,6 +52,7 @@ const categoryRoute = require('./routes/categories')(router);
 	app.use('/authentication', authRoute);
 	app.use('/users', usersRoute);
 	app.use('/categories', categoryRoute);
+	app.use('/profile', profileRoute);
 	// app.use('/blogs', blogsRoute);
 	// app.use('/contact', contactRoute)
 

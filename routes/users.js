@@ -75,13 +75,13 @@ module.exports = (router) => {
 							res.json({ success: false, message: 'Error occured finding user.', err });
 						}else if (!authUser) {
 							res.json({ success: false, message: 'No user was found with admin role.'});
-						}else if (authUser.userRole !== 'admin') {
+						}else if (authUser.adminAccess === false) {
 							res.json({ success: false, message: 'You are not authorized to edit this user.'});
 						}else {
 							user.name = req.body.name;
 							user.email = req.body.email;
 							user.username = req.body.username;
-							user.userRole = req.body.userRole;
+							user.adminAccess = req.body.adminAccess;
 							user.password = req.body.password;
 							user.save((err) => {
 								if(err){
@@ -127,7 +127,7 @@ module.exports = (router) => {
 							res.json({ success: false, message: 'Error occured finding admin.' + err});
 						}else if (!userAccess) {
 							res.json({ success: false, message: 'No user was found with admin access.'});
-						}else if(userAccess.userRole !== 'admin'){
+						}else if(userAccess.adminAccess === false){
 							res.json({ success: false, message: 'You are not authorized to delete this user. '});
 						}else {
 							user.remove((err) => {
@@ -143,6 +143,21 @@ module.exports = (router) => {
 			});
 		}
 	});
+
+// ==========================================================
+// 		 									DELETE USER
+// ==========================================================
+	router.get('/getUserProfile', (req, res) => {
+		User.findOne({ _id: req.decoded.userId }, (err, user) => {
+			if(err){
+				res.json({ success: false, message: 'Error occured finding user.' + err});
+			}else if (!user) {
+				res.json({ success: false, message: 'The user was not found in database.'});
+			}else {
+				res.json({ success: true, user: user });
+			}
+		})
+	})
 
 	return router;
 }

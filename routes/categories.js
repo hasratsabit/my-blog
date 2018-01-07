@@ -16,7 +16,7 @@ module.exports = (router) => {
 					res.json({ success: false, message: 'Error occured finding user', err})
 				}else if(!user) {
 					res.json({ success: false, message: 'You must be logged in to create categories.'});
-				}else if (user.userRole !== 'admin') {
+				}else if (user.adminAccess === false) {
 					res.json({ success: false, message: 'You are not an authorized adminstrator to create category.'});
 				}else {
 					let category = new Category({
@@ -88,7 +88,7 @@ module.exports = (router) => {
 							res.json({ success: false, message: 'Error occured finding the user. ' + err });
 						}else if(!user){
 							res.json({ success: false, message: 'You must be logged in to continue.'});
-						}else if (user.userRole !== 'admin') {
+						}else if (user.adminAccess === false) {
 							res.json({ success: false, message: 'You are not an authoried admin to edit this category.'});
 						}else {
 							cat.category = req.body.category;
@@ -122,7 +122,7 @@ module.exports = (router) => {
 							res.json({ success: false, message: 'Error occured finding user.' + err });
 						}else if (!user) {
 							res.json({ success: false, message: 'You must be logged in to continue.'});
-						}else if (user.userRole !== 'admin') {
+						}else if (user.adminAccess === false) {
 							res.json({ success: false, message: 'You are not authorized to delete this category.'})
 						}else {
 							cat.remove((err) => {

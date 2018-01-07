@@ -4,6 +4,7 @@ import { trigger, state, style, transition, animate } from "@angular/animations"
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { fadeIn, fadeInDown } from '../../animations/animation';
+import { UserService } from '../../services/user.service';
 
 import { AuthService } from '../../services/auth.service';
 import { AuthGuard } from '../../guard/auth.guard';
@@ -35,7 +36,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private location: Location,
     private authService: AuthService,
-    private authGuard: AuthGuard
+    private authGuard: AuthGuard,
+    private userService: UserService
   ) {
 
       this.createLoginForm();

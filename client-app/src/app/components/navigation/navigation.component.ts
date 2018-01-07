@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { AdminGuard } from '../../guard/admin.guard';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { fadeIn } from '../../animations/animation';
@@ -13,11 +15,15 @@ import { fadeIn } from '../../animations/animation';
 export class NavigationComponent implements OnInit {
 
   loggedOutLoaded = false;
+  isAdmin
 
   constructor(
     public authService: AuthService,
-    private router: Router
-  ) { }
+    public userService: UserService,
+    public adminGuard: AdminGuard,
+    private router: Router,
+  ) {
+    }
 
     onLogout() {
       this.authService.logoutUser();
@@ -28,7 +34,10 @@ export class NavigationComponent implements OnInit {
       }, 3000);
     }
 
+
   ngOnInit() {
+   
   }
+
 
 }

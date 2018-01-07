@@ -195,7 +195,7 @@ const Schema = mongoose.Schema;
 		name: { type: String, required: true, validate: nameValidators },
 		username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
 		email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
-		userRole: { type: String, default: 'admin'},
+		adminAccess: { type: Boolean, default: true },
 		password: { type: String, required: true, validate: passwordValidators }
 	});
 
