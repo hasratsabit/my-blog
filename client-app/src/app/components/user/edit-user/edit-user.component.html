@@ -2,7 +2,9 @@
 
 <div [ngClass]="{'expand-layer': editIsLoaded, 'collapse-layer': !editIsLoaded}" class="dark-layer">
 
-	<span class="dark-layer__close" (click)="toggleEdit()">X</span>
+	<span class="dark-layer__close" (click)="toggleEdit()">
+		<mat-icon>clear</mat-icon>
+	</span>
 
 	<!-- Success or Error Message -->
 	<div @fadeIn *ngIf="alertMessage">
@@ -16,7 +18,9 @@
 			<!-- Modal -->
 			<div [ngClass]="{'expand-dialog': editIsLoaded, 'collapse-dialog': !editIsLoaded}" class="modal">
 				<h1 class="modal__title">Edit User</h1>
-				<span (click)="toggleEdit()" class="modal__close">X</span>
+				<span (click)="toggleEdit()" class="modal__close">
+					<mat-icon>clear</mat-icon>
+				</span>
 
 				<!-- Form -->
 				<div class="modal__form">

@@ -1,5 +1,7 @@
 <div [ngClass]="{'expand-layer': registerIsLoaded, 'collapse-layer': !registerIsLoaded}" class="dark-layer">
-  <span (click)="toggleRegisterForm()" class="dark-layer__close">X</span>
+  <span (click)="toggleRegisterForm()" class="dark-layer__close">
+		<mat-icon>clear</mat-icon>
+	</span>
   <div class="dark-layer__modal row">
     <div class="col-2">
 
@@ -14,7 +16,9 @@
 				</div><!-- Success or Error Message Ends -->
 
         <!-- Close -->
-        <span (click)="toggleRegisterForm()"  class="signup__close">X</span>
+        <span (click)="toggleRegisterForm()"  class="signup__close">
+					<mat-icon>clear</mat-icon>
+				</span>
 
         <!-- Title -->
         <h1 class="signup__title">Register</h1>

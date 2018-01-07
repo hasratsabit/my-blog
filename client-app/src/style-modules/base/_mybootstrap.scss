@@ -2008,3 +2008,25 @@
 	mat-option {
 		text-transform: capitalize;
 	}
+
+// ===============
+// 	DARK LAYER
+// ===============
+
+.menu-button {
+	padding: 7px 10px;
+	background: $white;
+	border-radius: 50%;
+	box-shadow: $shadow;
+	transition: $SmoothTrasition;
+	&:hover {
+		box-shadow: $MediumShadow;
+	}
+
+	mat-icon {
+		font-size: 24px;
+		margin-top: 3px;
+		color: $IconsColor;
+		opacity: 0.8;
+	}
+}

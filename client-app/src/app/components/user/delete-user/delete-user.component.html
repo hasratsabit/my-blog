@@ -1,6 +1,8 @@
 <div [ngClass]="{'expand-layer': deleteIsLoaded, 'collapse-layer': !deleteIsLoaded}" class="dark-layer">
 
-	<span class="dark-layer__close" (click)="toggleDelete()">X</span>
+	<span class="dark-layer__close" (click)="toggleDelete()">
+    <mat-icon>clear</mat-icon>
+  </span>
 
 	<!-- Success or Error Message -->
 	<div @fadeIn *ngIf="alertMessage">
@@ -17,7 +19,7 @@
         <!-- Header -->
         <div class="dialog__header">
           <div class="header-title"><i class="fa fa-exclamation-triangle header-warning" aria-hidden="true"></i> Confirm</div>
-          <i class="fa fa-times header-close" aria-hidden="true"></i>
+          <mat-icon class="header-close">clear</mat-icon>
         </div><!-- Header Ends -->
         <!-- Body -->
         <div class="dialog__body">

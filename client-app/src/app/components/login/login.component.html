@@ -1,6 +1,8 @@
 
 <div [ngClass]="{'expand-layer': loginIsLoaded, 'collapse-layer': !loginIsLoaded}" class="dark-layer">
-  <span (click)="toggleLoginForm()" class="dark-layer__close">X</span>
+  <span (click)="toggleLoginForm()" class="dark-layer__close">
+		<mat-icon>clear</mat-icon>
+	</span>
   <div class="dark-layer__modal dark-layer__login-trasnlate-left row">
     <div class="col-3">
 
@@ -14,7 +16,9 @@
 					</div>
 				</div><!-- Success or Error Message Ends -->
 
-        <span (click)="toggleLoginForm()" class="login__close">X</span>
+        <span (click)="toggleLoginForm()" class="login__close">
+						<mat-icon>clear</mat-icon>
+				</span>
         <h1 class="login__welcome">Welcome</h1>
         <h1 class="login__title">Login</h1>
         <span class="login__text">Login to your account</span>

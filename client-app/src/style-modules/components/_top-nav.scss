@@ -1,11 +1,6 @@
 .top-nav {
-	position: fixed;
-	right: 0;
-	top: 0;
-	z-index: 100;
+	float: right;
 	width: 100%;
-	background: $white;
-	box-shadow: $shadow;
 
 	@include atSmall {
 		width: 82%;
@@ -14,71 +9,34 @@
 	@include atLarge {
 		width: 86%;
 	}
-}
 
-
-.logo,
-.menu {
-	width: 22.5%;
-	position: absolute;
-	height: 100%;
-	@include atSmall {
-		width: 9%;
+	&__right-nav {
+		float: right;
 	}
 
-	@include atLarge {
-		width: 7%;
-	}
-}
-
-.logo {
-	left: 0;
-	border-right: $LightBorder;
-}
-
-
-.menu {
-	left: 22.5%;
-	@include atSmall {
-		left: 9%;
-		border-right: $LightBorder;
-	}
-
-	@include atLarge {
-		left: 7%;
-	}
-}
-
-
-.top-right-navbar {
-	float: right;
-	font-family: $GeneralFont;
 	li {
 		display: inline-block;
-		transition: $SmoothTrasition;
-		cursor: pointer;
-		border-left: $LightBorder;
-		&:focus,
-		&:active,
-		&:hover a,
-		&:hover {
-			background: $LightGray;
-			transition: $SmoothTrasition;
-			color: $Green;
-			outline: none;
+		padding: 10px;
+	}
+
+	&__side-nav-toggle {
+		float: left;
+	}
+
+	&__search {
+		position: relative;
+		right: 50px;
+
+		.menu-button {
+			position: absolute;
+			right: -38px;
+			bottom: 23px;
 		}
 	}
 
-	a {
-		padding: 20px;
-		display: inline-block;
-		text-decoration: none;
-		font-size: 1.1rem;
+	&__filter mat-icon,
+	&__profile mat-icon {
 		color: $Gray;
-		transition: $SmoothTrasition;
 	}
-}
 
-.user-nav {
-	padding: 9px;
 }

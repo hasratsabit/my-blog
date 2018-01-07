@@ -1,6 +1,8 @@
 <!-- Dark Layer -->
 <div [ngClass]="{'expand-layer': deleteCategoryIsLoaded, 'collapse-layer': !deleteCategoryIsLoaded}" class="dark-layer">
-  <span (click)="toggleDeleteCategory()" class="dark-layer__close">X</span>
+  <span (click)="toggleDeleteCategory()" class="dark-layer__close">
+    <mat-icon>clear</mat-icon>
+  </span>
 
   <!-- Success or Error Message -->
   <div @fadeIn *ngIf="alertMessage">
@@ -23,7 +25,7 @@
           <div class="header-title"><i class="fa fa-exclamation-triangle header-warning" aria-hidden="true"></i> Confirm</div>
 
           <span (click)="toggleDeleteCategory()" class="header-close">
-            <i class="fa fa-times " aria-hidden="true"></i>
+            <mat-icon>clear</mat-icon>
           </span>
 
         </div><!-- Header Ends -->
