@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from "@angular/http";
+import { AngularDraggableModule } from 'angular2-draggable';
 
 // Material Modules
 
@@ -60,6 +61,7 @@ import { AddCategoryComponent } from './components/category/add-category/add-cat
 import { AddForumComponent } from './components/forum/add-forum/add-forum.component';
 import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
 import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
+import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
 
 
 @NgModule({
@@ -91,7 +93,8 @@ import { DeleteForumComponent } from './components/forum/delete-forum/delete-for
 
     AddForumComponent,
     EditForumComponent,
-    DeleteForumComponent
+    DeleteForumComponent,
+    ReadMoreComponent
   ],
   imports: [
     BrowserModule,
@@ -100,6 +103,7 @@ import { DeleteForumComponent } from './components/forum/delete-forum/delete-for
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
+    AngularDraggableModule,
 
     // Material Modules
     MatButtonModule,

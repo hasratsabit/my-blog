@@ -15,6 +15,7 @@ import { fadeIn } from '../../animations/animation';
 export class NavigationComponent implements OnInit {
 
   loggedOutLoaded = false;
+  mobileNavExpanded = false;
   isAdmin
 
   constructor(
@@ -23,6 +24,10 @@ export class NavigationComponent implements OnInit {
     public adminGuard: AdminGuard,
     private router: Router,
   ) {
+    }
+
+    toggleUserProfile() {
+      this.mobileNavExpanded = !this.mobileNavExpanded;
     }
 
     onLogout() {

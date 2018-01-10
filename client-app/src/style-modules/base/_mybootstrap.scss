@@ -2,355 +2,330 @@
 @import "./variables";
 @import "./mixins";
 @import "./global";
-
-
-
 // ===============
 // 	BOX
 // ===============
-
-
-
 // ===============
 // 	BOX
 // ===============
-
 .img {
-	box-sizing: border-box;
-	height: auto;
+  box-sizing: border-box;
+  height: auto;
 }
 
 .img-square {
-	border-radius: 5px;
+  border-radius: 5px;
 }
 
 .img-circle {
-	border-radius: 50%;
+  border-radius: 50%;
 }
 
 .img-large {
-	height: auto;
-	width: auto;
+  height: auto;
+  width: auto;
 }
 
 .img-medium {
-	height: 60px;
-	width: 60px;
+  height: 60px;
+  width: 60px;
 }
 
 .img-small {
-	height: 40px;
-	width: 40px;
+  height: 40px;
+  width: 40px;
 }
 
 .img-tiny {
-	height: 30px;
-	width: 30px;
+  height: 30px;
+  width: 30px;
 }
 
 .img-border {
-	border: 3px solid $LightGreen;
+  border: 3px solid $LightGreen;
 }
-
 
 // ===============
 // 	ITEM LISTS
 // ===============
 .list-group {
-	width: 100%;
-	font-family: $GeneralFont;
+  width: 100%;
+  font-family: $GeneralFont;
 }
 
 // Hover Head
 .list-head {
-	width: 100%;
-	padding: 10px 0;
-	background: $ListHead;
+  width: 100%;
+  padding: 10px 0;
+  background: $ListHead;
 }
-
-
 
 // Hover Title
 .list-title {
-	padding: 0;
-	margin: 0;
-	padding-left: 10px;
-	font-size: 1.1rem;
-	color: $ListTextColor;
-	text-transform: capitalize;
+  padding: 0;
+  margin: 0;
+  padding-left: 10px;
+  font-size: 1.1rem;
+  color: $ListTextColor;
+  text-transform: capitalize;
 }
-
 
 // Hover Body
 .list-body {
-	width: 100%;
-	padding: 0;
-	margin: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 // Hover Items
 .list-item {
-	position: relative;
-	padding: 10px 5px;
-	margin: 0;
-	display: block;
-	color: $ListTextColor;
-	border-bottom: 1px solid $ListHead;
-	border-right: 1px solid $ListHead;
-	border-left: 1px solid $ListHead;
-	transition: $SmoothTrasition;
-	.badge-label {
-		position: absolute;
-		padding: 5px 8px;
-		right: 10px;
-		bottom: 5px;
-	}
+  position: relative;
+  padding: 10px 5px;
+  margin: 0;
+  display: block;
+  color: $ListTextColor;
+  border-bottom: 1px solid $ListHead;
+  border-right: 1px solid $ListHead;
+  border-left: 1px solid $ListHead;
+  transition: $SmoothTrasition;
+  .badge-label {
+    position: absolute;
+    padding: 5px 8px;
+    right: 10px;
+    bottom: 5px;
+  }
 }
 
 // Hover List
 .list-hover {
-	.list-item:hover {
-		cursor: pointer;
-		background: $ListHover;
-	}
+  .list-item:hover {
+    cursor: pointer;
+    background: $ListHover;
+  }
 }
-
 
 // Blue List
 .list-blue {
-	.list-head {
-		background: $ListHeadBlue;
-	}
-	.list-title {
-		color: $white;
-	}
+  .list-head {
+    background: $ListHeadBlue;
+  }
+  .list-title {
+    color: $white;
+  }
 }
 
 // Green List
 .list-green {
-	.list-head {
-		background: $ListHeadGreen;
-	}
-	.list-title {
-		color: $white;
-	}
+  .list-head {
+    background: $ListHeadGreen;
+  }
+  .list-title {
+    color: $white;
+  }
 }
-
 
 // ===============
 // 	BUTTONS
 // ===============
-
 .button {
-	padding: 0;
-	margin: 0;
-	border: none;
-	cursor: pointer;
-	font-family: $ButtonFont;
-	border-radius: 3px;
-	&:disabled,
-	[disabled] {
-	opacity: 0.5;
-	cursor: not-allowed;
-	}
-	&:focus,
-	&:active {
-		outline: none;
-		background: transparent;
-	}
+  padding: 0;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  font-family: $ButtonFont;
+  border-radius: 3px;
+  &:disabled,
+  [disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &:focus,
+  &:active {
+    outline: none;
+    background: transparent;
+  }
 }
 
 .button-default {
-	background: transparent;
-	border: $LightBorder;
-	color: $Gray;
+  background: transparent;
+  border: $LightBorder;
+  color: $Gray;
 }
 
 .button-round-purple {
-	position: relative;
-	padding: 12px 30px;
-	margin: 10px 1px;
-	font-size: 12px;
-	font-weight: 400;
-	text-transform: uppercase;
-	border-radius: 30px;
-	background-color: #9c27b0;
-	color: #FFFFFF;
-	transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-	&:hover,
-	&:focus,
-	&:active  {
-		box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.22);
-		background-color: #9c27b0;
-		color: #FFFFFF;
-	}
+  position: relative;
+  padding: 12px 30px;
+  margin: 10px 1px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-radius: 30px;
+  background-color: #9c27b0;
+  color: #FFFFFF;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 3px 0 rgba(0, 0, 0, 0.22);
+    background-color: #9c27b0;
+    color: #FFFFFF;
+  }
 }
-
 
 // Button Shapes
 .button-flat {
-	border-radius: 0;
+  border-radius: 0;
 }
 
 .button-round {
-	border-radius: 30px;
+  border-radius: 30px;
 }
 
 .button-circle {
-	padding: 20px 10px !important;
-	border-radius: 50%;
+  padding: 20px 10px !important;
+  border-radius: 50%;
 }
-
 
 // Transparent Buttons
 .button-blue-clear,
 .button-red-clear,
 .button-yellow-clear,
 .button-green-clear {
-	transition: $SmoothTrasition;
-	background: transparent;
-	&:hover,
-	&:active,
-	&:focus {
-		color: $white;
-		transition: $SmoothTrasition;
-	}
+  transition: $SmoothTrasition;
+  background: transparent;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $white;
+    transition: $SmoothTrasition;
+  }
 }
 
 .button-blue-clear {
-	color: $LightBlue;
-	border: 1px solid $LightBlue;
-	&:hover,
-	&:active,
-	&:focus {
-		background-color: $LightBlue;
-	}
+  color: $LightBlue;
+  border: 1px solid $LightBlue;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $LightBlue;
+  }
 }
 
 .button-green-clear {
-	color: $ButtonGreen;
-	border: 1px solid $ButtonGreen;
-	&:hover,
-	&:active,
-	&:focus {
-		background-color: $ButtonGreen;
-	}
+  color: $ButtonGreen;
+  border: 1px solid $ButtonGreen;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $ButtonGreen;
+  }
 }
 
 .button-red-clear {
-	color: $LightRed;
-	border: 1px solid $LightRed;
-	&:hover,
-	&:active,
-	&:focus {
-		background-color: $LightRed;
-	}
+  color: $LightRed;
+  border: 1px solid $LightRed;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $LightRed;
+  }
 }
 
 .button-yellow-clear {
-	color: $LightYellow;
-	border: 1px solid $LightYellow;
-	&:hover,
-	&:active,
-	&:focus{
-		background-color: $LightYellow;
-	}
+  color: $LightYellow;
+  border: 1px solid $LightYellow;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $LightYellow;
+  }
 }
-
 
 // Button Colors
 .button-blue,
 .button-green,
 .button-red,
 .button-yellow {
-	transition: $SmoothTrasition;
-	color: $white;
-	font-weight: 100;
-	&:hover,
-	&:active,
-	&:focus {
-		color: $white;
-		transition: $SmoothTrasition;
-	}
+  transition: $SmoothTrasition;
+  color: $white;
+  font-weight: 100;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $white;
+    transition: $SmoothTrasition;
+  }
 }
-
 
 .button-blue {
-	background: $ButtonBlue;
-	&:hover,
-	&:active,
-	&:focus {
-		background: $ButtonBlueHover;
-	}
+  background: $ButtonBlue;
+  &:hover,
+  &:active,
+  &:focus {
+    background: $ButtonBlueHover;
+  }
 }
 
-
 .button-red {
-	background: $ButtonRed;
-	&:hover,
-	&:active,
-	&:focus  {
-		background: $ButtonRedHover;
-	}
+  background: $ButtonRed;
+  &:hover,
+  &:active,
+  &:focus {
+    background: $ButtonRedHover;
+  }
 }
 
 .button-yellow {
-	background: $ButtonYellow;
-	&:hover,
-	&:active,
-	&:focus  {
-		background: $ButtonYellowHover;
-	}
+  background: $ButtonYellow;
+  &:hover,
+  &:active,
+  &:focus {
+    background: $ButtonYellowHover;
+  }
 }
-
 
 .button-green {
-	background: $ButtonGreen;
-	&:hover,
-	&:active,
-	&:focus  {
-		background: $ButtonGreenHover;
-	}
+  background: $ButtonGreen;
+  &:hover,
+  &:active,
+  &:focus {
+    background: $ButtonGreenHover;
+  }
 }
-
 
 // Button Sizes
 .button-small {
-	padding: 8px 15px;
-	font-size: 0.9rem;
+  padding: 8px 15px;
+  font-size: 0.9rem;
 }
 
-
 .button-medium {
-	padding: 8px 15px;
-	font-size: 0.9rem;
-	@include atSmall {
-		padding: 10px 17px;
-		font-size: 1rem;
-	}
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  @include atSmall {
+    padding: 10px 17px;
+    font-size: 1rem;
+  }
 }
 
 .button-large {
-	font-size: 1rem;
-	font-weight: 100;
-	padding: 12px 0;
-	width: 100%;
-	@include atSmall {
-		width: auto;
-		font-size: 1.2rem;
-		padding: 15px 25px;
-	}
+  font-size: 1rem;
+  font-weight: 100;
+  padding: 12px 0;
+  width: 100%;
+  @include atSmall {
+    width: auto;
+    font-size: 1.2rem;
+    padding: 15px 25px;
+  }
 }
-
 
 // ===============
 // 	BADGES
 // ===============
-
-
 .badge-label {
-	font-size: 0.9rem;
-	font-weight: 900;
+  font-size: 0.9rem;
+  font-weight: 900;
 }
 
 // Badge Colors
@@ -358,1675 +333,1600 @@
 .badge-yellow,
 .badge-green,
 .badge-red {
-	color: $white;
+  color: $white;
 }
 
-.badge-blue { background: $LightBlue }
-.badge-yellow { background: $LightYellow }
-.badge-green { background: $LightGreen }
-.badge-red  { background: $LightRed }
+.badge-blue {
+  background: $LightBlue
+}
+
+.badge-yellow {
+  background: $LightYellow
+}
+
+.badge-green {
+  background: $LightGreen
+}
+
+.badge-red {
+  background: $LightRed
+}
 
 // Badge Shapes
 .badge-circle {
-	padding: 8px 9px;
-	border-radius: 50%;
+  padding: 8px 9px;
+  border-radius: 50%;
 }
 
 .badge-square {
-	padding: 6px 13px;
-	border-radius: 10%;
+  padding: 6px 13px;
+  border-radius: 10%;
 }
-
 
 // ===============
 // 	ICONS GROUP
 // ===============
-
 .icons-group {
-	width: 100%;
-	padding: 0;
-	margin: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-
 .icon-large {
-	font-size: 2rem;
-	color: $Gray;
+  font-size: 2rem;
+  color: $Gray;
 }
 
 .icon-small,
 .icon-data {
-	font-size: 0.9rem;
-	color: $IconsColor;
+  font-size: 0.9rem;
+  color: $IconsColor;
 }
 
 .icons-list {
-	display: inline;
-	font-family: $GeneralFont;
+  display: inline;
+  font-family: $GeneralFont;
 }
 
 .icon-data {
-	margin-left: 6px;
+  margin-left: 6px;
 }
 
 // Round Icons
 .icon-round {
-	display: inline-block;
-	position: relative;
-	height: 50px;
-	width: 50px;
-	border-radius: 50%;
-	text-align: center;
-	@include atSmall {
-		width: 70px;
-		height: 70px;
-	}
-
-	mat-icon {
-		position: absolute;
-		top: 28%;
-		left: 28%;
-		@include atSmall {
-			top: 23%;
-			left: 23%;
-			font-size: 2.5rem;
-		}
-	}
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  text-align: center;
+  @include atSmall {
+    width: 70px;
+    height: 70px;
+  }
+  mat-icon {
+    position: absolute;
+    top: 28%;
+    left: 28%;
+    @include atSmall {
+      top: 23%;
+      left: 23%;
+      font-size: 2.5rem;
+    }
+  }
 }
 
 .icon-green {
-	border: 2px solid $Green;
-	color: $Green !important;
+  border: 2px solid $Green;
+  color: $Green !important;
 }
-
 
 // ===============
 // 	NOTIFICATIONS
 // ===============
+.alert {
+  position: relative;
+  max-width: 100%;
+  padding: 15px;
+  color: $white;
+  font-family: $GeneralFont;
+  text-align: left;
+  i {
+    color: $white;
+    font-weight: 100 !important;
+    background: transparent;
+  }
+} // Notification Colors.
+.alert-green {
+  background: $DarkGreen
+}
 
-	.alert {
-		position: relative;
-		max-width: 100%;
-		padding: 15px;
-		color: $white;
-		font-family: $GeneralFont;
-		text-align: left;
+.alert-red {
+  background: $DarkRed
+}
 
-		i {
-			color: $white;
-			font-weight: 100 !important;
-			background: transparent;
-		}
+.alert-yellow {
+  background: $DarkOrange
+} // Notification Icons
+.alert-icon {
+  position: absolute;
+  left: 15px;
+  @include atSmall {
+    left: 30px;
+  }
+} // Notification Close.
+.alert-close {
+  position: absolute;
+  right: 20px;
+  bottom: 17px;
+} // Notification Inner Text.
+.alert-text {
+  display: inline;
+  font-weight: 100;
+  margin-left: 40px;
+  @include atSmall {
+    font-size: 1.2rem;
+    margin-left: 60px;
+  }
+}
 
-	}
+.hint-green {
+  color: $Green
+}
 
-	// Notification Colors.
-	.alert-green { background: $DarkGreen }
-	.alert-red { background: $DarkRed }
-	.alert-yellow { background: $DarkOrange }
-
-	// Notification Icons
-	.alert-icon {
-		position: absolute;
-		left: 15px;
-		@include atSmall {
-			left: 30px;
-		}
-	}
-
-	// Notification Close.
-	.alert-close {
-		position: absolute;
-		right: 20px;
-		bottom: 17px;
-	}
-
-	// Notification Inner Text.
-	.alert-text {
-		display: inline;
-		font-weight: 100;
-		margin-left: 40px;
-		@include atSmall {
-			font-size: 1.2rem;
-			margin-left: 60px;
-		}
-	}
-
-.hint-green { color: $Green}
-.hint-red { color: $Red}
-
+.hint-red {
+  color: $Red
+}
 
 // ===============
 // 	TITLES
 // ===============
+.title {
+  font-family: $TitleFont;
+  font-weight: 900;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+} // Title Sizes
+.title-small {
+  font-size: 0.8rem;
+  @include atSmall {
+    font-size: 0.8rem;
+  }
+}
 
-	.title {
-		font-family: $TitleFont;
-		font-weight: 900;
-		text-transform: capitalize;
-		margin: 0;
-		padding: 0;
-	}
+.title-medium {
+  font-size: 1rem;
+  @include atSmall {
+    font-size: 1.5rem;
+  }
+}
 
-	// Title Sizes
-	.title-small {
-		font-size: 0.8rem;
-		@include atSmall {
-			font-size: 0.8rem;
-		}
-	}
+.title-large {
+  font-size: 1.5rem;
+  @include atSmall {
+    font-size: 3rem;
+  }
+} // Title Style
+.title-hover:hover {
+  cursor: pointer;
+  text-decoration: underline;
+} // Title Colors
+.title-green {
+  color: $Green
+}
 
-	.title-medium {
-		font-size: 1rem;
-		@include atSmall {
-			font-size: 1.5rem;
-		}
-	}
+.title-gray {
+  color: $Gray
+}
 
-	.title-large {
-		font-size: 1.5rem;
-		@include atSmall {
-			font-size: 3rem;
-		}
-	}
+.title-yellow {
+  color: $Yellow
+}
 
-	// Title Style
-	.title-hover:hover {
-		cursor: pointer;
-		text-decoration: underline;
-	}
+.title-blue {
+  color: $Blue
+}
 
-	// Title Colors
-	.title-green { color: $Green }
-	.title-gray { color: $Gray}
-	.title-yellow { color: $Yellow}
-	.title-blue { color: $Blue}
-	.title-red { color: $Red}
-
+.title-red {
+  color: $Red
+}
 
 // ===============
 // 	    TEXT
 // ===============
+.text {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: -.013em;
+  font-family: $ParagraphFont;
+}
 
-	.text {
-		font-size: 1.5rem;
-		font-weight: 400;
-		line-height: 1.43;
-		letter-spacing: -.013em;
-		font-family: $ParagraphFont;
-	}
+.text-gray {
+  color: $ListTextColor;
+} // ===============
+// 	    TABLE
+// ===============
+.table {
+  width: 100%;
+  box-shadow: $shadow;
+  padding: 0 10px;
+  border-collapse: collapse;
+  font-family: $TableFont;
+  font-size: 0.6rem;
+  @include atSmall {
+    font-size: 1rem;
+  }
+  th,
+  td {
+    font-size: 0.8rem;
+    padding: 6px;
+    color: $Gray;
+    font-weight: 100;
+    border-bottom: 1px solid $LightGray;
+    text-transform: capitalize;
+    @include atSmall {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+  }
+}
 
-	.text-gray {
-		color: $ListTextColor;
-	}
+.table tbody {
+  .edit,
+  .reply,
+  .view,
+  .delete {
+    font-size: 0.6rem;
+    text-decoration: none;
+    @include atSmall {
+      font-size: 0.8rem;
+    }
+  }
+  .view,
+  .reply {
+    color: $Blue;
+  }
+  .edit {
+    color: $Green;
+  }
+  .delete {
+    color: $Red;
+  }
+} // Customized Table No thead
+.custom-table {
+  position: relative;
+  border-radius: 3px;
+  background: $white;
+  tr:first-child td {
+    padding-top: 70px;
+  }
+}
 
+.custom-head {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  border-bottom: $LightBorder;
+  z-index: 4;
+  border-radius: 3px 3px 0 0;
+  .custom-icon {
+    position: absolute;
+    left: 10px;
+    top: 13px;
+    font-size: 1.7rem;
+  }
+  .custom-btn {
+    position: absolute;
+    right: 3px;
+    top: 6px;
+    font-size: 0.8rem;
+    background: rgba($white, 0.5);
+    font-weight: 100;
+  }
+  .custom-title {
+    position: absolute;
+    font-size: 1rem;
+    left: 45px;
+    top: 18px;
+    font-weight: 200;
+  }
+} // Table Hover
+.table-hover {
+  transition: $SmoothTrasition;
+  tbody tr:hover {
+    cursor: pointer;
+    background: $LightGray;
+    transition: $SmoothTrasition;
+  }
+} // Table Position
+.table-center {
+  text-align: center;
+}
 
-	// ===============
-	// 	    TABLE
-	// ===============
-	.table {
-		width: 100%;
-		box-shadow: $shadow;
-		padding: 0 10px;
-		border-collapse: collapse;
-		font-family: $TableFont;
-		font-size: 0.6rem;
-		@include atSmall {
-			font-size: 1rem;
-		}
-		th, td {
-			font-size: 0.8rem;
-			padding: 6px;
-			color: $Gray;
-			font-weight: 100;
-			border-bottom: 1px solid $LightGray;
-			text-transform: capitalize;
-			@include atSmall {
-				font-size: 0.9rem;
-				padding: 10px;
-			}
-		}
+.table-left {
+  text-align: left;
+} // Table Colors
+.table-gray {
+  thead,
+  .custom-head {
+    background: $LightGray;
+  }
+}
 
-	}
+.table-blue {
+  thead,
+  .custom-head {
+    color: $white;
+    background: $LightBlue;
+  }
+}
 
-	.table tbody {
-		.edit,
-		.reply,
-		.view,
-		.delete {
-			font-size: 0.6rem;
-			text-decoration: none;
-			@include atSmall {
-				font-size: 0.8rem;
-			}
-		}
+.table-purple {
+  thead,
+  .custom-head {
+    color: $white;
+    background: $DarkPurple;
+  }
+}
 
-		.view,
-		.reply {
-			color: $Blue;
-		}
+.table-red {
+  thead,
+  .custom-head {
+    color: $white;
+    background: $DarkRed;
+  }
+}
 
-		.edit {
-			color: $Green;
-		}
+.table-orange {
+  thead,
+  .custom-head {
+    color: $white;
+    background: $DarkOrange;
+  }
+}
 
-		.delete {
-			color: $Red;
-		}
-	}
+.table-green {
+  thead,
+  .custom-head {
+    color: $white;
+    background: $DarkGreen;
+  }
+}
 
- // Customized Table No thead
-	.custom-table {
-		position: relative;
-		border-radius: 3px;
-		background: $white;
-		tr:first-child td {
-			padding-top: 70px;
-		}
-	}
-
-	.custom-head {
-		position: absolute;
-		width: 100%;
-		height: 50px;
-		border-bottom: $LightBorder;
-		z-index: 4;
-		border-radius: 3px 3px 0 0;
-
-		.custom-icon {
-			position: absolute;
-			left: 10px;
-			top: 13px;
-			font-size: 1.7rem;
-		}
-
-		.custom-btn {
-			position: absolute;
-			right: 3px;
-			top: 6px;
-			font-size: 0.8rem;
-			background: rgba($white, 0.5);
-			font-weight: 100;
-		}
-
-		.custom-title {
-			position: absolute;
-			font-size: 1rem;
-			left: 45px;
-			top: 18px;
-			font-weight: 200;
-		}
-	}
-
-	// Table Hover
-	.table-hover {
-		transition: $SmoothTrasition;
-		tbody tr:hover {
-			cursor: pointer;
-			background: $LightGray;
-			transition: $SmoothTrasition;
-		}
-	}
-
-	// Table Position
-	.table-center {
-		text-align: center;
-	}
-
-	.table-left {
-		text-align: left;
-	}
-
-	// Table Colors
-	.table-gray {
-		thead,
-		.custom-head {
-			background: $LightGray;
-		}
-	}
-
-	.table-blue {
-		thead,
-		.custom-head {
-			color: $white;
-			background: $LightBlue;
-		}
-	}
-
-	.table-purple {
-		thead,
-		.custom-head {
-			color: $white;
-			background: $DarkPurple;
-		}
-	}
-
-	.table-red {
-		thead,
-		.custom-head {
-			color: $white;
-			background: $DarkRed;
-		}
-	}
-
-	.table-orange {
-		thead,
-		.custom-head {
-			color: $white;
-			background: $DarkOrange;
-		}
-	}
-
-	.table-green {
-		thead,
-		.custom-head {
-			color: $white;
-			background: $DarkGreen;
-		}
-	}
-	.table-white {
-		thead,
-		.custom-head {
-			color: $Gray;
-			background: $white;
-		}
-	}
-
+.table-white {
+  thead,
+  .custom-head {
+    color: $Gray;
+    background: $white;
+  }
+}
 
 // ===============
 // 	INPUT FIELDS
 // ===============
-
 .input-field {
-	width: 100%;
+  width: 100%;
 }
-.mat-input-flex.mat-form-field-flex{
-   border-bottom: 1px solid $IconsColor;
-}
- // .input {
-	//  position: relative;
- // }
 
- // .input-control {
-	//  border: 0;
-	//  border-bottom: 1px solid $IconsColor;
-	//  width: 100%;
-	//  height: 50px;
-	//  outline: none;
-	//  font-size: 1rem;
-	//  font-weight: 200;
-	//  background: $LightGray;
-	//  padding: 0;
-	//  &:focus,
-	//  &:active {
-	// 	 background: transparent;
-	//  }
- //
-	//  &::placeholder {
-	// 	 position: absolute;
-	// 	 z-index: 10;
-	// 	 transform: translateX(10px);
-	//  }
- // }
- //
- // .input-control:active,
- // .input-control:focus  {
-	//  &::placeholder {
-	// 	 transform: translateY(-30px);
-	//  }
- // }
-
-
+.mat-input-flex.mat-form-field-flex {
+  border-bottom: 1px solid $IconsColor;
+} // .input {
+//  position: relative;
+// }
+// .input-control {
+//  border: 0;
+//  border-bottom: 1px solid $IconsColor;
+//  width: 100%;
+//  height: 50px;
+//  outline: none;
+//  font-size: 1rem;
+//  font-weight: 200;
+//  background: $LightGray;
+//  padding: 0;
+//  &:focus,
+//  &:active {
+// 	 background: transparent;
+//  }
+//
+//  &::placeholder {
+// 	 position: absolute;
+// 	 z-index: 10;
+// 	 transform: translateX(10px);
+//  }
+// }
+//
+// .input-control:active,
+// .input-control:focus  {
+//  &::placeholder {
+// 	 transform: translateY(-30px);
+//  }
+// }
 // ===============
 // 	BUCKET
 // ===============
+.bucket {}
 
-	.bucket {
+.bucket-img,
+.bucket-title,
+.bucket-text {
+  display: inline;
+}
 
-	}
+.bucket-img {
+  margin: 0 5px;
+  padding: 0;
+  float: left;
+}
 
-	.bucket-img,
-	.bucket-title,
-	.bucket-text {
-		display: inline;
-	}
+.bucket-title {
+  margin: 0;
+}
 
-	.bucket-img {
-		margin: 0 5px;
-		padding: 0;
-		float: left;
-	}
-
-	.bucket-title {
-		margin: 0;
-
-	}
-
-	.bucket-text {
-		margin: 0;
-		padding: 0;
-		font-size: 0.8rem;
-	}
+.bucket-text {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+}
 
 // ===============
 // 	Card
 // ===============
-
-	.card {
-		position: relative;
-		background: $white;
-		width: 90%;
-		transition: $SmoothTrasition;
-		@include atSmall {
-			width: 100%;
-		}
-
-		&:hover {
-			box-shadow: $shadow;
-			transform: scale(1.01);
-			transition: $SmoothTrasition;
-		}
-	}
-
-	// Card Header
-	.card-header {
-		width: 100%;
-		padding: 8px 0;
-		position: relative;
-		@include clearfix;
-		.card-author,
-		.card-author-img,
-		.card-date {
-			float: left;
-			display: inline;
-		}
-
-		.card-user {
-			margin-left: 10px;
-		}
-
-		// Card Rgiht Corner Menu
-		.card-menu {
-			position: absolute;
-			right: 10px;
-			top: 8px;
-		}
-	}
-
-	// Card Image
-	.card-img {
-		height: 250px;
-		@include atLarge {
-			height: 300px;
-		}
-
-		img {
-			height: 100%;
-			width: 100%;
-		}
-	}
-
-	// Card Content
-	.card-content {
-		padding: 20px;
-		@include atLarge {
-			padding: 30px;
-		}
-
-		.card-title {
-			padding-bottom: 10px;
-		}
-
-		.card-text {
-			margin: 0;
-			padding: 0;
-			font-size: 0.8rem;
-		}
-	}
-
-	// Card Footer
-	.card-footer {
-		padding: 15px 0;
-		border-top: 1px solid $LightGray;
-
-		.icons-list {
-			margin-left: 15px;
-			@include atLarge {
-				margin-left: 30px;
-			}
-		}
-
-		.footer-read {
-			float: right;
-			margin-right: 15px;
-			a {
-				font-size: 0.9rem;
-				color: $Green;
-				text-decoration: none;
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-		}
-	}
-
+.card {
+  position: relative;
+  background: $white;
+  width: 90%;
+  transition: $SmoothTrasition;
+  @include atSmall {
+    width: 100%;
+  }
+  &:hover {
+    box-shadow: $shadow;
+    transform: scale(1.01);
+    transition: $SmoothTrasition;
+  }
+} // Card Header
+.card-header {
+  width: 100%;
+  padding: 8px 0;
+  position: relative;
+  @include clearfix;
+  .card-author,
+  .card-author-img,
+  .card-date {
+    float: left;
+    display: inline;
+  }
+  .card-user {
+    margin-left: 10px;
+  } // Card Rgiht Corner Menu
+  .card-menu {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+  }
+} // Card Image
+.card-img {
+  height: 250px;
+  @include atLarge {
+    height: 300px;
+  }
+  img {
+    height: 100%;
+    width: 100%;
+  }
+} // Card Content
+.card-content {
+  padding: 20px;
+  @include atLarge {
+    padding: 30px;
+  }
+  .card-title {
+    padding-bottom: 10px;
+  }
+  .card-text {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+  }
+} // Card Footer
+.card-footer {
+  padding: 15px 0;
+  border-top: 1px solid $LightGray;
+  .icons-list {
+    margin-left: 15px;
+    @include atLarge {
+      margin-left: 30px;
+    }
+  }
+  .footer-read {
+    float: right;
+    margin-right: 15px;
+    a {
+      font-size: 0.9rem;
+      color: $Green;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
 
 // ===============
 // 	USER
 // ===============
-
 .user {
-	position: relative;
+  position: relative;
 }
 
 .user-img,
 .user-name,
 .user-info {
-	display: inline;
+  display: inline;
 }
 
 .user-name,
 .user-info {
-	position: absolute;
-	left: 35px;
+  position: absolute;
+  left: 35px;
 }
 
 .user-name {
-	top: 0;
+  top: 0;
 }
+
 .user-info {
-	top: 16px;
-	font-size: 0.7rem;
-	font-family: $GeneralFont;
-	color: $IconsColor;
+  top: 16px;
+  font-size: 0.7rem;
+  font-family: $GeneralFont;
+  color: $IconsColor;
 }
+
+
+// ===============
+// 	WIDGETS
+// ===============
+.widget {
+  width: 100%;
+  font-family: $WidgetFont;
+  position: relative;
+  @include clearfix;
+}
+
+.widget-icon {
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  height: 80px;
+  width: 80px;
+  color: $white;
+  transform: translateY(-20px);
+  z-index: 10;
+  border-radius: 3px;
+  text-align: center;
+  mat-icon {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    font-size: 2rem;
+  }
+}
+
+.widget-box {
+  position: relative;
+  height: 130px;
+  background: $white;
+  box-shadow: $shadow;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.widget-data {
+  position: absolute;
+  right: 15px;
+  top: 20px;
+  text-align: center;
+  .data {
+    font-size: 1.3rem;
+    font-weight: 100;
+    padding-top: 20px;
+    @include atSmall {
+      font-size: 2rem;
+    }
+  }
+  .widget-title {
+    color: $IconsColor;
+    font-weight: 100;
+    font-size: 1rem;
+  }
+}
+
+.widget-footer {
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  width: 90%;
+  padding: 15px 0;
+  border-top: $LightBorder;
+  color: $IconsColor;
+  font-size: 0.8rem;
+} // Widget Colors
+.widget-green {
+  .widget-icon {
+    background: $DarkGreen;
+  }
+}
+
+.widget-orange {
+  .widget-icon {
+    background: $DarkOrange;
+  }
+}
+
+.widget-red {
+  .widget-icon {
+    background: $DarkRed;
+  }
+}
+
+.widget-purple {
+  .widget-icon {
+    background: $DarkPurple;
+  }
+}
+
+// ===============
+// 	DISCUSSION
+// ===============
+.discussion {
+  background: $white;
+  box-shadow: $shadow;
+  @include clearfix; // These rules apply to answer and main content.
+  &__user,
+  &__content,
+  &__info,
+  &__footer,
+  &__body {
+    float: left;
+  }
+  img {
+    height: 30px;
+    width: 30px;
+    margin: 30px 0;
+    padding: 0;
+    margin: 0;
+    @include atSmall {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .name {
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0;
+    color: $IconsColor;
+  }
+  .content-title {
+    padding: 6px 10px;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    font-family: $TitleFont;
+    font-weight: 100;
+    @include atSmall {
+      padding-top: 20px;
+      font-size: 1.2rem;
+    }
+  }
+  .content-text {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    @include atSmall {
+      padding-bottom: 0;
+      font-size: 1rem;
+    }
+  }
+  .footer-list {
+    padding: 15px;
+    display: inline-block;
+    font-size: 0.9rem;
+    color: $IconsColor;
+    @include atSmall {
+      font-size: 1rem;
+      padding-left: 20px;
+    }
+  }
+  .footer-data {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    font-family: $GeneralFont;
+    font-weight: 100;
+  }
+  .footer-buttons {
+    float: right;
+    display: inline;
+    margin: 7px;
+    .button {
+      margin-left: 10px;
+      background: $white;
+      color: $Gray;
+      font-size: 0.8rem;
+      font-weight: 100;
+    }
+  } // Icons
+  .fa:hover {
+    transition: $SmoothTrasition;
+    cursor: pointer
+  }
+  .fa-thumbs-up:hover,
+  .fa-thumbs-up:focus {
+    color: $LightGreen;
+  }
+  .fa-thumbs-down:hover,
+  .fa-thumbs-down:focus {
+    color: $LightRed;
+  }
+  .fa-share-alt:hover,
+  .fa-share-alt:focus {
+    color: $LightYellow;
+  }
+  .fa-reply {
+    color: $LightYellow
+  }
+  .fa-eye {
+    color: $LightRed
+  }
+  .info-list .fa-clock-o {
+    color: $LightGreen
+  } // User
+  &__user {
+    width: 10%;
+    text-align: center;
+    padding-top: 30px;
+  } // content
+  &__content {
+    width: 70%;
+    @include atSmall {
+      width: 75%;
+    }
+  } // Info
+  &__info {
+    width: 20%;
+    text-align: center;
+    @include atSmall {
+      width: 15%;
+    }
+    .info-list {
+      padding: 7px 0;
+      border: $LightBorder;
+      font-size: 0.8rem;
+      color: $IconsColor;
+      @include atSmall {
+        padding: 5px 0;
+        font-size: 1rem;
+      }
+    }
+    .info-data {
+      font-size: 0.8rem;
+      font-weight: 100;
+    }
+  } // Footer
+  &__footer {
+    position: relative;
+    width: 100%;
+    background: $LightGray;
+  }
+  &__body {
+    width: 100%;
+    border-top: $LightBorder;
+  }
+  &__answer {
+    width: 90%;
+    background: $LightGray;
+    transform: translateX(6%);
+    margin: 20px 0;
+    @include clearfix;
+  } // All Answer Styles
+  .answer-user,
+  .answer-content,
+  .answer-footer {
+    float: left;
+  }
+  .answer-user {
+    width: 10%;
+    text-align: center;
+    padding-top: 20px;
+  }
+  .answer-content {
+    width: 90%;
+    padding: 10px 0;
+    margin-top: 5px;
+  }
+  .answer-footer {
+    width: 100%;
+    border-top: 1px solid #dbdbdb;
+    margin-top: 10px;
+  } // All Input Styles
+  &__input {
+    width: 90%;
+    background: $LightGray;
+    transform: translateX(6%);
+    margin: 20px 0;
+    @include clearfix;
+    .input-form {
+      padding: 40px;
+    }
+    .input-buttons {
+      float: right;
+      transform: translateY(-10px);
+    }
+    .button {
+      background: $white;
+      color: $Gray;
+      font-size: 0.8rem;
+      font-weight: 100;
+      margin-left: 10px;
+    }
+  } // Bottom End Buttons
+  .body-buttons {
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    @include atSmall {
+      margin: 15px;
+    }
+    .button {
+      background: $LightGray;
+      color: $Gray;
+      font-size: 0.8rem;
+      font-weight: 100;
+      margin-left: 10px;
+    }
+  }
+}
+
+// ===============
+// 	DIALOG
+// ===============
+.dialog {
+  width: 100%;
+  box-shadow: $largekShadow;
+  font-family: $GeneralFont;
+  background: $white;
+  border-radius: 3px;
+  @include clearfix;
+  &__header,
+  &__body,
+  &__footer {
+    width: 100%;
+    float: left;
+  }
+  &__header {
+    border-bottom: $LightBorder;
+    margin-bottom: 20px;
+    .header-title {
+      padding: 15px;
+      display: inline-block;
+      font-size: 0.9rem;
+      @include atSmall {
+        padding: 20px;
+      }
+    }
+    .header-warning {
+      font-size: 1.1rem;
+      margin-right: 10px;
+      color: $Gray;
+    }
+    .header-close {
+      float: right;
+      padding: 15px;
+      font-weight: 100;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: $IconsColor;
+      @include atSmall {
+        padding: 20px;
+      }
+    }
+  }
+  &__body {
+    padding: 30px 0;
+    text-align: center;
+    @include atSmall {
+      padding: 40px 0;
+    }
+    .body-text {
+      font-size: 0.9rem;
+    }
+    .body-target {
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+  }
+  &__footer {
+    text-align: center;
+    padding: 15px 0;
+    border-top: $LightBorder;
+    @include atSmall {
+      padding: 20px 0;
+    }
+    .button {
+      width: 40%;
+      display: inline-block;
+      margin: 0 10px;
+    }
+  }
+}
+
+// ===============
+// 	DARK LAYER
+// ===============
+.dark-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(#000, 0.5);
+  height: 100vh;
+  width: 100%;
+  transition: $SmoothTrasition;
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: $white;
+    z-index: 1000;
+    font-family: $GeneralFont;
+    cursor: pointer;
+    @include atSmall {
+      padding: 20px 30px;
+      font-size: 2rem;
+    }
+  }
+  &__modal {
+    @include atSmall {
+      transform: translateY(100px) translateX(25%);
+    }
+  }
+  &__modal-small {
+    @include atSmall {
+      transform: translateX(30%) translateY(20%);
+    }
+  }
+}
+
+.collapse-layer {
+  z-index: -100;
+  animation: collapseLayer 1s ease-out forwards;
+}
+
+@keyframes collapseLayer {
+  0% {
+    opacity: 1;
+    display: block;
+  }
+  ,
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.expand-layer {
+  z-index: 100;
+  animation: expandLayer 1s ease-out forwards;
+}
+
+@keyframes expandLayer {
+  0% {
+    opacity: 0;
+    display: none;
+  }
+  ,
+  100% {
+    opacity: 1;
+    display: block;
+  }
+}
+
+.expand-dialog {
+  animation: expandDialog 0.5s ease-in forwards;
+}
+
+@keyframes expandDialog {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.collapse-dialog {
+  animation: collapseDialog 0.5s ease-out forwards;
+}
+
+@keyframes collapseDialog {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+// ===============
+// 	MODAL
+// ===============
+.modal {
+  position: relative;
+  width: 87%;
+  margin-left: 2%;
+  padding: 20px;
+  font-family: $GeneralFont;
+  background: $white;
+  box-shadow: $largekShadow;
+  border-radius: 5px;
+  @include clearfix;
+  @include atSmall {
+    margin-left: 0;
+    width: 100%;
+    padding: 30px;
+  }
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: $IconsColor;
+    font-weight: 100;
+  }
+  &__title {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    font-weight: 900;
+    font-size: 1.5rem;
+    @include atSmall {
+      font-size: 2rem;
+    }
+  }
+  &__form {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+    .form-input {
+      width: 100%;
+    }
+  }
+}
+
+// ===============
+// 	SIGNUP
+// ===============
+.signup {
+  position: relative;
+  width: 87%;
+  margin-left: 2%;
+  padding: 20px;
+  font-family: $GeneralFont;
+  background: $white;
+  box-shadow: $largekShadow;
+  border-radius: 5px;
+  @include clearfix;
+  @include atSmall {
+    margin-left: 0;
+    width: 100%;
+    padding: 30px;
+  }
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: $IconsColor;
+    font-weight: 100;
+  }
+  &__title,
+  &__promo,
+  &__form {
+    float: left;
+  }
+  &__title {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    font-weight: 900;
+    font-size: 1.5rem;
+    @include atSmall {
+      font-size: 2rem;
+    }
+  }
+  &__promo {
+    width: 45%;
+    display: none;
+    @include atSmall {
+      display: block;
+    }
+    .promo-widget {
+      padding: 20px 0;
+    }
+    .fa {
+      margin-right: 10px
+    }
+    .fa-share-alt {
+      color: $Purple
+    }
+    .fa-comments {
+      color: $LightBlue
+    }
+    .fa-code {
+      color: $LightRed
+    }
+    .promo-title {
+      font-size: 1.2rem;
+    }
+    .promo-text {
+      color: $IconsColor;
+      margin-left: 32px;
+      line-height: 25px;
+    }
+  }
+  &__form {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+    @include atSmall {
+      width: 45%;
+      margin-left: 5%;
+    }
+    .form-input {
+      width: 100%;
+    }
+  }
+}
+
+// ===============
+// 	LOGIN
+// ===============
+.login {
+  position: relative;
+  width: 86%;
+  margin-left: 2.5%;
+  padding: 20px;
+  border-radius: 3px;
+  background: $white;
+  box-shadow: $largekShadow;
+  text-align: center;
+  font-family: $GeneralFont;
+  @include clearfix;
+  @include atSmall {
+    padding: 40px;
+    width: 100%;
+    margin-left: 0;
+  }
+  &__close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+  &__welcome,
+  &__title,
+  &__form,
+  &__buttons {
+    width: 100%;
+    float: left;
+  }
+  &__welcome {
+    font-size: 1.2rem;
+    color: $IconsColor;
+    padding: 15px 0;
+  }
+  &__title {
+    font-size: 1.5rem;
+    color: $Gray;
+    padding-bottom: 5px;
+  }
+  &__text {
+    font-size: 0.8rem;
+    color: $IconsColor;
+    text-transform: capitalize;
+  }
+  &__form {
+    padding-top: 20px;
+    .form-input {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  &__buttons {
+    padding: 30px 0;
+    span {
+      color: $Gray;
+      margin-right: 5px;
+    }
+    .button {
+      margin-bottom: 15px;
+    }
+  }
+  &__create {
+    color: $Green;
+    text-decoration: none;
+  }
+}
+
+// ===============
+// 	LARGE CARD
+// ===============
+.large-card {
+  width: 100%;
+  background: $white;
+  font-family: $GeneralFont;
+  transition: $SmoothTrasition;
+  border-radius: 5px;
+  margin-top: 20px;
+  &:hover {
+    box-shadow: $MediumShadow;
+  }
+  @include clearfix;
+  @include atMedium {
+    width: 80%;
+    transform: translateX(13%);
+  } // General Style
+  &__header,
+  &__footer {
+    width: 100%;
+    float: left;
+  } // Header
+  &__header {
+    position: relative;
+    padding: 10px 0;
+    @include atMedium {
+      border-bottom: $LightBorder;
+    }
+    .header-img,
+    .header-author {
+      float: left;
+      display: inline;
+    }
+    .header-img {
+      height: 40px;
+      width: 40px;
+      margin: 0 5px 0 10px;
+    }
+    .header-author {
+      font-size: 1rem;
+      font-weight: 900;
+      font-family: $TitleFont;
+      margin-top: 2px;
+      color: $Gray;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .header-date {
+      position: absolute;
+      left: 55px;
+      top: 35px;
+      font-size: 0.8rem;
+      color: $IconsColor;
+    }
+    .header-menu {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+  }
+  &__img {
+    @include atMedium {
+      width: 30%;
+      float: left;
+      padding: 45px 0 30px 30px;
+      .img {
+        border-radius: 3px; // box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 10px 18px 0 rgba(0, 0, 0, 0.22);
+      }
+    }
+  } // Content
+  &__content {
+    padding: 20px 0;
+    float: left;
+    @include atMedium {
+      width: 65%;
+      padding: 30px 0;
+    } // General Style
+    .content-title,
+    .content-text {
+      padding: 5px 20px;
+    }
+    .content-title {
+      color: $Gray;
+      font-family: $TitleFont;
+      font-size: 1.5rem;
+      text-transform: capitalize;
+      transition: $SmoothTrasition;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+      @include atMedium {
+        font-size: 2rem;
+      }
+    }
+    .content-text {
+      color: $IconsColor;
+      @include atMedium {
+        font-size: 1.3rem;
+        line-height: 30px;
+      }
+    }
+  } // Footer
+  &__footer {
+    position: relative;
+    padding: 20px 0;
+    border-top: $LightBorder;
+    @include atMedium {
+      padding: 15px 0;
+    }
+    .footer-icons {
+      text-decoration: none;
+      margin-left: 15px;
+      margin-right: 10px;
+      display: inline;
+      color: $IconsColor;
+      opacity: 0.8;
+      @include atMedium {
+        font-size: 1.2rem;
+        margin-left: 30px;
+        margin-right: 50px;
+      }
+    }
+    .footer-data {
+      font-size: 0.9rem;
+      font-weight: 900;
+      opacity: 0.5;
+      margin-left: 5px;
+      @include atMedium {
+        font-size: 1rem;
+      }
+    }
+    .footer-button {
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      border: none;
+      @include atMedium {
+        top: 10px;
+        right: 15px;
+      }
+    }
+  }
+}
+
+// ===============
+// 	TABS
+// ===============
+.tab {
+  width: 200px;
+  font-family: $GeneralFont;
+  background: $white;
+//   @include atMedium {
+//     display: flex;
+//     justify-content: space-between;
+//     width: 100%;
+//   }
+  &__list {
+    position: relative;
+    border-bottom: $LightBorder;
+    transition: $SmoothTrasition;
+    // @include atMedium {
+    //   display: inline-block;
+    //   border-bottom: none;
+    // }
+    &:hover {
+      background: $LightGray;
+    }
+    &:hover .tab__link,
+    &:focus .tab__link,
+    &:hover .tab__icon,
+    &:focus .tab__icon {
+      color: $LightGreen;
+    }
+  }
+  &__list:hover &__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: $LightGreen;
+    transition: $SmoothTrasition;
+    // @include atMedium {
+    //   width: 100%;
+    //   height: 3px;
+    // }
+  }
+  &__icon {
+    color: $IconsColor;
+    margin-right: 8px;
+    transition: $SmoothTrasition;
+  }
+  &__link {
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+    color: $Gray;
+    transition: $SmoothTrasition;
+    // @include atMedium {
+    //   flex: 1;
+    // }
+  }
+}
+
+// ===============
+// 	LARGE CARD
+// ===============
+mat-select {
+  max-width: 100%;
+}
+
+mat-option {
+  text-transform: capitalize;
+}
+
+// ===============
+// 	DARK LAYER
+// ===============
+.menu-button {
+  padding: 7px 10px;
+  background: $white;
+  border-radius: 50%;
+  box-shadow: $shadow;
+  transition: $SmoothTrasition;
+  &:hover {
+    box-shadow: $MediumShadow;
+  }
+  mat-icon {
+    font-size: 24px;
+    margin-top: 3px;
+    color: $IconsColor;
+    opacity: 0.8;
+  }
+}
+
 
 
 // ===============
 // 	COMMENTS
 // ===============
 
-	.comment {
-		padding: 15px 0;
-		border-bottom: 1px solid $LightGray;
-		position: relative;
-		width: 100%;
-		.text {
-			font-size: 0.8rem;
-			margin: 0;
-			padding: 0;
-			@include atSmall {
-				font-size: 1rem;
-			}
-		}
-	}
-
-
-	.comment-reply,
-	.comment-footer,
-	.comment-text {
-		width: 91%;
-		margin-left: 9%;
-		@include atSmall {
-			width: 97.5%;
-			margin-left: 2.5%;
-		}
-	}
-	.comment-footer {
-		margin-top: 10px;
-	}
-
-	// Reply Comment
-	.comment-reply {
-		padding: 10px 0;
-	}
-
-	.reply-text {
-		width: 80%;
-		margin-left: 10%;
-		@include atSmall {
-			width: 97%;
-			margin-left: 2.5%;
-		}
-	}
-
-
-
-
-// ===============
-// 	WIDGETS
-// ===============
-
-	.widget {
-		width: 100%;
-		font-family: $WidgetFont;
-		position: relative;
-		@include clearfix;
-	}
-
-	.widget-icon {
-		position: absolute;
-		top: 5px;
-		left: 15px;
-		height: 80px;
-		width: 80px;
-		color: $white;
-		transform: translateY(-20px);
-		z-index: 10;
-		border-radius: 3px;
-		text-align: center;
-
-		mat-icon {
-			position: absolute;
-			left: 30%;
-			top: 30%;
-			font-size: 2rem;
-		}
-	}
-
-	.widget-box {
-		position: relative;
-		height: 130px;
-		background: $white;
-		box-shadow: $shadow;
-		border-radius: 3px;
-		padding: 10px;
-	}
-
-	.widget-data {
-		position: absolute;
-		right: 15px;
-		top: 20px;
-		text-align: center;
-
-		.data {
-			font-size: 1.3rem;
-			font-weight: 100;
-			padding-top: 20px;
-			@include atSmall {
-				font-size: 2rem;
-			}
-		}
-
-		.widget-title {
-			color: $IconsColor;
-			font-weight: 100;
-			font-size: 1rem;
-		}
-	}
-
-	.widget-footer {
-		position: absolute;
-		bottom: 0;
-		left: 15px;
-		width: 90%;
-		padding: 15px 0;
-		border-top: $LightBorder;
-		color: $IconsColor;
-		font-size: 0.8rem;
-	}
-
-
-	// Widget Colors
-	.widget-green {
-		.widget-icon {
-			background: $DarkGreen;
-		}
-	}
-
-	.widget-orange {
-		.widget-icon {
-			background: $DarkOrange;
-		}
-	}
-
-	.widget-red {
-		.widget-icon {
-			background: $DarkRed;
-		}
-	}
-
-	.widget-purple {
-		.widget-icon {
-			background: $DarkPurple;
-		}
-	}
-
-
-// ===============
-// 	DISCUSSION
-// ===============
-.discussion {
-	background: $white;
-	box-shadow: $shadow;
-	@include clearfix;
-	// These rules apply to answer and main content.
-	&__user,
-	&__content,
-	&__info,
-	&__footer,
-	&__body {
-		float: left;
-	}
-
-	img {
-		height: 30px;
-		width: 30px;
-		margin: 30px 0;
-		padding: 0;
-		margin: 0;
-		@include atSmall {
-			width: 40px;
-			height: 40px;
-		}
-	}
-
-	.name {
-		font-size: 0.8rem;
-		margin: 0;
-		padding: 0;
-		color: $IconsColor;
-	}
-
-
-	.content-title {
-		padding: 6px 10px;
-		font-size: 1.1rem;
-		text-transform: capitalize;
-		font-family: $TitleFont;
-		font-weight: 100;
-		@include atSmall {
-			padding-top: 20px;
-			font-size: 1.2rem;
-		}
-	}
-
-	.content-text {
-		padding: 5px 10px;
-		font-size: 0.9rem;
-		@include atSmall {
-			padding-bottom: 0;
-			font-size: 1rem;
-		}
-	}
-
-
-	.footer-list {
-		padding: 15px;
-		display: inline-block;
-		font-size: 0.9rem;
-		color: $IconsColor;
-		@include atSmall {
-			font-size: 1rem;
-			padding-left: 20px;
-		}
-	}
-
-	.footer-data {
-		margin-left: 5px;
-		font-size: 0.8rem;
-		font-family: $GeneralFont;
-		font-weight: 100;
-	}
-
-	.footer-buttons {
-		float: right;
-		display: inline;
-		margin: 7px;
-
-		.button {
-			margin-left: 10px;
-			background: $white;
-			color: $Gray;
-			font-size: 0.8rem;
-			font-weight: 100;
-		}
-	}
-
-	// Icons
-	.fa:hover { transition: $SmoothTrasition; cursor: pointer}
-	.fa-thumbs-up:hover,
-	.fa-thumbs-up:focus { color: $LightGreen;}
-	.fa-thumbs-down:hover,
-	.fa-thumbs-down:focus { color: $LightRed;}
-	.fa-share-alt:hover,
-	.fa-share-alt:focus { color: $LightYellow;}
-	.fa-reply { color: $LightYellow }
-	.fa-eye { color: $LightRed }
-	.info-list .fa-clock-o { color: $LightGreen }
-
-	// User
-	&__user {
-		width: 10%;
-		text-align: center;
-		padding-top: 30px;
-	}
-
-	// content
-	&__content {
-		width: 70%;
-		@include atSmall {
-			width: 75%;
-		}
-	}
-
-	// Info
-	&__info {
-		width: 20%;
-		text-align: center;
-		@include atSmall {
-			width: 15%;
-		}
-
-
-		.info-list {
-			padding: 7px 0;
-			border: $LightBorder;
-			font-size: 0.8rem;
-			color: $IconsColor;
-			@include atSmall {
-				padding: 5px 0;
-				font-size: 1rem;
-			}
-		}
-
-		.info-data {
-			font-size: 0.8rem;
-			font-weight: 100;
-		}
-	}
-
-	// Footer
-	&__footer {
-		position: relative;
-		width: 100%;
-		background: $LightGray;
-	}
-
-	&__body {
-		width: 100%;
-		border-top: $LightBorder;
-	}
-
-	&__answer {
-		width: 90%;
-		background: $LightGray;
-		transform: translateX(6%);
-		margin: 20px 0;
-		@include clearfix;
-	}
-
-	// All Answer Styles
-
-	.answer-user,
-	.answer-content,
-	.answer-footer {
-		float: left;
-	}
-
-
-	.answer-user {
-		width: 10%;
-		text-align: center;
-		padding-top: 20px;
-	}
-
-	.answer-content {
-		width: 90%;
-		padding: 10px 0;
-		margin-top: 5px;
-	}
-
-	.answer-footer {
-		width: 100%;
-		border-top: 1px solid #dbdbdb;
-		margin-top: 10px;
-	}
-
-
-	// All Input Styles
-	&__input {
-		width: 90%;
-		background: $LightGray;
-		transform: translateX(6%);
-		margin: 20px 0;
-		@include clearfix;
-
-		.input-form {
-			padding: 40px;
-		}
-
-		.input-buttons {
-			float: right;
-			transform: translateY(-10px);
-		}
-
-		.button {
-			background: $white;
-			color: $Gray;
-			font-size: 0.8rem;
-			font-weight: 100;
-			margin-left: 10px;
-		}
-	}
-
-	// Bottom End Buttons
-	.body-buttons {
-		float: right;
-		margin-right: 20px;
-		margin-bottom: 20px;
-		@include atSmall {
-			margin: 15px;
-		}
-
-		.button {
-			background: $LightGray;
-			color: $Gray;
-			font-size: 0.8rem;
-			font-weight: 100;
-			margin-left: 10px;
-		}
-	}
+.comment {
+  width: 100%;
+  font-family: $GeneralFont;
+  transition: $SmoothTrasition;
 }
 
+.comment-user {
+  position: relative;
+  width: 100%;
+  @include clearfix;
 
 
-// ===============
-// 	DIALOG
-// ===============
+  &__img,
+  &__name {
+    float: left;
+  }
 
-	.dialog {
-		width: 100%;
-		box-shadow: $largekShadow;
-		font-family: $GeneralFont;
-		background: $white;
-		border-radius: 3px;
-		@include clearfix;
+  &__img {
+    margin-right: 5px;
+    transform: translateY(-3px);
+  }
 
-		&__header,
-		&__body,
-		&__footer {
-			width: 100%;
-			float: left;
-		}
+  &__name {
+    font-size: 0.9rem;
+    color: $Gray;
+    text-transform: capitalize;
+  }
 
-		&__header {
-			border-bottom: $LightBorder;
-			margin-bottom: 20px;
-
-			.header-title {
-				padding: 15px;
-				display: inline-block;
-				font-size: 0.9rem;
-				@include atSmall {
-					padding: 20px;
-				}
-			}
-
-			.header-warning {
-				font-size: 1.1rem;
-				margin-right: 10px;
-				color: $Gray;
-			}
-
-			.header-close {
-				float: right;
-				padding: 15px;
-				font-weight: 100;
-				font-size: 1.2rem;
-				cursor: pointer;
-				color: $IconsColor;
-				@include atSmall {
-					padding: 20px;
-				}
-			}
-		}
-
-		&__body {
-			padding: 30px 0;
-			text-align: center;
-			@include atSmall {
-				padding: 40px 0;
-			}
-
-			.body-text {
-				font-size: 0.9rem;
-			}
-
-			.body-target {
-				font-size: 1rem;
-				text-transform: capitalize;
-			}
-		}
-
-		&__footer {
-			text-align: center;
-			padding: 15px 0;
-			border-top: $LightBorder;
-			@include atSmall {
-				padding: 20px 0;
-			}
-
-			.button {
-				width: 40%;
-				display: inline-block;
-				margin: 0 10px;
-			}
-		}
-	}
-
-// ===============
-// 	DARK LAYER
-// ===============
-
-	.dark-layer {
-		position: fixed;
-		top: 0;
-		left: 0;
-		background: rgba(#000, 0.5);
-		height: 100vh;
-		width: 100%;
-		transition: $SmoothTrasition;
-
-		&__close {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			padding: 10px 20px;
-			font-size: 1.2rem;
-			color: $white;
-			z-index: 1000;
-			font-family: $GeneralFont;
-			cursor: pointer;
-			@include atSmall {
-				padding: 20px 30px;
-				font-size: 2rem;
-			}
-		}
-
-		&__modal {
-			@include atSmall {
-				transform: translateY(100px) translateX(25%);
-			}
-		}
-
-		&__modal-small {
-			@include atSmall {
-				transform: translateX(30%) translateY(20%);
-			}
-		}
-	}
-
-	.collapse-layer {
-		z-index: -100;
-		animation: collapseLayer 1s ease-out forwards;
-	}
-
-	@keyframes collapseLayer {
-		0% {
-			opacity: 1;
-			display: block;
-		},
-		100% {
-			opacity: 0;
-			display: none;
-		}
-	}
-
-	.expand-layer {
-		z-index: 100;
-		animation: expandLayer 1s ease-out forwards;
-	}
-
-	@keyframes expandLayer {
-		0% {
-			opacity: 0;
-			display: none;
-		},
-		100% {
-			opacity: 1;
-			display: block;
-		}
-	}
-
-
-	.expand-dialog {
-		animation: expandDialog 0.5s ease-in forwards;
-	}
-
-	@keyframes expandDialog {
-		0% {
-			opacity: 0;
-			transform: translateY(-100%);
-
-		}
-
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-
-	.collapse-dialog {
-		animation: collapseDialog 0.5s ease-out forwards;
-	}
-
-	@keyframes collapseDialog {
-		0% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-
-		100% {
-			opacity: 0;
-			transform: translateY(-100%);
-		}
-	}
-
-// ===============
-// 	MODAL
-// ===============
-
-	.modal {
-		position: relative;
-		width: 87%;
-		margin-left: 2%;
-		padding: 20px;
-		font-family: $GeneralFont;
-		background: $white;
-		box-shadow: $largekShadow;
-		border-radius: 5px;
-		@include clearfix;
-		@include atSmall {
-			margin-left: 0;
-			width: 100%;
-			padding: 30px;
-		}
-
-		&__close {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			cursor: pointer;
-			font-size: 1.2rem;
-			color: $IconsColor;
-			font-weight: 100;
-		}
-
-		&__title {
-			width: 100%;
-			text-align: center;
-			padding: 20px 0;
-			font-weight: 900;
-			font-size: 1.5rem;
-			@include atSmall {
-				font-size: 2rem;
-			}
-		}
-
-	&__form {
-		width: 100%;
-		margin-left: 0;
-		text-align: center;
-
-		.form-input {
-			width: 100%;
-		}
-	}
+  &__date {
+    font-size: 0.8rem;
+    color: $IconsColor;
+  }
 }
 
-
-// ===============
-// 	SIGNUP
-// ===============
-
-	.signup {
-		position: relative;
-		width: 87%;
-		margin-left: 2%;
-		padding: 20px;
-		font-family: $GeneralFont;
-		background: $white;
-		box-shadow: $largekShadow;
-		border-radius: 5px;
-		@include clearfix;
-		@include atSmall {
-			margin-left: 0;
-			width: 100%;
-			padding: 30px;
-		}
-
-		&__close {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			cursor: pointer;
-			font-size: 1.2rem;
-			color: $IconsColor;
-			font-weight: 100;
-		}
-
-
-
-		&__title,
-		&__promo,
-		&__form {
-			float: left;
-		}
-
-
-		&__title {
-			width: 100%;
-			text-align: center;
-			padding: 20px 0;
-			font-weight: 900;
-			font-size: 1.5rem;
-			@include atSmall {
-				font-size: 2rem;
-			}
-		}
-
-		&__promo {
-			width: 45%;
-			display: none;
-			@include atSmall {
-				display: block;
-			}
-
-			.promo-widget {
-				padding: 20px 0;
-			}
-
-			.fa { margin-right: 10px}
-			.fa-share-alt { color: $Purple }
-			.fa-comments { color: $LightBlue }
-			.fa-code { color: $LightRed }
-
-			.promo-title {
-				font-size: 1.2rem;
-			}
-
-			.promo-text {
-				color: $IconsColor;
-				margin-left: 32px;
-				line-height: 25px;
-			}
-		}
-
-		&__form {
-			width: 100%;
-			margin-left: 0;
-			text-align: center;
-			@include atSmall {
-				width: 45%;
-				margin-left: 5%;
-			}
-
-			.form-input {
-				width: 100%;
-			}
-		}
-
-	}
-
-
-// ===============
-// 	LOGIN
-// ===============
-	.login {
-		position: relative;
-		width: 86%;
-		margin-left: 2.5%;
-		padding: 20px;
-		border-radius: 3px;
-		background: $white;
-		box-shadow: $largekShadow;
-		text-align: center;
-		font-family: $GeneralFont;
-		@include clearfix;
-		@include atSmall {
-			padding: 40px;
-			width: 100%;
-			margin-left: 0;
-		}
-
-		&__close {
-			position: absolute;
-			top: 15px;
-			right: 15px;
-			cursor: pointer;
-		}
-
-		&__welcome,
-		&__title,
-		&__form,
-		&__buttons {
-			width: 100%;
-			float: left;
-		}
-
-		&__welcome {
-			font-size: 1.2rem;
-			color: $IconsColor;
-			padding: 15px 0;
-		}
-
-		&__title {
-			font-size: 1.5rem;
-			color: $Gray;
-			padding-bottom: 5px;
-		}
-
-		&__text {
-			font-size: 0.8rem;
-			color: $IconsColor;
-			text-transform: capitalize;
-		}
-
-		&__form {
-			padding-top: 20px;
-
-			.form-input {
-				width: 100%;
-				margin-bottom: 20px;
-			}
-		}
-
-
-		&__buttons {
-			padding: 30px 0;
-
-			span {
-				color: $Gray;
-				margin-right: 5px;
-			}
-
-			.button {
-				margin-bottom: 15px;
-			}
-		}
-
-		&__create {
-			color: $Green;
-			text-decoration: none;
-		}
-	}
-
-
-// ===============
-// 	LARGE CARD
-// ===============
-
-	.large-card {
-		width: 100%;
-		background: $white;
-		font-family: $GeneralFont;
-		transition: $SmoothTrasition;
-		border-radius: 5px;
-		margin-top: 20px;
-		&:hover {
-			box-shadow: $MediumShadow;
-		}
-		@include clearfix;
-		@include atMedium {
-			width: 80%;
-			transform: translateX(13%);
-		}
-
-		// General Style
-		&__header,
-		&__footer {
-			width: 100%;
-			float: left;
-		}
-
-		// Header
-		&__header {
-			position: relative;
-			padding: 10px 0;
-			@include atMedium {
-				border-bottom: $LightBorder;
-			}
-
-			.header-img,
-			.header-author {
-				float: left;
-				display: inline;
-			}
-
-			.header-img {
-				height: 40px;
-				width: 40px;
-				margin: 0 5px 0 10px;
-			}
-
-			.header-author {
-				font-size: 1rem;
-				font-weight: 900;
-				font-family: $TitleFont;
-				margin-top: 2px;
-				color: $Gray;
-				cursor: pointer;
-				&:hover {
-					text-decoration: underline;
-				}
-			}
-
-			.header-date {
-				position: absolute;
-				left: 55px;
-				top: 35px;
-				font-size: 0.8rem;
-				color: $IconsColor;
-			}
-
-			.header-menu {
-				position: absolute;
-				right: 10px;
-				top: 10px;
-			}
-		}
-
-		&__img {
-			@include atMedium {
-				width: 30%;
-				float: left;
-				padding: 45px 0 30px 30px;
-
-				.img {
-					border-radius: 3px;
-					// box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2), 0 10px 18px 0 rgba(0, 0, 0, 0.22);
-				}
-			}
-		}
-
-		// Content
-		&__content {
-			padding: 20px 0;
-			float: left;
-			@include atMedium {
-				width: 65%;
-				padding: 30px 0;
-			}
-
-			// General Style
-			.content-title,
-			.content-text {
-				padding: 5px 20px;
-
-			}
-
-			.content-title {
-				color: $Gray;
-				font-family: $TitleFont;
-				font-size: 1.5rem;
-				text-transform: capitalize;
-				transition: $SmoothTrasition;
-				cursor: pointer;
-				&:hover {
-					text-decoration: underline;
-				}
-				@include atMedium {
-					font-size: 2rem;
-				}
-			}
-
-			.content-text {
-				color: $IconsColor;
-				@include atMedium {
-					font-size: 1.3rem;
-					line-height: 30px;
-				}
-			}
-		}
-
-		// Footer
-		&__footer {
-			position: relative;
-			padding: 20px 0;
-			border-top: $LightBorder;
-			@include atMedium {
-				padding: 15px 0;
-			}
-
-			.footer-icons {
-				text-decoration: none;
-				margin-left: 15px;
-				margin-right: 10px;
-				display: inline;
-				color: $IconsColor;
-				opacity: 0.8;
-				@include atMedium {
-					font-size: 1.2rem;
-					margin-left: 30px;
-					margin-right: 50px;
-				}
-			}
-
-			.footer-data {
-				font-size: 0.9rem;
-				font-weight: 900;
-				opacity: 0.5;
-				margin-left: 5px;
-				@include atMedium {
-					font-size: 1rem;
-				}
-			}
-
-			.footer-button {
-				position: absolute;
-				top: 12px;
-				right: 10px;
-				border: none;
-				@include atMedium {
-					top: 10px;
-					right: 15px;
-				}
-			}
-		}
-	}
-
-
-// ===============
-// 	TABS
-// ===============
-
-	.tab {
-		width: 200px;
-		font-family: $GeneralFont;
-		background: $white;
-		@include atMedium {
-			display: flex;
-			justify-content: space-between;
-			width: 100%;
-		}
-
-		&__list {
-			position: relative;
-			border-bottom: $LightBorder;
-			transition: $SmoothTrasition;
-			@include atMedium {
-				display: inline-block;
-				border-bottom: none;
-			}
-
-			&:hover {
-				background: $LightGray;
-			}
-
-			&:hover .tab__link,
-			&:focus .tab__link,
-			&:hover .tab__icon,
-			&:focus .tab__icon {
-				color: $LightGreen;
-			}
-		}
-
-	&__list:hover &__link::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 3px;
-		height: 100%;
-		background: $LightGreen;
-		transition: $SmoothTrasition;
-
-		@include atMedium {
-			width: 100%;
-			height: 3px;
-		}
-
-	}
-		&__icon {
-			color: $IconsColor;
-			margin-right: 8px;
-			transition: $SmoothTrasition;
-		}
-
-		&__link {
-			display: block;
-			padding: 20px;
-			text-decoration: none;
-			color: $Gray;
-			transition: $SmoothTrasition;
-			@include atMedium {
-				flex: 1;
-			}
-		}
-	}
-
-// ===============
-// 	LARGE CARD
-// ===============
-	mat-select {
-		max-width: 100%;
-	}
-
-
-	mat-option {
-		text-transform: capitalize;
-	}
-
-// ===============
-// 	DARK LAYER
-// ===============
-
-.menu-button {
-	padding: 7px 10px;
-	background: $white;
-	border-radius: 50%;
-	box-shadow: $shadow;
-	transition: $SmoothTrasition;
-	&:hover {
-		box-shadow: $MediumShadow;
-	}
-
-	mat-icon {
-		font-size: 24px;
-		margin-top: 3px;
-		color: $IconsColor;
-		opacity: 0.8;
-	}
+.comment-text,
+.comment-footer {
+  width: 90%;
+  margin-left: 10%;
+
+  @include atSmall {
+    margin-left: 6%;
+  }
+
+  @include atMedium {
+    margin-left: 4%;
+  }
+}
+
+.comment-text {
+  padding: 5px 0;
+  text-align: justify;
+
+  @include atSmall {
+    padding: 10px 0;
+  }
+
+  &__para {
+    color: $Gray;
+    @include atSmall {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.comment-footer {
+
+  &__list {
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 0.8rem;
+    color: $IconsColor;
+
+    @include atMedium {
+      font-size: 0.9rem;
+      margin-right: 15px;
+    }
+  }
+
+  i {
+    margin-right: 3px;
+  }
+}
+
+.comment-reply {
+  width: 90%;
+  margin-left: 10%;
+  margin-top: 20px;
+
+  @include atSmall {
+    margin-left: 5%;
+  }
+
+  @include atMedium {
+    margin-top: 40px;
+    margin-left: 4%;
+  }
+}
+
+.comment-reply-box {
+  width: 90%;
+  margin-left: 10%;
+  margin-top: 10px;
+  @include atMedium {
+    margin-left: 4%;
+  }
+  @include clearfix;
+
+  .input {
+    width: 100%;
+  }
+
+  &__buttons {
+    float: right;
+    transform: translateY(-10px);
+
+    .button {
+      margin-left: 5px;
+    }
+  }
 }

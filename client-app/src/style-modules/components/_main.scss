@@ -8,11 +8,9 @@
 .content {
 	width: 91%;
 	padding: 20px;
-	margin-top: 50px;
 	@include atSmall {
 		float: right;
 		width: 79%;
-		margin-top: 50px;
 	}
 
 	@include atLarge {

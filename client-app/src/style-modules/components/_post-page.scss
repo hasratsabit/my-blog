@@ -1,0 +1,180 @@
+.post-page {
+    background: $white;
+}
+
+// Post Large Hero
+.large-hero {
+    position: relative;
+    font-family: $GeneralFont;
+
+    &__img {
+        height: 100%;
+        width: 100%;
+    }
+
+    &__content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        background: rgba(0,0,0,0.7);
+
+        .content-title {
+            color: $white;
+            text-transform: capitalize;
+            font-family: $TitleFont;
+            width: 80%;
+            font-size: 1.2rem;
+            margin-left: 10%;
+            margin-top: 20%;
+            letter-spacing: 1px;
+            @include atSmall {
+                font-size: 2rem;
+            }
+            @include atMedium {
+                font-size: 3rem;
+            }
+        }
+
+        .content-date {
+            color: $white;
+            font-family: $TitleFont;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            @include atSmall {
+                font-size: 1rem;
+                font-weight: 900;
+            }
+        }
+
+        .content-button {
+           margin-top: 10px;
+           @include atSmall {
+               margin-top: 20px;
+               padding: 15px 30px;
+           }
+        }
+    }
+}
+
+// Post Body
+.body {
+    position: relative;
+    width: 70%;
+    background: $white;
+    box-shadow: $MediumShadow;
+    margin-left: 7.5%;
+    padding: 30px;
+    border-radius: 5px;
+    transform: translateY(-30px);
+    @include atSmall {
+       width: 80%;
+       margin-left: 5%;
+    }
+    
+    @include atMedium {
+        width: 90%;
+        margin-left: 2.5%;
+        transform: translateY(-150px);
+        padding: 50px 30px;
+    }
+
+    // Body Text
+
+    &__text {
+        @include atMedium {
+            width: 70%;
+            margin-left: 15%;
+        }
+    p {
+        font-family: $ParagraphFont;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        color: $Gray;
+        line-height: 25px;
+        text-align: justify;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        @include atMedium {
+            font-size: 1.3rem;
+            line-height: 30px;
+            }
+        }
+    }
+}
+
+// Post Media 
+.media {
+    width: 100%;
+    padding: 20px 0;
+
+    @include atMedium {
+        text-align: center;
+        padding: 30px 0;
+        width: 70%;
+        margin-left: 15%;
+    }
+
+    &__list {
+        display: block;
+        text-decoration: none;
+        font-family: $GeneralFont;
+        color: $IconsColor;
+        padding: 10px 0;
+        border-top: 1px solid $LightGray;
+        &:last-child {
+            border-bottom: 1px solid $LightGray;
+            @include atMedium {
+                border: none;
+            }
+        }
+
+        @include atMedium {
+            border-top: none;
+            border-right: 1px solid $LightGray;
+            display: inline-block;
+            padding: 10px 20px;
+        }
+    }
+
+    i {
+        padding-right: 10px;
+        @include atMedium {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__data {
+        float: right;
+        @include atMedium {
+            float: none;
+            margin-left: 10px;
+        }
+    }
+}
+
+// Load Comment Button 
+.see-comments {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+
+    .button {
+        color: $IconsColor;
+        font-size: 0.8rem;
+    }
+}
+
+.post-comment {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 30px;
+    border-top: $LightBorder;
+    @include atMedium {
+        width: 70%;
+        margin-left: 15%;
+    }
+}

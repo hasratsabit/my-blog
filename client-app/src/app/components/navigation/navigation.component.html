@@ -1,114 +1,250 @@
 <!-- Top Nav -->
 <nav class="top-nav">
-    <li class="top-nav__side-nav-toggle">
-        <button class="menu-button button">
-            <mat-icon>menu</mat-icon>
-        </button>
-    </li>
-    <div class="top-nav__right-nav">
-        <li class="top-nav__search">
-            <mat-form-field class="input-field">
-                <input matInput placeholder="Search">
-            </mat-form-field>
-            <button class="menu-button button">
-                <mat-icon>search</mat-icon>
-            </button>
-        </li>
-        <li class="top-nav__filter">
-            <button mat-icon-button>
-                <mat-icon>tune</mat-icon>
-            </button>
-        </li>
-        <li class="top-nav__profile">
-            <button mat-icon-button>
-                <mat-icon>person</mat-icon>
-            </button>
-        </li>
-    </div>
+  <!-- Menu Icon -->
+  <li class="top-nav__side-nav-toggle">
+    <button class="menu-button button">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </li><!-- Menu Icon Ends -->
+
+  <!-- Right Nav  -->
+  <div class="top-nav__right-nav">
+    <!-- Search -->
+    <li class="top-nav__search">
+      <mat-form-field class="input-field">
+        <input matInput placeholder="Search">
+      </mat-form-field>
+      <button class="menu-button button">
+        <mat-icon>search</mat-icon>
+      </button>
+    </li><!-- Search Ends -->
+
+    <!-- Filter -->
+    <li class="top-nav__filter">
+      <button mat-button [matMenuTriggerFor]="filter">
+        <mat-icon>tune</mat-icon>
+      </button>
+      <mat-menu #filter="matMenu">
+        <!-- TABS -->
+        <div class="tab">
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+              </span>
+              Most Viewed
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+              </span>
+              Most Liked
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+              </span>
+              Most Shared
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                <i class="fa fa-comments" aria-hidden="true"></i>
+              </span>
+            Most Discussed
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+              </span>
+              Most Recent
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+              </span>
+              Category
+            </a>
+          </li>
+        </div>
+      </mat-menu>
+    </li><!-- Filter Ends-->
+
+    <!-- Profile Menu -->
+    <li class="top-nav__profile">
+      <button mat-button [matMenuTriggerFor]="profile">
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-menu #profile="matMenu">
+        <div class="tab">
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                <mat-icon>vpn_key</mat-icon>
+              </span>
+               Login
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                  <mat-icon>power_settings_new</mat-icon>
+              </span>
+                Logout
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                  <mat-icon>input</mat-icon>
+              </span>
+             Register
+            </a>
+          </li>
+          <li class="tab__list">
+            <a href="#" class="tab__link">
+              <span class="tab__icon">
+                  <mat-icon>person</mat-icon>
+              </span>
+              Profile
+            </a>
+          </li>
+        </div>
+      </mat-menu>
+    </li><!-- Profile Ends-->
+
+  </div><!-- Right Menu Ends -->
 </nav><!-- Top Nav Ends-->
 
 
 <!-- Side Nav -->
 <div class="side-navbar">
-    <ul class="side-navbar__user-nav">
-        
+  <!-- Nav Wrapper -->
+  <div class="nav-wrapper">
+
+    <!-- Private Nav -->
+    <ul class="private-nav">
+
+      <img class="private-nav__img img img-small img-circle" src="/assets/images/profile.jpg" alt="">
+      <h1 class="private-nav__title">Hasrat Sabit</h1>
+
+      <button (click)="toggleUserProfile()" class="private-nav__button button">
+        <mat-icon [ngClass]="mobileNavExpanded ? 'arrowUp' : 'arrowDown'">keyboard_arrow_down</mat-icon>
+      </button>
+
     </ul>
+    <!-- Private Nav Ends -->
+
+    <!-- Mobile List -->
+    <ul class="mobile-list" [ngClass]="mobileNavExpanded ? 
+                        'dropdownCollapsed' :
+                        'dropdownExpanded'">
+
+      <li>
+        <a routerLink="/profile" [routerLinkActive]="['active']">
+          <mat-icon>person</mat-icon>Profile</a>
+      </li>
+
+      <li>
+        <a routerLink="/login" [routerLinkActive]="['active']">
+          <mat-icon>vpn_key</mat-icon>Login</a>
+      </li>
+
+      <li>
+        <a routerLink="/logout" [routerLinkActive]="['active']">
+          <mat-icon>power_settings_new</mat-icon>Logout</a>
+      </li>
+
+      <li>
+        <a routerLink="/register" [routerLinkActive]="['active']">
+          <mat-icon>input</mat-icon>Register</a>
+      </li>
+
+    </ul>
+    <!-- Mobile List Ends-->
+
+    <!-- Main Navbar -->
     <ul class="navbar">
+
+      <!-- Public Nav -->
+      <ul class="navbar__public-nav">
         <li>
-            <mat-icon>home</mat-icon>
-            <a routerLink="/" 
-            [routerLinkActive]="['active']">Home</a>
-        </li>
-        <li>
-            <mat-icon>code</mat-icon>
-            <a routerLink="/" 
-            [routerLinkActive]="['active']">Tutorials</a>
+          <a routerLink="/" [routerLinkActive]="['active']">
+            <mat-icon>home</mat-icon>Home</a>
         </li>
         <li>
-            <mat-icon>forum</mat-icon>
-            <a routerLink="/forum" 
-            [routerLinkActive]="['active']">Forum</a>
-        </li>
-        <li *ngIf="authService.userLoggedIn()">
-            <mat-icon>person</mat-icon><a routerLink="/profile" 
-            [routerLinkActive]="['active']">Profile</a>
+          <a routerLink="/" [routerLinkActive]="['active']">
+            <mat-icon>code</mat-icon>Tutorials</a>
         </li>
         <li>
-            <mat-icon>dashboard</mat-icon>
-            <a routerLink="/dashboard" 
-            [routerLinkActive]="['active']">Dashboard</a>
+          <a routerLink="/forum" [routerLinkActive]="['active']">
+            <mat-icon>forum</mat-icon>Forum</a>
         </li>
         <li>
-            <mat-icon>description</mat-icon>
-            <a routerLink="/blog" 
-            [routerLinkActive]="['active']">Blogs</a>
+          <a routerLink="/dashboard" [routerLinkActive]="['active']">
+            <mat-icon>dashboard</mat-icon>Dashboard</a>
         </li>
         <li>
-            <mat-icon>build</mat-icon>
-            <a routerLink="/" 
-            [routerLinkActive]="['active']">Projects</a>
+          <a routerLink="/blog" [routerLinkActive]="['active']">
+            <mat-icon>description</mat-icon>Blogs</a>
         </li>
         <li>
-            <mat-icon>comment</mat-icon>
-            <a routerLink="/comment" 
-            [routerLinkActive]="['active']">Comments</a>
+          <a routerLink="/" [routerLinkActive]="['active']">
+            <mat-icon>build</mat-icon>Projects</a>
         </li>
         <li>
-            <mat-icon>dns</mat-icon>
-            <a routerLink="/category"
-             [routerLinkActive]="['active']">Categories</a>
+          <a routerLink="/comment" [routerLinkActive]="['active']">
+            <mat-icon>comment</mat-icon>Comments</a>
         </li>
         <li>
-            <mat-icon>account_box</mat-icon>
-            <a routerLink="/user" 
-            [routerLinkActive]="['active']">Users</a>
+          <a routerLink="/category" [routerLinkActive]="['active']">
+            <mat-icon>dns</mat-icon>Categories</a>
         </li>
         <li>
-            <mat-icon>email</mat-icon>
-            <a routerLink="/email" 
-            [routerLinkActive]="['active']">Email</a>
+          <a routerLink="/user" [routerLinkActive]="['active']">
+            <mat-icon>account_box</mat-icon>Users</a>
         </li>
         <li>
-            <mat-icon>settings_input_component</mat-icon>
-            <a routerLink="/parts" 
-            [routerLinkActive]="['active']">Components</a>
+          <a routerLink="/email" [routerLinkActive]="['active']">
+            <mat-icon>email</mat-icon>Email</a>
         </li>
         <li>
-            <mat-icon>assessment</mat-icon>
-            <a routerLink="/animation" 
-            [routerLinkActive]="['active']">Animation</a>
+          <a routerLink="/parts" [routerLinkActive]="['active']">
+            <mat-icon>settings_input_component</mat-icon>Components</a>
         </li>
+        <li>
+          <a routerLink="/animation" [routerLinkActive]="['active']">
+            <mat-icon>assessment</mat-icon>Animation</a>
+        </li>
+      </ul>
+      <!-- Public Nav Ends-->
+
     </ul>
-</div><!-- Side Nav Ends -->
+    <!-- Navbar Ends -->
+
+  </div>
+  <!-- Nav Wrapper Ends -->
+</div>
+<!-- Side Nav Ends -->
 
 
 
 
 <!-- Loggout message -->
 <div *ngIf="loggedOutLoaded">
-    <div [ngClass]="{'expand-layer': loggedOutLoaded, 'collapse-layer': !loggedOutLoaded}" class="dark-layer">
-        <div @fadeIn class="alert alert-green">
-            <i class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><p class="alert-text"> You are successfully logged out.</p>
-        </div>
+  <div [ngClass]="{'expand-layer': loggedOutLoaded, 'collapse-layer': !loggedOutLoaded}" class="dark-layer">
+    <div @fadeIn class="alert alert-green">
+      <i class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
+      <p class="alert-text"> You are successfully logged out.</p>
     </div>
+  </div>
 </div>

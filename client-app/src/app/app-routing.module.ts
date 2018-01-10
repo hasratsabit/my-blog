@@ -19,9 +19,12 @@ import { AnimationComponent } from "./components/animation/animation.component";
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
 import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
 
+// Blog
 import { AddBlogComponent } from './components/blog/add-blog/add-blog.component';
 import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';
 import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
+import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
+
 
 // Categories
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
@@ -60,6 +63,10 @@ const appRoutes: Routes = [
 	{
 		path: 'edit-blog',
 		component: EditBlogComponent
+	},
+	{
+		path: 'read-more',
+		component: ReadMoreComponent
 	},
 	{
 		path: 'delete-blog',
