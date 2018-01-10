@@ -1876,14 +1876,21 @@ mat-option {
 
 .comment-footer {
 
-  &__list {
-    text-decoration: none;
+  &__button {
+    border: none;
+    background: transparent;
     margin-right: 10px;
     font-size: 0.8rem;
     color: $IconsColor;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+    }
 
     @include atMedium {
-      font-size: 0.9rem;
       margin-right: 15px;
     }
   }
@@ -1908,7 +1915,7 @@ mat-option {
   }
 }
 
-.comment-reply-box {
+.comment-textarea {
   width: 90%;
   margin-left: 10%;
   margin-top: 10px;
@@ -1929,4 +1936,206 @@ mat-option {
       margin-left: 5px;
     }
   }
+}
+
+// ===============
+// 	TAB ROW
+// ===============
+
+.tab-row {
+  width: 100%;
+  background: $white;
+  box-shadow: $shadow;
+  display: flex;
+  justify-content: list-separator(#list);
+
+
+  &__button {
+    background: transparent;
+    color: $Gray;
+    font-family: $GeneralFont;
+    padding: 15px;
+    text-align: center;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: $SmoothTrasition;
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      color: $LightGreen;
+    }
+    @include atSmall {
+      font-size: 0.9rem;
+    }
+  }
+
+  i {
+    margin-right: 5px;
+  }
+}
+
+
+// ===============
+// 	AUTHOR
+// ===============
+
+.author {
+  width: 100%;
+  font-family: $GeneralFont;
+  text-align: center;
+  @include clearfix;
+
+  &__name,
+  &__title {
+    color: $IconsColor;
+  }
+
+  &__name,
+  &__title {
+    text-transform: uppercase;
+  }
+
+  &__name {
+    font-size: 0.7rem;
+    font-weight: 900;
+    font-family: $TitleFont;
+    letter-spacing: 1px;
+  }
+
+  &__title {
+    font-size: 0.5rem;
+    margin-top: -20px;
+  }
+
+  &__list {
+    display: inline-block;
+  }
+
+  &__list:hover a {
+    opacity: 1;
+  }
+
+  &__social-media {
+    margin-top: 10px;
+  }
+
+  &__link {
+    display: inline-block;
+    // padding: 5px 8px;
+    // border-radius: 50%;
+    text-decoration: none;
+    // background-color: $IconsColor;
+    color: $IconsColor;
+    margin-right: 10px;
+    opacity: 0.7;
+    transition: $SmoothTrasition;
+  }
+
+  // .facebook {
+  //   padding: 5px 11px;
+  // }
+}
+
+
+// ===============
+// 	BLOG CARD
+// ===============
+
+.blog-card {
+  font-family: $GeneralFont;
+  border-radius: 5px;
+  background: $white;
+  transition: $SmoothTrasition;
+  @include clearfix;
+
+  &:hover {
+    box-shadow: $MediumShadow;
+  }
+
+
+// GENERAL
+
+
+// HERO
+&__hero {
+  position: relative;
+}
+
+&__img {
+  border-radius: 5px 5px 0;
+}
+
+&__category {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  padding: 10px;
+  background: rgba($LightYellow, 0.8);
+  color: #FFF;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+
+// BODY
+&__body {
+  padding: 30px 30px 10px 30px;
+}
+
+&__title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  text-transform: capitalize;
+  font-family: $TitleFont;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  color: $Gray;
+  cursor: pointer;
+  transition: $SmoothTrasition;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+&__text {
+  color: $IconsColor;
+}
+
+
+
+
+// FOOTER
+&__footer {
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
+}
+
+&__link {
+  text-decoration: none;
+  color: $IconsColor;
+  font-size: 1.1rem;
+  margin-right: 20px;
+  opacity: 0.5;
+  transition: $SmoothTrasition;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
+&__data {
+  margin-left: 5px;
+  font-size: 1rem;
+}
+
+&__button {
+  text-decoration: none;
+  font-size: 0.8rem;
+  float: right;
+  transform: translateY(-5px);
+}
+
 }

@@ -79,18 +79,78 @@
             </a>
         </div><!-- Media Ends -->
 
+        <!-- Author  -->
+        <div class="post-author author">
+    
+            <img class="author__img img img-small img-circle" src="./assets/images/profile.jpg" alt="">
+            <h1 class="author__name">Hasrat Sabit</h1><br>
+            <h2 class="author__title">Full Stack Developer</h2>
+        
+            <!-- Social Media  -->
+            <ul class="author__social-media">
+            <li class="author__list">
+                <a class="author__link" href="#">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="author__list">
+                <a class="author__link facebook" href="#">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="author__list">
+                <a class="author__link" href="#">
+                <i class="fa fa-youtube" aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="author__list">
+                <a class="author__link" href="#">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                </a>
+            </li>
+            </ul><!-- Social Media Ends  -->
+        
+        </div><!-- Author  Ends -->
+
         <!-- Loadd Button -->
         <div class="see-comments">
-            <button class="button button-medium button-default button-round">
-                See Comments
+            <button (click)="loadAllComments()" class="button button-medium button-default button-round">
+                <span *ngIf="!allCommentsLoaded">Load Comments</span>
+                <span *ngIf="allCommentsLoaded">Hide Comments</span>
             </button>
         </div><!-- Load Button Ends -->
 
         <!-- Comments -->
-        <div class="post-comment">
+        <div [@expandCollapse]="allCommentsLoaded ? 'expanded' : 'collapsed'" class="post-comment">
+
+            <!-- Tab Row  -->
+            <div class="post-comment__tabs tab-row"> 
+                <li class="tab-row__list">
+                    <button (click)="loadAddNewComment()" class="tab-row__button">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        <span *ngIf="!addNewCommentIsLoaded">
+                            Post Comment
+                        </span>
+                        <span *ngIf="addNewCommentIsLoaded">
+                            Cancel Comment
+                        </span>
+                    </button>
+                </li>
+                <li class="tab-row__list">
+                    <button class="tab-row__button">
+                        Most Helpful
+                    </button>
+                </li>
+                <li class="tab-row__list">
+                    <button class="tab-row__button">
+                        Most Recent
+                    </button>
+                </li>
+            </div>
+            <!-- Tab Row  Ends -->
 
             <!-- Reply Box -->
-            <div class="comment-reply-box">
+            <div [@expandCollapse]="addNewCommentIsLoaded ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
                 <!-- Form -->
                 <form>
                     <!-- Textarea -->
@@ -98,8 +158,8 @@
                         <textarea matInput placeholder="Leave comment here"></textarea>
                     </mat-form-field><!-- Textarea Ends -->
                     <!-- Buttons-->
-                    <div class="comment-reply-box__buttons">
-                        <button class="button button-medium button-default button-round">
+                    <div class="comment-textarea__buttons">
+                        <button (click)="loadAddNewComment()" class="button button-medium button-default button-round">
                             Cancel
                         </button>
                         <button type="submit" class="button button-medium button-round button-green">
@@ -113,7 +173,7 @@
             <div class="comment">
 
                 <!-- user -->
-                <div class="comment-user">
+                <div class="post-comment__user-comment comment-user">
                     <img class="comment-user__img img img-circle img-small img-border" src="./assets/images/profile.jpg" alt="">
                     <h1 class="comment-user__name">Hasrat Sabit</h1><br>
                     <span class="comment-user__date">Jan 09, 2018</span>
@@ -130,30 +190,32 @@
                 <!-- Footer -->
                 <div class="comment-footer">
                 
-                    <a class="comment-footer__list" href="">
+                    <button class="comment-footer__button">
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                     15
-                    </a>
+                    </button>
                 
-                    <a class="comment-footer__list" href="">
+                    <button class="comment-footer__button">
                     <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                     15
-                    </a>
+                    </button>
                 
-                    <a class="comment-footer__list" href="">
+                    <button (click)="loadAddReply()" class="comment-footer__button">
                     <i class="fa fa-reply" aria-hidden="true"></i>
                         15
-                    </a>
+                    </button>
                 
-                    <a class="comment-footer__list" href="">Hide Replies</a>
-                    <a class="comment-footer__list" href="">Show Replies</a>
-                    <a class="comment-footer__list" href="">Edit</a>
-                    <a class="comment-footer__list" href="">Delete</a>
+                    <button (click)="loadAllReplies()" class="comment-footer__button">
+                        <span *ngIf="allRepliesLoaded">Hide Replies</span>
+                        <span *ngIf="!allRepliesLoaded">Show Replies</span>
+                    </button>
+                    <button class="comment-footer__button">Edit</button>
+                    <button class="comment-footer__button">Delete</button>
                 
                 </div><!-- Footer Ends -->
 
                 <!-- Reply Box -->
-                <div class="comment-reply-box">
+                <div [@expandCollapse]="addReplyIsLoaded ? 'expanded' : 'collapsed'" class="comment-textarea">
                     <!-- Form -->
                     <form>
                     <!-- Textarea -->
@@ -161,8 +223,8 @@
                         <textarea matInput placeholder="Reply to comment"></textarea>
                     </mat-form-field><!-- Textarea Ends -->
                     <!-- Buttons-->
-                    <div class="comment-reply-box__buttons">
-                        <button class="button button-medium button-default button-round">
+                    <div class="comment-textarea__buttons">
+                        <button (click)="loadAddReply()" class="button button-medium button-default button-round">
                             Cancel
                         </button>
                         <button type="submit" class="button button-medium button-round button-green">
@@ -173,7 +235,7 @@
                 </div><!-- Reply Box Ends-->
                 
                 <!-- Replied Comments -->
-                <div class="comment-reply">
+                <div [@expandCollapse]="allRepliesLoaded ? 'expanded' : 'collapsed'" class="comment-reply">
                 
                     <!-- user -->
                     <div class="comment-user">

@@ -8,14 +8,14 @@ import { UserService } from '../services/user.service';
 @Injectable()
 export class AdminGuard implements CanActivate {
 
+	userData;
+
 	constructor(
 		private userService: UserService,
 		private router: Router
 	) {}
 
-		canActivate():Observable<boolean> {
-			return this.userService.getUserProfile().map(data => {
-				return data.adminAccess;
-			})
+		canActivate() {
+			return this.userService.getUserProfile().map(data => data.user.adminAccess);
 		}
   }

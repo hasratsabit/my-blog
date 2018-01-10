@@ -73,7 +73,7 @@ export class UserService {
     return this.http.delete(this.domain + '/users/deleteUser/' + id, this.options).map(res => res.json());
   }
 
-  getUserProfile():Observable<ProfileUser> {
+  getUserProfile(){
     this.authorizationHeaders();
     return this.http.get(this.domain + '/users/getUserProfile', this.options).map(res => res.json());
   }

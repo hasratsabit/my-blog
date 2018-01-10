@@ -1,45 +1,110 @@
 
-<!-- Large Card -->
-<div class="large-card">
+<div class="row"><!-- Row -->
 
-  <!-- Header -->
-  <div class="large-card__header">
-    <img class="img img-border img-medium img-circle header-img" src="/assets/images/profile.jpg" alt="">
-    <h1 class="header-author">Hasrat Sabit</h1>
-    <span class="header-date">January 01, 2018</span>
-    <div class="header-menu">
-      <button mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </div>
-  </div><!-- Header Ends-->
 
-  <!-- Image -->
-  <div class="large-card__img">
-    <img class="img" src="/assets/images/car-img.jpg" alt="">
-  </div><!-- Image Ends -->
+  <div class="col-2"><!-- Col -->
 
-  <!-- Content -->
-  <div class="large-card__content">
-    <h1 class="content-title">This title is about writing code in JavaScript</h1>
-    <p class="content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-  </div><!-- Content Ends -->
+    <!-- Blog Card  -->
+    <div class="blog-card">
 
-  <!-- Footer -->
-  <div class="large-card__footer">
-    <a href="#" class="footer-icons">
-      <i class="fa fa-heart" aria-hidden="true"></i>
-      <span class="footer-data">33</span>
-    </a>
-    <a href="#" class="footer-icons">
-      <i class="fa fa-comment" aria-hidden="true"></i>
-      <span class="footer-data">33</span>
-    </a>
-    <a href="#" class="footer-icons">
-      <i class="fa fa-share-alt" aria-hidden="true"></i>
-      <span class="footer-data">33</span>
-    </a>
-    <button [routerLink]="['/read-more']" class="footer-button button button-medium button-round button-green-clear">Read More</button>
-  </div>
+      <!-- Hero  -->
+      <div class="blog-card__hero">
+        <span class="blog-card__category">Angular</span>
+        <img class="blog-card__img img img-round" src="./assets/images/read-more.jpg" alt="">
+      </div><!-- Hero Ends  -->
 
-</div><!-- Large Card Ends-->
+      <!-- Body  -->
+      <div class="blog-card__body">
+        <h1 class="blog-card__title">
+          larn functional programming with practical examples
+        </h1>
+        <p class="blog-card__text">
+          Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Saepe, quos illo adipisci officiis corporis
+           odio architecto quam, pariatur nam provident 
+           suscipit vitae molestiae. Accusantium unde 
+           illum assumenda ullam sunt pariatur.
+        </p>
+      </div><!-- Body Ends  -->
+
+      <!-- Footer  -->
+      <div class="blog-card__footer">
+        <a class="blog-card__link" href="">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__link" href="">
+            <i class="fa fa-comment" aria-hidden="true"></i>
+            <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__link" href="">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+            <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__link" href="">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__button button button-small button-round button-green-clear" [routerLink]="['/read-more']">
+            Read More
+          </a>
+      </div><!-- Footer Ends  -->
+
+    </div><!-- Blog Card Ends  -->
+
+  </div><!-- Col Ends  -->
+
+  <div class="col-2"><!-- Col -->
+
+    <!-- Blog Card  -->
+    <div class="blog-card">
+
+      <!-- Hero  -->
+      <div class="blog-card__hero">
+        <span class="blog-card__category">Angular</span>
+        <img class="blog-card__img img img-round" src="./assets/images/read-more.jpg" alt="">
+      </div><!-- Hero Ends  -->
+
+      <!-- Body  -->
+      <div class="blog-card__body">
+        <h1 class="blog-card__title">
+          larn functional programming with practical examples
+        </h1>
+        <p class="blog-card__text">
+          Lorem ipsum dolor sit amet consectetur adipisicing 
+          elit. Saepe, quos illo adipisci officiis corporis
+           odio architecto quam, pariatur nam provident 
+           suscipit vitae molestiae. Accusantium unde 
+           illum assumenda ullam sunt pariatur.
+        </p>
+      </div><!-- Body Ends  -->
+
+      <!-- Footer  -->
+      <div class="blog-card__footer">
+        <a class="blog-card__link" href="">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+          <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__link" href="">
+            <i class="fa fa-comment" aria-hidden="true"></i>
+            <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__link" href="">
+            <i class="fa fa-share-alt" aria-hidden="true"></i>
+            <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__link" href="">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <span class="blog-card__data">43</span>
+          </a>
+          <a class="blog-card__button button button-small button-round button-green-clear" href="">
+            Read More
+          </a>
+      </div><!-- Footer Ends  -->
+
+    </div><!-- Blog Card Ends  -->
+
+  </div><!-- Col Ends  -->
+
+
+</div><!-- Row Ends -->

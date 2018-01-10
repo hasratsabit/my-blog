@@ -156,6 +156,11 @@
     }
 }
 
+// Author 
+.post-author {
+    margin: 40px 0;
+}
+
 // Load Comment Button 
 .see-comments {
     width: 100%;
@@ -169,12 +174,27 @@
 }
 
 .post-comment {
+    position: relative;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 40px;
     padding-top: 30px;
     border-top: $LightBorder;
     @include atMedium {
         width: 70%;
         margin-left: 15%;
+    }
+
+    &__tabs {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &__user-comment {
+        margin-top: 50px;
+    }
+
+    &__add-comment {
+        margin-top: 100px;
     }
 }
