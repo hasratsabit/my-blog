@@ -17,6 +17,7 @@ export class NavigationComponent implements OnInit {
   loggedOutLoaded = false;
   mobileNavExpanded = false;
   isAdmin
+  name;
 
   constructor(
     public authService: AuthService,
@@ -41,7 +42,13 @@ export class NavigationComponent implements OnInit {
 
 
   ngOnInit() {
-   
+   this.isAdmin = this.userService.getUserProfile().subscribe(data => {
+     this.isAdmin = data.user.adminAccess;
+     this.name = data.user.name;
+   })
+
+   console.log(this.name);
+
   }
 
 

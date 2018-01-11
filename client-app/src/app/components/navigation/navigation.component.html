@@ -87,7 +87,7 @@
       <mat-menu #profile="matMenu">
         <div class="tab">
           <li class="tab__list">
-            <a href="#" class="tab__link">
+            <a [routerLink]="['/login']" class="tab__link">
               <span class="tab__icon">
                 <mat-icon>vpn_key</mat-icon>
               </span>
@@ -95,7 +95,7 @@
             </a>
           </li>
           <li class="tab__list">
-            <a href="#" class="tab__link">
+            <a (click)="onLogout()" class="tab__link">
               <span class="tab__icon">
                   <mat-icon>power_settings_new</mat-icon>
               </span>
@@ -103,7 +103,7 @@
             </a>
           </li>
           <li class="tab__list">
-            <a href="#" class="tab__link">
+            <a [routerLink]="['/register']" class="tab__link">
               <span class="tab__icon">
                   <mat-icon>input</mat-icon>
               </span>
@@ -111,7 +111,7 @@
             </a>
           </li>
           <li class="tab__list">
-            <a href="#" class="tab__link">
+            <a [routerLink]="['/profile']" class="tab__link">
               <span class="tab__icon">
                   <mat-icon>person</mat-icon>
               </span>
@@ -135,7 +135,7 @@
     <ul class="private-nav">
 
       <img class="private-nav__img img img-small img-circle" src="/assets/images/profile.jpg" alt="">
-      <h1 class="private-nav__title">Hasrat Sabit</h1>
+      <h1 class="private-nav__title">{{ name}} </h1>
 
       <button (click)="toggleUserProfile()" class="private-nav__button button">
         <mat-icon [ngClass]="mobileNavExpanded ? 'arrowUp' : 'arrowDown'">keyboard_arrow_down</mat-icon>

@@ -10,7 +10,7 @@
 
       <!-- Modal -->
       <div [ngClass]="{'expand-dialog': addBlogFormLoaded, 'collapse-dialog': !addBlogFormLoaded}" class="modal">
-        <h1 class="modal__title">Add Post</h1>
+        <h1 class="modal__title">Add Post</h1> <span>by: {{blogAuthor}} </span>
         <span (click)="toggleAddBlog()" class="modal__close">
           <mat-icon>clear</mat-icon>
         </span>
@@ -18,25 +18,33 @@
         <!-- Form -->
         <div class="modal__form">
 
-          <form action="">
+          <form [formGroup]="postForm" (submit)="onPostBlog()">
+
+
             <mat-form-field class="form-input">
-              <input matInput type="text" placeholder="Title">
+              <input name="title" formControlName="title" matInput type="text" placeholder="Title">
             </mat-form-field>
-            <mat-form-field  class="form-input">
+
+
+            <!-- <mat-form-field  class="form-input">
             <mat-select placeholder="Select Category">
               <mat-option
               *ngFor="let cat of categories"
               [value]="cat._id">
               {{ cat.category }}</mat-option>
             </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
+
+            <input name="blogImage" formControlName="blogImage"  type="file" placeholder="Upload image here">
+
+
             <mat-form-field class="form-input">
-              <textarea matInput placeholder="Body"></textarea>
+              <textarea name="body" formControlName="body" matInput placeholder="Body"></textarea>
             </mat-form-field>
 
             <!-- Buttons -->
             <div class="modal__buttons">
-              <button class="button button-large button-round button-green">Submit</button>
+              <button type="submit" class="button button-large button-round button-green">Submit</button>
             </div><!-- Buttons Ends -->
           </form>
 

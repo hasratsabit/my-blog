@@ -15,6 +15,7 @@ export class AdminGuard implements CanActivate {
 		private router: Router
 	) {}
 
+		// The method returns true or false based on if user have admin access or not.
 		canActivate() {
 			return this.userService.getUserProfile().map(data => data.user.adminAccess);
 		}

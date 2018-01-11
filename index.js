@@ -12,7 +12,7 @@ const authRoute = require('./routes/authentication')(router);
 const usersRoute = require('./routes/users')(router);
 const categoryRoute = require('./routes/categories')(router);
 const profileRoute = require('./routes/profile')(router);
-// const blogsRoute = require('./routes/blogs')(router);
+const blogsRoute = require('./routes/blogs')(router);
 // const contactRoute = require('./routes/contact')(router);
 
 
@@ -38,8 +38,9 @@ const profileRoute = require('./routes/profile')(router);
 
 	app.use(cors({ origin: 'http://localhost:4200'}));
 	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use('/uploads', express.static('uploads'));
 	app.use(bodyParser.json());
-	app.use(express.static(__dirname + '/client-app/dist'));
+	app.use(express.static('dest'));
 
 
 
@@ -53,7 +54,7 @@ const profileRoute = require('./routes/profile')(router);
 	app.use('/users', usersRoute);
 	app.use('/categories', categoryRoute);
 	app.use('/profile', profileRoute);
-	// app.use('/blogs', blogsRoute);
+	app.use('/blogs', blogsRoute);
 	// app.use('/contact', contactRoute)
 
 	// Other routes goes to the client side.

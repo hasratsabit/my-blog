@@ -1,3 +1,4 @@
+import { BlogService } from './services/blog.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -126,7 +127,8 @@ import { ReadMoreComponent } from './components/blog/read-more/read-more.compone
     ProfileService,
     AuthGuard,
     AdminGuard,
-    NotAuthGuard
+    NotAuthGuard,
+    BlogService
   ],
   bootstrap: [AppComponent]
 })
