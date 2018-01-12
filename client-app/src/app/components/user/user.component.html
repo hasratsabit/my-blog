@@ -14,6 +14,7 @@
         <tr *ngFor="let user of users; index as i">
           <td>{{ i }}</td>
           <td>{{ user.name }}</td>
+          <td>{{ user.userRole }}</td>
           <td> {{ user.email }}</td>
           <td (click)="loadEdit()"><a class="edit" [routerLink]="['/edit-user/', user._id]">Edit</a></td>
           <td><a class="delete" [routerLink]="['/delete-user/', user._id]">Delete</a></td>

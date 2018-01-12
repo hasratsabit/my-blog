@@ -44,7 +44,7 @@ let titleValidators = [
 let bodyLengthChecker = (body) => {
     if(!body) {
         return false; // Return false if no body is provided. 
-    }else if(body.length < 50 || body.length > 2000) {
+    }else if(body.length < 50 || body.length > 5000) {
         return false; // Return false if the body is smaller than 50 and larger than 2000 characters. 
     }else {
         return true; // Return true if all tests are passed. 
@@ -55,7 +55,7 @@ let bodyLengthChecker = (body) => {
 let bodyValidator = [
     {
         validator: bodyLengthChecker,
-        message: 'Body must be at least 50 characters but no more than 2000 character.'
+        message: 'Body must be at least 50 characters but no more than 5000 character.'
     }
 ]
 

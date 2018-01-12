@@ -13,7 +13,7 @@ module.exports = (router) => {
 // 		 									POST BLOG
 // ==========================================================
 
-    router.post('/postBlog', upload.single('blogImage'), (req, res, next) => {
+    router.post('/postBlog', upload.single('blogImage'), (req, res) => {
         // Check if the title is provided.
         if(!req.body.title){
           // Respond if the title is not provided.
@@ -28,7 +28,7 @@ module.exports = (router) => {
           res.json({ success: false, message: 'The author is required.'});
         }else {
           // Find the user who is posting this blog.
-          User.findOne({ _id: req.decoded.userId }, (user, err) => {
+          User.findOne({ _id: req.decoded.userId }, (err, user) => {
             // Check for error finding the user. 
             if(err){
               // Respond if there is any error while finding the user. 
@@ -38,7 +38,7 @@ module.exports = (router) => {
               // Respond if the user doesn't exist in database.
               res.json({ success: false, message: 'The author is not a register user. '});
               // Check if the user has admin access.
-            }else if(user.amdinAccess === false){
+            }else if(user.userRole !== 'admin' ) {
               // Respond if the user doesn't have admin access.
               res.json({ success: false, message: 'The user is not authorized to post blog.'});
             }else {
@@ -48,7 +48,7 @@ module.exports = (router) => {
                 body: req.body.body,
                 author: req.body.author,
                 category: req.body.category,
-                imagePath: req.file.path // Image path is provided by upload middleware.
+                // imagePath: req.file.path // Image path is provided by upload middleware.
               })
 
               // Save blog

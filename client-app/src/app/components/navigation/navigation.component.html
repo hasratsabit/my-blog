@@ -86,7 +86,7 @@
       </button>
       <mat-menu #profile="matMenu">
         <div class="tab">
-          <li class="tab__list">
+          <li *ngIf="!authService.userLoggedIn()" class="tab__list">
             <a [routerLink]="['/login']" class="tab__link">
               <span class="tab__icon">
                 <mat-icon>vpn_key</mat-icon>
@@ -94,7 +94,7 @@
                Login
             </a>
           </li>
-          <li class="tab__list">
+          <li *ngIf="authService.userLoggedIn()" class="tab__list">
             <a (click)="onLogout()" class="tab__link">
               <span class="tab__icon">
                   <mat-icon>power_settings_new</mat-icon>
@@ -102,7 +102,7 @@
                 Logout
             </a>
           </li>
-          <li class="tab__list">
+          <li *ngIf="!authService.userLoggedIn()" class="tab__list">
             <a [routerLink]="['/register']" class="tab__link">
               <span class="tab__icon">
                   <mat-icon>input</mat-icon>
@@ -110,10 +110,10 @@
              Register
             </a>
           </li>
-          <li class="tab__list">
+          <li *ngIf="authService.userLoggedIn()" class="tab__list">
             <a [routerLink]="['/profile']" class="tab__link">
               <span class="tab__icon">
-                  <mat-icon>person</mat-icon>
+                  <mat-icon >person</mat-icon>
               </span>
               Profile
             </a>
@@ -132,7 +132,7 @@
   <div class="nav-wrapper">
 
     <!-- Private Nav -->
-    <ul class="private-nav">
+    <ul *ngIf="authService.userLoggedIn()" class="private-nav">
 
       <img class="private-nav__img img img-small img-circle" src="/assets/images/profile.jpg" alt="">
       <h1 class="private-nav__title">{{ name}} </h1>
@@ -149,22 +149,22 @@
                         'dropdownCollapsed' :
                         'dropdownExpanded'">
 
-      <li>
+      <li *ngIf="authService.userLoggedIn()">
         <a routerLink="/profile" [routerLinkActive]="['active']">
           <mat-icon>person</mat-icon>Profile</a>
       </li>
 
-      <li>
+      <li *ngIf="!authService.userLoggedIn()">
         <a routerLink="/login" [routerLinkActive]="['active']">
           <mat-icon>vpn_key</mat-icon>Login</a>
       </li>
 
-      <li>
+      <li *ngIf="authService.userLoggedIn()">
         <a routerLink="/logout" [routerLinkActive]="['active']">
           <mat-icon>power_settings_new</mat-icon>Logout</a>
       </li>
 
-      <li>
+      <li *ngIf="!authService.userLoggedIn()">
         <a routerLink="/register" [routerLinkActive]="['active']">
           <mat-icon>input</mat-icon>Register</a>
       </li>
@@ -189,11 +189,11 @@
           <a routerLink="/forum" [routerLinkActive]="['active']">
             <mat-icon>forum</mat-icon>Forum</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/dashboard" [routerLinkActive]="['active']">
             <mat-icon>dashboard</mat-icon>Dashboard</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/blog" [routerLinkActive]="['active']">
             <mat-icon>description</mat-icon>Blogs</a>
         </li>
@@ -201,27 +201,27 @@
           <a routerLink="/" [routerLinkActive]="['active']">
             <mat-icon>build</mat-icon>Projects</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/comment" [routerLinkActive]="['active']">
             <mat-icon>comment</mat-icon>Comments</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/category" [routerLinkActive]="['active']">
             <mat-icon>dns</mat-icon>Categories</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/user" [routerLinkActive]="['active']">
             <mat-icon>person</mat-icon>Users</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/email" [routerLinkActive]="['active']">
             <mat-icon>email</mat-icon>Email</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/parts" [routerLinkActive]="['active']">
             <mat-icon>settings_input_component</mat-icon>Components</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/animation" [routerLinkActive]="['active']">
             <mat-icon>assessment</mat-icon>Animation</a>
         </li>

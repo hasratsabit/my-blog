@@ -9,7 +9,9 @@
 	<!-- Success or Error Message -->
 	<div @fadeIn *ngIf="alertMessage">
 		<div [ngClass]="alertMessageClass">
-			<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
+			<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
+			<i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
+			<p class="alert-text">{{ alertMessage }}</p>
 		</div>
 	</div><!-- Success or Error Message Ends -->
 
@@ -18,10 +20,6 @@
 			<!-- Modal -->
 			<div [ngClass]="{'expand-dialog': editIsLoaded, 'collapse-dialog': !editIsLoaded}" class="modal">
 				<h1 class="modal__title">Edit User</h1>
-				<span (click)="toggleEdit()" class="modal__close">
-					<mat-icon>clear</mat-icon>
-				</span>
-
 				<!-- Form -->
 				<div class="modal__form">
 

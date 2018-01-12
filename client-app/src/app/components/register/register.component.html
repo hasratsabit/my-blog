@@ -11,7 +11,9 @@
 				<!-- Success or Error Message -->
 				<div @fadeIn *ngIf="alertMessage">
 					<div [ngClass]="alertMessageClass">
-						<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
+						<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
+						<i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
+						<p class="alert-text">{{ alertMessage }}</p>
 					</div>
 				</div><!-- Success or Error Message Ends -->
 

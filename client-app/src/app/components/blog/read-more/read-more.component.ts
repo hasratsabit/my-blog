@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { expandCollapse } from '../../../animations/animation';
+import { expandCollapse, fadeIn } from '../../../animations/animation';
 
 @Component({
   selector: 'app-read-more',
   templateUrl: './read-more.component.html',
   styleUrls: ['./read-more.component.scss'],
-  animations: [expandCollapse]
+  animations: [expandCollapse, fadeIn]
 })
 export class ReadMoreComponent implements OnInit {
 

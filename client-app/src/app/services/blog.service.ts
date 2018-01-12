@@ -32,7 +32,6 @@ export class BlogService {
     this.authService.loadToken();
     this.options = new RequestOptions({
       headers: new Headers({
-        'Content-Type': 'application/json',
         'authorization': this.authService.authToken // The token contains the user information loaded loadToken method.
       })
     });

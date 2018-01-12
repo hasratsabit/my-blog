@@ -10,6 +10,16 @@
 
       <!-- Modal -->
       <div [ngClass]="{'expand-dialog': addBlogFormLoaded, 'collapse-dialog': !addBlogFormLoaded}" class="modal">
+
+        <!-- Success or Error Message -->
+        <div @fadeIn *ngIf="alertMessage">
+            <div [ngClass]="alertMessageClass">
+              <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
+              <i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
+              <p class="alert-text">{{ alertMessage }}</p>
+            </div>
+          </div><!-- Success or Error Message Ends -->
+
         <h1 class="modal__title">Add Post</h1> <span>by: {{blogAuthor}} </span>
         <span (click)="toggleAddBlog()" class="modal__close">
           <mat-icon>clear</mat-icon>
@@ -22,7 +32,15 @@
 
 
             <mat-form-field class="form-input">
-              <input name="title" formControlName="title" matInput type="text" placeholder="Title">
+              <input name="title" formControlName="title" matInput type="text" placeholder="Title" #title maxlength="100" required>
+              <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+              
+              <!-- Error Block -->
+              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.required">The title field is required.</mat-error>
+              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.minlength">The title must be at least 3 characters.</mat-error>
+              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.maxlength">The title must not exceed 100 characters.</mat-error>
+              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.validTitleChecker">The title must not not contain special characters.</mat-error>
+
             </mat-form-field>
 
 
@@ -35,16 +53,23 @@
             </mat-select>
             </mat-form-field> -->
 
-            <input name="blogImage" formControlName="blogImage"  type="file" placeholder="Upload image here">
+            <!-- <input name="blogImage" formControlName="blogImage"  type="file" placeholder="Upload image here"> -->
 
 
             <mat-form-field class="form-input">
-              <textarea name="body" formControlName="body" matInput placeholder="Body"></textarea>
+              <textarea name="body" formControlName="body" maxlength="5000" matInput placeholder="Body" #body required></textarea>
+              <mat-hint align="end">{{body.value?.length || 0}}/5000</mat-hint>
+
+              <!-- Error Block -->
+              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.required">The body field is required.</mat-error>
+              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.minlength">The body must be at least 50 characters.</mat-error>
+              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.maxlength">The body must not exceed 5000 characters.</mat-error>
+
             </mat-form-field>
 
             <!-- Buttons -->
             <div class="modal__buttons">
-              <button type="submit" class="button button-large button-round button-green">Submit</button>
+              <button [disabled]="processing || !postForm.valid" type="submit" class="button button-medium button-round button-green">Submit</button>
             </div><!-- Buttons Ends -->
           </form>
 

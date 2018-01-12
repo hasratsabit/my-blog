@@ -2054,6 +2054,10 @@ mat-option {
     box-shadow: $MediumShadow;
   }
 
+  // &:hover &__img {
+  //   transform: scale(1.1);
+  // }
+
 
 // GENERAL
 
@@ -2061,10 +2065,13 @@ mat-option {
 // HERO
 &__hero {
   position: relative;
+  // overflow: hidden;
 }
 
 &__img {
   border-radius: 5px 5px 0;
+  // box-sizing: border-box;
+  // transition: transform 300ms ease-in-out;
 }
 
 &__category {
