@@ -43,8 +43,10 @@ export class BlogService {
 // ==========================================================
 
   postBlog(blog: any){
-    this.createAddBlogAuthorization();
-    return this.http.post(this.domain + '/blogs/postBlog', blog, this.options).map(res => res.json());
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.domain + '/blogs/postBlog', blog, options).map(res => res.json());
   }
 
 }

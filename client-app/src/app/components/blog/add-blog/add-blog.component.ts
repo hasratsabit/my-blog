@@ -25,6 +25,7 @@ export class AddBlogComponent implements OnInit {
   postForm;
   blogAuthor;
   blogImage;
+  blogCategory
 
   processing = false;
   alertMessage;
@@ -59,6 +60,9 @@ export class AddBlogComponent implements OnInit {
 // ==========================================================
 // 		 					CREATE ADD BLOG FORM
 // ==========================================================
+
+
+  
   
   createPostForm() {
     this.postForm = this.formBuilder.group({
@@ -73,7 +77,7 @@ export class AddBlogComponent implements OnInit {
         Validators.minLength(50),
         Validators.maxLength(5000)
       ])],
-      // blogImage: ['', Validators.required]
+      // upload: ['', Validators.required]
     })
   }
 
@@ -114,19 +118,34 @@ enableForm() {
 // 		 					POST BLOG METHOD
 // ==========================================================
 
-  onPostBlog(){
-    // let files = this.postForm.get('blogImage').files;
-    // let formData = new FormData();
-    // let file = files[0];
-    // this.blogImage = formData.append('blogImage', file, file.name)
 
-    let blog = {
-      title: this.postForm.get('title').value,
-      body: this.postForm.get('body').value,
-      author: this.blogAuthor
+  //Get image
+  formData: FormData;
+  onFileChange(event) {
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      let file: File = fileList[0];
+      let formData: FormData = new FormData();
+      formData.append('blogImage', file, file.name);
+      this.formData = formData;
     }
+  }
 
-    this.blogService.postBlog(blog).subscribe(data => {
+  // Get the Category
+  onSelect(value) {
+    this.blogCategory = value;
+    console.log(this.blogCategory);
+  }
+
+
+  onPostBlog(){
+
+    this.formData.append('title', this.postForm.get('title').value);
+    this.formData.append('body', this.postForm.get('body').value);
+    this.formData.append('author', this.blogAuthor);
+    this.formData.append('category', this.blogCategory);
+
+    this.blogService.postBlog(this.formData).subscribe(data => {
       this.processing = true;
       this.disableForm();
       if(!data.success){

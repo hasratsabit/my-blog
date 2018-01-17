@@ -48,7 +48,7 @@ module.exports = (router) => {
                 body: req.body.body,
                 author: req.body.author,
                 category: req.body.category,
-                // imagePath: req.file.path // Image path is provided by upload middleware.
+                imagePath: req.file.path // Image path is provided by upload middleware.
               })
 
               // Save blog

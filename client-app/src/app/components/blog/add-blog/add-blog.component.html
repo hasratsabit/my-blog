@@ -44,16 +44,16 @@
             </mat-form-field>
 
 
-            <!-- <mat-form-field  class="form-input">
-            <mat-select placeholder="Select Category">
+            <mat-form-field  class="form-input">
+            <mat-select #val (change)="onSelect(val.value)" placeholder="Select Category">
               <mat-option
               *ngFor="let cat of categories"
-              [value]="cat._id">
+              [value]="cat.category">
               {{ cat.category }}</mat-option>
             </mat-select>
-            </mat-form-field> -->
+            </mat-form-field>
 
-            <!-- <input name="blogImage" formControlName="blogImage"  type="file" placeholder="Upload image here"> -->
+            <input type="file" (change)="onFileChange($event)">
 
 
             <mat-form-field class="form-input">
