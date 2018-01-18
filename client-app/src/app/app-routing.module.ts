@@ -65,7 +65,7 @@ const appRoutes: Routes = [
 		component: EditBlogComponent
 	},
 	{
-		path: 'read-more',
+		path: 'read-more/:id',
 		component: ReadMoreComponent
 	},
 	{

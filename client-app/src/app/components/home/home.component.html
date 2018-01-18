@@ -2,28 +2,24 @@
 <div class="row"><!-- Row -->
 
 
-  <div @fadeIn class="col-2"><!-- Col -->
+  <div *ngFor="let blog of blogs" @fadeIn class="col-2"><!-- Col -->
 
     <!-- Blog Card  -->
     <div class="blog-card">
 
       <!-- Hero  -->
       <div class="blog-card__hero">
-        <span class="blog-card__category">Angular</span>
-        <img class="blog-card__img img img-round" src="./assets/images/read-more.jpg" alt="">
+        <span class="blog-card__category">{{blog.category}}</span>
+        <img class="blog-card__img img" src="{{authService.domain}}/{{blog.imagePath}}" alt="">
       </div><!-- Hero Ends  -->
 
       <!-- Body  -->
       <div class="blog-card__body">
-        <h1 class="blog-card__title">
-          larn functional programming with practical examples
+        <h1 [routerLink]="['/read-more/', blog._id]" class="blog-card__title">
+          {{ blog.title }}
         </h1>
         <p class="blog-card__text">
-          Lorem ipsum dolor sit amet consectetur adipisicing 
-          elit. Saepe, quos illo adipisci officiis corporis
-           odio architecto quam, pariatur nam provident 
-           suscipit vitae molestiae. Accusantium unde 
-           illum assumenda ullam sunt pariatur.
+          {{ blog.body | blogPipe }}
         </p>
       </div><!-- Body Ends  -->
 
@@ -31,7 +27,7 @@
       <div class="blog-card__footer">
         <a class="blog-card__link" href="">
           <i class="fa fa-heart" aria-hidden="true"></i>
-          <span class="blog-card__data">43</span>
+          <span class="blog-card__data">{{ blog.likes }}</span>
           </a>
           <a class="blog-card__link" href="">
             <i class="fa fa-comment" aria-hidden="true"></i>
@@ -45,59 +41,7 @@
             <i class="fa fa-eye" aria-hidden="true"></i>
             <span class="blog-card__data">43</span>
           </a>
-          <a class="blog-card__button button button-small button-round button-green-clear" [routerLink]="['/read-more']">
-            Read More
-          </a>
-      </div><!-- Footer Ends  -->
-
-    </div><!-- Blog Card Ends  -->
-
-  </div><!-- Col Ends  -->
-
-  <div @fadeIn class="col-2"><!-- Col -->
-
-    <!-- Blog Card  -->
-    <div class="blog-card">
-
-      <!-- Hero  -->
-      <div class="blog-card__hero">
-        <span class="blog-card__category">Angular</span>
-        <img class="blog-card__img img img-round" src="./assets/images/read-more.jpg" alt="">
-      </div><!-- Hero Ends  -->
-
-      <!-- Body  -->
-      <div class="blog-card__body">
-        <h1 class="blog-card__title">
-          larn functional programming with practical examples
-        </h1>
-        <p class="blog-card__text">
-          Lorem ipsum dolor sit amet consectetur adipisicing 
-          elit. Saepe, quos illo adipisci officiis corporis
-           odio architecto quam, pariatur nam provident 
-           suscipit vitae molestiae. Accusantium unde 
-           illum assumenda ullam sunt pariatur.
-        </p>
-      </div><!-- Body Ends  -->
-
-      <!-- Footer  -->
-      <div class="blog-card__footer">
-        <a class="blog-card__link" href="">
-          <i class="fa fa-heart" aria-hidden="true"></i>
-          <span class="blog-card__data">43</span>
-          </a>
-          <a class="blog-card__link" href="">
-            <i class="fa fa-comment" aria-hidden="true"></i>
-            <span class="blog-card__data">43</span>
-          </a>
-          <a class="blog-card__link" href="">
-            <i class="fa fa-share-alt" aria-hidden="true"></i>
-            <span class="blog-card__data">43</span>
-          </a>
-          <a class="blog-card__link" href="">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-            <span class="blog-card__data">43</span>
-          </a>
-          <a class="blog-card__button button button-small button-round button-green-clear" href="">
+          <a class="blog-card__button button button-small button-round button-green-clear" [routerLink]="['/read-more/', blog._id]">
             Read More
           </a>
       </div><!-- Footer Ends  -->

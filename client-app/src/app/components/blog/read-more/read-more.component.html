@@ -6,18 +6,16 @@
 
         <!-- Image -->
         <div class="large-hero__img">
-            <img src="./assets/images/read-more.jpg" alt="">
+            <img src="{{blogService.domain}}/{{blog.imagePath}}" alt="">
         </div><!-- Ends -->
 
         <!-- Title  -->
         <div class="large-hero__content">
 
-            <h1 class="content-title"> Learn the fundamental of 
-                functional programming by 
-                practical example. </h1> 
+            <h1 class="content-title"> {{ blog.title }} </h1> 
             
-            <div class="content-date">January 09, 2018 </div>
-            <button class="content-button button button-medium button-round button-red">Go Back</button> 
+            <div class="content-date"> {{ blog.date | date: 'MMMM dd, yyyy'}} </div>
+            <button (click)="goBack()" class="content-button button button-medium button-round button-red">Go Back</button> 
         
         </div><!-- Title Ends -->
 
@@ -28,30 +26,7 @@
 
         <!-- Body Test -->
         <div class="body__text">
-            <p>Lorem ipsum, dolor sit amet consectetur 
-                adipisicing elit. Velit delectus dolorum 
-                impedit unde dignissimos harum soluta 
-                autem consequatur aspernatur. Impedit 
-                beatae necessitatibus labore, rerum ipsum velit 
-                consectetur itaque voluptatibus nobis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur 
-                adipisicing elit. Velit delectus dolorum 
-                impedit unde dignissimos harum soluta 
-                autem consequatur aspernatur. Impedit 
-                beatae necessitatibus labore, rerum ipsum velit 
-                consectetur itaque voluptatibus nobis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur 
-                adipisicing elit. Velit delectus dolorum 
-                impedit unde dignissimos harum soluta 
-                autem consequatur aspernatur. Impedit 
-                beatae necessitatibus labore, rerum ipsum velit 
-                consectetur itaque voluptatibus nobis.</p>
-            <p>Lorem ipsum, dolor sit amet consectetur 
-                adipisicing elit. Velit delectus dolorum 
-                impedit unde dignissimos harum soluta 
-                autem consequatur aspernatur. Impedit 
-                beatae necessitatibus labore, rerum ipsum velit 
-                consectetur itaque voluptatibus nobis.</p>
+            <p>{{ blog.body}}</p>
         </div><!-- Body Text Ends -->
 
         <!-- Media -->
@@ -60,7 +35,7 @@
            <a class="media__list" href="">
                <i class="fa fa-heart" aria-hidden="true"></i>
                 Like
-               <span class="media__data">43</span>
+               <span class="media__data">{{ blog.likes }}</span>
             </a>
             <a class="media__list" href="">
                 <i class="fa fa-comment" aria-hidden="true"></i>
@@ -83,7 +58,7 @@
         <div class="post-author author">
     
             <img class="author__img img img-small img-circle" src="./assets/images/profile.jpg" alt="">
-            <h1 class="author__name">Hasrat Sabit</h1><br>
+            <h1 class="author__name">{{ blog.author }}</h1><br>
             <h2 class="author__title">Full Stack Developer</h2>
         
             <!-- Social Media  -->

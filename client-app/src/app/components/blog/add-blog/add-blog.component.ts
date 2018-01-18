@@ -77,7 +77,8 @@ export class AddBlogComponent implements OnInit {
         Validators.minLength(50),
         Validators.maxLength(5000)
       ])],
-      // upload: ['', Validators.required]
+      category: ['', Validators.required],
+      image: ['', Validators.maxLength(1)]
     })
   }
 
@@ -105,12 +106,16 @@ export class AddBlogComponent implements OnInit {
 disableForm() {
   this.postForm.controls['title'].disable();
   this.postForm.controls['body'].disable();
+  this.postForm.controls['image'].disable();
+  this.postForm.controls['category'].disable();
 }
 
 // Enable Form
 enableForm() {
   this.postForm.controls['title'].enable();
   this.postForm.controls['body'].enable();
+  this.postForm.controls['image'].enable();
+  this.postForm.controls['category'].enable();
 }
 
 
@@ -121,9 +126,19 @@ enableForm() {
 
   //Get image
   formData: FormData;
+  validImage: Boolean = true;
+  imageMessage: String;
   onFileChange(event) {
     let fileList: FileList = event.target.files;
-    if (fileList.length > 0) {
+    if(fileList.length > 0 && !fileList[0].name.match(/\.(jpg|jpeg|png)$/)){
+      this.imageMessage = 'File type can be only .jpg/.jpeg/.png'
+      this.validImage = false;
+    }else if(event.target.files[0].size > 1200000){
+      this.imageMessage = 'The image must not be larger than 1MB.'
+      this.validImage = false;
+    }else {
+      this.imageMessage = null;
+      this.validImage = true;
       let file: File = fileList[0];
       let formData: FormData = new FormData();
       formData.append('blogImage', file, file.name);
@@ -150,11 +165,13 @@ enableForm() {
       this.disableForm();
       if(!data.success){
         this.processing = false;
+        this.successIcon = false;
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-red';
         this.enableForm();
       }else {
         this.processing = true;
+        this.successIcon = true;
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-green';
         this.postForm.reset();

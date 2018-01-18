@@ -20,7 +20,7 @@
             </div>
           </div><!-- Success or Error Message Ends -->
 
-        <h1 class="modal__title">Add Post</h1> <span>by: {{blogAuthor}} </span>
+        <h1 class="modal__title">Add Post</h1>
         <span (click)="toggleAddBlog()" class="modal__close">
           <mat-icon>clear</mat-icon>
         </span>
@@ -45,15 +45,21 @@
 
 
             <mat-form-field  class="form-input">
-            <mat-select #val (change)="onSelect(val.value)" placeholder="Select Category">
+            <mat-select formControlName="category" #val (change)="onSelect(val.value)" placeholder="Select Category">
               <mat-option
               *ngFor="let cat of categories"
               [value]="cat.category">
               {{ cat.category }}</mat-option>
             </mat-select>
+             <mat-error *ngIf="postForm.controls.category.touch && postForm.controls.category.errors?.required">The title field is required.</mat-error>
             </mat-form-field>
 
-            <input type="file" (change)="onFileChange($event)">
+            <div class="upload">
+              <input  class="upload__input" formControlName="image" type="file" (change)="onFileChange($event)">
+              <mat-error *ngIf="imageMessage">{{imageMessage}}</mat-error>
+            </div><br>
+        
+            
 
 
             <mat-form-field class="form-input">
@@ -69,7 +75,7 @@
 
             <!-- Buttons -->
             <div class="modal__buttons">
-              <button [disabled]="processing || !postForm.valid" type="submit" class="button button-medium button-round button-green">Submit</button>
+              <button [disabled]="processing || !postForm.valid || !validImage" type="submit" class="button button-medium button-round button-green">Submit</button>
             </div><!-- Buttons Ends -->
           </form>
 

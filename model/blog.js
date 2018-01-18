@@ -70,7 +70,9 @@ const BlogSchema = new Schema({
     category: { type: String },
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },
-    blogCounter: { type: Number, default: 0 }
+    viewCounter: { type: Number, default: 0 },
+    commentCounter: { type: Number, default: 0},
+    shareCounter: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model('Blog', BlogSchema)

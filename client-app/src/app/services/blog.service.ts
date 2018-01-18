@@ -49,4 +49,16 @@ export class BlogService {
     return this.http.post(this.domain + '/blogs/postBlog', blog, options).map(res => res.json());
   }
 
+// ==========================================================
+// 		                GET ALL BLOGS
+// ==========================================================
+
+getAllBlogs() {
+  return this.http.get(this.domain + '/public/allBlogs').map(res => res.json());
+}
+
+getSingBlog(id) {
+  return this.http.get(this.domain + '/public/singleBlog/' + id).map(res => res.json())
+}
+
 }

@@ -1,3 +1,6 @@
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { BlogService } from './../../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
 import { expandCollapse, fadeIn } from '../../../animations/animation';
 
@@ -14,8 +17,23 @@ export class ReadMoreComponent implements OnInit {
   addReplyIsLoaded = false;
   allRepliesLoaded = false;
 
-  constructor() { }
+  blog = {};
 
+  constructor(
+    public blogService: BlogService, 
+    private activatedRoute: ActivatedRoute,
+    private location: Location
+  ) { }
+
+
+  goBack() {
+    this.location.back();
+  }
+
+
+// ==========================================================
+// 		 				TOGGLE SECTIONS
+// ==========================================================
   loadAllComments() {
     this.allCommentsLoaded = !this.allCommentsLoaded;
   }
@@ -32,7 +50,14 @@ export class ReadMoreComponent implements OnInit {
     this.allRepliesLoaded = !this.allRepliesLoaded;
   }
 
+
+
   ngOnInit() {
+    let currentBlogUrl = this.activatedRoute.snapshot.params.id;
+    this.blogService.getSingBlog(currentBlogUrl).subscribe(data => {
+      this.blog = data.blog;
+    })
+
   }
 
 }

@@ -8,6 +8,7 @@ const config = require('../config/database');
 
 
 module.exports = (router) => {
+  
 
 // ==========================================================
 // 		 									POST BLOG
@@ -81,7 +82,9 @@ module.exports = (router) => {
             }
           })
         }
-    })
+    });
+
+
 
     return router;
 }

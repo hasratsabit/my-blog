@@ -63,6 +63,7 @@ import { AddForumComponent } from './components/forum/add-forum/add-forum.compon
 import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
 import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
 import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
+import { BlogPipe } from './pipes/blog.pipe';
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { ReadMoreComponent } from './components/blog/read-more/read-more.compone
     AddForumComponent,
     EditForumComponent,
     DeleteForumComponent,
-    ReadMoreComponent
+    ReadMoreComponent,
+    BlogPipe
   ],
   imports: [
     BrowserModule,
