@@ -1,9 +1,11 @@
 .top-nav {
+	display: none;
 	float: right;
 	width: 100%;
 
 	@include atSmall {
 		width: 82%;
+		display: block;
 	}
 
 	@include atLarge {

@@ -12,6 +12,9 @@ import { expandCollapse, fadeIn } from '../../../animations/animation';
 })
 export class ReadMoreComponent implements OnInit {
 
+// ==========================================================
+// 		 									VARIABLES 
+// ==========================================================
   allCommentsLoaded = false;
   addNewCommentIsLoaded = false;
   addReplyIsLoaded = false;
@@ -19,6 +22,9 @@ export class ReadMoreComponent implements OnInit {
 
   blog = {};
 
+// ==========================================================
+// 		 									CONSTRUCTOR
+// ==========================================================
   constructor(
     public blogService: BlogService, 
     private activatedRoute: ActivatedRoute,

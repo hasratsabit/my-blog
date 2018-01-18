@@ -7,74 +7,28 @@
       <div class="custom-head">
         <mat-icon class="custom-icon">assignment</mat-icon>
         <h1 class="custom-title">Blogs</h1>
-        <a class="custom-btn" mat-button [routerLink]="['/add-blog']">New Blog</a>
+        <a  class="custom-btn" mat-button [routerLink]="['/add-blog']">New Blog</a>
       </div>
       <thead>
 
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let blog of blogs">
           <td>01</td>
-          <td>This is the blog title</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>22 <br> Likes</td>
-          <td>22 <br> Comments</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>This is the blog title</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>22 <br> Likes</td>
-          <td>22 <br> Comments</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>This is the blog title</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>22 <br> Likes</td>
-          <td>22 <br> Comments</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>This is the blog title</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>22 <br> Likes</td>
-          <td>22 <br> Comments</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>This is the blog title</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>22 <br> Likes</td>
-          <td>22 <br> Comments</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="view" href="">Published</a></td>
-          <td><a class="edit" [routerLink]="['/edit-blog']">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-blog']">Delete</a></td>
+          <td>{{ blog.title }}</td>
+          <td>{{ blog.author }}</td>
+          <td>{{ blog.date | date: 'MMM dd, yyyy' }}</td>
+          <td>{{ blog.likes }} <br> Likes</td>
+          <td>{{ blog.commentCounter}} <br> Comments</td>
+          <td><a class="view" [routerLink]="['/read-more', blog._id]">View</a></td>
+          <td *ngIf="blog.authorUsername === username"><a class="view" href="">Published</a></td>
+          <td *ngIf="blog.authorUsername === username"><a class="edit" [routerLink]="['/edit-blog', blog._id]">Edit</a></td>
+          <td *ngIf="blog.authorUsername === username"><a class="delete" [routerLink]="['/delete-blog', blog._id]">Delete</a></td>
         </tr>
       </tbody>
     </table><!-- Table Ends  -->
   </div><!-- Table Row Ends-->  <!-- Table Row Ends-->
 
 </div>
+
+

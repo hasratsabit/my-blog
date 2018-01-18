@@ -57,8 +57,24 @@ getAllBlogs() {
   return this.http.get(this.domain + '/public/allBlogs').map(res => res.json());
 }
 
+
+// ==========================================================
+// 		                GET SINGLE BLOG
+// ==========================================================
 getSingBlog(id) {
   return this.http.get(this.domain + '/public/singleBlog/' + id).map(res => res.json())
 }
+
+
+// ==========================================================
+// 		                DELETE BLOG
+// ==========================================================
+
+  deleteBlog(id){
+    this.createAddBlogAuthorization();
+    return this.http.delete(this.domain + '/blogs/deleteBlog/' + id, this.options).map(res => res.json());
+  }
+
+
 
 }

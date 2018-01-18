@@ -66,6 +66,7 @@ const BlogSchema = new Schema({
     body: { type: String, required: true, validate: bodyValidator },
     date: { type: Date, default: Date.now() },
     author: { type: String, required: true },
+    authorUsername: { type: String },
     imagePath: { type: String},
     category: { type: String },
     likes: { type: Number, default: 0 },

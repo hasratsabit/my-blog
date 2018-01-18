@@ -573,6 +573,7 @@
   }
 }
 
+
 .table tbody {
   .edit,
   .reply,
@@ -2079,7 +2080,7 @@ mat-option {
 
 &__category {
   position: absolute;
-  bottom: 5px;
+  bottom: 0;
   left: 0;
   padding: 10px;
   background: rgba($LightYellow, 0.8);

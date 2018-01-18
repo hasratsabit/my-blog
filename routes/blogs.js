@@ -3,6 +3,7 @@ const Blog = require('../model/blog');
 const Category = require('../model/category');
 const upload = require('../model/upload');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 const config = require('../config/database');
 
@@ -48,6 +49,7 @@ module.exports = (router) => {
                 title: req.body.title,
                 body: req.body.body,
                 author: req.body.author,
+                authorUsername: req.body.authorUsername,
                 category: req.body.category,
                 imagePath: req.file.path // Image path is provided by upload middleware.
               })
@@ -83,6 +85,63 @@ module.exports = (router) => {
           })
         }
     });
+
+// ==========================================================
+// 		 									DELETE BLOG
+// ==========================================================
+
+    router.delete('/deleteBlog/:id', upload.single('blogImage'), (req, res) => {
+      // Check for deleting blog id
+      if(!req.params.id){
+        // Respond if the blog id is not provided.
+        res.json({ success: false, message: 'No id was provided.'});
+      }else {
+        // Find the deleting blog by it's id.
+        Blog.findOne({ _id: req.params.id }, (err, blog) => {
+          if(err){
+            // Respond if there is any error.
+            res.json({ success: false, message: 'Error occured finding the blog.' + err });
+            // Check if the blog exist in database.
+          }else if(!blog){
+            // Respond if the blog doesn't exsit in database.
+            res.json({ success: false, message: 'The blog is no longer available.'});
+          }else {
+            // Find the user to validate the authorization 
+            User.findOne({ _id: req.decoded.userId }, (err, user) => {
+              if(err){
+                // Repond if there is any error.
+                res.json({ success: false, message: 'Error occurred finding user.' + err})
+                // Check if the user doesn't exist in database.
+              }else if(!user){
+                // Respond if the user doesn't exist.
+                res.json({ success: false, message: 'You must be logged in to continue.'});
+                // Check the user is either the author of the blog or an authorized admin.
+              }else if(user.userRole !== 'admin' || blog.authorUsername !== user.username){
+                // Respond if the user is not authorized.
+                res.json({ success: false, messae: 'You are not authorized to delete this blog.'});
+              }else {
+                // Removes the image from the folder using the imagePath from deleting blog object.
+                fs.unlink(blog.imagePath, (err) => { 
+                  if(err) throw err;
+                });
+                // Remove the blog from database.
+                blog.remove((err) => {
+                  // Check for error.
+                  if(err){
+                    // Respond if there is any error.
+                    res.json({ success: false, message: 'Error occurred deleting blog.' + err});
+                  }else {
+                    // Respond the success message.
+                    res.json({ success: true, message: 'Blog successfully deleted.'})
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    })
+
 
 
 

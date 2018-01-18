@@ -25,7 +25,8 @@ export class AddBlogComponent implements OnInit {
   postForm;
   blogAuthor;
   blogImage;
-  blogCategory
+  blogCategory;
+  authorUsername;
 
   processing = false;
   alertMessage;
@@ -120,7 +121,7 @@ enableForm() {
 
 
 // ==========================================================
-// 		 					POST BLOG METHOD
+// 		 					GETTING IMAGE
 // ==========================================================
 
 
@@ -129,37 +130,44 @@ enableForm() {
   validImage: Boolean = true;
   imageMessage: String;
   onFileChange(event) {
-    let fileList: FileList = event.target.files;
+    let fileList: FileList = event.target.files; // Get the Files array from input.
+    // Check if there is a file and it matches the type of files that are allowed.
     if(fileList.length > 0 && !fileList[0].name.match(/\.(jpg|jpeg|png)$/)){
-      this.imageMessage = 'File type can be only .jpg/.jpeg/.png'
-      this.validImage = false;
+      this.imageMessage = 'File type can be only .jpg/.jpeg/.png' // Respond if the type of file is not the type we ask for.
+      this.validImage = false; // Keep the form invalid.
+      // Check for the size of the file. 
     }else if(event.target.files[0].size > 1200000){
-      this.imageMessage = 'The image must not be larger than 1MB.'
-      this.validImage = false;
+      this.imageMessage = 'The image must not be larger than 1MB.' // Respond if the size of the file is larger than 1MB.
+      this.validImage = false; // Keep the form invalid
     }else {
-      this.imageMessage = null;
-      this.validImage = true;
-      let file: File = fileList[0];
-      let formData: FormData = new FormData();
-      formData.append('blogImage', file, file.name);
-      this.formData = formData;
+      this.imageMessage = null; // Otherwise no message is displayed
+      this.validImage = true; // Validate the form.
+      let file: File = fileList[0]; // Take the first file from the array.
+      let formData: FormData = new FormData(); // Call the form data constructor.
+      formData.append('blogImage', file, file.name); // Pass the API expected name, the file itself, and the name of the file.
+      this.formData = formData; // Assign the FormData object to the variable. 
     }
   }
 
   // Get the Category
   onSelect(value) {
     this.blogCategory = value;
-    console.log(this.blogCategory);
   }
 
 
+// ==========================================================
+// 		 									DELETE BLOG
+// ==========================================================
   onPostBlog(){
 
+    // Grab all the input and user data and append to the formData. 
     this.formData.append('title', this.postForm.get('title').value);
     this.formData.append('body', this.postForm.get('body').value);
     this.formData.append('author', this.blogAuthor);
     this.formData.append('category', this.blogCategory);
+    this.formData.append('authorUsername', this.authorUsername); 
 
+    // Posting the blog using the postBlog Method in BlogService. 
     this.blogService.postBlog(this.formData).subscribe(data => {
       this.processing = true;
       this.disableForm();
@@ -184,6 +192,10 @@ enableForm() {
 
   ngOnInit() {
 
+// ==========================================================
+// 		 									GET CATEGORIES
+// ==========================================================
+
     // Getting Categories
     this.categoryService.getAllCategories().subscribe(data => {
       if(!data.success) {
@@ -193,12 +205,16 @@ enableForm() {
       }
     })
 
+// ==========================================================
+// 		 									GET USER PROFILE
+// ==========================================================
     // Getting the blog author
     this.userService.getUserProfile().subscribe(data => {
       if(!data.success){
         return null;
       }else {
-        this.blogAuthor = data.user.name;
+        this.blogAuthor = data.user.name; // Blog Author Name
+        this.authorUsername = data.user.username; // Blog Author Username
       }
     })
   }

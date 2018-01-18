@@ -31,15 +31,15 @@
           </a>
           <a class="blog-card__link" href="">
             <i class="fa fa-comment" aria-hidden="true"></i>
-            <span class="blog-card__data">43</span>
+            <span class="blog-card__data">{{ blog.commentCounter }}</span>
           </a>
           <a class="blog-card__link" href="">
             <i class="fa fa-share-alt" aria-hidden="true"></i>
-            <span class="blog-card__data">43</span>
+            <span class="blog-card__data"> {{ blog.shareCounter }}</span>
           </a>
           <a class="blog-card__link" href="">
             <i class="fa fa-eye" aria-hidden="true"></i>
-            <span class="blog-card__data">43</span>
+            <span class="blog-card__data"> {{ blog.viewCounter }}</span>
           </a>
           <a class="blog-card__button button button-small button-round button-green-clear" [routerLink]="['/read-more/', blog._id]">
             Read More

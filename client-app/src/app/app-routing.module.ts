@@ -61,7 +61,7 @@ const appRoutes: Routes = [
 		component: AddBlogComponent
 	},
 	{
-		path: 'edit-blog',
+		path: 'edit-blog/:id',
 		component: EditBlogComponent
 	},
 	{
@@ -69,7 +69,7 @@ const appRoutes: Routes = [
 		component: ReadMoreComponent
 	},
 	{
-		path: 'delete-blog',
+		path: 'delete-blog/:id',
 		component: DeleteBlogComponent
 	},
 	{

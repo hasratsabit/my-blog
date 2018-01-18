@@ -3,6 +3,16 @@
   <span (click)="toggleDelete()" class="dark-layer__close">
       <mat-icon>clear</mat-icon>
   </span>
+
+  <!-- Success or Error Message -->
+  <div @fadeIn *ngIf="alertMessage">
+    <div [ngClass]="alertMessageClass">
+      <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
+      <i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
+      <p class="alert-text">{{ alertMessage }}</p>
+    </div>
+  </div><!-- Success or Error Message Ends -->
+
   <!-- Row -->
   <div class="dark-layer__modal row">
     <!-- Col -->
@@ -24,15 +34,15 @@
 
         <!-- Body -->
         <div class="dialog__body">
-          <h3 class="body-text"> Are you sure you want to delete:</h3><br>
-          <h2 class="body-target">Hasrat Sabit</h2>
+          <h3 class="body-text"> Are you sure you want to delete the following blog:</h3><br>
+          <h2 class="body-target">{{ deletingBlogTitle }}</h2>
         </div><!-- Body Ends -->
 
         <!-- Footer -->
         <div class="dialog__footer">
 
-          <button class="button button-small button-red">Delete</button>
-          <button (click)="loadBlogDelete()" class="button button-small button-default">Cancel</button>
+          <button [disabled]="processing" (click)="onDeleteBlog()" class="button button-small button-red">Delete</button>
+          <button [disabled]="processing" (click)="toggleDelete()" class="button button-small button-default">Cancel</button>
 
         </div><!-- Footer Ends -->
 
