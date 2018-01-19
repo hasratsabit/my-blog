@@ -15,28 +15,64 @@
             <mat-icon>clear</mat-icon>
         </span>
 
+        <!-- Success or Error Message -->
+        <div @fadeIn *ngIf="alertMessage">
+            <div [ngClass]="alertMessageClass">
+              <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
+              <i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
+              <p class="alert-text">{{ alertMessage }}</p>
+            </div>
+          </div><!-- Success or Error Message Ends -->
+
         <!-- Form -->
         <div class="modal__form">
 
-          <form action="">
+          <form (submit)="onUpdateBlog()" [formGroup]="updateForm">
             <mat-form-field class="form-input">
-              <input matInput type="text" placeholder="Title">
+              <input #title formControlName="title" [(ngModel)]="blog.title" maxlength="200" matInput type="text" placeholder="Title">
+              <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+
+               <!-- Error Block -->
+               <mat-error *ngIf="updateForm.controls.title.dirty && updateForm.controls.title.errors?.required">The title field is required.</mat-error>
+               <mat-error *ngIf="updateForm.controls.title.dirty && updateForm.controls.title.errors?.minlength">The title must be at least 3 characters.</mat-error>
+               <mat-error *ngIf="updateForm.controls.title.dirty && updateForm.controls.title.errors?.maxlength">The title must not exceed 100 characters.</mat-error>
+               <mat-error *ngIf="updateForm.controls.title.dirty && updateForm.controls.title.errors?.validTitleChecker">The title must not not contain special characters.</mat-error>
+
             </mat-form-field>
+
+            <!-- Select -->
             <mat-form-field  class="form-input">
-            <mat-select placeholder="Select Category">
-              <mat-option>JavaScript</mat-option>
-              <mat-option>Python</mat-option>
-            </mat-select>
+              <mat-select formControlName="category" [(ngModel)]="blog.category"  #val (change)="onSelect(val.value)" placeholder="Select Category">
+                <mat-option
+                *ngFor="let cat of categories"
+                [value]="cat.category">
+                {{ cat.category }}</mat-option>
+              </mat-select>
             </mat-form-field>
+
+            <!-- Image -->
+            <div class="upload">
+              <input  class="upload__input" type="file" (change)="onFileChange($event)">
+              <mat-error *ngIf="imageMessage">{{imageMessage}}</mat-error>
+            </div><br>
+
+            
+            <!-- Body -->
             <mat-form-field class="form-input">
-              <textarea matInput placeholder="Body"></textarea>
+              <textarea #body formControlName="body" [(ngModel)]="blog.body" maxlength="5000" matInput placeholder="Body"></textarea>
+              <mat-hint align="end">{{body.value?.length || 0}}/5000</mat-hint>
+              
+              <!-- Error Block -->
+              <mat-error *ngIf="updateForm.controls.body.dirty && updateForm.controls.body.errors?.required">The body field is required.</mat-error>
+              <mat-error *ngIf="updateForm.controls.body.dirty && updateForm.controls.body.errors?.minlength">The body must be at least 50 characters.</mat-error>
+              <mat-error *ngIf="updateForm.controls.body.dirty && updateForm.controls.body.errors?.maxlength">The body must not exceed 5000 characters.</mat-error>
+
             </mat-form-field>
 
             <!-- Buttons -->
             <div class="modal__buttons">
-              <button class="button button-medium button-round button-green">Update</button>
-              <button class="button button-medium button-round button-red">Delete</button>
-              <button (click)="toggleEditBlog()" class="button button-medium button-round button-default">Cancel</button>
+              <button [disabled]="processing || !updateForm.valid || !validImage" type="submit" class="button button-medium button-round button-green">Update</button>
+              <button [disabled]="processing" [routerLink]="['/delete-blog/', blog._id]" class="button button-medium button-round button-red">Delete</button>
             </div><!-- Buttons Ends -->
 
           </form>

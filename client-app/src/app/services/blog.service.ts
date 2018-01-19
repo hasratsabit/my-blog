@@ -75,6 +75,14 @@ getSingBlog(id) {
     return this.http.delete(this.domain + '/blogs/deleteBlog/' + id, this.options).map(res => res.json());
   }
 
+// ==========================================================
+// 		                UPDATE BLOG
+// ==========================================================
 
-
+  updateBlog(blog){
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.domain + '/blogs/updateBlog', blog, options).map(res => res.json());
+  }
 }

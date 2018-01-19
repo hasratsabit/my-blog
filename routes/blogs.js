@@ -143,7 +143,53 @@ module.exports = (router) => {
     })
 
 
+// ==========================================================
+// 		 									EDIT BLOG
+// ==========================================================
 
+    router.put('/updateBlog', upload.single('blogImage'), (req, res) => {
+      if(!req.body._id){
+        res.json({ success: false, message: 'No blog id was provided.'});
+      }else {
+        Blog.findOne({ _id: req.body._id }, (err, blog) => {
+          if(err){
+            res.json({ success: false, message: 'Error occurred finding the blog.' + err });
+          }else if(!blog){
+            res.json({ success: false, message: 'Blog is not found.'});
+          }else {
+            User.findOne({ _id: req.decoded.userId }, (err, user) => {
+              if(err){
+                res.json({ success: false, message: 'Error occurred finding the user.' + err});
+              }else if(!user){
+                res.json({ success: false, message: 'You must be logged in to edit this blog.'});
+              }else if(user.userRole !== 'admin' || user.username !== blog.authorUsername) {
+                res.josn({ success: false, message: 'You must be the author or an authorized admin to edit this blog.'});
+              }else {
+                // Removes the image from the folder using the imagePath from deleting blog object.
+                fs.unlink(blog.imagePath, (err) => { 
+                  if(err) throw err;
+                });
+                
+                blog.title = req.body.title;
+                blog.body = req.body.body;
+                blog.category = req.body.category;
+                blog.author = req.body.author;
+                blog.authorUsername = req.body.authorUsername;
+                blog.imagePath = req.file.path;
+                
+                blog.save((err) => {
+                  if(err){
+                    res.json({ success: false, message: 'Error occurred updating the blog.' + err});
+                  }else {
+                    res.json({ success: true, message: 'Blog successfully updated.'})
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    })
 
     return router;
 }

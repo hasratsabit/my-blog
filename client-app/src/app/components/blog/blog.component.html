@@ -13,8 +13,8 @@
 
       </thead>
       <tbody>
-        <tr *ngFor="let blog of blogs">
-          <td>01</td>
+        <tr *ngFor="let blog of blogs; index as i">
+          <td>{{ i }}</td>
           <td>{{ blog.title }}</td>
           <td>{{ blog.author }}</td>
           <td>{{ blog.date | date: 'MMM dd, yyyy' }}</td>
