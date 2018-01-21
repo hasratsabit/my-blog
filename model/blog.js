@@ -69,6 +69,7 @@ const BlogSchema = new Schema({
     authorUsername: { type: String },
     imagePath: { type: String},
     category: { type: String },
+    blogStatus: { type: String, default: 'draft'},
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },
     viewCounter: { type: Number, default: 0 },

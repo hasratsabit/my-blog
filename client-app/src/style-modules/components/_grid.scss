@@ -48,10 +48,7 @@
 	@include atMedium {
 		width: 49%;
 		float: left;
-		margin-left: 2%;
-		&:first-child {
-			margin-left: 0;
-		}
+		margin-right: 10px;
 	}
 }
 

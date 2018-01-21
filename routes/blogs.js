@@ -121,9 +121,13 @@ module.exports = (router) => {
                 res.json({ success: false, messae: 'You are not authorized to delete this blog.'});
               }else {
                 // Removes the image from the folder using the imagePath from deleting blog object.
-                fs.unlink(blog.imagePath, (err) => { 
-                  if(err) throw err;
-                });
+                if(blog.imagePath){
+                  fs.unlink(blog.imagePath, (err) => { 
+                    if(err) throw err;
+                  });
+                }else {
+                  return null;
+                }
                 // Remove the blog from database.
                 blog.remove((err) => {
                   // Check for error.
@@ -134,17 +138,17 @@ module.exports = (router) => {
                     // Respond the success message.
                     res.json({ success: true, message: 'Blog successfully deleted.'})
                   }
-                })
+                });
               }
-            })
+            });
           }
-        })
+        });
       }
-    })
+    });
 
 
 // ==========================================================
-// 		 									EDIT BLOG
+// 		 									UPDATE BLOG
 // ==========================================================
 
     router.put('/updateBlog', upload.single('blogImage'), (req, res) => {
@@ -166,9 +170,10 @@ module.exports = (router) => {
                 res.josn({ success: false, message: 'You must be the author or an authorized admin to edit this blog.'});
               }else {
                 // Removes the image from the folder using the imagePath from deleting blog object.
-                fs.unlink(blog.imagePath, (err) => { 
-                  if(err) throw err;
-                });
+                // If a file exist.
+                  fs.unlink(blog.imagePath, (err) => { 
+                    if(err) throw err;
+                  });
                 
                 blog.title = req.body.title;
                 blog.body = req.body.body;
@@ -177,19 +182,90 @@ module.exports = (router) => {
                 blog.authorUsername = req.body.authorUsername;
                 blog.imagePath = req.file.path;
                 
+                
+                // Save blog
+                blog.save((err) => {
+                  // Check for error while saving.
+                  if(err){
+                    // Check for db validation error.
+                    if(err.errors){
+                      // Check for title validation error.
+                      if(err.errors.title){
+                        // Respond if the title is not valid.
+                        res.json({ success: false, message: err.errors.title.message });
+                        // Check for body validation error.
+                      }else if(err.errors.body){
+                        // Respond if the body is not valid.
+                        res.json({ success: false, message: err.errors.body.message });
+                      }else {
+                        // Repond if there is any other error aside from validation.
+                        res.json({ success: false, message: 'Error occcured saving the blog.' + err});
+                      }
+                    }else {
+                      // Repond if it a database error.
+                      res.json({ success: false, message: 'Database error occured.' + err});
+                    }
+                  }else {
+                    // Respond with success if all the tests are passed.
+                    res.json({ success: true, message: 'Blog successfully updated.'});
+                  }
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+
+
+
+
+// ==========================================================
+// 		 									CHANGE BLOG STATUS
+// ==========================================================
+    router.put('/changeStatus/:id', (req, res) => {
+      if(!req.params.id){
+        res.json({ success: false, message: 'No blog Id was provided.'});
+      }else {
+        Blog.findOne({ _id: req.params.id }, (err, blog) => {
+          if(err){
+            res.josn({ success: false, message: 'Error occured finding the blog.' + err });
+          }else if(!blog){
+            res.josn({ success: false, message: 'No blog was found.'});
+          }else {
+            User.findOne({ _id: req.decoded.userId }, (err, user) => {
+              if(err){
+                res.json({ success: false, message: 'Error occured finding the user.' + err });
+              }else if(!user){
+                res.josn({ success: false, message: 'You must be logged in to change the status.'});
+              }else if(user.userRole !== 'admin' || user.username !== blog.authorUsername ){
+                res.json({ success: false, message: 'You are not authorized to change the status.'});
+              }else {
+                if(blog.blogStatus === 'draft'){
+                  blog.blogStatus = 'published';
+                }else {
+                  blog.blogStatus = 'draft'
+                }
+    
                 blog.save((err) => {
                   if(err){
-                    res.json({ success: false, message: 'Error occurred updating the blog.' + err});
+                    res.json({ success: false, message: 'Error occurred saving the blog.' + err });
                   }else {
-                    res.json({ success: true, message: 'Blog successfully updated.'})
+                    res.json({ success: true, message: 'Blog successfully saved.'});
                   }
-                })
+                });
               }
             })
           }
-        })
+        });
       }
-    })
+    });
+
+
+
+
+
+
 
     return router;
 }

@@ -21,7 +21,7 @@
           <td>{{ blog.likes }} <br> Likes</td>
           <td>{{ blog.commentCounter}} <br> Comments</td>
           <td><a class="view" [routerLink]="['/read-more', blog._id]">View</a></td>
-          <td *ngIf="blog.authorUsername === username"><a class="view" href="">Published</a></td>
+          <td *ngIf="blog.authorUsername === username"><a class="view" (click)="changeStatus(blog._id)">{{ blog.blogStatus }}</a></td>
           <td *ngIf="blog.authorUsername === username"><a class="edit" [routerLink]="['/edit-blog', blog._id]">Edit</a></td>
           <td *ngIf="blog.authorUsername === username"><a class="delete" [routerLink]="['/delete-blog', blog._id]">Delete</a></td>
         </tr>

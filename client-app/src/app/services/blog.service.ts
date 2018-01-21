@@ -85,4 +85,16 @@ getSingBlog(id) {
     let options = new RequestOptions({ headers: headers });
     return this.http.put(this.domain + '/blogs/updateBlog', blog, options).map(res => res.json());
   }
+
+// ==========================================================
+// 		                CHANGE BLOG STATUS
+// ==========================================================
+
+  changeBlogStatus(id) {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.domain + '/blogs/changeStatus/' + id, options).map(res => res.json());
+  }
+
 }

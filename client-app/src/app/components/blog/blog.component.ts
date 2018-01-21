@@ -15,7 +15,8 @@ export class BlogComponent implements OnInit {
 // 		 									VARIABLES
 // ==========================================================
   blogs;
-  username
+  username;
+  isPublished: Boolean = false;
 
 // ==========================================================
 // 		 									CONSTRUCTOR 
@@ -25,6 +26,11 @@ export class BlogComponent implements OnInit {
     private userService: UserService
   ) { }
 
+  changeStatus(blogId){
+    this.blogService.changeBlogStatus(blogId).subscribe(data => {
+      console.log(data.message);
+    })
+  }
 
 
   ngOnInit() {
