@@ -40,10 +40,37 @@ router.get('/allBlogs', (req, res) => {
 			  }else {
 				  res.json({ success: true, blog: blog });
 			  }
-		  })
+		  });
 	  }
-  })
+	});
+	
 
+// ==========================================================
+// 		 				INCREMENT BLOG VIEW
+// ==========================================================
+
+	router.put('/updateView/:id', (req, res) => {
+		if(!req.params.id) {
+			res.json({ success: false, message: 'No blog Id was provided.'});
+		}else {
+			Blog.findOne({ _id: req.params.id }, (err, blog) => {
+				if(err){
+					res.json({ success: false, message: 'Error occurrred finding the blog.' + err });
+				}else if(!blog) {
+					res.json({ success: false, message: 'The blog is no longer available.'});
+				}else{
+					blog.viewCounter++;
+					blog.save((err) => {
+						if(err){
+							res.json({ success: false, message: 'Error occurred saving view.' + err });
+						}else {
+							res.json({ success: true, message: 'View saved.'});
+						}
+					});
+				}
+			});
+		}
+	});
 
 	return router;
 }

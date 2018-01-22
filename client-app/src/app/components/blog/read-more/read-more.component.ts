@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from './../../../services/blog.service';
@@ -19,6 +20,7 @@ export class ReadMoreComponent implements OnInit {
   addNewCommentIsLoaded = false;
   addReplyIsLoaded = false;
   allRepliesLoaded = false;
+  blogLiked = false;
 
   blog = {};
 
@@ -27,6 +29,7 @@ export class ReadMoreComponent implements OnInit {
 // ==========================================================
   constructor(
     public blogService: BlogService, 
+    public authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private location: Location
   ) { }
@@ -54,6 +57,17 @@ export class ReadMoreComponent implements OnInit {
 
   loadAllReplies() {
     this.allRepliesLoaded = !this.allRepliesLoaded;
+  }
+
+
+  onLikeBlog(blogId){
+    console.log(this.location.path());
+    this.blogService.likeBlog(blogId).subscribe(data => {
+      if(data.success){
+        this.blogLiked = true;
+      }
+      this.ngOnInit();
+    })
   }
 
 

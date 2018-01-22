@@ -121,6 +121,7 @@
     &__list {
         display: block;
         text-decoration: none;
+        cursor: pointer;
         font-family: $GeneralFont;
         color: $IconsColor;
         padding: 10px 0;
@@ -154,6 +155,11 @@
             margin-left: 10px;
         }
     }
+}
+
+// Read More Like Class
+.blogFavorite {
+    color: $LightRed;
 }
 
 // Author 

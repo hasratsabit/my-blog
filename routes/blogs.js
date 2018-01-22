@@ -152,22 +152,33 @@ module.exports = (router) => {
 // ==========================================================
 
     router.put('/updateBlog', upload.single('blogImage'), (req, res) => {
+      // Check if the blog id is provided.
       if(!req.body._id){
+        // Respond if the blog id is not provided.
         res.json({ success: false, message: 'No blog id was provided.'});
       }else {
+        // Find the blog by it's id.
         Blog.findOne({ _id: req.body._id }, (err, blog) => {
           if(err){
+            // Respond if there is any error.
             res.json({ success: false, message: 'Error occurred finding the blog.' + err });
+            // Check if the blog is not available.
           }else if(!blog){
+            // Respond if the blog is not available.
             res.json({ success: false, message: 'Blog is not found.'});
           }else {
+            // Find the user.
             User.findOne({ _id: req.decoded.userId }, (err, user) => {
               if(err){
+                // Respond if there is any error
                 res.json({ success: false, message: 'Error occurred finding the user.' + err});
               }else if(!user){
+                // Respond if the user is not logged in.
                 res.json({ success: false, message: 'You must be logged in to edit this blog.'});
+                // Check if the user is author or authorized admin
               }else if(user.userRole !== 'admin' || user.username !== blog.authorUsername) {
-                res.josn({ success: false, message: 'You must be the author or an authorized admin to edit this blog.'});
+                // Respond if the user is not admin or author.
+                res.json({ success: false, message: 'You must be the author or an authorized admin to edit this blog.'});
               }else {
                 // Removes the image from the folder using the imagePath from deleting blog object.
                 // If a file exist.
@@ -175,6 +186,7 @@ module.exports = (router) => {
                     if(err) throw err;
                   });
                 
+                // Update the blog.
                 blog.title = req.body.title;
                 blog.body = req.body.body;
                 blog.category = req.body.category;
@@ -219,38 +231,109 @@ module.exports = (router) => {
 
 
 
+// ==========================================================
+// 		 									LIKE BLOG
+// ==========================================================
+    router.put('/likeBlog', (req, res) => {
+      // Check if the blog id is provided.
+      if(!req.body.id){
+        // Respond if the blog id is not provided.
+        res.json({ success: false, message: 'No user id was provided.'});
+      }else {
+        // Find the blog.
+        Blog.findOne({ _id: req.body.id }, (err, blog) => {
+          if(err){
+            // Respond if any error.
+            res.json({ success: false, message: 'Error occurred finding the blog.' + err});
+          }else if(!blog){
+            // Respond if the blog is not found.
+            res.json({ success: false, message: 'Blog is no longer available.'});
+          }else {
+            // Find the user.
+            User.findOne({ _id: req.decoded.userId }, (err, user) => {
+              if(err){
+                // Respond if there is any error.
+                res.json({ success: false, message: 'Error occurred finding user.' + err });
+                // Check if the user is logged in.
+              }else if(!user){
+                // Respond if the user is not logged in.
+                res.json({ success: false, message: 'You must be logged in to like this blog.'});
+                // Check if the person who likes is the author of the same blog.
+              }else if(user.username === blog.authorUsername){
+                // Respond if the author is trying to like his blog.
+                res.json({ success: false, message: ' You can not like your own post.'});
+                // Check if the user already liked this blog.
+              }else if(blog.likedBy.includes(user.username)){
+                // Respond if the user already liked this blog.
+                res.json({ success: false, message: 'You already liked this post.'})
+              }else {
+                blog.likes++ // Increment the like by one.
+                blog.likedBy.push(user.username); // Push the username of the person to likedBy array.
+                // Save the blog.
+                blog.save((err) => {
+                  if(err){
+                    // Respond if there is any error.
+                    res.json({ success: false, message: 'Error occurred saving like.' + err});
+                  }else {
+                    // Repond with success.
+                    res.json({ success: true, message: 'You liked blog successfully.'});
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    })
+
+
+
 
 // ==========================================================
 // 		 									CHANGE BLOG STATUS
 // ==========================================================
-    router.put('/changeStatus/:id', (req, res) => {
-      if(!req.params.id){
+    router.put('/changeStatus', (req, res) => {
+      if(!req.body.id){
+        // Respond if no blog id is provided.
         res.json({ success: false, message: 'No blog Id was provided.'});
       }else {
-        Blog.findOne({ _id: req.params.id }, (err, blog) => {
+        // Find the blog by it's id.
+        Blog.findOne({ _id: req.body.id }, (err, blog) => {
           if(err){
-            res.josn({ success: false, message: 'Error occured finding the blog.' + err });
+            // Respond if there is any error.
+            res.json({ success: false, message: 'Error occured finding the blog.' + err });
           }else if(!blog){
-            res.josn({ success: false, message: 'No blog was found.'});
+            // Respond if the blog is not available.
+            res.json({ success: false, message: 'No blog was found.'});
           }else {
+            // Find the user.
             User.findOne({ _id: req.decoded.userId }, (err, user) => {
               if(err){
+                // Respond if there is any error.
                 res.json({ success: false, message: 'Error occured finding the user.' + err });
               }else if(!user){
-                res.josn({ success: false, message: 'You must be logged in to change the status.'});
+                // Respond if the user is not logged in.
+                res.json({ success: false, message: 'You must be logged in to change the status.'});
+                // Check if the user is either admin or the author of the blog to change the status.
               }else if(user.userRole !== 'admin' || user.username !== blog.authorUsername ){
+                // Respond if the user is not authorized to change the status of the blog.
                 res.json({ success: false, message: 'You are not authorized to change the status.'});
               }else {
+                // Check if the blog status draft.
                 if(blog.blogStatus === 'draft'){
-                  blog.blogStatus = 'published';
+                  blog.blogStatus = 'published'; // Change it to publish if the status is draft
                 }else {
-                  blog.blogStatus = 'draft'
+                  blog.blogStatus = 'draft' // Change it to draft if the status is published.
                 }
-    
+                
+                // Save the blog.
                 blog.save((err) => {
+                  // Check for error.
                   if(err){
+                    // Respond if there is any error.
                     res.json({ success: false, message: 'Error occurred saving the blog.' + err });
                   }else {
+                    // Respond with success message.
                     res.json({ success: true, message: 'Blog successfully saved.'});
                   }
                 });

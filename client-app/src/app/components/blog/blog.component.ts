@@ -1,13 +1,14 @@
 import { UserService } from './../../services/user.service';
 import { BlogService } from './../../services/blog.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Output } from '@angular/core';
 import { fadeInDown, fadeInLeft, fadeIn, rainFall} from '../../animations/animation';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.scss'],
-  animations: [fadeInDown, fadeInLeft, fadeIn, rainFall]
+  animations: [fadeInDown, fadeInLeft, fadeIn, rainFall],
+  outputs: ['postStatusClass']
 })
 export class BlogComponent implements OnInit {
 
@@ -17,18 +18,28 @@ export class BlogComponent implements OnInit {
   blogs;
   username;
   isPublished: Boolean = false;
+  postStatusClass;
 
 // ==========================================================
 // 		 									CONSTRUCTOR 
 // ==========================================================
   constructor(
     private blogService: BlogService,
-    private userService: UserService
+    private userService: UserService,
+    private element: ElementRef
   ) { }
 
-  changeStatus(blogId){
+
+  changeStatus(blogId, event){
     this.blogService.changeBlogStatus(blogId).subscribe(data => {
-      console.log(data.message);
+      if(event.target.innerText === 'Published'){
+        this.postStatusClass = 'post-hidden';
+        console.log(this.postStatusClass);
+      }else {
+        this.postStatusClass = 'post-visible';
+        console.log(this.postStatusClass);
+      }
+      this.ngOnInit();
     })
   }
 

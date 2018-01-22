@@ -59,7 +59,7 @@
 
           <!-- Upload  -->
           <div class="upload">
-            <input  class="upload__input" formControlName="image" type="file" (change)="onFileChange($event)">
+            <input [disabled]="processing"  class="upload__input" type="file" (change)="onFileChange($event)">
             <mat-error *ngIf="imageMessage">{{imageMessage}}</mat-error>
           </div><br><!-- Upload Ends  -->
 

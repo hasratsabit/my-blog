@@ -91,10 +91,30 @@ getSingBlog(id) {
 // ==========================================================
 
   changeBlogStatus(id) {
+    const blogData = { id: id }
     this.authService.loadToken();
     let headers = new Headers({ 'authorization': this.authService.authToken});
     let options = new RequestOptions({ headers: headers });
-    return this.http.put(this.domain + '/blogs/changeStatus/' + id, options).map(res => res.json());
+    return this.http.put(this.domain + '/blogs/changeStatus', blogData, options).map(res => res.json());
+  }
+
+// ==========================================================
+// 		                LIKE BLOG
+// ==========================================================
+
+  likeBlog(id){
+    const blogData = {id: id}
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.domain + '/blogs/likeBlog', blogData, options).map(res => res.json());
+  }
+
+// ==========================================================
+// 		                UPDATE VIEW
+// ==========================================================
+  updateBlogView(id){
+    return this.http.put(this.domain + '/public/updateView/' + id, this.options).map(res => res.json());
   }
 
 }

@@ -1,6 +1,7 @@
+import { Location } from '@angular/common';
 import { AuthService } from './../../services/auth.service';
 import { BlogService } from './../../services/blog.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { fadeIn } from '../../animations/animation';
 
 @Component({
@@ -16,12 +17,20 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private blogService: BlogService,
-    public authService: AuthService
-  ) { }
+    public authService: AuthService,
+    private location: Location
+  ) {}
+
+  updateBlogView(id){
+    console.log(id);
+    this.blogService.updateBlogView(id).subscribe(data => {
+      console.log(data.message);
+    })
+  }
 
   ngOnInit() {
     this.blogService.getAllBlogs().subscribe(data => {
-      this.blogs = data.blogs
+      this.blogs = data.blogs;
     })
   }
 

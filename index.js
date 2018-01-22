@@ -70,9 +70,9 @@ const profileRoute = require('./routes/profile')(router);
 	// app.use('/contact', contactRoute)
 
 	// Other routes goes to the client side.
-	app.get('*', (req, res) => {
-	  res.sendFile(path.join(__dirname + '/client-app/dist/index.html'));
-	});
+	// app.get('*', (req, res) => {
+	//   res.sendFile(path.join(__dirname + '/client-app/dist/index.html'));
+	// });
 
 
 
