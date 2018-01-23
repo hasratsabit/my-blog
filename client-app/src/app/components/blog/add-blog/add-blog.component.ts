@@ -23,10 +23,8 @@ export class AddBlogComponent implements OnInit {
   addBlogFormLoaded = true;
   categories;
   postForm;
-  blogAuthor;
   blogImage;
   blogCategory;
-  authorUsername;
 
   processing = false;
   alertMessage;
@@ -163,9 +161,7 @@ enableForm() {
     // Grab all the input and user data and append to the formData. 
     this.formData.append('title', this.postForm.get('title').value);
     this.formData.append('body', this.postForm.get('body').value);
-    this.formData.append('author', this.blogAuthor);
     this.formData.append('category', this.blogCategory);
-    this.formData.append('authorUsername', this.authorUsername); 
 
     // Posting the blog using the postBlog Method in BlogService. 
     this.blogService.postBlog(this.formData).subscribe(data => {
@@ -202,19 +198,6 @@ enableForm() {
         return null
       }else {
         this.categories = data.cat;
-      }
-    })
-
-// ==========================================================
-// 		 									GET USER PROFILE
-// ==========================================================
-    // Getting the blog author
-    this.userService.getUserProfile().subscribe(data => {
-      if(!data.success){
-        return null;
-      }else {
-        this.blogAuthor = data.user.name; // Blog Author Name
-        this.authorUsername = data.user.username; // Blog Author Username
       }
     })
   }

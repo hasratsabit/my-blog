@@ -1,6 +1,7 @@
 const User = require('../model/user');
 const Blog = require('../model/blog');
 const Category = require('../model/category');
+const Comment = require('../model/comment');
 const upload = require('../model/upload');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
@@ -24,11 +25,7 @@ module.exports = (router) => {
         }else if(!req.body.body){
           // Respond if the body is not provided.
           res.json({ success: false, messae: 'The body field is required.'});
-          // Check if the author is provided.
-        }else if(!req.body.author) {
-          // Respond if the author is not provided.
-          res.json({ success: false, message: 'The author is required.'});
-        }else {
+        }else{
           // Find the user who is posting this blog.
           User.findOne({ _id: req.decoded.userId }, (err, user) => {
             // Check for error finding the user. 
@@ -48,11 +45,11 @@ module.exports = (router) => {
               let blog = new Blog({
                 title: req.body.title,
                 body: req.body.body,
-                author: req.body.author,
-                authorUsername: req.body.authorUsername,
+                author: user.name,
+                authorUsername: user.username,
                 category: req.body.category,
                 imagePath: req.file.path // Image path is provided by upload middleware.
-              })
+              });
 
               // Save blog
               blog.save((err) => {
@@ -120,7 +117,7 @@ module.exports = (router) => {
                 // Respond if the user is not authorized.
                 res.json({ success: false, messae: 'You are not authorized to delete this blog.'});
               }else {
-                // Removes the image from the folder using the imagePath from deleting blog object.
+                //Removes the image from the folder using the imagePath from deleting blog object.
                 if(blog.imagePath){
                   fs.unlink(blog.imagePath, (err) => { 
                     if(err) throw err;
@@ -128,6 +125,7 @@ module.exports = (router) => {
                 }else {
                   return null;
                 }
+            
                 // Remove the blog from database.
                 blog.remove((err) => {
                   // Check for error.
@@ -135,8 +133,7 @@ module.exports = (router) => {
                     // Respond if there is any error.
                     res.json({ success: false, message: 'Error occurred deleting blog.' + err});
                   }else {
-                    // Respond the success message.
-                    res.json({ success: true, message: 'Blog successfully deleted.'})
+                    res.json({ success: true, message: 'Blog successfully deleted.'});
                   }
                 });
               }
@@ -144,7 +141,7 @@ module.exports = (router) => {
           }
         });
       }
-    });
+    });   
 
 
 // ==========================================================
@@ -190,8 +187,8 @@ module.exports = (router) => {
                 blog.title = req.body.title;
                 blog.body = req.body.body;
                 blog.category = req.body.category;
-                blog.author = req.body.author;
-                blog.authorUsername = req.body.authorUsername;
+                blog.author = user.name;
+                blog.authorUsername = user.username;
                 blog.imagePath = req.file.path;
                 
                 

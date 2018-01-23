@@ -40,7 +40,7 @@
             <a class="media__list" href="">
                 <i class="fa fa-comment" aria-hidden="true"></i>
                     Comments
-                <span class="media__data">{{ blog.commentCounter }}</span>
+                <span class="media__data">0</span>
             </a>
             <a class="media__list" href="">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
@@ -133,7 +133,7 @@
                 </div>
             </div><!-- Success or Error Message Ends -->
 
-            <!-- Reply Box -->
+            <!-- Add Comment Box -->
             <div [@expandCollapse]="addNewCommentIsLoaded ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
 
                 <!-- Form -->
@@ -163,90 +163,94 @@
                 </form><!-- Comment Form Ends -->
             </div><!-- Reply Box Ends-->
 
-            <!-- Single Comment-->
-            <div *ngFor="let comment of postComments" class="comment">
+            <!-- All Comments -->
+            <div class="post-comment__all-comments">
+                <!-- Single Comment-->
+                <div *ngFor="let comment of postComments" class="post-comment__single-comment comment">
 
-                <!-- user -->
-                <div class="post-comment__user-comment comment-user">
-                    <img class="comment-user__img img img-circle img-small img-border" src="./assets/images/profile.jpg" alt="">
-                    <h1 class="comment-user__name">{{ comment.authorName }}</h1><br>
-                    <span class="comment-user__date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
-                </div><!-- user Ends -->
-                
-                <!-- Text -->
-                <div class="comment-text">
-                    <p class="comment-text__para">{{ comment.comment }}</p>
-                </div><!-- Text Ends -->
-                
-                <!-- Footer -->
-                <div class="comment-footer">
-                
-                    <button class="comment-footer__button">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                    {{ comment.likes }}
-                    </button>
-                
-                    <button class="comment-footer__button">
-                    <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                    {{ comment.dislikes }}
-                    </button>
-                
-                    <button (click)="loadAddReply()" class="comment-footer__button">
-                    <i class="fa fa-reply" aria-hidden="true"></i>
-                        {{ comment.replies.length }}
-                    </button>
-                
-                    <button *ngIf="comment.replies.indexOf(comment.replies._id) > -1" (click)="loadAllReplies()" class="comment-footer__button">
-                        <span *ngIf="allRepliesLoaded">Hide Replies</span>
-                        <span *ngIf="!allRepliesLoaded">Show Replies</span>
-                    </button>
-                    <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
-                    <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
-                
-                </div><!-- Footer Ends -->
-
-                <!-- Reply Box -->
-                <div [@expandCollapse]="addReplyIsLoaded ? 'expanded' : 'collapsed'" class="comment-textarea">
-                    <!-- Form -->
-                    <form>
-                    <!-- Textarea -->
-                    <mat-form-field class="input">
-                        <textarea matInput placeholder="Reply to comment"></textarea>
-                    </mat-form-field><!-- Textarea Ends -->
-                    <!-- Buttons-->
-                    <div class="comment-textarea__buttons">
-                        <button (click)="loadAddReply()" class="button button-medium button-default button-round">
-                            Cancel
-                        </button>
-                        <button type="submit" class="button button-medium button-round button-green">
-                            Submit
-                        </button>
-                    </div><!-- Buttons End -->
-                    </form><!-- Comment Form Ends -->
-                </div><!-- Reply Box Ends-->
-                
-                <!-- Replied Comments -->
-                <div [@expandCollapse]="allRepliesLoaded ? 'expanded' : 'collapsed'" class="comment-reply">
-                
                     <!-- user -->
-                    <div class="comment-user">
-                    <img class="comment-user__img img img-circle img-small img-border" src="./assets/images/profile.jpg" alt="">
-                    <h1 class="comment-user__name">Hasrat Sabit</h1><br>
-                    <span class="comment-user__date">Jan 09, 2018</span>
+                    <div class="post-comment__user-comment comment-user">
+                        <img class="comment-user__img img img-circle img-tiny img-border" src="./assets/images/profile.jpg" alt="">
+                        <h1 class="comment-user__name">{{ comment.authorName }}</h1><br>
+                        <span class="comment-user__date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
                     </div><!-- user Ends -->
-                
+                    
                     <!-- Text -->
                     <div class="comment-text">
-                    <p class="comment-text__para">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Laudantium id sed consectetur autem dolor nemo culpa aspernatur 
-                        in est quis quam distinctio rem eius officiis doloribus repellat 
-                        harum, asperiores deserunt!</p>
+                        <p class="comment-text__para">{{ comment.comment }}</p>
                     </div><!-- Text Ends -->
-                
-                </div><!-- Replied Comments Ends -->
-                
-            </div><!-- Comment Ends -->
+                    
+                    <!-- Footer -->
+                    <div class="comment-footer">
+                    
+                        <button class="comment-footer__button">
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                        {{ comment.likes }}
+                        </button>
+                    
+                        <button class="comment-footer__button">
+                        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                        {{ comment.dislikes }}
+                        </button>
+                    
+                        <button (click)="loadAddReply()" class="comment-footer__button">
+                        <i class="fa fa-reply" aria-hidden="true"></i>
+                            {{ comment.replies.length }}
+                        </button>
+                    
+                        <button *ngIf="comment.replies.indexOf(comment.replies._id) > -1" (click)="loadAllReplies()" class="comment-footer__button">
+                            <span *ngIf="allRepliesLoaded">Hide Replies</span>
+                            <span *ngIf="!allRepliesLoaded">Show Replies</span>
+                        </button>
+                        <div class="comment-footer__change-btns">
+                            <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
+                            <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
+                        </div>
+                    
+                    </div><!-- Footer Ends -->
 
+                    <!-- Reply Box -->
+                    <div [@expandCollapse]="addReplyIsLoaded ? 'expanded' : 'collapsed'" class="comment-textarea">
+                        <!-- Form -->
+                        <form>
+                        <!-- Textarea -->
+                        <mat-form-field class="input">
+                            <textarea matInput placeholder="Reply to comment"></textarea>
+                        </mat-form-field><!-- Textarea Ends -->
+                        <!-- Buttons-->
+                        <div class="comment-textarea__buttons">
+                            <button (click)="loadAddReply()" class="button button-medium button-default button-round">
+                                Cancel
+                            </button>
+                            <button type="submit" class="button button-medium button-round button-green">
+                                Submit
+                            </button>
+                        </div><!-- Buttons End -->
+                        </form><!-- Comment Form Ends -->
+                    </div><!-- Reply Box Ends-->
+                    
+                    <!-- Replied Comments -->
+                    <div [@expandCollapse]="allRepliesLoaded ? 'expanded' : 'collapsed'" class="comment-reply">
+                    
+                        <!-- user -->
+                        <div class="comment-user">
+                        <img class="comment-user__img img img-circle img-small img-border" src="./assets/images/profile.jpg" alt="">
+                        <h1 class="comment-user__name">Hasrat Sabit</h1><br>
+                        <span class="comment-user__date">Jan 09, 2018</span>
+                        </div><!-- user Ends -->
+                    
+                        <!-- Text -->
+                        <div class="comment-text">
+                        <p class="comment-text__para">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                            Laudantium id sed consectetur autem dolor nemo culpa aspernatur 
+                            in est quis quam distinctio rem eius officiis doloribus repellat 
+                            harum, asperiores deserunt!</p>
+                        </div><!-- Text Ends -->
+                    
+                    </div><!-- Replied Comments Ends -->
+                    
+                </div><!-- Comment Ends -->
+            </div><!-- All Comments End -->
 
         </div>  <!-- Comments Section End -->
 

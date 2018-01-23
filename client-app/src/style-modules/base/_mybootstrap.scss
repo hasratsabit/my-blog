@@ -1819,6 +1819,7 @@ mat-option {
   width: 100%;
   font-family: $GeneralFont;
   transition: $SmoothTrasition;
+  border-radius: 3px;
 }
 
 .comment-user {
@@ -1844,13 +1845,15 @@ mat-option {
   }
 
   &__date {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: 0.8rem;
     color: $IconsColor;
   }
 }
 
-.comment-text,
-.comment-footer {
+.comment-text {
   width: 90%;
   margin-left: 10%;
 
@@ -1859,33 +1862,47 @@ mat-option {
   }
 
   @include atMedium {
-    margin-left: 4%;
+    margin-left: 6.7%;
   }
 }
 
 .comment-text {
-  padding: 5px 0;
+  transform: translateY(-8px) translateX(7px);
+  padding-bottom: 5px;
   text-align: justify;
 
   @include atSmall {
-    padding: 10px 0;
+    transform: translateY(-7px) translateX(-10px);
+    padding-bottom: 5px;
   }
 
   &__para {
     color: $Gray;
+    font-size: 0.8rem;
     @include atSmall {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
   }
 }
 
 .comment-footer {
+  position: relative;
+  margin-left: 16%;
+  @include atSmall {
+    margin-left: 6%;
+  }
+
+  &__change-btns {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
 
   &__button {
     border: none;
     background: transparent;
     margin-right: 10px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: $IconsColor;
     cursor: pointer;
 
@@ -1896,6 +1913,7 @@ mat-option {
     }
 
     @include atMedium {
+      font-size: 0.8rem;
       margin-right: 15px;
     }
   }

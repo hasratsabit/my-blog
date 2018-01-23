@@ -26,6 +26,7 @@ const CommentSchema = new Schema({
     authorUsername: { type: String, required: true },
     date: { type: Date, default: Date.now() },
     blogId: { type: String, required: true },
+    blogTitle: { type: String},
     comment: { type: String, required: true, validate: commentValidators },
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },

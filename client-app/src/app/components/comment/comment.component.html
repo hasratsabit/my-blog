@@ -10,63 +10,13 @@
 
       </thead>
       <tbody>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>Closures</td>
-          <td>33 <br/>Replies</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="edit" href="">Approved</a></td>
-          <td><a class="delete" href="">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>Closures</td>
-          <td>33 <br/>Replies</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="edit" href="">Approved</a></td>
-          <td><a class="delete" href="">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>Closures</td>
-          <td>33 <br/>Replies</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="edit" href="">Approved</a></td>
-          <td><a class="delete" href="">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>Closures</td>
-          <td>33 <br/>Replies</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="edit" href="">Approved</a></td>
-          <td><a class="delete" href="">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>Closures</td>
-          <td>33 <br/>Replies</td>
-          <td><a class="view" href="">View</a></td>
-          <td><a class="edit" href="">Approved</a></td>
-          <td><a class="delete" href="">Delete</a></td>
-        </tr>
-        <tr>
-          <td>01</td>
-          <td>John Doe</td>
-          <td>Nov 13, 2017</td>
-          <td>Closures</td>
-          <td>33 <br/>Replies</td>
-          <td><a class="view" href="">View</a></td>
+        <tr *ngFor="let comment of comments; i as index">
+          <td>{{ i }}</td>
+          <td>{{ comment.authorName }}</td>
+          <td>{{ comment.date | date: 'MMM dd, yyyy'}}</td>
+          <td>{{ comment.blogTitle }}</td>
+          <td>{{ comment.replies.length }}<br/>Replies</td>
+          <td><a class="view" [routerLink]="['/read-more/, comment.blogId']">View</a></td>
           <td><a class="edit" href="">Approved</a></td>
           <td><a class="delete" href="">Delete</a></td>
         </tr>

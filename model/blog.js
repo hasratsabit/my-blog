@@ -73,7 +73,6 @@ const BlogSchema = new Schema({
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },
     viewCounter: { type: Number, default: 0 },
-    commentCounter: { type: Number, default: 0},
     shareCounter: { type: Number, default: 0 }
 });
 

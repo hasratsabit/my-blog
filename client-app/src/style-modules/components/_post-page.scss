@@ -184,7 +184,6 @@
     width: 100%;
     margin-top: 40px;
     padding-top: 30px;
-    border-top: $LightBorder;
     @include atMedium {
         width: 70%;
         margin-left: 15%;
@@ -194,10 +193,31 @@
         position: absolute;
         top: 0;
         left: 0;
+        
+    }
+
+    &__all-comments {
+        margin-top: 40px;
+        width: 86%;
+        @include atSmall {
+            width: 94.4%;
+            margin-top: 30px;
+        }
+    }
+
+    &__single-comment {
+        padding: 20px;
+        background: #FFF;
+        box-shadow: $shadow;
+        margin-top: 10px;
+        @include atSmall {
+            margin-top: 20px;
+        }
+        
     }
 
     &__user-comment {
-        margin-top: 50px;
+
     }
 
     &__add-comment {

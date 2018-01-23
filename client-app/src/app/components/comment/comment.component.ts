@@ -1,3 +1,4 @@
+import { CommentService } from './../../services/comment.service';
 import { Component, OnInit } from '@angular/core';
 import { fadeIn } from '../../animations/animation';
 
@@ -9,9 +10,16 @@ import { fadeIn } from '../../animations/animation';
 })
 export class CommentComponent implements OnInit {
 
-  constructor() { }
+  comments;
+
+  constructor(
+    private commentService: CommentService
+  ) { }
 
   ngOnInit() {
+    this.commentService.getAllComments().subscribe(data => {
+      this.comments = data.comments;
+    })
   }
 
 }

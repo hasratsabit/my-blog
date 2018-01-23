@@ -141,7 +141,9 @@ export class ReadMoreComponent implements OnInit {
         this.alertMessageClass = 'alert alert-green';
         this.successIcon = true;
         setTimeout(() => {
-          this.loadAddNewComment();
+          this.commentForm.reset();
+          this.enableForm();
+          this.processing = false;
           this.alertMessageClass = null;
           this.alertMessage = null;
           this.ngOnInit();

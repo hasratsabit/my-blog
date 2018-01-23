@@ -8,6 +8,15 @@ const config = require('../config/database');
 
 module.exports = (router) => {
 
+	router.get('/findComments/:id', (req, res) => {
+		 Comment.find({ blogId: req.params.id }, (err, comments) => {
+			 res.json({ success: true, comments: comments });
+			 comments.forEach((data) => {
+				 console.log('the blog title is' + data.blogTitle);
+			 })
+		 });
+	})
+
 // ==========================================================
 // 		 				GET BLOGS
 // ==========================================================
