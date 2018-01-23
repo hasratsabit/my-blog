@@ -124,20 +124,39 @@
             </div>
             <!-- Tab Row  Ends -->
 
+            <!-- Success or Error Message -->
+            <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+                <div [ngClass]="alertMessageClass">
+                    <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+                    <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+                    <p class="alert-text">{{ alertMessage }}</p>
+                </div>
+            </div><!-- Success or Error Message Ends -->
+
             <!-- Reply Box -->
             <div [@expandCollapse]="addNewCommentIsLoaded ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
+
                 <!-- Form -->
-                <form>
+                <form [formGroup]="commentForm" (submit)="onPostComment()">
                     <!-- Textarea -->
                     <mat-form-field class="input">
-                        <textarea matInput placeholder="Leave comment here"></textarea>
+                        <textarea (blur)="askForLogin()" name="comment" formControlName="comment" matInput placeholder="Leave comment here"></textarea>
+                        <mat-error *ngIf="commentForm.controls.comment.dirty && commentForm.controls.comment.errors?.required">
+                            The comment field is required.
+                        </mat-error>
+                        <mat-error *ngIf="commentForm.controls.comment.dirty && commentForm.controls.comment.errors?.maxlength">
+                            The comment must not exceed 2000 characters.
+                        </mat-error>
+                        <mat-error *ngIf="commentForm.controls.comment.dirty && commentForm.controls.comment.errors?.minlength">
+                            The comment must be at least 3 characters.
+                        </mat-error>
                     </mat-form-field><!-- Textarea Ends -->
                     <!-- Buttons-->
                     <div class="comment-textarea__buttons">
-                        <button (click)="loadAddNewComment()" class="button button-medium button-default button-round">
+                        <button [disabled]="processing" (click)="loadAddNewComment()" class="button button-medium button-default button-round">
                             Cancel
                         </button>
-                        <button type="submit" class="button button-medium button-round button-green">
+                        <button [disabled]="processing || !commentForm.valid" type="submit" class="button button-medium button-round button-green">
                             Submit
                         </button>
                     </div><!-- Buttons End -->
@@ -145,21 +164,18 @@
             </div><!-- Reply Box Ends-->
 
             <!-- Single Comment-->
-            <div class="comment">
+            <div *ngFor="let comment of postComments" class="comment">
 
                 <!-- user -->
                 <div class="post-comment__user-comment comment-user">
                     <img class="comment-user__img img img-circle img-small img-border" src="./assets/images/profile.jpg" alt="">
-                    <h1 class="comment-user__name">Hasrat Sabit</h1><br>
-                    <span class="comment-user__date">Jan 09, 2018</span>
+                    <h1 class="comment-user__name">{{ comment.authorName }}</h1><br>
+                    <span class="comment-user__date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
                 </div><!-- user Ends -->
                 
                 <!-- Text -->
                 <div class="comment-text">
-                    <p class="comment-text__para">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Laudantium id sed consectetur autem dolor nemo culpa aspernatur 
-                    in est quis quam distinctio rem eius officiis doloribus repellat 
-                    harum, asperiores deserunt!</p>
+                    <p class="comment-text__para">{{ comment.comment }}</p>
                 </div><!-- Text Ends -->
                 
                 <!-- Footer -->
@@ -167,25 +183,25 @@
                 
                     <button class="comment-footer__button">
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                    15
+                    {{ comment.likes }}
                     </button>
                 
                     <button class="comment-footer__button">
                     <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-                    15
+                    {{ comment.dislikes }}
                     </button>
                 
                     <button (click)="loadAddReply()" class="comment-footer__button">
                     <i class="fa fa-reply" aria-hidden="true"></i>
-                        15
+                        {{ comment.replies.length }}
                     </button>
                 
-                    <button (click)="loadAllReplies()" class="comment-footer__button">
+                    <button *ngIf="comment.replies.indexOf(comment.replies._id) > -1" (click)="loadAllReplies()" class="comment-footer__button">
                         <span *ngIf="allRepliesLoaded">Hide Replies</span>
                         <span *ngIf="!allRepliesLoaded">Show Replies</span>
                     </button>
-                    <button class="comment-footer__button">Edit</button>
-                    <button class="comment-footer__button">Delete</button>
+                    <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
+                    <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
                 
                 </div><!-- Footer Ends -->
 

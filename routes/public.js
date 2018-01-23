@@ -1,5 +1,6 @@
 const User = require('../model/user');
 const Blog = require('../model/blog');
+const Comment = require('../model/comment');
 const jwt = require('jsonwebtoken');
 
 const config = require('../config/database');
@@ -20,7 +21,7 @@ router.get('/allBlogs', (req, res) => {
 	  }else {
 		res.json({ success: true, blogs: blogs });
 	  }
-	})
+	}).sort({'_id': -1 });
   });
 
 
@@ -71,6 +72,26 @@ router.get('/allBlogs', (req, res) => {
 			});
 		}
 	});
+
+// ==========================================================
+// 		 							GET COMMENTS
+// ==========================================================
+
+	router.get('/getCommentByPost/:id', (req, res) => {
+		if(!req.params.id){
+			res.json({ success: false, message: 'No blog id was provided.'});
+		}else {
+			Comment.find({ blogId: req.params.id }, (err, comments) => {
+				if(err){
+					res.json({ success: false, message: 'Error occurred finding the comments.' + err });
+				}else if(!comments){
+					res.json({ success: false, message: 'Comments are no longer available.'});
+				}else {
+					res.json({ success: true, comments: comments });
+				}
+			}).sort({'_id': -1 });
+		}
+	})
 
 	return router;
 }

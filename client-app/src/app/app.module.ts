@@ -1,4 +1,3 @@
-import { BlogService } from './services/blog.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -47,6 +46,8 @@ import { ProfileService } from './services/profile.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
+import { CommentService } from './services/comment.service';
+import { BlogService } from './services/blog.service';
 import { AuthGuard } from './guard/auth.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { NotAuthGuard } from './guard/notAuth.guard';
@@ -64,6 +65,7 @@ import { EditForumComponent } from './components/forum/edit-forum/edit-forum.com
 import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
 import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
 import { BlogPipe } from './pipes/blog.pipe';
+
 
 
 @NgModule({
@@ -130,7 +132,8 @@ import { BlogPipe } from './pipes/blog.pipe';
     AuthGuard,
     AdminGuard,
     NotAuthGuard,
-    BlogService
+    BlogService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })
