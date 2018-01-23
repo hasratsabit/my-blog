@@ -137,7 +137,7 @@
             <div [@expandCollapse]="addNewCommentIsLoaded ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
 
                 <!-- Form -->
-                <form [formGroup]="commentForm" (submit)="onPostComment()">
+                <form [formGroup]="commentForm" (submit)="onPostComment(blog._id)">
                     <!-- Textarea -->
                     <mat-form-field class="input">
                         <textarea (blur)="askForLogin()" name="comment" formControlName="comment" matInput placeholder="Leave comment here"></textarea>
@@ -166,7 +166,7 @@
             <!-- All Comments -->
             <div class="post-comment__all-comments">
                 <!-- Single Comment-->
-                <div *ngFor="let comment of postComments" class="post-comment__single-comment comment">
+                <div *ngFor="let comment of blog.comments" class="post-comment__single-comment comment">
 
                     <!-- user -->
                     <div class="post-comment__user-comment comment-user">

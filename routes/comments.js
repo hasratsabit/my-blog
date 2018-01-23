@@ -1,6 +1,5 @@
 const User = require('../model/user');
 const Blog = require('../model/blog');
-const Comment = require('../model/comment');
 const Category = require('../model/category');
 const upload = require('../model/upload');
 const jwt = require('jsonwebtoken');
@@ -8,13 +7,17 @@ const fs = require('fs');
 
 module.exports = (router) => {
 
+
+// ==========================================================
+// 		 					POST COMMENT
+// ==========================================================
     router.post('/postComment', (req, res) => {
-        if(!req.body.blogId){
+        if(!req.body.id){
             res.json({ success: false, message: 'No blog id is provided.'});
         }else if(!req.body.comment){
             res.json({ success: false, message: 'The comment field is required.'});
         }else {
-            Blog.findOne({ _id: req.body.blogId }, (err, blog) => {
+            Blog.findOne({ _id: req.body.id }, (err, blog) => {
                 if(err){
                     res.json({ success: false, message: 'Error occurred finding the blog.' + err});
                 }else if(!blog){
@@ -26,15 +29,13 @@ module.exports = (router) => {
                         }else if(!user){
                             res.json({ success: false, message: 'You must be logged in to post comment.'});
                         }else {
-                            let comment = new Comment({
+                            blog.comments.push({
                                 authorName: user.name,
                                 authorUsername: user.username,
-                                comment: req.body.comment,
-                                blogId: req.body.blogId,
-                                blogTitle: blog.title
+                                comment: req.body.comment
                             });
         
-                            comment.save((err) => {
+                            blog.save((err) => {
                                 if(err){
                                     if(err.errors){
                                         if(err.errors.comment){
@@ -55,23 +56,7 @@ module.exports = (router) => {
             })
         }
     });
-
-
-// ==========================================================
-// 		 					GET ALL COMMENTS
-// ==========================================================
-    
-    router.get('/allComments', (req, res) => {
-        Comment.find({}, (err, comments) => {
-            if(err){
-                res.json({ success: false, message: 'Error occurred finding comments.' + err});
-            }else if(!comments){
-                res.json({ success: false, message: 'Comments are no longer available.'});
-            }else {
-                res.json({ success: true, comments: comments });
-            }
-        });
-    });
+  
 
 
 

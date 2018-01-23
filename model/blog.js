@@ -60,6 +60,23 @@ let bodyValidator = [
 ]
 
 
+let commentLengthChecker = (comment) => {
+    if(!comment){
+        return false // No comment 
+    }else if(comment.length < 3 || comment.length > 2000){
+        return false;
+    }else {
+        return true;
+    }
+}
+
+let commentValidators = [
+    {
+        validator: commentLengthChecker,
+        message: 'Comment must be at least three characters but no longer than 2000 character.'
+    }
+]
+
 
 const BlogSchema = new Schema({
     title: { type: String, required: true, validate: titleValidators },
@@ -73,7 +90,26 @@ const BlogSchema = new Schema({
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },
     viewCounter: { type: Number, default: 0 },
-    shareCounter: { type: Number, default: 0 }
+    shareCounter: { type: Number, default: 0 },
+    comments: [{
+        authorName: { type: String },
+        authorUsername: { type: String },
+        date: { type: Date, default: Date.now() },
+        comment: { type: String},
+        likes: { type: Number, default: 0 },
+        likedBy: { type: Array },
+        dislikes: { type: Number, default: 0 },
+        dislikedBy: { type: Array},
+        replies: [{
+            authorName: { type: String },
+            authorUsername: { type: String },
+            comment: { type: String},
+            likes: { type: Number, default: 0 },
+            likedBy: { type: Array },
+            dislikes: { type: Number, default: 0 },
+            dislikedBy: { type: Array},
+        }]
+    }]
 });
 
 module.exports = mongoose.model('Blog', BlogSchema)

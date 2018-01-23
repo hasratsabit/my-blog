@@ -118,18 +118,14 @@ export class ReadMoreComponent implements OnInit {
   }
 
 
-  onPostComment(){
+  onPostComment(id){
 
-    let comment = {
-      comment: this.commentForm.get('comment').value,
-      blogId: this.currentBlogUrl
-    }
-    
+    let comment = this.commentForm.get('comment').value;
     this.disableForm();
     this.processing = true;
   
 
-    this.commentService.postComment(comment).subscribe(data => {
+    this.commentService.postComment(id, comment).subscribe(data => {
       if(!data.success){
         this.processing = true;
         this.alertMessage = data.message;
@@ -175,11 +171,6 @@ export class ReadMoreComponent implements OnInit {
     this.currentBlogUrl = this.activatedRoute.snapshot.params.id;
     this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
       this.blog = data.blog;
-    });
-
-
-    this.commentService.getPostComments(this.currentBlogUrl).subscribe(data => {
-      this.postComments = data.comments;
     });
 
     this.userService.getUserProfile().subscribe(data => {

@@ -10,7 +10,7 @@
 
       </thead>
       <tbody>
-        <tr *ngFor="let comment of comments; i as index">
+        <tr *ngFor="let comment of blogComments; i as index">
           <td>{{ i }}</td>
           <td>{{ comment.authorName }}</td>
           <td>{{ comment.date | date: 'MMM dd, yyyy'}}</td>

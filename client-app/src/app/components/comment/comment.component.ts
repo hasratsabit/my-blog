@@ -1,3 +1,4 @@
+import { BlogService } from './../../services/blog.service';
 import { CommentService } from './../../services/comment.service';
 import { Component, OnInit } from '@angular/core';
 import { fadeIn } from '../../animations/animation';
@@ -10,16 +11,20 @@ import { fadeIn } from '../../animations/animation';
 })
 export class CommentComponent implements OnInit {
 
-  comments;
+  blogComments;
 
   constructor(
-    private commentService: CommentService
+    private commentService: CommentService,
+    private blogService: BlogService
   ) { }
 
   ngOnInit() {
-    this.commentService.getAllComments().subscribe(data => {
-      this.comments = data.comments;
-    })
+    this.blogService.getAllBlogs().subscribe(data => {
+      let blogs = data.blogs;
+      blogs.map(res => {
+        this.blogComments = res.comments;
+      });
+    });
   }
 
 }

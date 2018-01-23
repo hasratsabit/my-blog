@@ -1,7 +1,6 @@
 const User = require('../model/user');
 const Blog = require('../model/blog');
 const Category = require('../model/category');
-const Comment = require('../model/comment');
 const upload = require('../model/upload');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
@@ -340,12 +339,6 @@ module.exports = (router) => {
         });
       }
     });
-
-
-
-
-
-
 
     return router;
 }

@@ -20,7 +20,7 @@
           <td>{{ blog.date | date: 'MMM dd, yyyy' }}</td>
           <td>{{ blog.likes }} <br> Likes</td>
           <td>{{ blog.viewCounter }} <br> Views</td>
-          <td>{{ blog.commentCounter}} <br> Comments</td>
+          <td>{{ blog.comments.length}} <br> Comments</td>
           <td><a class="view" [routerLink]="['/read-more', blog._id]">View</a></td>
           <td *ngIf="blog.authorUsername === username"><a class="view" (click)="changeStatus(blog._id, $event)">{{ blog.blogStatus }}</a></td>
           <td *ngIf="blog.authorUsername === username"><a class="edit" [routerLink]="['/edit-blog', blog._id]">Edit</a></td>
