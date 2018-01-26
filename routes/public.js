@@ -72,6 +72,14 @@ router.get('/allBlogs', (req, res) => {
 		}
 	});
 
+	router.get('/getComment', (req, res) => {
+		Blog.findOne({ _id: req.body.blogId })
+		.select('comments')
+		.exec((err, comments) => {
+			let singleComment = comments.comments.filter(index => index._id == req.body.commentId);
+			res.send(singleComment);
+		})
+	})
 
 	return router;
 }

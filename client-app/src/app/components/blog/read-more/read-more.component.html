@@ -1,6 +1,8 @@
 
 <div @fadeIn class="post-page">
 
+
+
     <!-- Large Hero -->
     <div class="large-hero">
 
@@ -21,13 +23,22 @@
 
     </div><!-- Large Hero Ends-->
 
+
+
+
+
     <!-- Body -->
     <div class="body">
 
-        <!-- Body Test -->
+
+
+        <!-- Body Text -->
         <div class="body__text">
             <p>{{ blog.body}}</p>
         </div><!-- Body Text Ends -->
+
+
+
 
         <!-- Media -->
         <div class="media">
@@ -53,6 +64,8 @@
                 <span class="media__data"> {{ blog.viewCounter }}</span>
             </a>
         </div><!-- Media Ends -->
+
+
 
         <!-- Author  -->
         <div class="post-author author">
@@ -87,7 +100,10 @@
         
         </div><!-- Author  Ends -->
 
-        <!-- Loadd Button -->
+
+
+
+        <!-- See Comments Button -->
         <div class="see-comments">
             <button (click)="loadAllComments()" class="button button-medium button-default button-round">
                 <span *ngIf="!allCommentsLoaded">Load Comments</span>
@@ -95,8 +111,14 @@
             </button>
         </div><!-- Load Button Ends -->
 
+
+
+
+
         <!-- Comments -->
         <div [@expandCollapse]="allCommentsLoaded ? 'expanded' : 'collapsed'" class="post-comment">
+
+
 
             <!-- Tab Row  -->
             <div class="post-comment__tabs tab-row"> 
@@ -124,6 +146,8 @@
             </div>
             <!-- Tab Row  Ends -->
 
+
+
             <!-- Success or Error Message -->
             <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
                 <div [ngClass]="alertMessageClass">
@@ -132,6 +156,9 @@
                     <p class="alert-text">{{ alertMessage }}</p>
                 </div>
             </div><!-- Success or Error Message Ends -->
+
+
+
 
             <!-- Add Comment Box -->
             <div [@expandCollapse]="addNewCommentIsLoaded ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
@@ -163,8 +190,13 @@
                 </form><!-- Comment Form Ends -->
             </div><!-- Reply Box Ends-->
 
+
+
+
             <!-- All Comments -->
             <div class="post-comment__all-comments">
+
+
                 <!-- Single Comment-->
                 <div *ngFor="let comment of blog.comments" class="post-comment__single-comment comment">
 
@@ -175,42 +207,83 @@
                         <span class="comment-user__date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
                     </div><!-- user Ends -->
                     
+
                     <!-- Text -->
                     <div class="comment-text">
                         <p class="comment-text__para">{{ comment.comment }}</p>
                     </div><!-- Text Ends -->
                     
+
                     <!-- Footer -->
                     <div class="comment-footer">
                     
-                        <button class="comment-footer__button">
+                        <button (click)="likeComment(comment._id)" class="comment-footer__button">
                         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                         {{ comment.likes }}
                         </button>
                     
-                        <button class="comment-footer__button">
+                        <button (click)="dislikeComment(comment._id)" class="comment-footer__button">
                         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                         {{ comment.dislikes }}
                         </button>
                     
-                        <button (click)="loadAddReply()" class="comment-footer__button">
+                        <button (click)="loadAddReply(comment._id)" class="comment-footer__button">
                         <i class="fa fa-reply" aria-hidden="true"></i>
                             {{ comment.replies.length }}
                         </button>
                     
-                        <button *ngIf="comment.replies.indexOf(comment.replies._id) > -1" (click)="loadAllReplies()" class="comment-footer__button">
-                            <span *ngIf="allRepliesLoaded">Hide Replies</span>
-                            <span *ngIf="!allRepliesLoaded">Show Replies</span>
+                        <!-- *ngIf="comment.replies.indexOf(comment.replies._id) > -1" -->
+                        <button  (click)="loadAllReplies(comment._id)" class="comment-footer__button">
+                            <span *ngIf="this.allRepliesArray.indexOf(comment._id) > -1">Hide Replies</span>
+                            <span *ngIf="this.allRepliesArray.indexOf(comment._id) === -1">Show Replies</span>
                         </button>
                         <div class="comment-footer__change-btns">
-                            <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
-                            <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
+                            <button (click)="toggleEditComment(comment._id)" *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
+                            <button (click)="toggleDeleteComment(comment._id)" *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
                         </div>
                     
                     </div><!-- Footer Ends -->
+                    
+
+                    <!-- Edit Comment Box -->
+                    <div [@expandCollapse]="editArray.indexOf(comment._id) > -1 ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
+
+                        <!-- Form -->
+                        <form [formGroup]="editCommentForm" (submit)="onEditComment()">
+                            <!-- Textarea -->
+                            <mat-form-field class="input">
+                                <textarea  
+                                    name="editComment" 
+                                    [(ngModel)]="oneComment" 
+                                    formControlName="editComment" 
+                                    matInput 
+                                    placeholder="Leave comment here">
+                                </textarea>
+                                <mat-error *ngIf="editCommentForm.controls.editComment.dirty && editCommentForm.controls.editComment.errors?.required">
+                                    The comment field is required.
+                                </mat-error>
+                                <mat-error *ngIf="editCommentForm.controls.editComment.dirty && editCommentForm.controls.editComment.errors?.maxlength">
+                                    The comment must not exceed 2000 characters.
+                                </mat-error>
+                                <mat-error *ngIf="editCommentForm.controls.editComment.dirty && editCommentForm.controls.editComment.errors?.minlength">
+                                    The comment must be at least 3 characters.
+                                </mat-error>
+                            </mat-form-field><!-- Textarea Ends -->
+                            <!-- Buttons-->
+                            <div class="comment-textarea__buttons">
+                                <button [disabled]="processing || !editCommentForm.valid" type="submit" class="button button-medium button-round button-green">
+                                    Submit
+                                </button>
+                            </div><!-- Buttons End -->
+                        </form><!-- Comment Form Ends -->
+                        <button [disabled]="processing" (click)="toggleEditComment(comment._id)" class="button button-medium button-default button-round">
+                            Cancel
+                        </button>
+                    </div><!-- Edit Comment Ends-->
+
 
                     <!-- Reply Box -->
-                    <div [@expandCollapse]="addReplyIsLoaded ? 'expanded' : 'collapsed'" class="comment-textarea">
+                    <div [@expandCollapse]="addReplyArray.indexOf(comment._id) > -1 ? 'expanded' : 'collapsed'" class="comment-textarea">
                         <!-- Form -->
                         <form>
                         <!-- Textarea -->
@@ -219,7 +292,7 @@
                         </mat-form-field><!-- Textarea Ends -->
                         <!-- Buttons-->
                         <div class="comment-textarea__buttons">
-                            <button (click)="loadAddReply()" class="button button-medium button-default button-round">
+                            <button (click)="loadAddReply(comment._id)" class="button button-medium button-default button-round">
                                 Cancel
                             </button>
                             <button type="submit" class="button button-medium button-round button-green">
@@ -228,13 +301,14 @@
                         </div><!-- Buttons End -->
                         </form><!-- Comment Form Ends -->
                     </div><!-- Reply Box Ends-->
+
                     
                     <!-- Replied Comments -->
-                    <div [@expandCollapse]="allRepliesLoaded ? 'expanded' : 'collapsed'" class="comment-reply">
+                    <div [@expandCollapse]="allRepliesArray.indexOf(comment._id) > -1 ? 'expanded' : 'collapsed'" class="comment-reply">
                     
                         <!-- user -->
                         <div class="comment-user">
-                        <img class="comment-user__img img img-circle img-small img-border" src="./assets/images/profile.jpg" alt="">
+                        <img class="comment-user__img img img-circle img-tiny img-border" src="./assets/images/profile.jpg" alt="">
                         <h1 class="comment-user__name">Hasrat Sabit</h1><br>
                         <span class="comment-user__date">Jan 09, 2018</span>
                         </div><!-- user Ends -->
@@ -246,13 +320,29 @@
                             in est quis quam distinctio rem eius officiis doloribus repellat 
                             harum, asperiores deserunt!</p>
                         </div><!-- Text Ends -->
+
+                        <!-- Footer -->
+                        <div class="comment-footer">
+
+                            <div class="comment-footer__change-btns">
+                                <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
+                                <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
+                            </div>
+                        
+                        </div><!-- Footer Ends -->
                     
                     </div><!-- Replied Comments Ends -->
                     
                 </div><!-- Comment Ends -->
+
+
             </div><!-- All Comments End -->
 
         </div>  <!-- Comments Section End -->
+
+
+
+
 
     </div><!-- Body Ends -->
 

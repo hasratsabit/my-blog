@@ -22,9 +22,9 @@ export class HomeComponent implements OnInit {
   ) {}
 
   updateBlogView(id){
-    console.log(id);
-    this.blogService.updateBlogView(id).subscribe(data => {
-      console.log(data.message);
+    this.blogService.updateBlogView(id)
+    .subscribe(data => {
+      if(!data.success) return null;
     })
   }
 

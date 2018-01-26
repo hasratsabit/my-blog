@@ -77,6 +77,28 @@ let commentValidators = [
     }
 ]
 
+const ReplySchema = new Schema({
+    authorName: { type: String },
+    authorUsername: { type: String },
+    comment: { type: String},
+    likes: { type: Number, default: 0 },
+    likedBy: { type: Array },
+    dislikes: { type: Number, default: 0 },
+    dislikedBy: { type: Array},
+});
+
+const CommentSchema = new Schema({
+    authorName: { type: String },
+    authorUsername: { type: String },
+    date: { type: Date, default: Date.now() },
+    comment: { type: String},
+    likes: { type: Number, default: 0 },
+    likedBy: { type: Array },
+    dislikes: { type: Number, default: 0 },
+    dislikedBy: { type: Array},
+    replies: [ReplySchema]
+})
+
 
 const BlogSchema = new Schema({
     title: { type: String, required: true, validate: titleValidators },
@@ -91,25 +113,7 @@ const BlogSchema = new Schema({
     likedBy: { type: Array },
     viewCounter: { type: Number, default: 0 },
     shareCounter: { type: Number, default: 0 },
-    comments: [{
-        authorName: { type: String },
-        authorUsername: { type: String },
-        date: { type: Date, default: Date.now() },
-        comment: { type: String},
-        likes: { type: Number, default: 0 },
-        likedBy: { type: Array },
-        dislikes: { type: Number, default: 0 },
-        dislikedBy: { type: Array},
-        replies: [{
-            authorName: { type: String },
-            authorUsername: { type: String },
-            comment: { type: String},
-            likes: { type: Number, default: 0 },
-            likedBy: { type: Array },
-            dislikes: { type: Number, default: 0 },
-            dislikedBy: { type: Array},
-        }]
-    }]
+    comments: [CommentSchema]
 });
 
 module.exports = mongoose.model('Blog', BlogSchema)

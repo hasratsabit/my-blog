@@ -13,11 +13,20 @@ export class CommentService {
 domain = this.authService.domain;
 options;
 
+
+// ==========================================================
+// 		                CONSTRUCTOR
+// ==========================================================
+
 constructor(
   private authService: AuthService,
   private http: Http
 ) { }
 
+
+// ==========================================================
+// 		                POST COMMENT
+// ==========================================================
 
 postComment(id, comment){
   let blogData = {
@@ -31,5 +40,68 @@ postComment(id, comment){
   let options = new RequestOptions({ headers: headers });
   return this.http.post(this.domain + '/comments/postComment', blogData, options).map(res => res.json());
 }
+
+
+
+// ==========================================================
+// 		                LIKE COMMENT 
+// ==========================================================
+
+  likeComment(commentId, blogId){
+    let blogData = {
+      commentId: commentId,
+      blogId: blogId
+    }
+    this.authService.loadToken();
+    let headers = new Headers({'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.domain + '/comments/likeComment', blogData, options).map(res => res.json());
+  }
+
+
+// ==========================================================
+// 		                DISLIKE COMMENT
+// ==========================================================
+
+  dislikeComment(commentId, blogId){
+    let blogData = {
+      commentId: commentId,
+      blogId: blogId
+    }
+    this.authService.loadToken();
+    let headers = new Headers({'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.domain + '/comments/dislikeComment', blogData, options).map(res => res.json());
+  }
+
+
+// ==========================================================
+// 		                GET SINGL COMMENT
+// ==========================================================
+
+  getSingleComment(blogId, commentId){
+    this.authService.loadToken();
+    let headers = new Headers({'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+    return this.http.get(this.domain + '/comments/getSingleComment/' + blogId + '/' + commentId , options).map(res => res.json());
+  }
+
+// ==========================================================
+// 		                EDIT COMMENT
+// ==========================================================
+
+  editComment(blogId, commentId, comment){
+    const commentData = {
+      blogId: blogId,
+      commentId: commentId,
+      comment: comment
+    }
+    this.authService.loadToken();
+    let headers = new Headers({'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+    return this.http.put(this.domain + '/comments/editComment', commentData, options)
+          .map(res => res.json());
+
+  }
 
 }

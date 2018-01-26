@@ -1819,7 +1819,6 @@ mat-option {
   width: 100%;
   font-family: $GeneralFont;
   transition: $SmoothTrasition;
-  border-radius: 3px;
 }
 
 .comment-user {
@@ -1848,8 +1847,11 @@ mat-option {
     position: absolute;
     top: 0;
     right: 0;
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     color: $IconsColor;
+    @include atSmall {
+      font-size: 0.8rem;
+    }
   }
 }
 
@@ -1887,14 +1889,13 @@ mat-option {
 
 .comment-footer {
   position: relative;
-  margin-left: 16%;
   @include atSmall {
     margin-left: 6%;
   }
 
   &__change-btns {
     position: absolute;
-    right: 0;
+    right: -10px;
     bottom: 0;
   }
 
@@ -1902,7 +1903,7 @@ mat-option {
     border: none;
     background: transparent;
     margin-right: 10px;
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     color: $IconsColor;
     cursor: pointer;
 
@@ -1925,16 +1926,20 @@ mat-option {
 
 .comment-reply {
   width: 90%;
-  margin-left: 10%;
+  margin-left: 1%;
   margin-top: 20px;
+  padding: 5px;
+  background: whitesmoke;
+  border-radius: 3px;
 
   @include atSmall {
     margin-left: 5%;
+    padding: 20px;
   }
 
   @include atMedium {
     margin-top: 40px;
-    margin-left: 4%;
+    margin-left: 2%;
   }
 }
 
@@ -2337,6 +2342,7 @@ mat-option {
       font-size: 25px;
       border-radius: 50%;
       color: #FFF;
+      box-shadow: $shadow;
     }
 
     .fa-twitter {
