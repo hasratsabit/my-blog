@@ -35,6 +35,7 @@ export class ReadMoreComponent implements OnInit {
   alertMessageClass;
   successIcon;
   postComments;
+  commentsLength
   authorizedUsername;
 
 // ==========================================================
@@ -51,6 +52,7 @@ export class ReadMoreComponent implements OnInit {
   ) {
     this.createCommentForm();
     this.createEditForm();
+    this.createReplyForm();
    }
 
 
@@ -62,8 +64,6 @@ export class ReadMoreComponent implements OnInit {
 // ==========================================================
 // 		 				TOGGLE SECTIONS
 // ==========================================================
-  addReplyArray = [];
-  allRepliesArray = [];
 
   loadAllComments() {
     this.allCommentsLoaded = !this.allCommentsLoaded;
@@ -71,31 +71,6 @@ export class ReadMoreComponent implements OnInit {
 
   loadAddNewComment() {
     this.addNewCommentIsLoaded = !this.addNewCommentIsLoaded;
-  }
-
-  // Load the comment box when a user is replying to a comment
-  loadAddReply(id) {
-    // Check if the array is empty.
-    if(this.addReplyArray.indexOf(id) === -1){
-      // If empty, push the id of current comment to the array and toggle the reply box.
-      this.addReplyArray.push(id);
-    }else {
-      // Find the idnex of the id for the current comment in the array.
-      let index = this.addReplyArray.indexOf(id);
-      this.addReplyArray.splice(index, 1); // Delete the id from the array to close the comment box.
-    }
-  }
-
-  // Load all the replies.
-  loadAllReplies(id) {
-    // Check if the array is empty.
-    if(this.allRepliesArray.indexOf(id) === -1){
-      this.allRepliesArray.push(id); // If empty, Push the current comment id to the array to load all the replies.
-    }else {
-      // Find the index of current comment in the array.
-      let index = this.allRepliesArray.indexOf(id);
-      this.allRepliesArray.splice(index, 1); // Delete the current id from the array to collapse the replies.
-    }
   }
 
 
@@ -149,25 +124,16 @@ export class ReadMoreComponent implements OnInit {
       // If the comment is not posted:
       if(!data.success){
         this.processing = true;
-        this.alertMessage = data.message;
-        this.alertMessageClass = 'alert alert-red';
-        this.successIcon = false;
         this.enableForm();
         // If the comment is posted:
       }else {
-        this.alertMessage = data.message;
-        this.alertMessageClass = 'alert alert-green';
-        this.successIcon = true;
-        setTimeout(() => {
-          this.commentForm.reset();
-          this.enableForm();
-          this.processing = false;
-          this.alertMessageClass = null;
-          this.alertMessage = null;
-          this.ngOnInit();
-        }, 2000);
+        this.commentForm.reset();
+        this.enableForm();
+        this.processing = false;
+        this.loadAddNewComment();
+        this.ngOnInit();
       }
-    })
+    });
   }
 
 
@@ -244,41 +210,23 @@ export class ReadMoreComponent implements OnInit {
     }
   }
 
-  // Get Single Comment 
-  getSingleComment(blogId, commentId){
-    this.commentService.getSingleComment(blogId, commentId)
-    .subscribe(data => {
-      this.oneComment = data.singleComment[0].comment;
-    });
-  }
 
   // Edit the comment
   onEditComment(){
     // Get the value of the editting comment.
     let comment = this.editCommentForm.get('editComment').value
+    this.processing = true;
     
     // Call the edit comment method.
     this.commentService.editComment(this.currentBlogUrl, this.commentId, comment)
     .subscribe(data => {
       // If the comment is successfully editted:
       if(data.success){
-        this.alertMessage = data.message;
-        this.alertMessageClass = 'alert alert-green';
-        this.successIcon = true;
-        this.processing = true;
-        setTimeout(() => {
-          this.ngOnInit();
-          this.processing = false;
-          this.alertMessage = null;
-          this.alertMessageClass = null;
-          this.editCommentForm.reset();
-          this.editArray.splice(this.editArray.indexOf(this.commentId, 1));
-        }, 2000);
-        // If comment is not editted:
+        this.processing = false;
+        this.editCommentForm.reset();
+        this.editArray.splice(this.editArray.indexOf(this.commentId, 1));
+        this.ngOnInit();
       }else {
-        this.alertMessage = data.message;
-        this.alertMessageClass = 'alert alert-red';
-        this.successIcon = false;
         this.processing = false;
       }
     });
@@ -288,6 +236,157 @@ export class ReadMoreComponent implements OnInit {
 // ==========================================================
 // 		                DELETE COMMENT
 // ==========================================================
+  
+  deleteArray = [];
+  deleteId;
+
+  toggleDeleteComment(id){
+    // Check if the delete array is empty.
+    if(this.deleteArray.indexOf(id) === -1){
+      this.deleteArray.push(id); // If empty, Push the current comment id to the array to open the delete box.
+      this.deleteId = id; // Assign the current comment id to the deleteId var.
+    }else {
+      // Find the index of current comment id in the array.
+      let index = this.deleteArray.indexOf(id);
+      this.deleteArray.splice(index, 1); // Delete the id from the array to close the delete box.
+    }
+  }
+
+  onDeleteComment(){
+    this.processing = true;
+
+    this.commentService.deleteComment(this.currentBlogUrl, this.deleteId)
+    .subscribe(data => {
+      if(!data.success){
+        this.processing = false;
+      }else {
+        this.deleteArray.splice(this.deleteArray.indexOf(this.commentId));
+        this.ngOnInit();
+      }
+    })
+  }
+
+
+// ==========================================================
+// 		 				          REPLY COMMENTS
+// ==========================================================
+
+replyForm 
+
+addReplyArray = [];
+allRepliesArray = [];
+replyId
+
+createReplyForm(){
+  this.replyForm = this.formBuilder.group({
+    replyComment: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(2000)
+    ])]
+  })
+}
+  // Load the comment box when a user is replying to a comment
+  loadAddReply(id) {
+    // Check if the array is empty.
+    if(this.addReplyArray.indexOf(id) === -1){
+      // If empty, push the id of current comment to the array and toggle the reply box.
+      this.addReplyArray.push(id);
+      this.allRepliesArray.push(id); // Also load the replies when user wants to add reply.
+      this.replyId = id;
+    }else {
+      // Find the idnex of the id for the current comment in the array.
+      let index = this.addReplyArray.indexOf(id);
+      this.addReplyArray.splice(index, 1); // Delete the id from the array to close the comment box.
+    }
+  }
+
+  // Load all the replies.
+  loadAllReplies(id) {
+    // Check if the array is empty.
+    if(this.allRepliesArray.indexOf(id) === -1){
+      this.allRepliesArray.push(id); // If empty, Push the current comment id to the array to load all the replies.
+    }else {
+      // Find the index of current comment in the array.
+      let index = this.allRepliesArray.indexOf(id);
+      this.allRepliesArray.splice(index, 1); // Delete the current id from the array to collapse the replies.
+    }
+  }
+
+  onPostReply(){
+
+    this.processing = true;
+
+    let replyComment = this.replyForm.get('replyComment').value;
+    this.commentService.postReply(this.currentBlogUrl, this.replyId, replyComment)
+      .subscribe(data => {
+        if(!data.success){
+          this.processing = false;
+        }else {
+          this.processing = false;
+          this.replyForm.reset();
+          this.addReplyArray.splice(this.addReplyArray.indexOf(this.replyId));
+          this.ngOnInit();
+        }
+      });
+  }
+
+
+
+
+
+
+
+
+// ==========================================================
+// 		 				          DELETE REPLY
+// ==========================================================
+
+  deleteReplyArray = [];
+  deleteReplyId;
+  parentCommentId;
+
+  toggleDeleteReply(childId, parentId) {
+    if(this.deleteReplyArray.indexOf(childId) === -1){
+      this.deleteReplyArray.push(childId);
+      this.deleteReplyId = childId;
+      this.parentCommentId = parentId;
+    }else {
+      let index = this.deleteReplyArray.indexOf(childId);
+      this.deleteReplyArray.splice(index, 1);
+    }
+  }
+
+
+  onDeleteReply(){
+
+    this.commentService.deleteRepliedComment(
+      this.currentBlogUrl, 
+      this.parentCommentId, 
+      this.deleteReplyId)
+      .subscribe(data => {
+        if(data.success){
+          this.deleteReplyArray.splice(this.deleteReplyArray.indexOf(this.deleteReplyId));
+          this.ngOnInit();
+        }
+      });
+  }
+
+
+
+// ==========================================================
+// 		                GET SINGLE COMMENT
+// ==========================================================
+
+ getSingleComment(blogId, commentId){
+  this.commentService.getSingleComment(blogId, commentId)
+  .subscribe(data => {
+    this.oneComment = data.singleComment[0].comment;
+  });
+}
+
+
+
 
 
 
@@ -299,6 +398,7 @@ export class ReadMoreComponent implements OnInit {
     this.currentBlogUrl = this.activatedRoute.snapshot.params.id;
     this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
       this.blog = data.blog;
+      this.commentsLength = data.blog.comments.length
     });
 
 // ==========================================================

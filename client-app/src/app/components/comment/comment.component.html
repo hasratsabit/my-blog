@@ -16,7 +16,7 @@
           <td>{{ comment.date | date: 'MMM dd, yyyy'}}</td>
           <td>{{ comment.blogTitle }}</td>
           <td>{{ comment.replies.length }}<br/>Replies</td>
-          <td><a class="view" [routerLink]="['/read-more/, comment.blogId']">View</a></td>
+          <td><a class="view" [routerLink]="['/read-more/']">View</a></td>
           <td><a class="edit" href="">Approved</a></td>
           <td><a class="delete" href="">Delete</a></td>
         </tr>

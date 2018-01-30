@@ -322,5 +322,179 @@ router.put('/dislikeComment', (req, res) => {
         }
     });
 
+
+// ==========================================================
+// 		 					DELETE COMMENT
+// ==========================================================
+
+    router.delete('/deleteComment/:blogId/:commentId', (req, res) => {
+        // Check for blog id.
+        if(!req.params.blogId){
+            // Respond if no blog id was provided.
+            res.json({ success: false, message: 'No blog id was provided.'});
+            // Check for comment id.
+        }else if(!req.params.commentId){
+            // Respond if no comment id is provided.
+            res.json({ success: false, message: 'No comment id was provided.'});
+        }else {
+            // Find the blog by it's id.
+            Blog.findOne({ _id: req.params.blogId })
+            .select('comments') // Select just the comments.
+            .exec((err, comments) => {
+                if(err){
+                    res.json({ success: false, message: 'Error occurred finding comments.' + err });
+                }else if(!comments){
+                    // Respond if no comments are found.
+                    res.json({ success: false, message: 'Comments are no longer available.'});
+                }else {
+                    // Find the user.
+                    User.findOne({ _id: req.decoded.userId })
+                    .select('username userRole') // Grab just the user role and username.
+                    .exec((err, user) => {
+                        if(err){
+                            // Respond if error.
+                            res.json({ success: false, message: 'Error occurred finding the user. ' + err });
+                        }else if(!user){
+                            // Respond if no user is found.
+                            res.json({ success: false, message: 'You must be logged in to continue.'});
+                        }else {
+                            // Find the single comment that user wants to delete by filtering the array using comment id.
+                            let singleComment = comments.comments.filter(index => index._id == req.params.commentId);
+                            // Check if the user is the author of the comment.
+                            if(singleComment[0].authorUsername !== user.username){
+                                // Respond if the user is not the authorized author to delete the comment.
+                                res.json({ success: false, message: 'You are not authorized to delete this comment. '});
+                            }else {
+                                // Find the index of the comment in the comments array.
+                                let index = comments.comments.indexOf(singleComment[0]);
+                                // Delete the comment from the array.
+                                comments.comments.splice(index, 1);
+                                // Save the comments.
+                                comments.save((err) => {
+                                    if(err){
+                                        res.json({ success: false, message: 'Error occurred deleting the comment.' + err});
+                                    }else {
+                                        res.json({ success: true, message: 'Comment successfully deleted.'});
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+// ==========================================================
+// 		 					REPLY COMMENT
+// ==========================================================
+
+    router.post('/replyComment', (req, res) => {
+        // Check for blog id.
+        if(!req.body.blogId){
+            res.json({ success: false, message: 'No blog id was provided.'});
+            // Check for comment id.
+        }else if(!req.body.commentId){
+            res.json({ success: false, message: 'No comment id was provided.'});
+            // Check for reply comment.
+        }else if(!req.body.replyComment){
+            res.json({ success: false, message: 'The comment field is required.'});
+        }else {
+            // Find the blog using the id in the body.
+            Blog.findOne({ _id: req.body.blogId })
+            .select('comments') // Grab the comments.
+            .exec((err, comments) => {
+                if(err){
+                    res.json({ success: false, message: 'Error occurred finding the comment.' + err });
+                }else if(!comments){
+                    res.json({ success: false, message: 'No comment was found.'});
+                }else {
+                    // Find the user.
+                    User.findOne({ _id: req.decoded.userId })
+                    .select('name username') // Grab the name and the username.
+                    .exec((err, user) => {
+                        if(err){
+                            res.json({ success: false, message: 'Error occurred finding the user. ' + err });
+                        }else if(!user) {
+                            res.json({ success: false, message: 'You must be logged in to continue.'});
+                        }else {
+                            // Find the current comment that user is replying to using the comment id.
+                            let currentComment = comments.comments.filter(index => index._id == req.body.commentId);
+                            
+                            // Push the new replied comment to the replies array in the comment.
+                            currentComment[0].replies.push({
+                                authorName: user.name,
+                                authorUsername: user.username,
+                                comment: req.body.replyComment
+                            });
+
+                            // Save the comments.
+                            comments.save((err) => {
+                                if(err){
+                                    res.json({ success: false, message: 'Error occurred saving the comment.' + err });
+                                }else {
+                                    res.json({ success: true, message: 'Comment successfully posted.'});
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+
+
+// ==========================================================
+// 		 					DELETE REPLY
+// ==========================================================
+
+	router.delete('/deleteReply/:blogId/:commentId/:replyId', (req, res) => {
+        // Find the user.
+        User.findOne({ _id: req.decoded.userId })
+        .select('username userRole') // Grab the username and user role.
+        .exec((err, user) => {
+            if(err){
+                res.json({ success: false, message: 'Error occurred finding user.' + err });
+            }else if(!user){
+                res.json({ success: false, message: 'You must be logged in to continue.'});
+            }else {
+                // Find the blog using blog id in the url.
+                Blog.findOne({_id: req.params.blogId })
+                .select('comments') // Grab the comments.
+                .exec((err, comments) => {
+                    if(err){
+                        res.json({ success: false, message: 'Error occurred finding comments.' + err });
+                    }else if(!comments){
+                        res.json({ success: false, message: 'No comments found.'});
+                    }else {
+                        // Find the single comment that the reply is located using the comment id from the url params.
+                        const singleComment = comments.comments.filter(index => index._id == req.params.commentId);
+                        // Find the single reply from the replies array in the comment array.
+                        const singleReply = singleComment[0].replies.filter(index => index._id == req.params.replyId);
+
+                        if(singleReply[0].authorUsername !== user.username){
+                            res.json({ success: false, message: 'You are not authorized to delete this comment.'});
+                        }else {
+                            // Find the index of the replied comment in the replies array.
+                            const index = singleComment[0].replies.indexOf(singleReply);
+                            // Delete the replied comment from the replies array.
+                            singleComment[0].replies.splice(index, 1);
+                            // Save the comments. 
+                            comments.save((err) => {
+                                if(err){
+                                    res.json({ success: false, message: 'Error occurred saving the comments.' + err });
+                                }else {
+                                    res.json({ success: true, message: 'Your comment successfully deleted. '});
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+	});
+
+
     return router;
 }

@@ -28,8 +28,8 @@ module.exports = (router) => {
 			// Store the input values given by user in the user object.
 			let user = new User({
 				name: req.body.name,
-				username: req.body.username,
-				email: req.body.email,
+				username: req.body.username.toLowerCase(),
+				email: req.body.email.toLowerCase(),
 				password: req.body.password
 			});
 

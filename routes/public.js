@@ -72,14 +72,20 @@ router.get('/allBlogs', (req, res) => {
 		}
 	});
 
-	router.get('/getComment', (req, res) => {
-		Blog.findOne({ _id: req.body.blogId })
-		.select('comments')
-		.exec((err, comments) => {
-			let singleComment = comments.comments.filter(index => index._id == req.body.commentId);
-			res.send(singleComment);
-		})
-	})
+
+
+	// router.delete('/deleteReply/:blogId/:commentId/:replyId', (req, res) => {
+	// 	Blog.findOne({ _id: req.params.blogId })
+	// 	.select('comments')
+	// 	.exec((err, comments) => {
+	// 		let parentComments = comments.comments.filter(index => index._id == req.params.commentId);
+	// 		let childComment = parentComments[0].replies.filter(index => index._id == req.params.replyId)
+	// 		res.json(childComment[0].authorUsername);
+	// 	})
+	// })
 
 	return router;
+
+
+
 }

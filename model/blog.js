@@ -81,6 +81,7 @@ const ReplySchema = new Schema({
     authorName: { type: String },
     authorUsername: { type: String },
     comment: { type: String},
+    date: { type: Date, default: Date.now()},
     likes: { type: Number, default: 0 },
     likedBy: { type: Array },
     dislikes: { type: Number, default: 0 },

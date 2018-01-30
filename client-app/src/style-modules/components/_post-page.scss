@@ -218,11 +218,20 @@
         
     }
 
+    &__single-reply {
+        margin-bottom: 10px;
+        border-bottom: 10p solid red;
+    }
+
     &__user-comment {
 
     }
 
     &__add-comment {
         margin-top: 100px;
+    }
+
+    &__inline-modal {
+        margin-bottom: 10px;
     }
 }

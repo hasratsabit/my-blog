@@ -1816,6 +1816,7 @@ mat-option {
 // ===============
 
 .comment {
+  position: relative;
   width: 100%;
   font-family: $GeneralFont;
   transition: $SmoothTrasition;
@@ -1842,18 +1843,29 @@ mat-option {
     color: $Gray;
     text-transform: capitalize;
   }
+}
 
-  &__date {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 0.5rem;
-    color: $IconsColor;
-    @include atSmall {
-      font-size: 0.8rem;
+.comment-select {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+
+  &__button {
+    border: none;
+    background: transparent;
+    &:hover,
+    &:focus {
+      outline: none;
+      cursor: pointer;
     }
   }
+
+  &__more {
+    font-size: 1rem;
+    color: $Gray;
+  }
 }
+
 
 .comment-text {
   width: 90%;
@@ -1893,12 +1905,6 @@ mat-option {
     margin-left: 6%;
   }
 
-  &__change-btns {
-    position: absolute;
-    right: -10px;
-    bottom: 0;
-  }
-
   &__button {
     border: none;
     background: transparent;
@@ -1922,25 +1928,33 @@ mat-option {
   i {
     margin-right: 3px;
   }
+
+  &__date {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 0.5rem;
+    color: $IconsColor;
+    @include atSmall {
+      font-size: 0.8rem;
+    }
+  }
 }
 
 .comment-reply {
-  width: 90%;
-  margin-left: 1%;
+  position: relative;
+  width: 94%;
   margin-top: 20px;
-  padding: 5px;
+  padding: 15px;
   background: whitesmoke;
   border-radius: 3px;
 
-  @include atSmall {
-    margin-left: 5%;
-    padding: 20px;
+  &__footer {
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 
-  @include atMedium {
-    margin-top: 40px;
-    margin-left: 2%;
-  }
 }
 
 .comment-textarea {
@@ -2282,9 +2296,7 @@ mat-option {
   .modal-box-alert {
     float: left;
     width: 90%;
-    margin-left: 4%;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: 10px 0 10px 4%;
   }
 
   .modal-box-title,
@@ -2411,3 +2423,38 @@ mat-option {
       opacity: 0.5;
     }
   }
+
+
+
+// ===============
+// 	INLINE MODAL
+// ===============
+
+.inline-modal {
+  width: 100%;
+  background: $DarkBlue;
+  padding: 8px 0;
+  @include clearfix;
+
+  &__button {
+    border: none;
+    padding: 10px;
+    color: #FFF;
+    float: right;
+    cursor: pointer;
+    background: rgb(47, 47, 85);
+    margin-right: 10px;
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__text {
+    padding: 6px 0 0 10px;
+    float: left;
+    color: #FFF;
+    font-family: $TableFont;
+    font-size: 1rem;
+  }
+}

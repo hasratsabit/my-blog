@@ -104,4 +104,55 @@ postComment(id, comment){
 
   }
 
+
+// ==========================================================
+// 		                EDIT COMMENT
+// ==========================================================
+
+  deleteComment(blogId, commentId){
+    this.authService.loadToken();
+    let headers = new Headers({'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+    return this.http.delete(this.domain + '/comments/deleteComment/' + blogId + '/' + commentId, options)
+          .map(res => res.json());
+  }
+
+
+// ==========================================================
+// 		                POST REPLY
+// ==========================================================
+
+  postReply(blogId, commentId, replyComment){
+
+    let replyData = {
+      blogId: blogId,
+      commentId: commentId,
+      replyComment: replyComment
+    }
+
+    this.authService.loadToken();
+    let headers = new Headers({'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+    
+    return this.http.post(this.domain + '/comments/replyComment', replyData, options)
+            .map(res => res.json());
+  }
+
+
+// ==========================================================
+// 		                DELETE REPLY
+// ==========================================================
+
+  deleteRepliedComment(blogId, commentId, replyId){
+
+    this.authService.loadToken();
+    let headers = new Headers({'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+
+    return this.http.delete(this.domain + 
+            '/comments/deleteReply/' + blogId + 
+            '/' + commentId + '/' + replyId, options)
+            .map(res => res.json());
+  }
+
 }

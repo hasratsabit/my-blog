@@ -42,7 +42,6 @@
 
         <!-- Media -->
         <div class="media">
-
            <a [class.blogFavorite]="blogLiked" (click)="onLikeBlog(blog._id)" class="media__list">
                <i class="fa fa-heart" aria-hidden="true"></i>
                 Like
@@ -51,7 +50,7 @@
             <a class="media__list" href="">
                 <i class="fa fa-comment" aria-hidden="true"></i>
                     Comments
-                <span class="media__data">0</span>
+                <span class="media__data">{{ commentsLength }} </span>
             </a>
             <a class="media__list" href="">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
@@ -148,18 +147,6 @@
 
 
 
-            <!-- Success or Error Message -->
-            <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
-                <div [ngClass]="alertMessageClass">
-                    <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
-                    <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
-                    <p class="alert-text">{{ alertMessage }}</p>
-                </div>
-            </div><!-- Success or Error Message Ends -->
-
-
-
-
             <!-- Add Comment Box -->
             <div [@expandCollapse]="addNewCommentIsLoaded ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
 
@@ -199,12 +186,19 @@
 
                 <!-- Single Comment-->
                 <div *ngFor="let comment of blog.comments" class="post-comment__single-comment comment">
-
+                   
+                   <!-- Delete Alert-->
+                    <div @fadeIn  *ngIf="deleteArray.indexOf(comment._id) > -1" class="post-comment__inline-modal inline-modal">
+                        <p class="inline-modal__text">Are you sure you want to delete your comment?</p>
+                        <button [disabled]="processing" (click)="onDeleteComment()" class="inline-modal__button">Delete</button>
+                        <button [disabled]="processing" (click)="toggleDeleteComment(comment._id)" class="inline-modal__button">Cancel</button>
+                    </div>
+                    
+                      
                     <!-- user -->
                     <div class="post-comment__user-comment comment-user">
                         <img class="comment-user__img img img-circle img-tiny img-border" src="./assets/images/profile.jpg" alt="">
                         <h1 class="comment-user__name">{{ comment.authorName }}</h1><br>
-                        <span class="comment-user__date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
                     </div><!-- user Ends -->
                     
 
@@ -233,17 +227,31 @@
                         </button>
                     
                         <!-- *ngIf="comment.replies.indexOf(comment.replies._id) > -1" -->
-                        <button  (click)="loadAllReplies(comment._id)" class="comment-footer__button">
+                        <button *ngIf="comment.replies.length" (click)="loadAllReplies(comment._id)" class="comment-footer__button">
                             <span *ngIf="this.allRepliesArray.indexOf(comment._id) > -1">Hide Replies</span>
                             <span *ngIf="this.allRepliesArray.indexOf(comment._id) === -1">Show Replies</span>
                         </button>
-                        <div class="comment-footer__change-btns">
-                            <button (click)="toggleEditComment(comment._id)" *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
-                            <button (click)="toggleDeleteComment(comment._id)" *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
-                        </div>
+
+                        <span class="comment-footer__date">{{ comment.date | date: 'MMM dd, yyyy' }}</span>
                     
                     </div><!-- Footer Ends -->
-                    
+
+                    <!-- Comment Select Menu -->
+                    <div *ngIf="authorizedUsername === comment.authorUsername" class="comment-select">
+                        <button class="comment-select__button" [matMenuTriggerFor]="replyCtrl">
+                            <mat-icon class="comment-select__more" >more_vert</mat-icon>
+                        </button>
+                        <mat-menu #replyCtrl="matMenu">
+                            <button mat-menu-item (click)="toggleEditComment(comment._id)">
+                                <mat-icon>edit</mat-icon>
+                                Edit
+                            </button>
+                            <button mat-menu-item (click)="toggleDeleteComment(comment._id)" >
+                                <mat-icon>delete</mat-icon>
+                                Delete
+                            </button>
+                        </mat-menu>
+                    </div><!-- Comment Select Menu Ends-->
 
                     <!-- Edit Comment Box -->
                     <div [@expandCollapse]="editArray.indexOf(comment._id) > -1 ? 'expanded' : 'collapsed'" class="post-comment__add-comment comment-textarea">
@@ -285,17 +293,28 @@
                     <!-- Reply Box -->
                     <div [@expandCollapse]="addReplyArray.indexOf(comment._id) > -1 ? 'expanded' : 'collapsed'" class="comment-textarea">
                         <!-- Form -->
-                        <form>
+                        <form [formGroup]="replyForm" (submit)="onPostReply()">
                         <!-- Textarea -->
                         <mat-form-field class="input">
-                            <textarea matInput placeholder="Reply to comment"></textarea>
+                            <textarea formControlName="replyComment" matInput placeholder="Reply to comment"></textarea>
+                            
+                            <mat-error *ngIf="replyForm.controls.replyComment.dirty && replyForm.controls.replyComment.errors?.required">
+                                The comment field is required.
+                            </mat-error>
+                            <mat-error *ngIf="replyForm.controls.replyComment.dirty && replyForm.controls.replyComment.errors?.maxlength">
+                                The comment must not exceed 2000 characters.
+                            </mat-error>
+                            <mat-error *ngIf="replyForm.controls.replyComment.dirty && replyForm.controls.replyComment.errors?.minlength">
+                                The comment must be at least 3 characters.
+                            </mat-error>
+
                         </mat-form-field><!-- Textarea Ends -->
                         <!-- Buttons-->
                         <div class="comment-textarea__buttons">
-                            <button (click)="loadAddReply(comment._id)" class="button button-medium button-default button-round">
+                            <button [disabled]="processing" type="button" (click)="loadAddReply(comment._id)" class="button button-medium button-default button-round">
                                 Cancel
                             </button>
-                            <button type="submit" class="button button-medium button-round button-green">
+                            <button [disabled]="!replyForm.valid || processing" type="submit" class="button button-medium button-round button-green">
                                 Submit
                             </button>
                         </div><!-- Buttons End -->
@@ -304,32 +323,39 @@
 
                     
                     <!-- Replied Comments -->
-                    <div [@expandCollapse]="allRepliesArray.indexOf(comment._id) > -1 ? 'expanded' : 'collapsed'" class="comment-reply">
+                    <div *ngFor="let reply of comment.replies" [@expandCollapse]="allRepliesArray.indexOf(comment._id) > -1 ? 'expanded' : 'collapsed'" class="post-comment__single-reply comment-reply">
                     
+                        <!-- Delete Reply Alert-->
+                        <div @fadeIn  *ngIf="deleteReplyArray.indexOf(reply._id) > -1" class="post-comment__inline-modal inline-modal">
+                            <p class="inline-modal__text">Are you sure you want to delete your comment?</p>
+                            <button [disabled]="processing" (click)="onDeleteReply()" class="inline-modal__button">Delete</button>
+                            <button [disabled]="processing" (click)="toggleDeleteReply(reply._id)" class="inline-modal__button">Cancel</button>
+                        </div><!-- Delete Reply Alert Finishes-->
+
                         <!-- user -->
                         <div class="comment-user">
-                        <img class="comment-user__img img img-circle img-tiny img-border" src="./assets/images/profile.jpg" alt="">
-                        <h1 class="comment-user__name">Hasrat Sabit</h1><br>
-                        <span class="comment-user__date">Jan 09, 2018</span>
+                            <img class="comment-user__img img img-circle img-tiny img-border" src="./assets/images/profile.jpg" alt="">
+                            <h1 class="comment-user__name">{{ reply.authorName }}</h1><br>
                         </div><!-- user Ends -->
                     
                         <!-- Text -->
                         <div class="comment-text">
-                        <p class="comment-text__para">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Laudantium id sed consectetur autem dolor nemo culpa aspernatur 
-                            in est quis quam distinctio rem eius officiis doloribus repellat 
-                            harum, asperiores deserunt!</p>
+                            <p class="comment-text__para">{{ reply.comment }}</p>
                         </div><!-- Text Ends -->
-
-                        <!-- Footer -->
-                        <div class="comment-footer">
-
-                            <div class="comment-footer__change-btns">
-                                <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Edit</button>
-                                <button *ngIf="authorizedUsername === comment.authorUsername" class="comment-footer__button">Delete</button>
-                            </div>
                         
-                        </div><!-- Footer Ends -->
+                        <!-- Comment Select Menu -->
+                        <div *ngIf="authorizedUsername === reply.authorUsername" class="comment-select">
+                            <button class="comment-select__button" [matMenuTriggerFor]="replyCtrl">
+                                <mat-icon class="comment-select__more" >more_vert</mat-icon>
+                            </button>
+                            <mat-menu #replyCtrl="matMenu">
+                                <button (click)="toggleDeleteReply(reply._id, comment._id)" mat-menu-item><mat-icon>delete</mat-icon>Delete</button>
+                            </mat-menu>
+                        </div><!-- Comment Select Menu Ends-->
+
+                        <div class="comment-footer">
+                            <span class="comment-footer__date">{{ reply.date | date: 'MMM dd, yyyy' }}</span>
+                        </div>
                     
                     </div><!-- Replied Comments Ends -->
                     
