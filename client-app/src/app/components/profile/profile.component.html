@@ -1,1 +1,179 @@
 
+<div class="profile">
+
+
+    <!-- Header -->
+    <div class="profile-header">
+        <img class="profile-header__bg-img" src="./assets/images/profile-bg.jpg" alt="">
+        <div class="profile-header__user-info">
+            <img class="profile-header__user-img img img-circle" src="./assets/images/profile.jpg" alt="">
+            <h1 class="profile-header__user-name">Hasrat Sabit</h1>
+            <h1 class="profile-header__user-title">Full Stack Developer</h1>
+            <h3 class="profile-header__user-location">Alexandria, VA</h3>
+            <button class="profile-header__update-btn blue-btn blue-btn-sm">update</button>
+        </div>
+    </div><!-- Header Ends -->
+
+
+    <!-- Skills and Tools Row -->
+    <div class="row">
+
+        <!-- Skill Col -->
+        <div class="col-2">
+
+            <!-- Skills -->
+            <div class="profile-table">
+                <div class="profile-table__header">
+                    <mat-icon class="profile-table__icon">code</mat-icon>
+                    <h1 class="profile-table__title">Programming Skills</h1>
+                    <button class="profile-table__add-btn">Add Skill</button>
+                </div>
+                <div class="profile-table__row">
+                    <span class="profile-table__data">1</span>
+                    <span class="profile-table__data">JavaScript</span>
+                    <span class="profile-table__data">Basic</span>
+                    <span class="profile-table__data">2 &nbsp; Years</span>
+                    <div class="profile-table__update-btn">
+                        <a href="" class="icon-btn">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a href="" class="icon-btn">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- Skills End -->
+
+        </div><!-- Skill Col Ends -->
+
+        <!-- Tool Col -->
+        <div class="col-2">
+
+            <!-- Tools -->
+            <div class="profile-table">
+                <div class="profile-table__header">
+                    <mat-icon class="profile-table__icon">build</mat-icon>
+                    <h1 class="profile-table__title">Programming Tools</h1>
+                    <button class="profile-table__add-btn">Add Tool</button>
+                </div>
+                <div class="profile-table__row">
+                    <span class="profile-table__data">1</span>
+                    <span class="profile-table__data">Visual Studio</span>
+                    <span class="profile-table__data">Basic</span>
+                    <span class="profile-table__data">2 &nbsp; Years</span>
+                    <div class="profile-table__update-btn">
+                        <a href="" class="icon-btn">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a href="" class="icon-btn">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- Tools End -->
+
+        </div> <!-- Tool Col Ends -->
+
+    </div><!-- Skills and Tools Row Ends-->
+
+
+    <!-- Projects -->
+    <div class="profile-table">
+        <div class="profile-table__header">
+            <mat-icon class="profile-table__icon">dns</mat-icon>
+            <h1 class="profile-table__title">Projects</h1>
+            <button class="profile-table__add-btn">Add Project</button>
+        </div>
+        <div class="profile-table__row">
+            <span class="profile-table__data">1</span>
+            <span class="profile-table__data">Online Shopping Web</span>
+            <span class="profile-table__data">Bootstrap</span>
+            <span class="profile-table__data">
+                <a href="" class="profile-table__link">Live Preview</a>
+            </span>
+            <div class="profile-table__update-btn">
+                <a href="" class="icon-btn">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="" class="icon-btn">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div><!-- Projects End -->
+
+
+    <!-- Experiance -->
+    <div class="profile-table">
+        <div class="profile-table__header">
+            <mat-icon class="profile-table__icon">work</mat-icon>
+            <h1 class="profile-table__title"> Experiance</h1>
+            <button class="profile-table__add-btn">Add Experiance</button>
+        </div>
+        <div (click)="toggleProfileRow()" class="profile-table__row">
+            <span class="profile-table__data">02, 2015 - 06, 2017</span>
+            <span class="profile-table__data">Diplomatic Language Service</span>
+            <span class="profile-table__data">Language Instructor</span>
+            <div class="profile-table__update-btn">
+                <mat-icon [ngClass]="profileRowIsExpanded ? 'arrowBtnUp' : 'arrowBtnDown'"  class="arrow-btn">keyboard_arrow_down</mat-icon>
+            </div>
+        </div>
+
+        <div [@expandCollapse]="profileRowIsExpanded ? 'expanded' : 'collapsed'" class="profile-table__row-detail">
+            <p class="profile-table__discription">
+                Accusantium, ad minus quisquam corporis dolor 
+                repudiandae vept dolorum nobis omnis laboriosam? 
+            </p>
+        </div>
+    </div><!-- Experiance End -->
+
+
+    <!-- Education -->
+    <div class="profile-table">
+        <div class="profile-table__header">
+            <mat-icon class="profile-table__icon">library_books</mat-icon>
+            <h1 class="profile-table__title">Education</h1>
+            <button class="profile-table__add-btn">Add Education</button>
+        </div>
+        <div class="profile-table__row">
+            <span class="profile-table__data">02, 2015 - 08, 2017</span>
+            <span class="profile-table__data">Goerge Mason University</span>
+            <span class="profile-table__data">Computer Science</span>
+            <div class="profile-table__update-btn">
+                <a href="" class="icon-btn">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="" class="icon-btn">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div><!-- Tools End -->
+
+
+    <!-- Publications -->
+    <div class="profile-table">
+        <div class="profile-table__header">
+            <mat-icon class="profile-table__icon">assignment</mat-icon>
+            <h1 class="profile-table__title">Publications</h1>
+            <button class="profile-table__add-btn">Add Publication</button>
+        </div>
+        <div class="profile-table__row">
+            <span class="profile-table__data">Jan 01, 2018</span>
+            <span class="profile-table__data">Learn JavaScript Algorithm</span>
+            <span class="profile-table__data">
+                <a href="" class="profile-table__link">Read</a>
+            </span>
+            <div class="profile-table__update-btn">
+                <a href="" class="icon-btn">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="" class="icon-btn">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div><!-- Projects End -->
+
+
+</div><!-- Profile Ends -->

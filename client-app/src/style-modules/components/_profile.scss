@@ -1,0 +1,228 @@
+
+
+.profile {
+    padding: 10px 0;
+}
+
+
+
+// HEADER
+.profile-header {
+    position: relative;
+    height: 310px;
+    width: 100%;
+    background: $white;
+    box-shadow: $shadow;
+
+    @include atMedium {
+        height: 400px;
+    }
+
+    &__bg-img {
+        width: 100%;
+        height: 150px;
+
+        @include atMedium {
+            height: 200px;
+        }
+    }
+
+    &__user-info {
+        transform: translateY(-50px);
+        text-align: center;
+        @include atMedium {
+            transform: translateY(-75px);  
+        }
+    }
+
+    &__user-img {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        border: 3px solid $LightGreen;
+        @include atMedium {
+            width: 130px;
+            height: 130px;
+        }
+    }
+
+    &__user-name,
+    &__user-title,
+    &__user-location {
+        font-family: $TableFont;
+        color: $Gray;
+        padding-top: 5px;
+    }
+
+    &__user-name {
+        text-transform: uppercase;
+        font-size: 1.1rem;
+        font-weight: 900;
+        @include atSmall {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__user-location,
+    &__user-title {
+        font-size: 0.8rem;
+        text-transform: capitalize;
+        font-weight: 100;
+    }
+
+    &__update-btn {
+        margin-top: 10px;
+    }
+}
+
+// TABLES
+.profile-table {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background: $white;
+    box-shadow: $shadow;
+    margin-top: 10px;
+    font-family: $TableFont;
+    color: $Gray;
+    transition: all 300ms ease-in-out;
+
+    &__header {
+       width: 100%;
+       padding: 10px 0;
+       border-bottom: $LightBorder; 
+    }
+
+    &__title,
+    &__icon {
+        display: inline-block;
+    }
+
+    &__icon {
+        font-size: 1rem;
+        margin-left: 10px;
+        transform: translateY(5px);
+        @include atSmall {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    }
+
+    &__title {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        @include atSmall {
+            font-size: 1rem;
+        }
+    }
+
+    &__add-btn {
+        visibility: hidden;
+        border: none;
+        background: $LightGray;
+        color: $Gray;
+        font-size: 0.5rem;
+        font-weight: 100;
+        padding: 8px;
+        border-radius: 2px;
+        float: right;
+        margin-right: 10px;
+        transform: translateY(-2px);
+        cursor: pointer;
+        &:hover,
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &:hover .profile-table__add-btn{
+        visibility: visible;
+    }
+
+    &__row {
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        text-align: center;
+        cursor: pointer;
+        border-bottom: $LightBorder;
+        transition: all 300ms ease-in-out;
+        &:hover,
+        &:focus,
+        &:active {
+            background: whitesmoke;
+        }
+    }
+
+    &__data {
+        font-size: 0.8rem;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: $LightBlue;
+    }
+
+    &__update-btn {
+        .icon-btn {
+            visibility: hidden;
+            margin-right: 10px;
+        }
+    }
+
+    &__row:hover .icon-btn {
+        visibility: visible;
+    }
+
+
+    .arrow-btn {
+        
+    }
+
+    &__row-detail {
+        background: whitesmoke;
+        border-bottom: $LightBorder;
+        padding: 15px 0;
+    }
+
+    &__discription {
+        font-size: 0.8rem;
+        padding: 0 10px;
+
+        @include atMedium {
+            padding: 0 20px;
+        }
+    }
+}
+
+
+// Arrow Animation 
+.arrowBtnUp {
+    
+    animation: arrow-up 300ms ease-in-out forwards;
+}
+
+@keyframes arrow-up {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+.arrowBtnDown {
+    animation: arrow-down 300ms ease-in-out forwards;
+}
+
+@keyframes arrow-down {
+    0% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}

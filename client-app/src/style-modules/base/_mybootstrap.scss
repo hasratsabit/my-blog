@@ -2436,3 +2436,61 @@ mat-option {
     font-size: 1rem;
   }
 }
+
+
+
+// ===============
+// 	BLUE BUTTON
+// ===============
+
+.blue-btn {
+  border: none;
+  font-weight: 100;
+  font-family: $TableFont;
+  text-transform: uppercase;
+  background: $DarkBlue;
+  cursor: pointer;
+  color: #FFF;
+  transition: all 300ms ease-in-out;
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: $MediumShadow;
+  }
+}
+
+.blue-btn-sm {
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.blue-btn-md {
+  border-radius: 2px;
+  font-size: 0.8rem;
+  padding: 13px 20px;
+}
+
+.blue-btn-lg {
+  width: 100%;
+  padding: 15px 0;
+  font-size: 1rem;
+}
+
+
+// ===============
+// 	ICON BUTTON
+// ===============
+
+.icon-btn {
+  text-decoration: none;
+
+  .fa-trash-o {
+    color: $LightRed;
+  }
+
+  .fa-pencil {
+    color: $Yellow;
+  }
+}
