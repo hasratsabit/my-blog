@@ -139,8 +139,7 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'profile',
-		component: ProfileComponent,
-		canActivate: [AuthGuard]
+		component: ProfileComponent
 	},
 	{
 		path: 'register',

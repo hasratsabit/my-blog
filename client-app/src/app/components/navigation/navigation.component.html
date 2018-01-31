@@ -148,12 +148,6 @@
     <ul class="mobile-list" [ngClass]="mobileNavExpanded ? 
                         'dropdownCollapsed' :
                         'dropdownExpanded'">
-
-      <li *ngIf="authService.userLoggedIn()">
-        <a routerLink="/profile" [routerLinkActive]="['active']">
-          <mat-icon>person</mat-icon>Profile</a>
-      </li>
-
       <li *ngIf="!authService.userLoggedIn()">
         <a routerLink="/login" [routerLinkActive]="['active']">
           <mat-icon>vpn_key</mat-icon>Login</a>
@@ -217,6 +211,10 @@
           <a routerLink="/email" [routerLinkActive]="['active']">
             <mat-icon>email</mat-icon>Email</a>
         </li>
+        <li>
+          <a routerLink="/profile" [routerLinkActive]="['active']">
+            <mat-icon>person</mat-icon>Profile</a>
+        </li>  
         <li *ngIf="authService.userLoggedIn()">
           <a routerLink="/parts" [routerLinkActive]="['active']">
             <mat-icon>settings_input_component</mat-icon>Components</a>
