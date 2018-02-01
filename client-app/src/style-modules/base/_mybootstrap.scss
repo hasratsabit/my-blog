@@ -2454,10 +2454,12 @@ mat-option {
   transition: all 300ms ease-in-out;
   text-align: center;
 
-  &:hover,
+  &:hover {
+    box-shadow: $MediumShadow;
+  }
+
   &:focus {
     outline: none;
-    box-shadow: $MediumShadow;
   }
 }
 
@@ -2492,5 +2494,44 @@ mat-option {
 
   .fa-pencil {
     color: $Yellow;
+  }
+}
+
+
+// ===============
+// 	INLINE FORM
+// ===============
+
+.inline-form {
+  width: 100%;
+  @include clearfix;
+
+  &__input {
+    display: block;
+    width: 100%;
+
+    @include atSmall {
+      float: left;
+      width: auto;
+      margin-right: 5px;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    margin-top: 10px;
+    @include atSmall {
+      width: auto;
+      margin-top: 10px;
+      margin-left: 5px;
+      float: left;
+    }
+    .blue-btn {
+      width: 100%;
+      @include atSmall {
+        display: inline;
+        width: auto;
+      }
+    }
   }
 }

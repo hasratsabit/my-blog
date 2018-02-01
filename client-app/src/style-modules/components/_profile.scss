@@ -9,14 +9,10 @@
 // HEADER
 .profile-header {
     position: relative;
-    height: 310px;
+    height: auto;
     width: 100%;
-    background: $white;
+    background: whitesmoke;
     box-shadow: $shadow;
-
-    @include atMedium {
-        height: 400px;
-    }
 
     &__bg-img {
         width: 100%;
@@ -72,6 +68,43 @@
 
     &__update-btn {
         margin-top: 10px;
+    }
+
+    &__social-media {
+        padding-top: 20px;
+
+        a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .fa {
+            font-size: 1.1rem;
+            opacity: 0.5;
+            transition: all 300ms ease-in-out;
+            &:hover {
+                opacity: 1;
+            }
+            // color: #FFF;
+            // padding: 8px 10px;
+            // border-radius: 50%;
+        }
+
+        .fa-twitter {color: $LightBlue}
+        .fa-instagram {color: $DarkPurple}
+        .fa-linkedin {color: $DarkBlue}
+        .fa-github {color: $LightGreen}
+    }
+
+    // Header Form
+    &__form {
+        width: 90%;
+        margin-left: 5%;
+        padding-bottom: 20px;
+        @include atSmall {
+            width: 95%;
+            margin-left: 2.5%;
+        }
     }
 }
 
@@ -139,6 +172,31 @@
         visibility: visible;
     }
 
+    // Table Form 
+    &__form {
+        width: 90%;
+        margin-left: 5%;
+        padding-bottom: 20px;
+        margin-top: 10px;
+        @include atSmall {
+            width: 95%;
+            margin-left: 2.5%;
+        }
+    }
+
+    // Objective Form
+    &__objective-textarea {
+        @include atSmall {
+            width: 100% !important;
+        }
+    }
+
+    &__objective-button {
+        @include atSmall {
+            float: right;
+        }
+    }
+
     &__row {
         position: relative;
         display: flex;
@@ -146,12 +204,13 @@
         padding: 10px 0;
         text-align: center;
         cursor: pointer;
+        background: whitesmoke;
         border-bottom: $LightBorder;
         transition: all 300ms ease-in-out;
         &:hover,
         &:focus,
         &:active {
-            background: whitesmoke;
+            background: $white;
         }
     }
 

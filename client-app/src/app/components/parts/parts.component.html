@@ -1374,7 +1374,7 @@
 <button class="blue-btn blue-btn-lg ">Blue Lg</button>
 
 <hr class="divider">
-<h1>Edit Delete</h1>
+<h1>Edit Delete Buttons</h1>
 
   <a href="" class="icon-btn">
     <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -1384,4 +1384,31 @@
     <i class="fa fa-trash-o" aria-hidden="true"></i>
   </a>
 </div>
+</div>
+
+
+<hr class="divider">
+<h1>Inline Form</h1>
+
+<div class="inline-form">
+  <form>
+      <mat-form-field class="inline-form__input">
+          <input name="title"  matInput type="text" placeholder="Title" #title maxlength="100" required>
+          <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="inline-form__input">
+          <input name="title"  matInput type="text" placeholder="Title" #title maxlength="100" required>
+          <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="inline-form__input">
+          <input name="title"  matInput type="text" placeholder="Title" #title maxlength="100" required>
+          <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+      </mat-form-field>
+      <div class="inline-form__button">
+        <button class="blue-btn blue-btn-sm">Submit</button>
+      </div>
+  </form>
+  <div class="inline-form__button">
+      <button class="blue-btn blue-btn-sm">Cancel</button>
+  </div>
 </div>

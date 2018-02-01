@@ -16,10 +16,39 @@ export class ProfileComponent implements OnInit {
   name = '';
   role = ''
 
+
   constructor(
     private profileService: ProfileService,
     private userService: UserService
   ) { }
+
+// ==========================================================
+// 		 					    HEADER PROFILE
+// ==========================================================
+  headerFormIsLoaded = false;
+
+  toggleHeaderForm() {
+    this.headerFormIsLoaded = !this.headerFormIsLoaded;
+  }
+
+// ==========================================================
+// 		 					          OBJECTIVE
+// ==========================================================
+  objectiveFormLoaded = false;
+
+  toggleObjectiveForm(){
+    this.objectiveFormLoaded = !this.objectiveFormLoaded
+  }
+
+// ==========================================================
+// 		 					          SKILL
+// ==========================================================
+  skillFormIsLoaded = false;
+
+  toggleSkillForm(){
+    this.skillFormIsLoaded = !this.skillFormIsLoaded;
+  }
+
 
 
   toggleProfileRow(){
@@ -27,12 +56,43 @@ export class ProfileComponent implements OnInit {
   }
 
 
+// ==========================================================
+// 		 					          TOOL 
+// ==========================================================
+ toolFormIsLoaded = false;
+
+ toggleToolForm(){
+   this.toolFormIsLoaded = !this.toolFormIsLoaded;
+ }
 
 
+// ==========================================================
+// 		 					          PROJECT 
+// ==========================================================
+ projectFormIsLoaded = false;
+
+ toggleProjectForm(){
+   this.projectFormIsLoaded = !this.projectFormIsLoaded;
+ }
 
 
+ // ==========================================================
+// 		 					          EXPERIANCE 
+// ==========================================================
+  experianceFormIsLoaded = false;
 
+ toggleExperianceForm(){
+    this.experianceFormIsLoaded = !this.experianceFormIsLoaded;
+ }
 
+// ==========================================================
+// 		 					          EXPERIANCE 
+// ==========================================================
+  educationFormIsLoaded = false;
+  
+  toggleEducationForm(){
+      this.educationFormIsLoaded = !this.educationFormIsLoaded;
+  }
   ngOnInit() {
     this.userService.getUserProfile().subscribe(data => {
       this.name = data.name;
