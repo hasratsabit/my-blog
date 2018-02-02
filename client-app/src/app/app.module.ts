@@ -1,3 +1,4 @@
+import { SkillComponent } from './components/profile/skill/skill.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -65,6 +66,14 @@ import { EditForumComponent } from './components/forum/edit-forum/edit-forum.com
 import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
 import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
 import { BlogPipe } from './pipes/blog.pipe';
+import { ToolComponent } from './components/profile/tool/tool.component';
+import { ProjectComponent } from './components/profile/project/project.component';
+import { ExperianceComponent } from './components/profile/experiance/experiance.component';
+import { EducationComponent } from './components/profile/education/education.component';
+import { ObjectiveComponent } from './components/profile/objective/objective.component';
+import { PersonalComponent } from './components/profile/personal/personal.component';
+import { PublicationComponent } from './components/profile/publication/publication.component';
+
 
 
 
@@ -80,6 +89,7 @@ import { BlogPipe } from './pipes/blog.pipe';
     ForumComponent,
     DashboardComponent,
     ProfileComponent,
+    SkillComponent,
     EmailComponent,
     CommentComponent,
     RegisterComponent,
@@ -99,7 +109,14 @@ import { BlogPipe } from './pipes/blog.pipe';
     EditForumComponent,
     DeleteForumComponent,
     ReadMoreComponent,
-    BlogPipe
+    BlogPipe,
+    ToolComponent,
+    ProjectComponent,
+    ExperianceComponent,
+    EducationComponent,
+    ObjectiveComponent,
+    PersonalComponent,
+    PublicationComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ const blogsRoute = require('./routes/blogs')(router);
 const commentRoute = require('./routes/comments')(router);
 const usersRoute = require('./routes/users')(router);
 const categoryRoute = require('./routes/categories')(router);
-const profileRoute = require('./routes/profile')(router);
+const profileRoute = require('./routes/profile/profile');
 // const contactRoute = require('./routes/contact')(router);
 
 

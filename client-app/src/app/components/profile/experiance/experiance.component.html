@@ -1,0 +1,64 @@
+<!-- Experiance -->
+<div class="profile-table">
+    <div class="profile-table__header">
+        <mat-icon class="profile-table__icon">work</mat-icon>
+        <h1 class="profile-table__title"> Experiance</h1>
+        <button *ngIf="!experianceFormIsLoaded" (click)="toggleExperianceForm()" class="profile-table__add-btn">Add Experiance</button>
+    </div>
+
+    <!-- Experiance Form -->
+    <div *ngIf="experianceFormIsLoaded" class="profile-table__form inline-form">
+        <form>
+
+        <!-- Started Picker  -->
+            <mat-form-field class="inline-form__input">
+                <input matInput [matDatepicker]="started" placeholder="Start">
+                <mat-datepicker-toggle matSuffix [for]="started"></mat-datepicker-toggle>
+                <mat-datepicker #started></mat-datepicker>
+            </mat-form-field><!-- started Picker Ends  -->
+
+            <!-- Ended Picker  -->
+            <mat-form-field class="inline-form__input">
+                <input matInput [matDatepicker]="ended" placeholder="End">
+                <mat-datepicker-toggle matSuffix [for]="ended"></mat-datepicker-toggle>
+                <mat-datepicker #ended></mat-datepicker>
+            </mat-form-field><!-- Ended Picker Ends  -->        
+
+            <!-- company  -->
+            <mat-form-field class="inline-form__input">
+                <input name="company" maxlength="100" matInput placeholder="Company" #company required>
+                <mat-hint align="end">{{company.value?.length || 0}}/100</mat-hint>
+            </mat-form-field><!-- company Ends -->
+
+            <!-- Position  -->
+            <mat-form-field class="inline-form__input">
+                <input name="position" maxlength="100" matInput placeholder="Position" #position required>
+                <mat-hint align="end">{{position.value?.length || 0}}/100</mat-hint>
+            </mat-form-field><!-- Position Ends -->
+
+            <div class="inline-form__button">
+                <button class="blue-btn blue-btn-sm">Submit</button>
+            </div>
+        </form>
+        <div class="inline-form__button">
+            <button (click)="toggleExperianceForm()"  class="blue-btn blue-btn-sm">Cancel</button>
+        </div>
+    </div><!-- Experiance Form Ends -->
+
+    <div (click)="toggleProfileRow()" class="profile-table__row">
+        <span class="profile-table__data">02, 2015 - 06, 2017</span>
+        <span class="profile-table__data">Diplomatic Language Service</span>
+        <span class="profile-table__data">Language Instructor</span>
+        <div class="profile-table__update-btn">
+            <mat-icon [ngClass]="profileRowIsExpanded ? 'arrowBtnUp' : 'arrowBtnDown'"  class="arrow-btn">keyboard_arrow_down</mat-icon>
+        </div>
+    </div>
+
+    <div [@expandCollapse]="profileRowIsExpanded ? 'expanded' : 'collapsed'" class="profile-table__row-detail">
+        <p class="profile-table__discription">
+            Accusantium, ad minus quisquam corporis dolor 
+            repudiandae vept dolorum nobis omnis laboriosam? 
+        </p>
+    </div>
+</div><!-- Experiance End -->
+

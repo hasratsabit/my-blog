@@ -1,0 +1,51 @@
+ <!-- Header -->
+ <div class="profile-header">
+  <img class="profile-header__bg-img" src="./assets/images/profile-bg.jpg" alt="">
+  <div class="profile-header__user-info">
+      <img class="profile-header__user-img img img-circle" src="./assets/images/profile.jpg" alt="">
+      <h1 class="profile-header__user-name">Hasrat Sabit</h1>
+      <h1 class="profile-header__user-title">Full Stack Developer</h1>
+      <h3 class="profile-header__user-location">Alexandria, VA</h3>
+      <div class="profile-header__social-media">
+          <a href="https://twitter.com/HasratSabit"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+          <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
+      </div>
+      <button *ngIf="!headerFormIsLoaded" (click)="toggleHeaderForm()" class="profile-header__update-btn blue-btn blue-btn-sm">update</button>
+  </div>
+
+  <!-- Header Form -->
+  <div *ngIf="headerFormIsLoaded" class="profile-header__form inline-form">
+      <form>
+          <mat-form-field class="inline-form__input">
+              <input name="title"  matInput type="text" placeholder="Title" #title maxlength="100" required>
+              <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="inline-form__input">
+              <input name="location"  matInput type="text" placeholder="Location" #location maxlength="100" required>
+              <mat-hint align="end">{{location.value?.length || 0}}/100</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="inline-form__input">
+              <input name="twitter"  matInput type="text" placeholder="Twitter" #twitter maxlength="100" required>
+          </mat-form-field>
+          <!-- <mat-form-field class="inline-form__input">
+              <input name="instagram"  matInput type="text" placeholder="Instagram" #instagram maxlength="100" required>
+          </mat-form-field> -->
+          <mat-form-field class="inline-form__input">
+              <input name="linkedin"  matInput type="text" placeholder="Linkedin" #linkedin maxlength="100" required>
+          </mat-form-field>
+          <mat-form-field class="inline-form__input">
+              <input name="github"  matInput type="text" placeholder="Github" #github maxlength="100" required>
+          </mat-form-field>
+          <div class="inline-form__button">
+              <button class="blue-btn blue-btn-sm">Submit</button>
+          </div>
+      </form>
+      <div class="inline-form__button">
+          <button (click)="toggleHeaderForm()" class="blue-btn blue-btn-sm">Cancel</button>
+      </div>
+  </div><!-- Header Form Ends -->
+
+
+</div><!-- Header Ends -->

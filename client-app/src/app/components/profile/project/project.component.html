@@ -1,0 +1,57 @@
+  <!-- Projects -->
+  <div class="profile-table">
+      <div class="profile-table__header">
+          <mat-icon class="profile-table__icon">dns</mat-icon>
+          <h1 class="profile-table__title">Projects</h1>
+          <button *ngIf="!projectFormIsLoaded" (click)="toggleProjectForm()"  class="profile-table__add-btn">Add Project</button>
+      </div>
+
+      <!-- Project Form -->
+      <div *ngIf="projectFormIsLoaded" class="profile-table__form inline-form">
+          <form>
+
+              <!-- title  -->
+              <mat-form-field class="inline-form__input">
+                  <input name="title" maxlength="100" matInput placeholder="Project Name" #title required>
+                  <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+              </mat-form-field><!-- title Ends -->
+              
+              <!-- language  -->
+              <mat-form-field class="inline-form__input">
+                  <input name="language" maxlength="100" matInput placeholder="Technology" #language required>
+                  <mat-hint align="end">{{language.value?.length || 0}}/100</mat-hint>
+              </mat-form-field><!-- Language Ends -->
+
+              <!-- Link  -->
+              <mat-form-field class="inline-form__input">
+                  <input name="link" maxlength="100" matInput placeholder="Url" #link required>
+                  <mat-hint align="end">{{link.value?.length || 0}}/100</mat-hint>
+              </mat-form-field><!-- Language Ends -->
+
+              <div class="inline-form__button">
+                  <button class="blue-btn blue-btn-sm">Submit</button>
+              </div>
+          </form>
+          <div class="inline-form__button">
+              <button (click)="toggleProjectForm()"   class="blue-btn blue-btn-sm">Cancel</button>
+          </div>
+      </div><!-- Project Form Ends -->
+
+      <div class="profile-table__row">
+          <span class="profile-table__data">1</span>
+          <span class="profile-table__data">Online Shopping Web</span>
+          <span class="profile-table__data">Bootstrap</span>
+          <span class="profile-table__data">
+              <a href="" class="profile-table__link">Live Preview</a>
+          </span>
+          <div class="profile-table__update-btn">
+              <a href="" class="icon-btn">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+              <a href="" class="icon-btn">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </a>
+          </div>
+      </div>
+  </div><!-- Projects End -->
+

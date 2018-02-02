@@ -1,0 +1,37 @@
+    <!-- Objectives -->
+    <div class="profile-table">
+      <div class="profile-table__header">
+          <mat-icon class="profile-table__icon">language</mat-icon>
+          <h1 class="profile-table__title">Objectives</h1>
+          <button *ngIf="!objectiveFormLoaded" (click)="toggleObjectiveForm()" class="profile-table__add-btn">Add Objective</button>
+      </div>
+
+      <!-- Objective Form -->
+      <div *ngIf="objectiveFormLoaded" class="profile-table__form inline-form">
+          <form>
+              <mat-form-field class="profile-table__objective-textarea inline-form__input">
+                  <textarea name="objective" maxlength="500" matInput placeholder="Objective" #objective required></textarea>
+                  <mat-hint align="end">{{objective.value?.length || 0}}/500</mat-hint>
+              </mat-form-field>
+              <div class="profile-table__objective-button inline-form__button">
+                  <button class="blue-btn blue-btn-sm">Submit</button>
+              </div>
+          </form>
+          <div class="profile-table__objective-button inline-form__button">
+              <button (click)="toggleObjectiveForm()" class="blue-btn blue-btn-sm">Cancel</button>
+          </div>
+      </div><!-- Objective Form Ends -->
+
+      <div class="profile-table__row-detail">
+          <p class="profile-table__discription">
+              Accusantium, ad minus quisquam corporis dolor 
+              repudiandae vept dolorum nobis omnis laboriosam? 
+              Accusantium, ad minus quisquam corporis dolor 
+              repudiandae vept dolorum nobis omnis laboriosam? 
+              Accusantium, ad minus quisquam corporis dolor 
+              repudiandae vept dolorum nobis omnis laboriosam? 
+              Accusantium, ad minus quisquam corporis dolor 
+              repudiandae vept dolorum nobis omnis laboriosam? 
+          </p>
+      </div>
+  </div><!-- Objectives End -->  

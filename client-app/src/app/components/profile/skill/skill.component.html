@@ -1,0 +1,65 @@
+<!-- Skill Col -->
+<div class="col-2">
+
+    <!-- Skills -->
+    <div class="profile-table">
+        <!-- Skills Header-->
+        <div class="profile-table__header">
+            <mat-icon class="profile-table__icon">code</mat-icon>
+            <h1 class="profile-table__title">Programming Skills</h1>
+            <button *ngIf="!skillFormIsLoaded" (click)="toggleSkillForm()"  class="profile-table__add-btn">Add Skill</button>
+        </div><!-- Skills Header End-->
+
+        <!-- Skill Form -->
+        <div *ngIf="skillFormIsLoaded" class="profile-table__form inline-form">
+            <form>
+
+                <!-- Language  -->
+                <mat-form-field class="inline-form__input">
+                    <input name="language" maxlength="100" matInput placeholder="Skill" #language required>
+                    <mat-hint align="end">{{language.value?.length || 0}}/100</mat-hint>
+                </mat-form-field><!-- Language Ends -->
+                
+                <!-- Level  -->
+                <mat-form-field  class="inline-form__input">
+                    <mat-select placeholder="Choose Level">
+                        <mat-option value="basic">Basic</mat-option>
+                        <mat-option value="midlevel">Mid Level</mat-option>
+                        <mat-option value="advance">Advance</mat-option>
+                    </mat-select>
+                </mat-form-field><!-- Level End  -->
+                
+                <!-- Date Picker  -->
+                <mat-form-field class="inline-form__input">
+                    <input matInput [matDatepicker]="picker" placeholder="Since">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field><!-- Date Picker Ends  -->
+
+
+                <div class="inline-form__button">
+                    <button class="blue-btn blue-btn-sm">Submit</button>
+                </div>
+            </form>
+            <div class="inline-form__button">
+                <button (click)="toggleSkillForm()" class="blue-btn blue-btn-sm">Cancel</button>
+            </div>
+        </div><!-- Skill Form Ends -->
+
+        <div class="profile-table__row">
+            <span class="profile-table__data">1</span>
+            <span class="profile-table__data">JavaScript</span>
+            <span class="profile-table__data">Basic</span>
+            <span class="profile-table__data">2 &nbsp; Years</span>
+            <div class="profile-table__update-btn">
+                <a href="" class="icon-btn">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a href="" class="icon-btn">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div><!-- Skills End -->
+
+</div><!-- Skill Col Ends -->

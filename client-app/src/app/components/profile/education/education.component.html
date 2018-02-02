@@ -1,0 +1,62 @@
+  <!-- Education -->
+  <div class="profile-table">
+      <div class="profile-table__header">
+          <mat-icon class="profile-table__icon">library_books</mat-icon>
+          <h1 class="profile-table__title">Education</h1>
+          <button *ngIf="!educationFormIsLoaded" (click)="toggleEducationForm()" class="profile-table__add-btn">Add Education</button>
+      </div>
+
+      <!-- Education Form -->
+      <div *ngIf="educationFormIsLoaded" class="profile-table__form inline-form">
+          <form>
+
+          <!-- Started Picker  -->
+              <mat-form-field class="inline-form__input">
+                  <input matInput [matDatepicker]="started" placeholder="Start">
+                  <mat-datepicker-toggle matSuffix [for]="started"></mat-datepicker-toggle>
+                  <mat-datepicker #started></mat-datepicker>
+              </mat-form-field><!-- started Picker Ends  -->
+
+              <!-- Ended Picker  -->
+              <mat-form-field class="inline-form__input">
+                  <input matInput [matDatepicker]="ended" placeholder="End">
+                  <mat-datepicker-toggle matSuffix [for]="ended"></mat-datepicker-toggle>
+                  <mat-datepicker #ended></mat-datepicker>
+              </mat-form-field><!-- Ended Picker Ends  -->        
+
+              <!-- school  -->
+              <mat-form-field class="inline-form__input">
+                  <input name="school" maxlength="100" matInput placeholder="School" #school required>
+                  <mat-hint align="end">{{school.value?.length || 0}}/100</mat-hint>
+              </mat-form-field><!-- school Ends -->
+
+              <!-- Major  -->
+              <mat-form-field class="inline-form__input">
+                  <input name="major" maxlength="100" matInput placeholder="Major" #major required>
+                  <mat-hint align="end">{{major.value?.length || 0}}/100</mat-hint>
+              </mat-form-field><!-- major Ends -->
+
+              <div class="inline-form__button">
+                  <button class="blue-btn blue-btn-sm">Submit</button>
+              </div>
+          </form>
+          <div class="inline-form__button">
+              <button (click)="toggleEducationForm()"  class="blue-btn blue-btn-sm">Cancel</button>
+          </div>
+      </div><!-- Experiance Form Ends -->
+
+
+      <div class="profile-table__row">
+          <span class="profile-table__data">02, 2015 - 08, 2017</span>
+          <span class="profile-table__data">Goerge Mason University</span>
+          <span class="profile-table__data">Computer Science</span>
+          <div class="profile-table__update-btn">
+              <a href="" class="icon-btn">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+              </a>
+              <a href="" class="icon-btn">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </a>
+          </div>
+      </div>
+  </div><!-- Tools End -->
