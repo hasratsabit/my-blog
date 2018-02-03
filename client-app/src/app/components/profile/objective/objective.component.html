@@ -7,7 +7,7 @@
       </div>
 
       <!-- Objective Form -->
-      <div *ngIf="objectiveFormLoaded" class="profile-table__form inline-form">
+      <div  [@expandCollapse]="objectiveFormLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
           <form>
               <mat-form-field class="profile-table__objective-textarea inline-form__input">
                   <textarea name="objective" maxlength="500" matInput placeholder="Objective" #objective required></textarea>

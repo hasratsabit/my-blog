@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { expandCollapse } from '../../../animations/animation';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  styleUrls: ['./project.component.scss'],
+  animations: [expandCollapse]
 })
 export class ProjectComponent implements OnInit {
 

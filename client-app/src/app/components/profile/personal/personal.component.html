@@ -2,7 +2,10 @@
  <div class="profile-header">
   <img class="profile-header__bg-img" src="./assets/images/profile-bg.jpg" alt="">
   <div class="profile-header__user-info">
-      <img class="profile-header__user-img img img-circle" src="./assets/images/profile.jpg" alt="">
+      <div class="profile-header__user-img-wrapper">
+        <span (click)="toggleProfileUploader()" class="img-btn"><mat-icon>camera_alt</mat-icon></span>
+        <img class="profile-header__user-img img img-circle" src="./assets/images/profile.jpg" alt="">
+      </div>
       <h1 class="profile-header__user-name">Hasrat Sabit</h1>
       <h1 class="profile-header__user-title">Full Stack Developer</h1>
       <h3 class="profile-header__user-location">Alexandria, VA</h3>
@@ -15,8 +18,40 @@
       <button *ngIf="!headerFormIsLoaded" (click)="toggleHeaderForm()" class="profile-header__update-btn blue-btn blue-btn-sm">update</button>
   </div>
 
+    <!-- Upload Image Plate Dark Layer-->
+    <div [ngClass]="{'expand-layer': profileImageUpload, 'collapse-layer': !profileImageUpload}" class="dark-layer">
+        <div class="col-3">
+            <!-- Image Upload Plate -->
+            <div class="plate">
+                <!-- Header -->
+                <div class="plate__header">
+                    <h1 class="plate__title">Upload</h1>
+                    <div (click)="toggleProfileUploader()" class="plate__close">
+                        <mat-icon>clear</mat-icon>
+                    </div>
+                </div><!-- Header Ends -->
+                
+                <!-- Body -->
+                <div class="plate__body">
+                    <h1 class="plate__message">Upload your image here.</h1>
+                    <!-- Upload  -->
+                    <div class="upload">
+                        <input class="upload__input" type="file">
+                    </div>
+                </div><!-- Body Ends -->
+                
+                <!-- Footer -->
+                <div class="plate__footer">
+                    <button (click)="toggleProfileUploader()"  class="plate__button button button-default button-small">Cancel</button>
+                    <button class="plate__button button button-blue button-small">Upload</button>
+                </div><!-- Footer Ends -->
+            </div><!-- Image Upload Plate Ends-->  
+        </div>
+    </div><!-- Upload Image Plate Dark Layer Ends-->
+
+
   <!-- Header Form -->
-  <div *ngIf="headerFormIsLoaded" class="profile-header__form inline-form">
+  <div [@expandCollapse]="headerFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-header__form inline-form">
       <form>
           <mat-form-field class="inline-form__input">
               <input name="title"  matInput type="text" placeholder="Title" #title maxlength="100" required>

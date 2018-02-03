@@ -10,7 +10,7 @@
         </div>
 
         <!-- Tool Form -->
-        <div *ngIf="toolFormIsLoaded" class="profile-table__form inline-form">
+        <div [@expandCollapse]="toolFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
             <form>
 
                 <!-- Tool  -->

@@ -133,7 +133,6 @@
   border: none;
   cursor: pointer;
   font-family: $ButtonFont;
-  border-radius: 3px;
   &:disabled,
   [disabled] {
     opacity: 0.5;
@@ -259,10 +258,8 @@
 
 .button-blue {
   background: $ButtonBlue;
-  &:hover,
-  &:active,
-  &:focus {
-    background: $ButtonBlueHover;
+  &:hover {
+    box-shadow: $MediumShadow;
   }
 }
 
@@ -2533,5 +2530,73 @@ mat-option {
         width: auto;
       }
     }
+  }
+}
+
+
+// ===============
+// 	PLATE
+// ===============
+
+.plate {
+  width: 100%;
+  background: $white;
+  font-family: $TableFont;
+  box-shadow: $MediumShadow;
+  @include clearfix;
+
+  &__header,
+  &__body,
+  &__footer {
+    width: 100%;
+    float: left;
+  }
+
+  &__header {
+    position: relative;
+    background: $DarkBlue;
+  }
+
+  &__title {
+    padding: 15px 10px;
+    color: #FFF;
+    font-size: 0.9rem;
+    font-weight: 100;
+    text-transform: uppercase;
+  }
+
+  &__close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    mat-icon {
+      color: #FFF;
+      cursor: pointer;
+    }
+  }
+
+
+  // Body 
+  &__body {
+    padding: 10px 0;
+  }
+
+  &__message {
+    font-size: 1rem;
+    color: $Gray;
+    padding: 10px;
+  }
+
+
+  // Footer 
+  &__footer {
+    border-top: $LightBorder;
+    padding: 10px 0;
+  }
+  
+  &__button {
+    float: right;
+    margin-right: 10px;
   }
 }

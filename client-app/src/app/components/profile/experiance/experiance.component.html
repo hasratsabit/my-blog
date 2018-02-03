@@ -7,7 +7,7 @@
     </div>
 
     <!-- Experiance Form -->
-    <div *ngIf="experianceFormIsLoaded" class="profile-table__form inline-form">
+    <div [@expandCollapse]="experianceFormIsLoaded ? 'expanded' : 'collapsed'"  class="profile-table__form inline-form">
         <form>
 
         <!-- Started Picker  -->
@@ -45,16 +45,16 @@
         </div>
     </div><!-- Experiance Form Ends -->
 
-    <div (click)="toggleProfileRow()" class="profile-table__row">
+    <div (click)="toggleExperianceRow()" class="profile-table__row">
         <span class="profile-table__data">02, 2015 - 06, 2017</span>
         <span class="profile-table__data">Diplomatic Language Service</span>
         <span class="profile-table__data">Language Instructor</span>
         <div class="profile-table__update-btn">
-            <mat-icon [ngClass]="profileRowIsExpanded ? 'arrowBtnUp' : 'arrowBtnDown'"  class="arrow-btn">keyboard_arrow_down</mat-icon>
+            <mat-icon [ngClass]="experianceRowIsLoaded ? 'arrowBtnUp' : 'arrowBtnDown'"  class="arrow-btn">keyboard_arrow_down</mat-icon>
         </div>
     </div>
 
-    <div [@expandCollapse]="profileRowIsExpanded ? 'expanded' : 'collapsed'" class="profile-table__row-detail">
+    <div [@expandCollapse]="experianceRowIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__row-detail">
         <p class="profile-table__discription">
             Accusantium, ad minus quisquam corporis dolor 
             repudiandae vept dolorum nobis omnis laboriosam? 

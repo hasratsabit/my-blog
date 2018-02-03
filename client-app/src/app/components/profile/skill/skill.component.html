@@ -11,7 +11,7 @@
         </div><!-- Skills Header End-->
 
         <!-- Skill Form -->
-        <div *ngIf="skillFormIsLoaded" class="profile-table__form inline-form">
+        <div [@expandCollapse]="skillFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
             <form>
 
                 <!-- Language  -->

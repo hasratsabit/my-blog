@@ -16,12 +16,12 @@ export class ExperianceComponent implements OnInit {
 // 		 					          EXPERIANCE 
 // ==========================================================
 experianceFormIsLoaded = false;
-profileRowIsExpanded = false;
+experianceRowIsLoaded = false;
 
 
 
-toggleProfileRow(){
-  this.profileRowIsExpanded = !this.profileRowIsExpanded;
+toggleExperianceRow(){
+  this.experianceRowIsLoaded = !this.experianceRowIsLoaded;
 }
 
 

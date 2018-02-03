@@ -7,7 +7,7 @@
       </div>
 
       <!-- Project Form -->
-      <div *ngIf="projectFormIsLoaded" class="profile-table__form inline-form">
+      <div [@expandCollapse]="projectFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
           <form>
 
               <!-- title  -->

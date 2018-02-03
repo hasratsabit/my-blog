@@ -7,7 +7,7 @@
       </div>
 
       <!-- Education Form -->
-      <div *ngIf="educationFormIsLoaded" class="profile-table__form inline-form">
+      <div [@expandCollapse]="educationFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
           <form>
 
           <!-- Started Picker  -->
