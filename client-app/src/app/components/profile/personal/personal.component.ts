@@ -209,7 +209,9 @@ uploadSuccessIcon = false;
       }
     }
 
-
+// ==========================================================
+// 		 					      UPLOAD PROFILE IMAGE
+// ==========================================================
     onUploadImage(){
       this.processing = true;
       this.profileService.updateProfileImage(this.url.username, this.formData)
