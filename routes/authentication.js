@@ -1,4 +1,5 @@
 const User = require('../model/user');
+const Profile = require('../model/profile');
 const jwt = require('jsonwebtoken');
 
 const config = require('../config/database');
@@ -33,40 +34,52 @@ module.exports = (router) => {
 				password: req.body.password
 			});
 
-			// Save object.
-			user.save((err) => {
-				// Check for error.
+			const profile = new Profile({
+				username: req.body.username,
+				name: req.body.name,
+				email: req.body.email
+			});
+
+			profile.save((err) => {
 				if(err){
-					// Check if it is a username or email duplicate error.
-					if(err.code === 11000){
-						res.json({ success: false, message: 'E-mail or Username already exist.'});
-					}else {
-						// Check if it is a validation error.
-						if(err.errors){
-							// Check if it is name validation error.
-							if(err.errors.name){
-								res.json({ success: false, message: err.errors.name.message });
-							// Check if it is username validation error.
-							}else if (err.errors.username) {
-								res.json({ success: false, message: err.errors.username.message });
-							// Check if it is email validation error.
-							}else if (err.errors.email) {
-								res.json({ success: false, message: err.errors.email.message });
-							// Check if it is password validation error.
-							}else if (err.errors.password) {
-								res.json({ success: false, message: err.errors.password.message });
+					res.json({ success: false, message: 'Error occurred saving profile.' + err});
+				}else {
+					// Save object.
+					user.save((err) => {
+						// Check for error.
+						if(err){
+							// Check if it is a username or email duplicate error.
+							if(err.code === 11000){
+								res.json({ success: false, message: 'E-mail or Username already exist.'});
 							}else {
-								// Respond if it is any othe validation error.
-								res.json({ success: false, message:  err });
+								// Check if it is a validation error.
+								if(err.errors){
+									// Check if it is name validation error.
+									if(err.errors.name){
+										res.json({ success: false, message: err.errors.name.message });
+									// Check if it is username validation error.
+									}else if (err.errors.username) {
+										res.json({ success: false, message: err.errors.username.message });
+									// Check if it is email validation error.
+									}else if (err.errors.email) {
+										res.json({ success: false, message: err.errors.email.message });
+									// Check if it is password validation error.
+									}else if (err.errors.password) {
+										res.json({ success: false, message: err.errors.password.message });
+									}else {
+										// Respond if it is any othe validation error.
+										res.json({ success: false, message:  err });
+									}
+								}else {
+									// Respond if it is any error other than validation.
+									res.json({ success: false, message: 'Could not save user. Error: ', err });
+								}
 							}
 						}else {
-							// Respond if it is any error other than validation.
-							res.json({ success: false, message: 'Could not save user. Error: ', err });
+							// Respond with success message once the validaiton test is passed.
+							res.json({ success: true, message: 'Account successfully created.'})
 						}
-					}
-				}else {
-					// Respond with success message once the validaiton test is passed.
-					res.json({ success: true, message: 'Account successfully created.'})
+					})
 				}
 			})
 		}

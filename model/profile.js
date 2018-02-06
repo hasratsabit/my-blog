@@ -45,6 +45,8 @@ let valueValidators = [
 // ==========================================================
 
 
+
+
 // SKILLS 
 const Skill = new Schema({
     language: { type: String, validate: valueValidators },
@@ -83,15 +85,17 @@ const Education = new Schema({
 
 
 const ProfileSchema = new Schema({
-    username: { type: String },
+    name: { type: String },
     email: { type: String },
-    title: { type: String},
-    location: { type: String },
+    title: { type: String, default: 'Title'},
+    image: { type: String, default: './assets/images/avatar.png'},
+    location: { type: String, default: 'Location' },
     twitter: { type: String },
     instagram: { type: String },
     linkedin: { type: String },
     github: { type: String},
     objective: { type: String},
+    username: { type: String },
     skill: [Skill],
     project: [Project],
     experiance: [Experiance],

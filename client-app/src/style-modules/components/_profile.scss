@@ -70,7 +70,8 @@
     }
 
     &__user-img {
-        border: 3px solid $LightGreen;
+        border: 3px solid #FFF;
+        box-shadow: $shadow;
     }
 
     &__user-name,

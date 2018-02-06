@@ -212,7 +212,7 @@
             <mat-icon>email</mat-icon>Email</a>
         </li>
         <li>
-          <a routerLink="/profile" [routerLinkActive]="['active']">
+          <a [routerLink]="['/profile/', username]" [routerLinkActive]="['active']">
             <mat-icon>person</mat-icon>Profile</a>
         </li>  
         <li *ngIf="authService.userLoggedIn()">

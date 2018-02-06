@@ -138,7 +138,7 @@ const appRoutes: Routes = [
 		canActivate: [AdminGuard]
 	},
 	{
-		path: 'profile',
+		path: 'profile/:username',
 		component: ProfileComponent
 	},
 	{

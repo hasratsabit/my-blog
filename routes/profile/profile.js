@@ -9,8 +9,8 @@ const config = require('../../config/database');
 // Sub Routes
 const personalRoute = require('./personal')(router);
 
+module.exports = (router) => {
+    router.use('/personal', personalRoute);
 
-router.use('/personal', personalRoute);
-
-
-module.exports = router;
+    return router;
+}

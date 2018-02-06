@@ -1,4 +1,5 @@
 const User = require('../model/user');
+const Profile = require('../model/profile');
 const Blog = require('../model/blog');
 const jwt = require('jsonwebtoken');
 
@@ -72,6 +73,22 @@ router.get('/allBlogs', (req, res) => {
 		}
 	});
 
+
+	router.get('/userProfile/:username', (req, res) => {
+		if(!req.params.username){
+			res.json({ success: false, message: 'No username was provided.'});
+		}else {
+			Profile.findOne({ username: req.params.username }, (err, user) => {
+				if(err){
+					res.json({ success: false, message: 'Error occurred finding the user.' + err });
+				}else if(!user){
+					res.json({ success: false, message: 'No user was found. '});
+				}else {
+					res.json({ success: true, user: user });
+				}
+			});
+		}
+	});
 
 
 	// router.delete('/deleteReply/:blogId/:commentId/:replyId', (req, res) => {

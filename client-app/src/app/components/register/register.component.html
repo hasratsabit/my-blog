@@ -33,15 +33,6 @@
 				</div><!-- Modal Media Ends -->
 	
 				<span class="modal-box-divider">Or</span>
-	
-				<!-- Success or Error Message -->
-				<div @fadeIn *ngIf="alertMessage">
-					<div [ngClass]="alertMessageClass">
-						<i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
-						<i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
-						<p class="alert-text">{{ alertMessage }}</p>
-					</div>
-				</div><!-- Success or Error Message Ends -->
 
 				<!-- Promo -->
 				<div class="register__promo">
@@ -68,6 +59,16 @@
 	
 				<!-- Modal Form -->
 				<div class="modal-box-form register__form">
+
+					<!-- Success or Error Message -->
+					<div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+						<div [ngClass]="alertMessageClass">
+							<i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+							<i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+							<p class="alert-text">{{ alertMessage }}</p>
+						</div>
+					</div><!-- Success or Error Message Ends -->
+					
 					<!-- Register Form -->
 					<form [formGroup]="form" (submit)="onRegisterUser()">
 						<!-- Name Input -->

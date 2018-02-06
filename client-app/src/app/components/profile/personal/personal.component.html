@@ -4,16 +4,15 @@
   <div class="profile-header__user-info">
       <div class="profile-header__user-img-wrapper">
         <span (click)="toggleProfileUploader()" class="img-btn"><mat-icon>camera_alt</mat-icon></span>
-        <img class="profile-header__user-img img img-circle" src="./assets/images/profile.jpg" alt="">
+        <img class="profile-header__user-img img img-circle" src="{{domain}}/{{ personal.image }}" alt="">
       </div>
-      <h1 class="profile-header__user-name">Hasrat Sabit</h1>
-      <h1 class="profile-header__user-title">Full Stack Developer</h1>
-      <h3 class="profile-header__user-location">Alexandria, VA</h3>
+      <h1 class="profile-header__user-name">{{ personal.name }}</h1>
+      <h1 class="profile-header__user-title">{{ personal.title }}</h1>
+      <h3 class="profile-header__user-location">{{ personal.location }}</h3>
       <div class="profile-header__social-media">
-          <a href="https://twitter.com/HasratSabit"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-          <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-          <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-          <a href=""><i class="fa fa-github" aria-hidden="true"></i></a>
+          <a href="{{ personal.twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+          <a href="{{ personal.linkedin }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+          <a href="{{ personal.github }}"><i class="fa fa-github" aria-hidden="true"></i></a>
       </div>
       <button *ngIf="!headerFormIsLoaded" (click)="toggleHeaderForm()" class="profile-header__update-btn blue-btn blue-btn-sm">update</button>
   </div>
@@ -30,57 +29,178 @@
                         <mat-icon>clear</mat-icon>
                     </div>
                 </div><!-- Header Ends -->
+
+                <!-- Success or Error Message -->
+                <div @fadeIn *ngIf="uploadMessage" class="modal-box-alert">
+                    <div [ngClass]="uploadMessageClass">
+                        <i *ngIf="uploadSuccessIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+                        <i *ngIf="!uploadSuccessIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+                        <p class="alert-text">{{ uploadMessage }}</p>
+                    </div>
+                </div><!-- Success or Error Message Ends -->
                 
                 <!-- Body -->
                 <div class="plate__body">
                     <h1 class="plate__message">Upload your image here.</h1>
                     <!-- Upload  -->
                     <div class="upload">
-                        <input class="upload__input" type="file">
+                        <input [disabled]="processing"  class="upload__input" type="file" (change)="onProfileImageChange($event)">
+                        <mat-error *ngIf="imageMessage">{{imageMessage}}</mat-error>
                     </div>
                 </div><!-- Body Ends -->
                 
                 <!-- Footer -->
                 <div class="plate__footer">
-                    <button (click)="toggleProfileUploader()"  class="plate__button button button-default button-small">Cancel</button>
-                    <button class="plate__button button button-blue button-small">Upload</button>
+                    <button [disabled]="processing"  (click)="toggleProfileUploader()"  class="plate__button button button-default button-small">Cancel</button>
+                    <button [disabled]="processing" (click)="onUploadImage()" class="plate__button button button-blue button-small">Upload</button>
                 </div><!-- Footer Ends -->
             </div><!-- Image Upload Plate Ends-->  
         </div>
     </div><!-- Upload Image Plate Dark Layer Ends-->
 
+    <!-- Success or Error Message -->
+    <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+        <div [ngClass]="alertMessageClass">
+            <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+            <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+            <p class="alert-text">{{ alertMessage }}</p>
+        </div>
+    </div><!-- Success or Error Message Ends -->
 
-  <!-- Header Form -->
+
+  <!-- Header Form Div -->
   <div [@expandCollapse]="headerFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-header__form inline-form">
-      <form>
-          <mat-form-field class="inline-form__input">
-              <input name="title"  matInput type="text" placeholder="Title" #title maxlength="100" required>
-              <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
-          </mat-form-field>
-          <mat-form-field class="inline-form__input">
-              <input name="location"  matInput type="text" placeholder="Location" #location maxlength="100" required>
-              <mat-hint align="end">{{location.value?.length || 0}}/100</mat-hint>
-          </mat-form-field>
-          <mat-form-field class="inline-form__input">
-              <input name="twitter"  matInput type="text" placeholder="Twitter" #twitter maxlength="100" required>
-          </mat-form-field>
-          <!-- <mat-form-field class="inline-form__input">
-              <input name="instagram"  matInput type="text" placeholder="Instagram" #instagram maxlength="100" required>
-          </mat-form-field> -->
-          <mat-form-field class="inline-form__input">
-              <input name="linkedin"  matInput type="text" placeholder="Linkedin" #linkedin maxlength="100" required>
-          </mat-form-field>
-          <mat-form-field class="inline-form__input">
-              <input name="github"  matInput type="text" placeholder="Github" #github maxlength="100" required>
-          </mat-form-field>
-          <div class="inline-form__button">
-              <button class="blue-btn blue-btn-sm">Submit</button>
-          </div>
-      </form>
+    
+    <!-- Form -->
+    <form [formGroup]="personalForm" (submit)="onPersonalPost()">
+        
+            <!-- Title -->
+            <mat-form-field class="inline-form__input">
+                
+                <!-- Title Input -->
+                <input 
+                    formControlName="title" 
+                    name="title"  
+                    matInput type="text" 
+                    placeholder="Title" 
+                    #title
+                    maxlength="100" 
+                    [(ngModel)]="personal.title"
+                    required>
+                <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+                
+                <!-- Title Error Block -->
+                <mat-error *ngIf="personalForm.controls.title.dirty && personalForm.controls.title.errors?.required">
+                    The title field is required.
+                </mat-error>
+                <mat-error 
+                    *ngIf="personalForm.controls.title.dirty && 
+                    (personalForm.controls.title.errors?.minlength || 
+                    personalForm.controls.title.errors?.minlength)">
+                    The title must be at least 3 charactars but no more than 100 charactars.
+                </mat-error>
+
+                <mat-error *ngIf="personalForm.controls.title.dirty && personalForm.controls.title.errors?.validTitleChecker">
+                    The title must not contain special charactars. 
+                </mat-error>
+                <!-- Title Error Ends-->
+
+            </mat-form-field><!-- Title Ends-->
+
+            <!-- Location -->
+            <mat-form-field class="inline-form__input">
+
+                <!-- Location Input-->
+                <input 
+                    formControlName="location" 
+                    name="location"  
+                    matInput 
+                    type="text" 
+                    placeholder="Location" 
+                    #location 
+                    maxlength="100"
+                    [(ngModel)]="personal.location" 
+                    required>
+                <mat-hint align="end">{{location.value?.length || 0}}/100</mat-hint>
+                
+                <!-- Location Error Block-->
+                <mat-error *ngIf="personalForm.controls.location.dirty && personalForm.controls.location.errors?.required">
+                    The location field is required.
+                </mat-error>
+                <mat-error 
+                    *ngIf="personalForm.controls.location.dirty && 
+                    (personalForm.controls.location.errors?.minlength || 
+                    personalForm.controls.location.errors?.minlength)">
+                    The location must be at least 3 charactars but no more than 100 charactars.
+                </mat-error>
+
+                <mat-error *ngIf="personalForm.controls.location.dirty && personalForm.controls.location.errors?.validLocationChecker">
+                    The location must not contain special charactars. 
+                </mat-error>
+                <!-- Location Error Ends-->
+
+            </mat-form-field><!-- Location Ends -->
+
+            <!-- Twitter -->
+            <mat-form-field class="inline-form__input">
+                <input 
+                    formControlName="twitter" 
+                    name="twitter"  
+                    matInput 
+                    type="text" 
+                    placeholder="Twitter(url)" 
+                    #twitter 
+                    [(ngModel)]="personal.twitter" 
+                    maxlength="100">
+            </mat-form-field><!-- Twitter Ends -->
+
+            <!-- <mat-form-field class="inline-form__input">
+                <input name="instagram"  matInput type="text" placeholder="Instagram" #instagram maxlength="100" required>
+            </mat-form-field> -->
+
+            <!-- Linkedin -->
+            <mat-form-field class="inline-form__input">
+                <input 
+                    formControlName="linkedin" 
+                    name="linkedin"  
+                    matInput 
+                    type="text" 
+                    placeholder="Linkedin(url)" 
+                    #linkedin 
+                    [(ngModel)]="personal.linkedin" 
+                    maxlength="100">
+            </mat-form-field><!-- Linkedin Ends -->
+
+            <!-- Github -->
+            <mat-form-field class="inline-form__input">
+                <input 
+                    formControlName="github" 
+                    name="github"  
+                    matInput 
+                    type="text" 
+                    placeholder="Github(url)" 
+                    #github 
+                    [(ngModel)]="personal.github" 
+                    maxlength="100">
+            </mat-form-field><!-- Github Ends -->
+
+            <!-- Submit Button -->
+            <div class="inline-form__button">
+                <button [disabled]="!personalForm.controls.title.valid || !personalForm.controls.location.valid || processing" 
+                class="button button-blue button-small" type="submit">Submit</button>
+            </div><!-- Submit Button Ends -->
+        
+      </form><!-- Form Ends-->
+
+      <!-- Cancel Button -->
       <div class="inline-form__button">
-          <button (click)="toggleHeaderForm()" class="blue-btn blue-btn-sm">Cancel</button>
-      </div>
-  </div><!-- Header Form Ends -->
+          <button 
+            [disabled]="processing" 
+            (click)="toggleHeaderForm()" 
+            class="button button-default button-small">Cancel</button>
+      </div><!-- Cancel Button Ends -->
+      
+    </div><!-- Header Form Ends -->
 
 
 </div><!-- Header Ends -->
