@@ -50,7 +50,7 @@ let valueValidators = [
 // SKILLS 
 const Skill = new Schema({
     language: { type: String, validate: valueValidators },
-    level: { type: String, validate: valueValidators },
+    level: { type: String },
     start: { type: Date }
 });
 

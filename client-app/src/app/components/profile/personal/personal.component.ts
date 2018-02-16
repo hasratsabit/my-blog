@@ -2,7 +2,7 @@ import { AuthService } from './../../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from './../../../services/profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { expandCollapse, fadeIn } from '../../../animations/animation';
 
 @Component({
@@ -43,6 +43,12 @@ constructor(
 
 @Input() personal
 @Input() url
+@Output() reloadPage = new EventEmitter();
+
+  // This refereshes the page in the profile component when skill is updated.
+  refreshPage() {
+    this.reloadPage.emit();
+  }
 
 
 
@@ -162,6 +168,7 @@ validLocationChecker(controls) {
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-green';
         this.successIcon = true;
+        this.refreshPage(); // Referesh the page.
         setTimeout(() => {
           this.processing = false;
           this.alertMessage = null;
@@ -225,8 +232,8 @@ uploadSuccessIcon = false;
           this.uploadMessage = data.message;
           this.uploadMessageClass = 'alert alert-green';
           this.uploadSuccessIcon = true;
+          this.refreshPage();
           setTimeout(() => {
-            window.location.reload();
             this.uploadMessage = null;
             this.uploadMessageClass = null;
             this.processing = false;

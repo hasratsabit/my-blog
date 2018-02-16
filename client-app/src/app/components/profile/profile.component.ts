@@ -14,6 +14,8 @@ import { expandCollapse } from '../../animations/animation';
 export class ProfileComponent implements OnInit {
 
   usernameUrl
+
+  skills;
   personal = {
     name: String,
     username: String,
@@ -28,6 +30,13 @@ export class ProfileComponent implements OnInit {
 
 
 
+  onReload(e) {
+    this.ngOnInit();
+    console.log('reloaded');
+  }
+
+
+
 
 
 
@@ -36,7 +45,8 @@ export class ProfileComponent implements OnInit {
     this.usernameUrl = this.activatedRoute.snapshot.params
     this.profileService.getUserProfile(this.usernameUrl.username).subscribe(data => {
       this.personal = data.user;
-    })
+      this.skills = data.user.skill;
+    });
   }
 
 }

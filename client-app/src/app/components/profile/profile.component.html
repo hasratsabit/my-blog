@@ -2,14 +2,14 @@
 <div class="profile">
 
 
-    <app-personal [personal]="personal" [url]="usernameUrl" ></app-personal>
+    <app-personal (reloadPage)="onReload($event)" [personal]="personal" [url]="usernameUrl" ></app-personal>
 
     <app-objective></app-objective>
 
     <!-- Skills and Tools Row -->
     <div class="row">
 
-        <app-skill></app-skill>
+        <app-skill (reloadPage)="onReload($event)" [skills]="skills" [url]="usernameUrl"></app-skill>
 
         <app-tool></app-tool>
 

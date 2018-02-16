@@ -10,56 +10,154 @@
             <button *ngIf="!skillFormIsLoaded" (click)="toggleSkillForm()"  class="profile-table__add-btn">Add Skill</button>
         </div><!-- Skills Header End-->
 
+        <!-- Success or Error Message -->
+        <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+            <div [ngClass]="alertMessageClass">
+                <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+                <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+                <p class="alert-text">{{ alertMessage }}</p>
+            </div>
+        </div><!-- Success or Error Message Ends -->
+
         <!-- Skill Form -->
         <div [@expandCollapse]="skillFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
-            <form>
+            <form [formGroup]="skillForm" (submit)="onSubmitSkill()">
 
                 <!-- Language  -->
                 <mat-form-field class="inline-form__input">
-                    <input name="language" maxlength="100" matInput placeholder="Skill" #language required>
+                    <input formControlName="language" name="language" maxlength="100" matInput placeholder="Skill" #language required>
                     <mat-hint align="end">{{language.value?.length || 0}}/100</mat-hint>
+
+                    <mat-error *ngIf="skillForm.controls.language.dirty && 
+                    skillForm.controls.language.errors?.required">The skill field is required.</mat-error>
+                    <mat-error *ngIf="skillForm.controls.language.dirty && 
+                    (skillForm.controls.language.errors?.minlength || skillForm.controls.language.errors?.maxlength)">
+                    The skill must be at least 2 characters but no longer than 100.
+                    </mat-error>
+                
+                    <mat-error *ngIf="skillForm.controls.language.dirty && skillForm.controls.language.errors?.validateLanguage">
+                        The skill must not contain special characters.
+                    </mat-error>
+
                 </mat-form-field><!-- Language Ends -->
                 
                 <!-- Level  -->
                 <mat-form-field  class="inline-form__input">
-                    <mat-select placeholder="Choose Level">
+                    <mat-select formControlName="level" placeholder="Choose Level">
                         <mat-option value="basic">Basic</mat-option>
-                        <mat-option value="midlevel">Mid Level</mat-option>
+                        <mat-option value="mid-level">Mid Level</mat-option>
                         <mat-option value="advance">Advance</mat-option>
                     </mat-select>
+
+                    <mat-error *ngIf="skillForm.controls.level.dirty && 
+                                      skillForm.controls.level.errors?.required">
+                                      You must choose a level.
+                    </mat-error>
                 </mat-form-field><!-- Level End  -->
                 
                 <!-- Date Picker  -->
                 <mat-form-field class="inline-form__input">
-                    <input matInput [matDatepicker]="picker" placeholder="Since">
+                    <input formControlName="start" matInput [matDatepicker]="picker" placeholder="Since">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
+
+                    <mat-error *ngIf="skillForm.controls.start.dirty && 
+                                      skillForm.controls.start.errors?.required">
+                                        You must choose a date.
+                    </mat-error>
                 </mat-form-field><!-- Date Picker Ends  -->
 
 
                 <div class="inline-form__button">
-                    <button class="blue-btn blue-btn-sm">Submit</button>
+                    <button [disabled]="!skillForm.valid || processing" type="submit" class="button button-blue button-small">Submit</button>
                 </div>
             </form>
             <div class="inline-form__button">
-                <button (click)="toggleSkillForm()" class="blue-btn blue-btn-sm">Cancel</button>
+                <button [disabled]="processing" (click)="toggleSkillForm()" class="button button-default button-small">Cancel</button>
             </div>
         </div><!-- Skill Form Ends -->
 
-        <div class="profile-table__row">
-            <span class="profile-table__data">1</span>
-            <span class="profile-table__data">JavaScript</span>
-            <span class="profile-table__data">Basic</span>
-            <span class="profile-table__data">2 &nbsp; Years</span>
+        <!-- Inline Alert -->
+        <div @fadeIn *ngIf="skillIsDeleting" class="inline-modal">
+            <p class="inline-modal__text">Are you sure you want to delete this?</p>
+            <button (click)="onDeleteSkill()" class="inline-modal__button">Delete</button>
+            <button (click)="toggleDeleteSkill(skill._id)" class="inline-modal__button">Cancel</button>
+        </div><!-- Inline Alert -->
+          
+
+        <!-- Edit Skill Form -->
+        <div [@expandCollapse]="updateSkillIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
+            <form [formGroup]="skillForm" (submit)="onUpdateSkill()">
+
+                <!-- Language  -->
+                <mat-form-field class="inline-form__input">
+                    <input [(ngModel)]="singleSkill.language" formControlName="language" name="language" maxlength="100" matInput placeholder="Skill" #language required>
+                    <mat-hint align="end">{{language.value?.length || 0}}/100</mat-hint>
+
+                    <mat-error *ngIf="skillForm.controls.language.dirty && 
+                    skillForm.controls.language.errors?.required">The skill field is required.</mat-error>
+                    <mat-error *ngIf="skillForm.controls.language.dirty && 
+                    (skillForm.controls.language.errors?.minlength || skillForm.controls.language.errors?.maxlength)">
+                    The skill must be at least 2 characters but no longer than 100.
+                    </mat-error>
+                
+                    <mat-error *ngIf="skillForm.controls.language.dirty && skillForm.controls.language.errors?.validateLanguage">
+                        The skill must not contain special characters.
+                    </mat-error>
+
+                </mat-form-field><!-- Language Ends -->
+                
+                <!-- Level  -->
+                <mat-form-field  class="inline-form__input">
+                    <mat-select [(ngModel)]="singleSkill.level" formControlName="level" placeholder="Choose Level">
+                        <mat-option value="basic">Basic</mat-option>
+                        <mat-option value="mid-level">Mid Level</mat-option>
+                        <mat-option value="advance">Advance</mat-option>
+                    </mat-select>
+
+                    <mat-error *ngIf="skillForm.controls.level.dirty && 
+                                        skillForm.controls.level.errors?.required">
+                                        You must choose a level.
+                    </mat-error>
+                </mat-form-field><!-- Level End  -->
+                
+                <!-- Date Picker  -->
+                <mat-form-field class="inline-form__input">
+                    <input [(ngModel)]="singleSkill.start" formControlName="start" matInput [matDatepicker]="updateSkillDate" placeholder="Since">
+                    <mat-datepicker-toggle matSuffix [for]="updateSkillDate"></mat-datepicker-toggle>
+                    <mat-datepicker #updateSkillDate></mat-datepicker>
+
+                    <mat-error *ngIf="skillForm.controls.start.dirty && 
+                                        skillForm.controls.start.errors?.required">
+                                        You must choose a date.
+                    </mat-error>
+                </mat-form-field><!-- Date Picker Ends  -->
+
+
+                <div class="inline-form__button">
+                    <button [disabled]="!skillForm.valid || processing" type="submit" class="button button-blue button-small">Update</button>
+                </div>
+            </form>
+            <div class="inline-form__button">
+                <button [disabled]="processing" (click)="cancelUpdateSkill()" class="button button-default button-small">Cancel</button>
+            </div>
+        </div><!-- Edit Skill Form Ends -->
+
+        <!-- Skill Table Rows -->
+        <div *ngFor="let skill of skills; index as i" class="profile-table__row">
+            <span class="profile-table__data">{{ i }}</span>
+            <span class="profile-table__data">{{ skill.language }}</span>
+            <span class="profile-table__data">{{ skill.level }}</span>
+            <span class="profile-table__data">Since {{ skill.start | date: 'MMM, yyyy' }}</span>
             <div class="profile-table__update-btn">
-                <a href="" class="icon-btn">
+                <a (click)="toggleUpdateSkill(skill._id)" class="icon-btn">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
-                <a href="" class="icon-btn">
+                <a (click)="toggleDeleteSkill(skill._id)" class="icon-btn">
                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                 </a>
             </div>
-        </div>
+        </div><!-- Skill Table Rows End-->
     </div><!-- Skills End -->
 
 </div><!-- Skill Col Ends -->
