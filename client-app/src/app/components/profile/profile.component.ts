@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   usernameUrl
 
   skills;
+  tools;
   personal = {
     name: String,
     username: String,
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getUserProfile(this.usernameUrl.username).subscribe(data => {
       this.personal = data.user;
       this.skills = data.user.skill;
+      this.tools = data.user.tool;
     });
   }
 

@@ -91,15 +91,18 @@ router.get('/allBlogs', (req, res) => {
 	});
 
 
-
-	// router.delete('/deleteReply/:blogId/:commentId/:replyId', (req, res) => {
-	// 	Blog.findOne({ _id: req.params.blogId })
-	// 	.select('comments')
-	// 	.exec((err, comments) => {
-	// 		let parentComments = comments.comments.filter(index => index._id == req.params.commentId);
-	// 		let childComment = parentComments[0].replies.filter(index => index._id == req.params.replyId)
-	// 		res.json(childComment[0].authorUsername);
+	// router.get('/test', (req, res) => {
+	// 	Profile.find({})
+	// 	.then(result => {
+	// 		if(!result) {
+	// 			res.json({ success: false, message: 'Profile was not found.'});
+	// 		}else {
+	// 			res.json({ success: true, message: 'successfully found.', result: result})
+	// 		}
 	// 	})
+	// 	.catch(err => {
+	// 		res.json({ success: false, message: 'Error occurred finding the profile.' + err });
+	// 	});
 	// })
 
 	return router;

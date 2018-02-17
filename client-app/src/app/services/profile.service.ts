@@ -113,4 +113,50 @@ deleteSkill(username, id){
           .map(res => res.json());
 }
 
+
+// ==========================================================
+// 		                ADD TOOL
+// ==========================================================
+addTool(username, tool){
+  this.authService.loadToken();
+  let headers = new Headers({ 'authorization': this.authService.authToken});
+  let options = new RequestOptions({ headers: headers});
+  return this.http.post(this.domain + '/profile/tools/addTool/' + username, tool, options).map(res => res.json());
+}
+
+
+// ==========================================================
+// 		                GET SINGLE TOOL
+// ==========================================================
+  
+  getSingleTool(username, id) {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+    return this.http.get(this.domain + '/profile/tools/getSingleTool/' + username + '/' + id, options).map(res => res.json())
+  }
+
+
+// ==========================================================
+// 		                UPDATE TOOL
+// ==========================================================
+  
+updateTool(username, id, tool) {
+  this.authService.loadToken();
+  let headers = new Headers({ 'authorization': this.authService.authToken});
+  let options = new RequestOptions({ headers: headers});
+  return this.http.put(this.domain + '/profile/tools/updateTool/' + username + '/' + id, tool, options).map(res => res.json())
+}
+
+
+// ==========================================================
+// 		                UPDATE TOOL
+// ==========================================================
+  
+  deleteTool(username, id) {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+    return this.http.delete(this.domain + '/profile/tools/deleteTool/' + username + '/' + id, options).map(res => res.json())
+  }
 }

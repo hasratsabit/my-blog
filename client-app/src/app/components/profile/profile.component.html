@@ -11,7 +11,7 @@
 
         <app-skill (reloadPage)="onReload($event)" [skills]="skills" [url]="usernameUrl"></app-skill>
 
-        <app-tool></app-tool>
+        <app-tool (reloadPage)="onReload($event)" [tools]="tools" [url]="usernameUrl"></app-tool>
 
     </div><!-- Skills and Tools Row Ends-->
 

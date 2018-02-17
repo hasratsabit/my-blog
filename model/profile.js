@@ -54,11 +54,18 @@ const Skill = new Schema({
     start: { type: Date }
 });
 
+// TOOLS 
+const Tool = new Schema({
+    tool: { type: String, validate: valueValidators },
+    level: { type: String },
+    start: { type: Date }
+});
+
 
 // PROJECT
 const Project = new Schema({
     title: { type: String, validate: valueValidators },
-    language: { type: String, validate: valueValidators },
+    tech: { type: String, validate: valueValidators },
     link: { type: String }
 });
 
@@ -97,6 +104,7 @@ const ProfileSchema = new Schema({
     objective: { type: String},
     username: { type: String },
     skill: [Skill],
+    tool: [Tool],
     project: [Project],
     experiance: [Experiance],
     education: [Education]
