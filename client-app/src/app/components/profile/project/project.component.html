@@ -6,49 +6,207 @@
           <button *ngIf="!projectFormIsLoaded" (click)="toggleProjectForm()"  class="profile-table__add-btn">Add Project</button>
       </div>
 
-      <!-- Project Form -->
-      <div [@expandCollapse]="projectFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
-          <form>
+        <!-- Success or Error Message -->
+        <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+            <div [ngClass]="alertMessageClass">
+                <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+                <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+                <p class="alert-text">{{ alertMessage }}</p>
+            </div>
+        </div><!-- Success or Error Message Ends -->
 
-              <!-- title  -->
-              <mat-form-field class="inline-form__input">
-                  <input name="title" maxlength="100" matInput placeholder="Project Name" #title required>
-                  <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
-              </mat-form-field><!-- title Ends -->
-              
-              <!-- language  -->
-              <mat-form-field class="inline-form__input">
-                  <input name="language" maxlength="100" matInput placeholder="Technology" #language required>
-                  <mat-hint align="end">{{language.value?.length || 0}}/100</mat-hint>
-              </mat-form-field><!-- Language Ends -->
+        <!-- Project Form -->
+        <div [@expandCollapse]="projectFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
+            <form [formGroup]="projectForm" (submit)=onProjectSubmit() >
 
-              <!-- Link  -->
-              <mat-form-field class="inline-form__input">
-                  <input name="link" maxlength="100" matInput placeholder="Url" #link required>
-                  <mat-hint align="end">{{link.value?.length || 0}}/100</mat-hint>
-              </mat-form-field><!-- Language Ends -->
+                <!-- title  -->
+                <mat-form-field class="inline-form__input">
+                    <input name="title"
+                            formControlName="title" 
+                            maxlength="100" 
+                            matInput 
+                            placeholder="Project Name" 
+                            #title 
+                            required>
+                    <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
 
-              <div class="inline-form__button">
-                  <button class="blue-btn blue-btn-sm">Submit</button>
-              </div>
-          </form>
-          <div class="inline-form__button">
-              <button (click)="toggleProjectForm()"   class="blue-btn blue-btn-sm">Cancel</button>
-          </div>
-      </div><!-- Project Form Ends -->
+                    <mat-error *ngIf="projectForm.controls.title.dirty && projectForm.controls.title.errors?.required">
+                        The title field is required.
+                    </mat-error>
+                    <mat-error *ngIf="projectForm.controls.title.dirty && (projectForm.controls.title.errors?.minlength || projectForm.controls.title.errors?.maxlength)">
+                        The title field must be at least 2 but no more than 100 characters. 
+                    </mat-error>
 
-      <div class="profile-table__row">
-          <span class="profile-table__data">1</span>
-          <span class="profile-table__data">Online Shopping Web</span>
-          <span class="profile-table__data">Bootstrap</span>
+                    <mat-error *ngIf="projectForm.controls.title.dirty && projectForm.controls.title.errors?.validValueChecker">
+                        The title must not contain special characters.
+                    </mat-error>
+
+                </mat-form-field><!-- title Ends -->
+                
+                <!-- Technology  -->
+                <mat-form-field class="inline-form__input">
+                    <input
+                        formControlName="tech" 
+                        name="tech" 
+                        maxlength="100" 
+                        matInput 
+                        placeholder="Technology" 
+                        #tech 
+                        required>
+                    <mat-hint align="end">{{tech.value?.length || 0}}/100</mat-hint>
+
+                    <mat-error *ngIf="projectForm.controls.tech.dirty && projectForm.controls.tech.errors?.required">
+                        The technology field is required.
+                    </mat-error>
+
+                    <mat-error *ngIf="projectForm.controls.tech.dirty && (projectForm.controls.tech.errors?.minlength || projectForm.controls.tech.errors?.maxlength)">
+                        The technology field must be at least 2 but no more than 100 characters. 
+                    </mat-error>
+
+                    <mat-error *ngIf="projectForm.controls.tech.dirty && projectForm.controls.tech.errors?.validValueChecker">
+                        The technology must not contain special characters.
+                    </mat-error>
+
+                </mat-form-field><!-- Technology Ends -->
+
+                <!-- Link  -->
+                <mat-form-field class="inline-form__input">
+                    <input 
+                        name="link"
+                        formControlName="link"
+                        matInput 
+                        placeholder="Url"
+                        #link 
+                        required>
+
+                <mat-error *ngIf="projectForm.controls.link.dirty && projectForm.controls.link.errors?.required">
+                    The link field is required.
+                </mat-error>
+
+                </mat-form-field><!-- Language Ends -->
+
+                <div class="inline-form__button">
+                    <button
+                        [disabled]="processing || !projectForm.valid" 
+                        type="submit" 
+                        class="button button-small button-blue">Submit</button>
+                </div>
+            </form>
+            <div class="inline-form__button">
+                <button
+                    [disabled]="processing" 
+                    (click)="toggleProjectForm()"   
+                    class="button button-small button-default">Cancel</button>
+            </div>
+        </div><!-- Project Form Ends -->
+
+        <!-- Update Project Form -->
+        <div [@expandCollapse]="updateProjFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
+            <form [formGroup]="projectForm" (submit)=onUpdateProjSubmit() >
+
+                <!-- title  -->
+                <mat-form-field class="inline-form__input">
+                    <input name="title"
+                            formControlName="title"
+                            [(ngModel)]="singleProj.title" 
+                            maxlength="100" 
+                            matInput 
+                            placeholder="Project Name" 
+                            #title 
+                            required>
+                        <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+
+                        <mat-error *ngIf="projectForm.controls.title.dirty && projectForm.controls.title.errors?.required">
+                            The title field is required.
+                        </mat-error>
+                        <mat-error *ngIf="projectForm.controls.title.dirty && (projectForm.controls.title.errors?.minlength || projectForm.controls.title.errors?.maxlength)">
+                            The title field must be at least 2 but no more than 100 characters. 
+                        </mat-error>
+
+                        <mat-error *ngIf="projectForm.controls.title.dirty && projectForm.controls.title.errors?.validValueChecker">
+                            The title must not contain special characters.
+                        </mat-error>
+
+                </mat-form-field><!-- title Ends -->
+                
+                <!-- Technology  -->
+                <mat-form-field class="inline-form__input">
+                    <input
+                            formControlName="tech" 
+                            [(ngModel)]="singleProj.tech" 
+                            name="tech" 
+                            maxlength="100" 
+                            matInput 
+                            placeholder="Technology" 
+                            #tech 
+                            required>
+                    <mat-hint align="end">{{tech.value?.length || 0}}/100</mat-hint>
+
+                        <mat-error *ngIf="projectForm.controls.tech.dirty && projectForm.controls.tech.errors?.required">
+                            The technology field is required.
+                        </mat-error>
+
+                        <mat-error *ngIf="projectForm.controls.tech.dirty && (projectForm.controls.tech.errors?.minlength || projectForm.controls.tech.errors?.maxlength)">
+                            The technology field must be at least 2 but no more than 100 characters. 
+                        </mat-error>
+
+                        <mat-error *ngIf="projectForm.controls.tech.dirty && projectForm.controls.tech.errors?.validValueChecker">
+                            The technology must not contain special characters.
+                        </mat-error>
+
+                </mat-form-field><!-- Technology Ends -->
+
+                <!-- Link  -->
+                <mat-form-field class="inline-form__input">
+                    <input 
+                            name="link"
+                            formControlName="link"
+                            [(ngModel)]="singleProj.link" 
+                            matInput 
+                            placeholder="Url"
+                            #link 
+                            required>
+
+                    <mat-error *ngIf="projectForm.controls.link.dirty && projectForm.controls.link.errors?.required">
+                        The link field is required.
+                    </mat-error>
+
+                </mat-form-field><!-- Language Ends -->
+
+                <div class="inline-form__button">
+                    <button
+                            [disabled]="processing || !projectForm.valid" 
+                            type="submit" 
+                            class="button button-small button-blue">Submit</button>
+                </div>
+            </form>
+            <div class="inline-form__button">
+                <button
+                        [disabled]="processing" 
+                        (click)="cancelUpdateProj()"   
+                        class="button button-small button-default">Cancel</button>
+            </div>
+        </div><!-- Update Project Form Ends -->
+
+        <!-- Inline Alert -->
+        <div @fadeIn *ngIf="deleteProjIsLoaded" class="inline-modal">
+            <p class="inline-modal__text">Are you sure you want to delete this?</p>
+            <button (click)="onDeleteProject()" class="inline-modal__button">Delete</button>
+            <button (click)="cancelDeleteProj()" class="inline-modal__button">Cancel</button>
+        </div><!-- Inline Alert -->
+
+      <div *ngFor="let project of projects; index as i" class="profile-table__row">
+          <span class="profile-table__data">{{ i }}</span>
+          <span class="profile-table__data">{{ project.title }}</span>
+          <span class="profile-table__data">{{ project.tech }}</span>
           <span class="profile-table__data">
-              <a href="" class="profile-table__link">Live Preview</a>
+              <a href="{{ project.link }}" class="profile-table__link">Live Preview</a>
           </span>
           <div class="profile-table__update-btn">
-              <a href="" class="icon-btn">
+              <a (click)="toggleUpdateProjForm(project._id)" class="icon-btn">
                   <i class="fa fa-pencil" aria-hidden="true"></i>
               </a>
-              <a href="" class="icon-btn">
+              <a (click)="toggleDeleteProj(project._id)" class="icon-btn">
                   <i class="fa fa-trash-o" aria-hidden="true"></i>
               </a>
           </div>

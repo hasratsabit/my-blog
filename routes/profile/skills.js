@@ -31,8 +31,9 @@ module.exports = (router) => {
                 message: 'Please, tell us when you first started using this skill.'
             });
         }else {
+            // Find the profile by username.
             Profile.findOne({ username: req.params.username })
-            .select('skill username')
+            .select('skill username') // Choose the skill array and username.
             .exec((err, profile) => {
                 if(err){
                     res.json({
@@ -45,6 +46,7 @@ module.exports = (router) => {
                         message: 'This section is not available.'
                     });
                 }else {
+                    // Find the logged in user.
                     User.findOne({ _id: req.decoded.userId })
                     .select('username')
                     .exec((err, user) => {
@@ -58,20 +60,23 @@ module.exports = (router) => {
                                 success: false,
                                 message: 'You must be logged in to continue.'
                             });
+                            // check if the profile username is the same as the log in username.
                         }else if(user.username !== profile.username){
                             res.json({
                                 success: false,
                                 message: 'You are not authorized to update this user.'
                             });
                         }else {
+                            // Push the data to the array.
                             profile.skill.push({
                                 language: req.body.language,
                                 level: req.body.level,
                                 start: req.body.start
                             });
-
+                            // Save the data.
                             profile.save((err) => {
                                 if(err){
+                                    // Check if it is database validation.
                                    if(err.errors){
                                        if(err.errors.language){
                                            res.json({
@@ -115,21 +120,24 @@ module.exports = (router) => {
 // ==========================================================
 
     router.get('/getSingleSkill/:username/:id', (req, res) => {
+        // Check for username.
         if(!req.params.username){
             res.json({ success: false, message: 'No username was provided.'});
         }else if(!req.params.id){
             res.json({ success: false, message: 'No skill id was provided.'});
         }else {
+            // Find the profile by username.
             Profile.findOne({ username: req.params.username })
-            .select('username skill')
+            .select('username skill') // Choose the skill and username
             .exec((err, profile) => {
                 if(err){
                     res.json({ success: false, message: 'Error occurred finding profile.' + err });
                 }else if(!profile){
                     res.json({ success: false, message: 'No profile was found.'});
                 }else {
+                    // Find the single skill from the array using the id.
                     let skill = profile.skill.filter(index => index._id == req.params.id);
-                    res.json({ success: true, skill: skill[0] });
+                    res.json({ success: true, skill: skill[0] }); // Respond with success and single skill.
                 }
             });
         }

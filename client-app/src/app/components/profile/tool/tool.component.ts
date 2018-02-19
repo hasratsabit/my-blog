@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { expandCollapse, fadeIn } from '../../../animations/animation';
-import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from './../../../services/profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

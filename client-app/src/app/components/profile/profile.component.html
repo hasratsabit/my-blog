@@ -4,7 +4,7 @@
 
     <app-personal (reloadPage)="onReload($event)" [personal]="personal" [url]="usernameUrl" ></app-personal>
 
-    <app-objective></app-objective>
+    <!-- <app-objective></app-objective> -->
 
     <!-- Skills and Tools Row -->
     <div class="row">
@@ -16,11 +16,11 @@
     </div><!-- Skills and Tools Row Ends-->
 
 
-    <app-project></app-project>
+    <app-project (reloadPage)="onReload($event)" [projects]="projects" [url]="usernameUrl"></app-project>
 
-    <app-experiance></app-experiance>
+    <!-- <app-experiance></app-experiance>
 
-    <app-education></app-education>
+    <app-education></app-education> -->
 
 
     <app-publication></app-publication>

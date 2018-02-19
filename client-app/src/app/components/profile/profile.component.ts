@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
 
   skills;
   tools;
+  projects;
   personal = {
     name: String,
     username: String,
@@ -48,6 +49,7 @@ export class ProfileComponent implements OnInit {
       this.personal = data.user;
       this.skills = data.user.skill;
       this.tools = data.user.tool;
+      this.projects = data.user.project;
     });
   }
 

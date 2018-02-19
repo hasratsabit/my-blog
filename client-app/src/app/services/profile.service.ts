@@ -150,7 +150,7 @@ updateTool(username, id, tool) {
 
 
 // ==========================================================
-// 		                UPDATE TOOL
+// 		                DELETE TOOL
 // ==========================================================
   
   deleteTool(username, id) {
@@ -159,4 +159,69 @@ updateTool(username, id, tool) {
     let options = new RequestOptions({ headers: headers});
     return this.http.delete(this.domain + '/profile/tools/deleteTool/' + username + '/' + id, options).map(res => res.json())
   }
+
+
+// ==========================================================
+// 		                ADD PROJECT
+// ==========================================================
+
+  addProject(username, project) {
+    this.authService.loadToken();
+    const headers = new Headers({
+          'Content-Type': 'application/json',
+          'authorization': this.authService.authToken
+        });
+    const options = new RequestOptions({ headers: headers});
+    return this.http.post(this.domain + '/profile/projects/postProject/' + username, project, options)
+    .map(res => res.json());
+
+  }
+
+// ==========================================================
+// 		                GET SINGLE PROJECT
+// ==========================================================
+
+  getSingleProj(username, id) {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+
+    return this.http.get(this.domain + '/profile/projects/singleProject/' + username + '/' + id, options)
+    .map(res => res.json());
+  }
+
+
+// ==========================================================
+// 		                UPDATE PROJECT
+// ==========================================================
+
+  updateProject(username, id, project) {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+
+    return this.http.put(this.domain + '/profile/projects/updateProject/' + username + '/' + id, project, options)
+    .map(res => res.json());
+  }
+
+
+
+  // ==========================================================
+// 		                DELETE PROJECT
+// ==========================================================
+
+deleteProject(username, id) {
+  this.authService.loadToken();
+  let headers = new Headers({ 'authorization': this.authService.authToken});
+  let options = new RequestOptions({ headers: headers});
+
+  return this.http.delete(this.domain + '/profile/projects/deleteProject/' + username + '/' + id, options)
+  .map(res => res.json());
+}
+
+
+
+
+
+
 }
