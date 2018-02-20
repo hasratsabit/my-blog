@@ -1,10 +1,12 @@
  <!-- Header -->
  <div class="profile-header">
-  <img class="profile-header__bg-img" src="./assets/images/profile-bg.jpg" alt="">
+  <div class="profile-header__bg-img"></div>
   <div class="profile-header__user-info">
       <div class="profile-header__user-img-wrapper">
-        <span (click)="toggleProfileUploader()" class="img-btn"><mat-icon>camera_alt</mat-icon></span>
-        <img class="profile-header__user-img img img-circle" src="{{domain}}/{{ personal.image }}" alt="">
+        <div class="profile-header__user-avatar">
+            <span (click)="toggleProfileUploader()" class="img-btn"><mat-icon>camera_alt</mat-icon></span>
+            <img class="profile-header__user-img img img-circle" src="{{domain}}/{{ personal.image }}" alt="">
+        </div>
       </div>
       <h1 class="profile-header__user-name">{{ personal.name }}</h1>
       <h1 class="profile-header__user-title">{{ personal.title }}</h1>
@@ -14,8 +16,24 @@
           <a href="{{ personal.linkedin }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
           <a href="{{ personal.github }}"><i class="fa fa-github" aria-hidden="true"></i></a>
       </div>
-      <button *ngIf="!headerFormIsLoaded" (click)="toggleHeaderForm()" class="profile-header__update-btn blue-btn blue-btn-sm">update</button>
-      <button *ngIf="!headerFormIsLoaded" (click)="toggleDeleteProfile()" class="profile-header__update-btn blue-btn blue-btn-sm">delete profile</button>
+
+      <!-- User control buttons -->
+      <div *ngIf="!deleteProfileIsLoaded && !headerFormIsLoaded" class="profile-header__update-btn">
+        <button class="profile-header__ctrl-btn" [matMenuTriggerFor]="userCtrl">
+            <mat-icon>more_horiz</mat-icon>
+        </button>
+        <mat-menu #userCtrl="matMenu">
+            <button mat-menu-item (click)="toggleHeaderForm()">
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+            <button mat-menu-item (click)="toggleDeleteProfile()" >
+                <mat-icon>delete</mat-icon>
+                Delete
+            </button>
+        </mat-menu>
+      </div><!-- User control buttons End-->
+      
   </div>
 
     <!-- Upload Image Plate Dark Layer-->

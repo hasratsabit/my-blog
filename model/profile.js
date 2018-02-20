@@ -94,10 +94,10 @@ const Education = new Schema({
 const ProfileSchema = new Schema({
     name: { type: String },
     email: { type: String },
-    title: { type: String, default: 'Title'},
+    title: { type: String},
     image: { type: String},
-    location: { type: String, default: 'Location' },
-    about: { type: String },
+    location: { type: String },
+    about: { type: String, default: 'Say something about yourself.' },
     twitter: { type: String },
     instagram: { type: String },
     linkedin: { type: String },

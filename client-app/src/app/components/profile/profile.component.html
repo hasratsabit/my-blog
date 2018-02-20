@@ -6,7 +6,7 @@
 
     <!-- <app-objective></app-objective> -->
 
-    <app-about></app-about>
+    <app-about (reloadPage)="onReload($event)" [url]="usernameUrl" [profile]="abouts"></app-about> 
 
     <!-- Skills and Tools Row -->
     <div class="row">

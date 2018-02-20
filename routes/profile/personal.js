@@ -150,13 +150,13 @@ module.exports = (router) => {
 // 		 					DELETE PROFILE
 // ==========================================================
     router.delete('/deleteProfile/:username', (req, res) => {
-        Profile.findOne({ username: req.params.username })
-        .exec()
+        Profile.findOne({ username: req.params.username }) // Find profile by username.
+        .exec() 
         .then(profile => {
             if(!profile){
                 res.json({ success: false, message: 'No profile is found for this user.'});
             }else {
-                User.findOne({ _id: req.decoded.userId })
+                User.findOne({ _id: req.decoded.userId }) // Find the logged in user
                 .select('username userRole')
                 .exec()
                 .then(user => {
@@ -165,6 +165,8 @@ module.exports = (router) => {
                     }else if(profile.username !== user.username || user.userRole !== 'admin'){
                         res.json({ success: false, message: 'You are not authorized to delete this user.'})
                     }else {
+
+                        // If the user has image, delete it.
                         if(profile.image){
                             fs.unlink(profile.image, (err) => {
                                 if(err){
@@ -173,9 +175,10 @@ module.exports = (router) => {
                             });
                         }
 
-
+                        // First remove the profile data.
                         profile.remove((err) => {
                             if(!err){
+                                // Second, remove the user data.
                                 user.remove((err) => {
                                     if(!err){
                                         res.json({ success: true, message: 'Your profile successfully deleted.'});

@@ -26,9 +26,8 @@ export class ToolComponent implements OnInit {
     this.createToolForm();
    }
 
-
-   @Input() url;
    @Input() tools;
+   @Input() url;
    @Output() reloadPage = new EventEmitter(); 
 
 

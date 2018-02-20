@@ -35,7 +35,9 @@ export class ProfileService {
     return this.http.get(this.domain + '/public/userProfile/' + username).map(res => res.json());
   }
 
-
+// ==========================================================
+// 		               UPDATE PROFILE
+// ==========================================================
   updateProfileBio(username, bio){
     this.authService.loadToken();
     let headers = new Headers({
@@ -49,7 +51,7 @@ export class ProfileService {
 
 
 // ==========================================================
-// 		                UPDATE USER PROFILE
+// 		                DELETE USER PROFILE
 // ==========================================================
   deleteProfile(username) {
     this.authService.loadToken();
@@ -219,7 +221,7 @@ updateTool(username, id, tool) {
 
 
 
-  // ==========================================================
+// ==========================================================
 // 		                DELETE PROJECT
 // ==========================================================
 
@@ -231,6 +233,22 @@ deleteProject(username, id) {
   return this.http.delete(this.domain + '/profile/projects/deleteProject/' + username + '/' + id, options)
   .map(res => res.json());
 }
+
+
+
+
+// ==========================================================
+// 		                ADD ABOUT
+// ==========================================================
+
+  addAbout(username, about) {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+
+    return this.http.put(this.domain + '/profile/about/postAbout/' + username, about, options)
+           .map(res => res.json());
+  }
 
 
 
