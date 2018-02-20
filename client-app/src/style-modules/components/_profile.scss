@@ -145,8 +145,8 @@
     position: relative;
     width: 100%;
     height: auto;
-    background: $white;
     box-shadow: $shadow;
+    background: whitesmoke;
     margin-top: 10px;
     font-family: $TableFont;
     color: $Gray;
@@ -155,6 +155,7 @@
     &__header {
        width: 100%;
        padding: 10px 0;
+       background: $white;
        border-bottom: $LightBorder; 
     }
 
@@ -216,14 +217,14 @@
         }
     }
 
-    // Objective Form
-    &__objective-textarea {
+    // about Form
+    &__about-textarea {
         @include atSmall {
             width: 100% !important;
         }
     }
 
-    &__objective-button {
+    &__about-button {
         @include atSmall {
             float: right;
         }
@@ -236,9 +237,9 @@
         padding: 10px 0;
         text-align: center;
         cursor: pointer;
-        background: whitesmoke;
         border-bottom: $LightBorder;
         transition: all 300ms ease-in-out;
+        background: whitesmoke;
         &:hover,
         &:focus,
         &:active {

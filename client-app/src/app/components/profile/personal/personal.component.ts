@@ -1,5 +1,5 @@
 import { AuthService } from './../../../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from './../../../services/profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -34,7 +34,8 @@ constructor(
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
     public authService: AuthService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.createPersonalForm();
    }
@@ -244,6 +245,31 @@ uploadSuccessIcon = false;
     }
   
 
+
+// ==========================================================
+// 		 					      DELETE PROFILE
+// ==========================================================
+
+  deleteProfileIsLoaded: Boolean = false;
+
+
+
+  toggleDeleteProfile() {
+    this.deleteProfileIsLoaded = !this.deleteProfileIsLoaded;
+  }
+
+
+
+    onDeleteProfile() {
+      this.profileService.deleteProfile(this.url.username)
+      .subscribe(data => {
+        setTimeout(() => {
+          this.router.navigate(['/']);
+          this.authService.logoutUser();
+          this.deleteProfileIsLoaded = false;
+        }, 2000);
+      })
+    }
 
   ngOnInit() {
   }

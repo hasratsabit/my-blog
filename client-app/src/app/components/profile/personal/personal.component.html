@@ -15,6 +15,7 @@
           <a href="{{ personal.github }}"><i class="fa fa-github" aria-hidden="true"></i></a>
       </div>
       <button *ngIf="!headerFormIsLoaded" (click)="toggleHeaderForm()" class="profile-header__update-btn blue-btn blue-btn-sm">update</button>
+      <button *ngIf="!headerFormIsLoaded" (click)="toggleDeleteProfile()" class="profile-header__update-btn blue-btn blue-btn-sm">delete profile</button>
   </div>
 
     <!-- Upload Image Plate Dark Layer-->
@@ -57,6 +58,33 @@
             </div><!-- Image Upload Plate Ends-->  
         </div>
     </div><!-- Upload Image Plate Dark Layer Ends-->
+
+    <!-- Delete Profile Alert-->
+    <div [ngClass]="{'expand-layer': deleteProfileIsLoaded, 'collapse-layer': !profileImageUpload}" class="dark-layer">
+        <div class="col-3">
+            <!-- Image Upload Plate -->
+            <div class="plate">
+                <!-- Header -->
+                <div class="plate__header">
+                    <h1 class="plate__title">Delete Profile</h1>
+                    <div (click)="toggleDeleteProfile()" class="plate__close">
+                        <mat-icon>clear</mat-icon>
+                    </div>
+                </div><!-- Header Ends -->
+                
+                <!-- Body -->
+                <div class="plate__body">
+                    <h1 class="plate__message">This will delete all your information in this page. Are you sure you want to delete?</h1>
+                </div><!-- Body Ends -->
+                
+                <!-- Footer -->
+                <div class="plate__footer">
+                    <button [disabled]="processing"  (click)="toggleDeleteProfile()"  class="plate__button button button-default button-small">Cancel</button>
+                    <button [disabled]="processing" (click)="onDeleteProfile()" class="plate__button button button-blue button-small">Delete Profile</button>
+                </div><!-- Footer Ends -->
+            </div><!-- Image Upload Plate Ends-->  
+        </div>
+    </div><!-- Delete Profile Alert Plate Dark Layer Ends-->
 
     <!-- Success or Error Message -->
     <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">

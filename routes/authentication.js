@@ -37,7 +37,13 @@ module.exports = (router) => {
 			const profile = new Profile({
 				username: req.body.username,
 				name: req.body.name,
-				email: req.body.email
+				email: req.body.email,
+				title: "",
+				location: "",
+				image: "",
+				twitter: "",
+				github: "",
+				linkedin: "",
 			});
 
 			profile.save((err) => {

@@ -73,6 +73,7 @@ import { EducationComponent } from './components/profile/education/education.com
 import { ObjectiveComponent } from './components/profile/objective/objective.component';
 import { PersonalComponent } from './components/profile/personal/personal.component';
 import { PublicationComponent } from './components/profile/publication/publication.component';
+import { AboutComponent } from './components/profile/about/about.component';
 
 
 
@@ -117,6 +118,7 @@ import { PublicationComponent } from './components/profile/publication/publicati
     ObjectiveComponent,
     PersonalComponent,
     PublicationComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

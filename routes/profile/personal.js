@@ -101,26 +101,40 @@ module.exports = (router) => {
                             // Respond if the user is not authorized.
                             res.json({ success: false, message: 'You are not authorized to change the profile picture for this user.'});
                         // Check if there is already a profile image of the user.
-                        }else if(profile.image){
-                            // Delete the old profile image before uploading the new one.
-                            fs.unlink(profile.image, (err) => { 
-                                if(err) {
-                                    console.log(err)
-                                }else {
-                                    // update the profile object with new image.
-                                    profile.image = req.file.path;
-                                    // Save the profile object.
-                                    profile.save((err) => {
-                                        if(err){
-                                            // Respond if any error.
-                                            res.json({ success: false, message: 'Error occurred saving the user.' + err });
-                                        }else {
-                                            // Respond with success.
-                                            res.json({ success: true, message: 'Your profile image successfully uploaded.'});
-                                        }
-                                    });
-                                }
-                            });
+                        }else {
+                            
+                            if(profile.image){
+                                fs.unlink(profile.image, (err) => {
+                                    if(err){
+                                        console.log(err);
+                                    }else {
+                                        profile.image = req.file.path;
+                                        // Save the profile object.
+                                        profile.save((err) => {
+                                            if(err){
+                                                // Respond if any error.
+                                                res.json({ success: false, message: 'Error occurred saving the user.' + err });
+                                            }else {
+                                                // Respond with success.
+                                                res.json({ success: true, message: 'Your profile image successfully uploaded.'});
+                                            }
+                                        });
+                                    }
+                                });
+                            }else {
+                                profile.image = req.file.path;
+                                // Save the profile object.
+                                profile.save((err) => {
+                                    if(err){
+                                        // Respond if any error.
+                                        res.json({ success: false, message: 'Error occurred saving the user.' + err });
+                                    }else {
+                                        // Respond with success.
+                                        res.json({ success: true, message: 'Your profile image successfully uploaded.'});
+                                    }
+                                });
+                            }
+
                         }
 
                     });
@@ -132,8 +146,55 @@ module.exports = (router) => {
 
 
 
+// ==========================================================
+// 		 					DELETE PROFILE
+// ==========================================================
+    router.delete('/deleteProfile/:username', (req, res) => {
+        Profile.findOne({ username: req.params.username })
+        .exec()
+        .then(profile => {
+            if(!profile){
+                res.json({ success: false, message: 'No profile is found for this user.'});
+            }else {
+                User.findOne({ _id: req.decoded.userId })
+                .select('username userRole')
+                .exec()
+                .then(user => {
+                    if(!user){
+                        res.json({ success: false, message: 'You must be logged in to continue.'});
+                    }else if(profile.username !== user.username || user.userRole !== 'admin'){
+                        res.json({ success: false, message: 'You are not authorized to delete this user.'})
+                    }else {
+                        if(profile.image){
+                            fs.unlink(profile.image, (err) => {
+                                if(err){
+                                    res.json({ success: false, message:'Error occurred deleting user image.' + err});
+                                }
+                            });
+                        }
 
 
+                        profile.remove((err) => {
+                            if(!err){
+                                user.remove((err) => {
+                                    if(!err){
+                                        res.json({ success: true, message: 'Your profile successfully deleted.'});
+                                    }
+                                })
+                            }
+                        });
+                    }
+                }).catch(err => {
+                    res.json({ success: false, message: 'Error occurred finding user.' + err });
+                    console.log(err);
+                })
+            }
+        })
+
+        .catch((err) => {
+            res.json({ success: false, message: 'Error occurred. ' + err });
+        })
+    });
 
 
 

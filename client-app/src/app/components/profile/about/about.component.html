@@ -1,0 +1,37 @@
+    <!-- abouts -->
+    <div class="profile-table">
+        <div class="profile-table__header">
+            <mat-icon class="profile-table__icon">perm_contact_calendar</mat-icon>
+            <h1 class="profile-table__title">about</h1>
+            <button *ngIf="!aboutFormIsLoaded" (click)="toggleaboutForm()" class="profile-table__add-btn">Add about</button>
+        </div>
+  
+        <!-- about Form -->
+        <div  [@expandCollapse]="aboutFormIsLoaded ? 'expanded' : 'collapsed'" class="profile-table__form inline-form">
+            <form>
+                <mat-form-field class="profile-table__about-textarea inline-form__input">
+                    <textarea name="about" maxlength="1500" matInput placeholder="Who you are?" #about required></textarea>
+                    <mat-hint align="end">{{about.value?.length || 0}}/1500</mat-hint>
+                </mat-form-field>
+                <div class="profile-table__about-button inline-form__button">
+                    <button class="button button-small button-blue">Submit</button>
+                </div>
+            </form>
+            <div class="profile-table__about-button inline-form__button">
+                <button (click)="toggleaboutForm()" class="button button-small button-default">Cancel</button>
+            </div>
+        </div><!-- about Form Ends -->
+  
+        <div class="profile-table__row-detail">
+            <p class="profile-table__discription">
+                Accusantium, ad minus quisquam corporis dolor 
+                repudiandae vept dolorum nobis omnis laboriosam? 
+                Accusantium, ad minus quisquam corporis dolor 
+                repudiandae vept dolorum nobis omnis laboriosam? 
+                Accusantium, ad minus quisquam corporis dolor 
+                repudiandae vept dolorum nobis omnis laboriosam? 
+                Accusantium, ad minus quisquam corporis dolor 
+                repudiandae vept dolorum nobis omnis laboriosam? 
+            </p>
+        </div>
+    </div><!-- abouts End -->  

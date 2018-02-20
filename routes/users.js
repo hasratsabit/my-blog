@@ -127,7 +127,7 @@ module.exports = (router) => {
 							res.json({ success: false, message: 'Error occured finding admin.' + err});
 						}else if (!userAccess) {
 							res.json({ success: false, message: 'No user was found with admin access.'});
-						}else if(userAccess.adminAccess === false){
+						}else if(userAccess.userRole !== 'admin'|| user.username !== userAccess.username){
 							res.json({ success: false, message: 'You are not authorized to delete this user. '});
 						}else {
 							user.remove((err) => {

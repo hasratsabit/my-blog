@@ -51,6 +51,19 @@ export class ProfileService {
 // ==========================================================
 // 		                UPDATE USER PROFILE
 // ==========================================================
+  deleteProfile(username) {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+
+    return this.http.delete(this.domain + '/profile/personal/deleteProfile/' + username, options)
+    .map(res => res.json());
+
+  }
+
+// ==========================================================
+// 		                UPDATE USER PROFILE
+// ==========================================================
 
   updateProfileImage(username, image){
     this.authService.loadToken();

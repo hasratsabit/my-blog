@@ -3,6 +3,7 @@ const Profile = require('../../model/profile');
 const Category = require('../../model/category');
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const fs = require('fs');
 const router = express.Router();
 const config = require('../../config/database');
 
