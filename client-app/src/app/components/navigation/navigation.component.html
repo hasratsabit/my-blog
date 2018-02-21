@@ -134,7 +134,9 @@
     <!-- Private Nav -->
     <ul *ngIf="authService.userLoggedIn()" class="private-nav">
 
-      <img class="private-nav__img img img-small img-circle" src="/assets/images/profile.jpg" alt="">
+        <div class="private-nav__img user-img user-img--md">
+            <!-- <img class="user-img__img" src="/assets/images/profile.jpg" alt=""> -->
+        </div>
       <h1 class="private-nav__title">{{ name}} </h1>
 
       <button (click)="toggleUserProfile()" class="private-nav__button button">

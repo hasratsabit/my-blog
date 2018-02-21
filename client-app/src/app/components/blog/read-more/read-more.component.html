@@ -68,8 +68,10 @@
 
         <!-- Author  -->
         <div class="post-author author">
-    
-            <img class="author__img img img-small img-circle" src="./assets/images/profile.jpg" alt="">
+            <div class="author__img user-img user-img--sm">
+                <!-- <img class="user-img__img" src="/assets/images/profile.jpg" alt=""> -->
+            </div>
+            
             <h1 class="author__name">{{ blog.author }}</h1><br>
             <h2 class="author__title">Full Stack Developer</h2>
         
@@ -197,7 +199,9 @@
                       
                     <!-- user -->
                     <div class="post-comment__user-comment comment-user">
-                        <img class="comment-user__img img img-circle img-tiny img-border" src="./assets/images/profile.jpg" alt="">
+                        <div class="comment-user__img user-img user-img--sm">
+                            <!-- <img class="user-img__img" src="/assets/images/profile.jpg" alt=""> -->
+                        </div>
                         <h1 class="comment-user__name">{{ comment.authorName }}</h1><br>
                     </div><!-- user Ends -->
                     
@@ -334,7 +338,9 @@
 
                         <!-- user -->
                         <div class="comment-user">
-                            <img class="comment-user__img img img-circle img-tiny img-border" src="./assets/images/profile.jpg" alt="">
+                            <div class="comment-user__img user-img user-img--sm">
+                                <!-- <img class="user-img__img" src="/assets/images/profile.jpg" alt=""> -->
+                            </div>
                             <h1 class="comment-user__name">{{ reply.authorName }}</h1><br>
                         </div><!-- user Ends -->
                     

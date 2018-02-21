@@ -854,34 +854,74 @@
 }
 
 // ===============
-// 	USER
+// 	USER IMAGE
 // ===============
-.user {
+
+.user-img {
   position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  margin: 0 auto;
+  background-image: url('./assets/images/sm-avatar.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+  }
+
+  &--sm {
+    height: 30px;
+    width: 30px;
+  }
+
+  &--md {
+    height: 40px;
+    width: 40px;
+  }
+
+  &--lg {
+    height: 50px;
+    width: 50px;
+  }
 }
 
-.user-img,
-.user-name,
-.user-info {
-  display: inline;
-}
 
-.user-name,
-.user-info {
-  position: absolute;
-  left: 35px;
-}
 
-.user-name {
-  top: 0;
-}
 
-.user-info {
-  top: 16px;
-  font-size: 0.7rem;
-  font-family: $GeneralFont;
-  color: $IconsColor;
-}
+
+
+// .user {
+//   position: relative;
+// }
+
+// .user-img,
+// .user-name,
+// .user-info {
+//   display: inline;
+// }
+
+// .user-name,
+// .user-info {
+//   position: absolute;
+//   left: 35px;
+// }
+
+// .user-name {
+//   top: 0;
+// }
+
+// .user-info {
+//   top: 16px;
+//   font-size: 0.7rem;
+//   font-family: $GeneralFont;
+//   color: $IconsColor;
+// }
 
 
 // ===============
@@ -1808,7 +1848,7 @@ mat-option {
   }
 
   &__img {
-    margin-right: 5px;
+    margin-right: 8px;
     transform: translateY(-3px);
   }
 
@@ -1844,25 +1884,20 @@ mat-option {
 .comment-text {
   width: 90%;
   margin-left: 10%;
+  transform: translateY(-8px) translateX(13px);
+  padding-bottom: 5px;
+  text-align: justify;
 
   @include atSmall {
     margin-left: 6%;
+    transform: translateY(-7px) translateX(0);
+    padding-bottom: 5px;
   }
 
   @include atMedium {
     margin-left: 6.7%;
   }
-}
 
-.comment-text {
-  transform: translateY(-8px) translateX(7px);
-  padding-bottom: 5px;
-  text-align: justify;
-
-  @include atSmall {
-    transform: translateY(-7px) translateX(-10px);
-    padding-bottom: 5px;
-  }
 
   &__para {
     color: $Gray;
@@ -1872,6 +1907,7 @@ mat-option {
     }
   }
 }
+
 
 .comment-footer {
   position: relative;
