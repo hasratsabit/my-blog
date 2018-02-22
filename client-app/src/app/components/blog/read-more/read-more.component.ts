@@ -1,3 +1,4 @@
+import { ProfileService } from './../../../services/profile.service';
 import { UserService } from './../../../services/user.service';
 import { CommentService } from './../../../services/comment.service';
 import { AuthService } from './../../../services/auth.service';
@@ -25,7 +26,13 @@ export class ReadMoreComponent implements OnInit {
   blogLiked = false;
   currentBlogUrl;
 
-  blog = {};
+  blog = {
+    authorName: String,
+    comments: [{
+      authorUsername: String,
+      replies: []
+    }]
+  };
 
   // Comment Variables
   FormGroup;
@@ -45,6 +52,7 @@ export class ReadMoreComponent implements OnInit {
     public blogService: BlogService, 
     public authService: AuthService,
     private userService: UserService,
+    private profileService: ProfileService,
     private commentService: CommentService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -123,15 +131,17 @@ export class ReadMoreComponent implements OnInit {
     this.commentService.postComment(id, comment).subscribe(data => {
       // If the comment is not posted:
       if(!data.success){
-        this.processing = true;
+        this.processing = false;
         this.enableForm();
         // If the comment is posted:
       }else {
         this.commentForm.reset();
         this.enableForm();
-        this.processing = false;
         this.loadAddNewComment();
         this.ngOnInit();
+        setTimeout(() => {
+          this.processing = false;
+        }, 2000)
       }
     });
   }
@@ -221,13 +231,15 @@ export class ReadMoreComponent implements OnInit {
     this.commentService.editComment(this.currentBlogUrl, this.commentId, comment)
     .subscribe(data => {
       // If the comment is successfully editted:
-      if(data.success){
+      if(!data.success){
         this.processing = false;
+      }else {
         this.editCommentForm.reset();
         this.editArray.splice(this.editArray.indexOf(this.commentId, 1));
         this.ngOnInit();
-      }else {
-        this.processing = false;
+        setTimeout(() => {
+          this.processing = false;
+        }, 2000)
       }
     });
   }
@@ -262,6 +274,9 @@ export class ReadMoreComponent implements OnInit {
       }else {
         this.deleteArray.splice(this.deleteArray.indexOf(this.commentId));
         this.ngOnInit();
+        setTimeout(() => {
+          this.processing = false;
+        }, 2000)
       }
     })
   }
@@ -323,10 +338,12 @@ createReplyForm(){
         if(!data.success){
           this.processing = false;
         }else {
-          this.processing = false;
           this.replyForm.reset();
           this.addReplyArray.splice(this.addReplyArray.indexOf(this.replyId));
           this.ngOnInit();
+          setTimeout(() => {
+            this.processing = false;
+          }, 2000)
         }
       });
   }
@@ -386,10 +403,35 @@ createReplyForm(){
 }
 
 
+  // The method is called bellow which takes the username arrays as param.
+  getProfile(usernames) {
+    // Loops through usernames and send gets the profile for each username.
+    usernames.forEach((username, index) => {
+     this.profileService.getUserProfile(username).subscribe(data => {
+       // Loops through comments and check if the username of the commentator is the same as us
+      this.blog.comments.forEach(comment => {
+        // Assign the image property to the object.
+        if(username === comment.authorUsername) {
+          Object.assign(comment, {
+            image: data.user.image
+          })
+        }
 
+        // Loop through replies and assign the image property to the reply object.
 
+        comment.replies.forEach(reply => {
+          if(username === reply.authorUsername) {
+            Object.assign(reply, {
+              image: data.user.image
+            })
+          }
+        })
+      })
+     })
+    })
+  }
 
-
+  usernames
   ngOnInit() {
 
 // ==========================================================
@@ -399,6 +441,8 @@ createReplyForm(){
     this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
       this.blog = data.blog;
       this.commentsLength = data.blog.comments.length
+      this.usernames = data.blog.comments.map(com => com.authorUsername);
+      this.getProfile(this.usernames);
     });
 
 // ==========================================================
@@ -411,7 +455,7 @@ createReplyForm(){
         this.authorizedUsername = data.user.username;
       }
     });
-
+    
 
 
   }

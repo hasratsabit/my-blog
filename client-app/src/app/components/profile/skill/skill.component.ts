@@ -26,6 +26,7 @@ export class SkillComponent implements OnInit {
     this.createSkillForm();
    }
 
+  @Input() authorizedUsername;
   @Input() url;
   @Input() skills;
   @Output() reloadPage = new EventEmitter(); 

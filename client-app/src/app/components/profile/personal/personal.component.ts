@@ -41,7 +41,7 @@ constructor(
    }
 
 
-
+@Input() authorizedUsername;
 @Input() personal
 @Input() url
 @Output() reloadPage = new EventEmitter();

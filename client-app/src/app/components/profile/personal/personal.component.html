@@ -4,7 +4,7 @@
   <div class="profile-header__user-info">
       <div class="profile-header__user-img-wrapper">
         <div class="profile-header__user-avatar">
-            <span (click)="toggleProfileUploader()" class="img-btn"><mat-icon>camera_alt</mat-icon></span>
+            <span *ngIf="authorizedUsername === personal.username" (click)="toggleProfileUploader()" class="img-btn"><mat-icon>camera_alt</mat-icon></span>
             <img class="profile-header__user-img img img-circle" src="{{domain}}/{{ personal.image }}" alt="">
         </div>
       </div>
@@ -18,7 +18,7 @@
       </div>
 
       <!-- User control buttons -->
-      <div *ngIf="!deleteProfileIsLoaded && !headerFormIsLoaded" class="profile-header__update-btn">
+      <div *ngIf="!deleteProfileIsLoaded && !headerFormIsLoaded && authorizedUsername === personal.username" class="profile-header__update-btn">
         <button class="profile-header__ctrl-btn" [matMenuTriggerFor]="userCtrl">
             <mat-icon>more_horiz</mat-icon>
         </button>

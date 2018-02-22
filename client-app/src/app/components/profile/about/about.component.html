@@ -3,7 +3,7 @@
         <div class="profile-table__header">
             <mat-icon class="profile-table__icon">perm_contact_calendar</mat-icon>
             <h1 class="profile-table__title">about me</h1>
-            <button *ngIf="!aboutFormIsLoaded" (click)="toggleaboutForm()" class="profile-table__add-btn">Update</button>
+            <button *ngIf="!aboutFormIsLoaded && authorizedUsername === profile.username" (click)="toggleaboutForm()" class="profile-table__add-btn">Update</button>
         </div>
 
         <!-- Success or Error Message -->

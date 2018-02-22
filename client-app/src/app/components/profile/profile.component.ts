@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   usernameUrl
 
+  accessUsername;
   skills;
   tools;
   projects;
@@ -55,6 +56,14 @@ export class ProfileComponent implements OnInit {
       this.projects = data.user.project;
       this.abouts = data.user;
     });
+
+    this.userService.getUserProfile().subscribe(data => {
+      if(data.success){
+        this.accessUsername = data.user.username;
+      }else {
+        return null;
+      }
+    })
   }
 
 }

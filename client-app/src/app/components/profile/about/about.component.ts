@@ -23,7 +23,8 @@ export class AboutComponent implements OnInit {
   ) {
     this.createAboutForm();
    }
-
+  
+  @Input() authorizedUsername;
   @Input() profile;
   @Input() url;
   @Output() reloadPage = new EventEmitter(); 

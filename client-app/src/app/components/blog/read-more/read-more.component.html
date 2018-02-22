@@ -106,7 +106,7 @@
 
         <!-- See Comments Button -->
         <div class="see-comments">
-            <button (click)="loadAllComments()" class="button button-medium button-default button-round">
+            <button (click)="loadAllComments()" class="button button-small button-default">
                 <span *ngIf="!allCommentsLoaded">Load Comments</span>
                 <span *ngIf="allCommentsLoaded">Hide Comments</span>
             </button>
@@ -169,10 +169,10 @@
                     </mat-form-field><!-- Textarea Ends -->
                     <!-- Buttons-->
                     <div class="comment-textarea__buttons">
-                        <button [disabled]="processing" (click)="loadAddNewComment()" class="button button-medium button-default button-round">
+                        <button [disabled]="processing" (click)="loadAddNewComment()" class="button button-small button-default">
                             Cancel
                         </button>
-                        <button [disabled]="processing || !commentForm.valid" type="submit" class="button button-medium button-round button-green">
+                        <button [disabled]="processing || !commentForm.valid" type="submit" class="button button-small button-blue">
                             Submit
                         </button>
                     </div><!-- Buttons End -->
@@ -199,10 +199,10 @@
                       
                     <!-- user -->
                     <div class="post-comment__user-comment comment-user">
-                        <div class="comment-user__img user-img user-img--sm">
-                            <!-- <img class="user-img__img" src="/assets/images/profile.jpg" alt=""> -->
+                        <div [routerLink]="['/profile', comment.authorUsername]" class="comment-user__img user-img user-img--sm">
+                            <img class="user-img__img" src="{{ authService.domain }}/{{ comment.image }}" alt="">
                         </div>
-                        <h1 class="comment-user__name">{{ comment.authorName }}</h1><br>
+                        <h1 [routerLink]="['/profile', comment.authorUsername]" class="comment-user__name">{{ comment.authorName }}</h1><br>
                     </div><!-- user Ends -->
                     
 
@@ -283,14 +283,14 @@
                             </mat-form-field><!-- Textarea Ends -->
                             <!-- Buttons-->
                             <div class="comment-textarea__buttons">
-                                <button [disabled]="processing || !editCommentForm.valid" type="submit" class="button button-medium button-round button-green">
+                                <button [disabled]="processing || !editCommentForm.valid" type="submit" class="button button-small button-blue">
                                     Submit
+                                </button>
+                                <button [disabled]="processing" (click)="toggleEditComment(comment._id)" class="button button-small button-default">
+                                    Cancel
                                 </button>
                             </div><!-- Buttons End -->
                         </form><!-- Comment Form Ends -->
-                        <button [disabled]="processing" (click)="toggleEditComment(comment._id)" class="button button-medium button-default button-round">
-                            Cancel
-                        </button>
                     </div><!-- Edit Comment Ends-->
 
 
@@ -315,10 +315,10 @@
                         </mat-form-field><!-- Textarea Ends -->
                         <!-- Buttons-->
                         <div class="comment-textarea__buttons">
-                            <button [disabled]="processing" type="button" (click)="loadAddReply(comment._id)" class="button button-medium button-default button-round">
+                            <button [disabled]="processing" type="button" (click)="loadAddReply(comment._id)" class="button button-small button-default">
                                 Cancel
                             </button>
-                            <button [disabled]="!replyForm.valid || processing" type="submit" class="button button-medium button-round button-green">
+                            <button [disabled]="!replyForm.valid || processing" type="submit" class="button button-small button-blue">
                                 Submit
                             </button>
                         </div><!-- Buttons End -->
@@ -338,10 +338,10 @@
 
                         <!-- user -->
                         <div class="comment-user">
-                            <div class="comment-user__img user-img user-img--sm">
-                                <!-- <img class="user-img__img" src="/assets/images/profile.jpg" alt=""> -->
+                            <div [routerLink]="['/profile', comment.authorUsername]" class="comment-user__img user-img user-img--sm">
+                                <img class="user-img__img" src="{{ authService.domain }}/{{ reply.image }}" alt="">
                             </div>
-                            <h1 class="comment-user__name">{{ reply.authorName }}</h1><br>
+                            <h1 [routerLink]="['/profile', comment.authorUsername]" class="comment-user__name">{{ reply.authorName }}</h1><br>
                         </div><!-- user Ends -->
                     
                         <!-- Text -->
@@ -371,10 +371,6 @@
             </div><!-- All Comments End -->
 
         </div>  <!-- Comments Section End -->
-
-
-
-
 
     </div><!-- Body Ends -->
 

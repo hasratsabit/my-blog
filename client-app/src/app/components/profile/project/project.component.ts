@@ -25,6 +25,7 @@ export class ProjectComponent implements OnInit {
     this.createProjectForm();
   }
 
+  @Input() authorizedUsername;
   @Input() url;
   @Input() projects;
   @Output() reloadPage = new EventEmitter(); 
