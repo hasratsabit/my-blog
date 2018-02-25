@@ -1,17 +1,17 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
 import { BlogService } from './../../../services/blog.service';
 import { UserService } from './../../../services/user.service';
-import { fadeIn } from '../../../animations/animation';
+import { fadeIn, expandCollapse } from '../../../animations/animation';
 
 @Component({
   selector: 'app-add-blog',
   templateUrl: './add-blog.component.html',
   styleUrls: ['./add-blog.component.scss'],
-  animations: [fadeIn]
+  animations: [fadeIn, expandCollapse]
 })
 export class AddBlogComponent implements OnInit {
 
@@ -46,22 +46,12 @@ export class AddBlogComponent implements OnInit {
     this.createPostForm();
   }
 
-// ==========================================================
-// 		 					TOGGLE ADD BLOG
-// ==========================================================
 
-  toggleAddBlog() {
-    this.addBlogFormLoaded = !this.addBlogFormLoaded;
-    setTimeout(() => {
-      this.location.back();
-    }, 500);
-  }
+  @Input('addBlogFormIsLoaded') addBlogFormIsLoaded: Boolean;
+
 // ==========================================================
 // 		 					CREATE ADD BLOG FORM
 // ==========================================================
-
-
-  
   
   createPostForm() {
     this.postForm = this.formBuilder.group({

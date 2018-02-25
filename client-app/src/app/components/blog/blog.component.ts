@@ -44,6 +44,26 @@ export class BlogComponent implements OnInit {
   }
 
 
+// ==========================================================
+// 		 									ADD BLOG
+// ==========================================================
+
+  addBlogFormIsLoaded = false;
+
+  loadAddBlogForm() {
+    console.log('works');
+    this.addBlogFormIsLoaded = !this.addBlogFormIsLoaded;
+  }
+
+
+
+
+
+
+
+
+
+
   ngOnInit() {
   
 // ==========================================================
