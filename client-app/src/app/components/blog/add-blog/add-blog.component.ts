@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
@@ -48,6 +48,7 @@ export class AddBlogComponent implements OnInit {
 
 
   @Input('addBlogFormIsLoaded') addBlogFormIsLoaded: Boolean;
+  @Output('loadBlog') loadBlog:any = new EventEmitter();
 
 // ==========================================================
 // 		 					CREATE ADD BLOG FORM
@@ -85,6 +86,12 @@ export class AddBlogComponent implements OnInit {
    }
 
 }
+
+
+
+  loadAddBlog(){
+    this.loadBlog.emit();
+  }
 
 
 // ==========================================================

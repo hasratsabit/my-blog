@@ -19,9 +19,7 @@
         <h1 (click)="updateBlogView(blog._id)" [routerLink]="['/read-more/', blog._id]" class="blog-card__title">
           {{ blog.title }}
         </h1>
-        <p class="blog-card__text">
-          {{ blog.body | blogPipe }}
-        </p>
+        <p class="blog-card__text" [innerHTML]="blog.body | blogPipe"> </p>
       </div><!-- Body Ends  -->
 
       <!-- Footer  -->

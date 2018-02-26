@@ -12,36 +12,15 @@ import { fadeInDown, fadeInLeft, fadeIn, rainFall} from '../../animations/animat
 })
 export class BlogComponent implements OnInit {
 
-// ==========================================================
-// 		 									VARIABLES
-// ==========================================================
-  blogs;
-  username;
-  isPublished: Boolean = false;
-  postStatusClass;
+
 
 // ==========================================================
 // 		 									CONSTRUCTOR 
 // ==========================================================
-  constructor(
-    private blogService: BlogService,
-    private userService: UserService,
-    private element: ElementRef
-  ) { }
+  constructor() { }
 
 
-  changeStatus(blogId, event){
-    this.blogService.changeBlogStatus(blogId).subscribe(data => {
-      if(event.target.innerText === 'Published'){
-        this.postStatusClass = 'post-hidden';
-        console.log(this.postStatusClass);
-      }else {
-        this.postStatusClass = 'post-visible';
-        console.log(this.postStatusClass);
-      }
-      this.ngOnInit();
-    })
-  }
+
 
 
 // ==========================================================
@@ -51,7 +30,6 @@ export class BlogComponent implements OnInit {
   addBlogFormIsLoaded = false;
 
   loadAddBlogForm() {
-    console.log('works');
     this.addBlogFormIsLoaded = !this.addBlogFormIsLoaded;
   }
 
@@ -66,23 +44,7 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
   
-// ==========================================================
-// 		 									GET ALL BLOGS
-// ==========================================================
-    this.blogService.getAllBlogs().subscribe(data => {
-      this.blogs = data.blogs
-    })
 
-// ==========================================================
-// 		 									GET USER PROFILES
-// ==========================================================
-    this.userService.getUserProfile().subscribe(data => {
-     if(!data.success) {
-       return null;
-     }else {
-      this.username = data.user.username;
-     }
-    })
   }
 
 }

@@ -4,7 +4,7 @@
         <!-- Modal Header -->
         <div class="modal-box-header">
           <h1 class="modal-box-header__title">New Blog</h1>
-          <button (click)="addBlogFormIsLoaded = false" class="modal-buttons modal-box-header__close">
+          <button (click)="loadAddBlog()" class="modal-buttons modal-box-header__close">
             <mat-icon>clear</mat-icon>
           </button>
         </div>
@@ -35,6 +35,18 @@
               <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.validTitleChecker">The title must not not contain special characters.</mat-error>
   
             </mat-form-field><!-- Title  Ends-->
+
+            <!-- Body  -->
+            <mat-form-field class="modal-box-form__inputs">
+              <textarea [froalaEditor] name="body" formControlName="body" maxlength="5000" matInput #body required></textarea>
+              <mat-hint align="end">{{body.value?.length || 0}}/5000</mat-hint>
+  
+              <!-- Error Block -->
+              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.required">The body field is required.</mat-error>
+              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.minlength">The body must be at least 50 characters.</mat-error>
+              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.maxlength">The body must not exceed 5000 characters.</mat-error>
+  
+            </mat-form-field><!-- Body Ends  -->
   
             <!-- Categories  -->
             <mat-form-field  class="modal-box-form__inputs">
@@ -52,18 +64,6 @@
               <input [disabled]="processing"  class="upload__input" type="file" (change)="onFileChange($event)">
               <mat-error *ngIf="imageMessage">{{imageMessage}}</mat-error>
             </div><br><!-- Upload Ends  -->
-  
-            <!-- Body  -->
-            <mat-form-field class="modal-box-form__inputs">
-              <textarea name="body" formControlName="body" maxlength="5000" matInput placeholder="Body" #body required></textarea>
-              <mat-hint align="end">{{body.value?.length || 0}}/5000</mat-hint>
-  
-              <!-- Error Block -->
-              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.required">The body field is required.</mat-error>
-              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.minlength">The body must be at least 50 characters.</mat-error>
-              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.maxlength">The body must not exceed 5000 characters.</mat-error>
-  
-            </mat-form-field><!-- Body Ends  -->
   
           </div><!-- Modal Inputs Ends-->
   

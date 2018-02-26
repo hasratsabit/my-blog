@@ -613,16 +613,6 @@
     right: 10px;
     top: 8px;
     padding: 10px 15px;
-    background: transparent;
-    border: 1px solid rgba($white, 0.5);
-    color: #FFF;
-    border-radius: 3px;
-    transition: all 300ms ease-in-out;
-    cursor: pointer;
-    &:hover {
-      background: $white;
-      color: $LightGreen;
-    }
   }
   .custom-title {
     position: absolute;
@@ -658,7 +648,7 @@
   thead,
   .custom-head {
     color: $white;
-    background: $LightBlue;
+    background: $DarkBlue;
   }
 }
 
@@ -2266,7 +2256,6 @@ mat-option {
 // ===============
   .modal-box {
     background: #FFF;
-    box-shadow: $largekShadow;
     z-index: 1000000;
     @include clearfix;
 
@@ -2280,6 +2269,10 @@ mat-option {
       &:focus {
         outline: none;
       }
+    }
+
+    &--shadow {
+      box-shadow: $largekShadow;
     }
   }
 
@@ -2637,5 +2630,34 @@ mat-option {
   &__button {
     float: right;
     margin-right: 10px;
+  }
+}
+
+
+
+// ===============
+// 	 DATA TABLE
+// ===============
+
+.data-table {
+  width: 100%;
+  background: yellow;
+  font-family: $TableFont;
+  text-align: center;
+  
+  &__head,
+  &__row,
+  &__footer {
+    width: 100%;
+    border-top: 1px solid $LightGray;
+    text-align: center;
+  }
+
+  &__head-col,
+  &__row-data,
+  &__footer-col {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 10px;
   }
 }

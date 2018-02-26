@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from "@angular/http";
 import { AngularDraggableModule } from 'angular2-draggable';
-
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 // Material Modules
 
 import {MatButtonModule,
@@ -74,6 +74,7 @@ import { ObjectiveComponent } from './components/profile/objective/objective.com
 import { PersonalComponent } from './components/profile/personal/personal.component';
 import { PublicationComponent } from './components/profile/publication/publication.component';
 import { AboutComponent } from './components/profile/about/about.component';
+import { BlogListComponent } from './components/blog/blog-list/blog-list.component';
 
 
 
@@ -119,6 +120,7 @@ import { AboutComponent } from './components/profile/about/about.component';
     PersonalComponent,
     PublicationComponent,
     AboutComponent,
+    BlogListComponent,
   ],
   imports: [
     BrowserModule,
@@ -141,7 +143,8 @@ import { AboutComponent } from './components/profile/about/about.component';
     MatNativeDateModule,
     MatMenuModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()
   ],
   providers: [
     AuthService,
