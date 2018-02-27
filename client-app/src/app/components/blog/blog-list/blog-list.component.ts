@@ -1,13 +1,14 @@
+import { Subscription } from 'rxjs/Subscription';
 import { UserService } from './../../../services/user.service';
 import { BlogService } from './../../../services/blog.service';
-import { Component, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
   styleUrls: ['./blog-list.component.scss']
 })
-export class BlogListComponent implements OnInit {
+export class BlogListComponent implements OnInit, OnDestroy {
 
 // ==========================================================
 // 		 									VARIABLES
@@ -17,6 +18,7 @@ export class BlogListComponent implements OnInit {
   username;
   isPublished: Boolean = false;
   postStatusClass;
+  subscription: Subscription
   
 
   constructor(
@@ -52,20 +54,24 @@ export class BlogListComponent implements OnInit {
     // ==========================================================
     // 		 									GET ALL BLOGS
     // ==========================================================
-    this.blogService.getAllBlogs().subscribe(data => {
+    this.subscription = this.blogService.getAllBlogs().subscribe(data => {
       this.blogs = data.blogs
     })
 
     // ==========================================================
     // 		 									GET USER PROFILES
     // ==========================================================
-    this.userService.getUserProfile().subscribe(data => {
+    this.subscription = this.userService.getUserProfile().subscribe(data => {
     if(!data.success) {
       return null;
     }else {
       this.username = data.user.username;
     }
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

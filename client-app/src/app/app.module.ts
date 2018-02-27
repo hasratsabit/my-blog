@@ -20,7 +20,8 @@ import {MatButtonModule,
         MatNativeDateModule,
         MatMenuModule,
         MatIconModule,
-        MatListModule
+        MatListModule,
+        MatTableModule
       } from '@angular/material';
 
 
@@ -75,6 +76,7 @@ import { PersonalComponent } from './components/profile/personal/personal.compon
 import { PublicationComponent } from './components/profile/publication/publication.component';
 import { AboutComponent } from './components/profile/about/about.component';
 import { BlogListComponent } from './components/blog/blog-list/blog-list.component';
+import { CategoryListComponent } from './components/category/category-list/category-list.component';
 
 
 
@@ -121,6 +123,7 @@ import { BlogListComponent } from './components/blog/blog-list/blog-list.compone
     PublicationComponent,
     AboutComponent,
     BlogListComponent,
+    CategoryListComponent,
   ],
   imports: [
     BrowserModule,

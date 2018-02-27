@@ -1,5 +1,6 @@
+import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
@@ -13,7 +14,7 @@ import { fadeIn, expandCollapse } from '../../../animations/animation';
   styleUrls: ['./add-blog.component.scss'],
   animations: [fadeIn, expandCollapse]
 })
-export class AddBlogComponent implements OnInit {
+export class AddBlogComponent implements OnInit, OnDestroy {
 
 // ==========================================================
 // 		 					VARIABLES
@@ -30,6 +31,8 @@ export class AddBlogComponent implements OnInit {
   alertMessage;
   alertMessageClass;
   successIcon = false;
+
+  subscription: Subscription
 
 // ==========================================================
 // 		 					CONSTRUCTOR
@@ -161,7 +164,7 @@ enableForm() {
     this.formData.append('category', this.blogCategory);
 
     // Posting the blog using the postBlog Method in BlogService. 
-    this.blogService.postBlog(this.formData).subscribe(data => {
+    this.subscription = this.blogService.postBlog(this.formData).subscribe(data => {
       this.processing = true;
       this.disableForm();
       if(!data.success){
@@ -190,13 +193,17 @@ enableForm() {
 // ==========================================================
 
     // Getting Categories
-    this.categoryService.getAllCategories().subscribe(data => {
+    this.subscription = this.categoryService.getAllCategories().subscribe(data => {
       if(!data.success) {
         return null
       }else {
         this.categories = data.cat;
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

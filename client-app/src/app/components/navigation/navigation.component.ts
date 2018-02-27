@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AdminGuard } from '../../guard/admin.guard';
@@ -28,8 +28,18 @@ export class NavigationComponent implements OnInit {
   ) {
     }
 
+
+  @Output('toggleNavbar') toggleNavbar: any = new EventEmitter();
+  @Input('sideNavbarIsToggled') sideNavbarIsToggled: Boolean;
+
     toggleUserProfile() {
       this.mobileNavExpanded = !this.mobileNavExpanded;
+    }
+
+
+
+    toggleSideNav() {
+      this.toggleNavbar.emit();
     }
 
     onLogout() {

@@ -1,59 +1,60 @@
-<!-- Dark Layer -->
-<div [ngClass]="{'expand-layer': editCategoryLoaded, 'collapse-layer': !editCategoryLoaded}" class="dark-layer">
-  <span (click)="toggleEditCategory()" class="dark-layer__close">
-    <mat-icon>clear</mat-icon>
-  </span>
 
 
-  <!-- Row -->
-  <div class="dark-layer__modal row">
-    <!-- Col -->
-    <div class="col-2">
+<div  [@expandCollapse]="updateCategoryIsLoaded ? 'expanded' : 'collapsed'" class="modal-box row">
 
-      <!-- Modal -->
-      <div [ngClass]="{'expand-dialog': editCategoryLoaded, 'collapse-dialog': !editCategoryLoaded}" class="modal">
-        <h1 class="modal__title">Edit Category</h1>
-        <span (click)="toggleEditCategory()" class="modal__close">
-          <mat-icon>clear</mat-icon>
-        </span>
+    <!-- Modal Header -->
+    <div class="modal-box-header">
+      <h1 class="modal-box-header__title">Edit Category</h1>
+      <button (click)="toggleUpdateCategory()" class="modal-buttons modal-box-header__close">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div> <!-- Modal Header Ends -->
 
-        <!-- Success or Error Message -->
-        <div @fadeIn *ngIf="alertMessage">
-            <div [ngClass]="alertMessageClass">
-              <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
-              <i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
-              <p class="alert-text">{{ alertMessage }}</p>
-            </div>
-          </div><!-- Success or Error Message Ends -->
+    <!-- Success or Error Message -->
+    <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+      <div [ngClass]="alertMessageClass">
+        <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+        <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+        <p class="alert-text">{{ alertMessage }}</p>
+      </div>
+    </div><!-- Success or Error Message Ends -->
 
-        <!-- Form -->
-        <div class="modal__form">
+    <!-- Form -->
+    <form [formGroup]="form" (submit)="onUpdateCategory()">
+      <!-- Modal Form -->
+      <div class="modal-box-form">
+        <!-- Category Field -->
+        <mat-form-field class="modal-box-form__inputs">
+          <!-- Category Input -->
+          <input
+            matInput
+            type="text"
+            name="category"
+            formControlName="category"
+            #category
+            [(ngModel)]="categories.category"
+            placeholder="Edit Category" 
+            required>
 
-          <form (submit)="onUpdateCategory()">
-            <mat-form-field class="form-input">
-              <input
-                matInput
-                type="text"
-                name="category"
-                [(ngModel)]="categories.category"
-                #category="ngModel"
-                placeholder="Edit Category">
-            </mat-form-field>
+            <mat-error *ngIf="form.controls.category.errors?.required">The category field is required.</mat-error>
+            <mat-error *ngIf="form.controls.category.errors?.minlength">The category can not be less than 3 character</mat-error>
+            <mat-error *ngIf="form.controls.category.errors?.maxlength">The category can not be more than 15 character</mat-error>
+            <mat-error *ngIf="form.controls.category.errors?.validCategory">The category cannot contain special characters.</mat-error><!-- Category Input Ends -->
+        </mat-form-field><!-- Category Field Ends -->
+      </div><!-- Modal Form Ends -->
 
-            <!-- Buttons -->
-            <div class="modal__buttons">
+      <!-- Modal Buttons -->
+      <div class="modal-box-buttons">
+        <button [disabled]="!form.valid || 
+                            !validCategory || 
+                            processing " 
+                type="submit" 
+                class="modal-buttons modal-box-buttons__buttons">
+                Update Category
+        </button>
+      </div><!-- Modal Buttons Ends--> 
 
-              <button [disabled]="processing" (click)="toggleEditCategory()" class="button button-medium button-round button-default">Cancel</button>
+    </form><!-- Form Ends -->
+    
+</div>
 
-              <button [disabled]="processing" [routerLink]="['/delete-category']" class="button button-medium button-round button-red">Delete</button>
-
-              <button [disabled]="processing" type="submit" class="button button-medium button-round button-green">Update</button>
-
-            </div><!-- Buttons Ends -->
-          </form>
-
-        </div><!-- Form Ends -->
-      </div><!-- Modal Ends -->
-    </div><!-- Col Ends -->
-  </div><!-- Row Ends -->
-</div><!-- Dark Layer Ens -->

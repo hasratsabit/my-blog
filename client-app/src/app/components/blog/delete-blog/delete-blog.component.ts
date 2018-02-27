@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { fadeIn } from './../../../animations/animation';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from './../../../services/blog.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -10,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./delete-blog.component.scss'],
   animations: [fadeIn]
 })
-export class DeleteBlogComponent implements OnInit {
+export class DeleteBlogComponent implements OnInit, OnDestroy {
 
 // ==========================================================
 // 		 									VARIABLES 
@@ -23,6 +24,8 @@ export class DeleteBlogComponent implements OnInit {
   currentBlogUrl;
 
   deletingBlogTitle;
+
+  subscription: Subscription
 
 // ==========================================================
 // 		 									CONSTRUCTOR 
@@ -48,7 +51,7 @@ export class DeleteBlogComponent implements OnInit {
 // ==========================================================
   onDeleteBlog(){
     this.processing = true;
-    this.blogService.deleteBlog(this.currentBlogUrl).subscribe(data => {
+    this.subscription = this.blogService.deleteBlog(this.currentBlogUrl).subscribe(data => {
      if(!data.success){
       this.processing = false;
       this.alertMessage = data.message;
@@ -73,10 +76,14 @@ export class DeleteBlogComponent implements OnInit {
     // Grab the deleting blog url
     this.currentBlogUrl = this.activatedRoute.snapshot.params.id;
     // Find The deleting blog
-    this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
+    this.subscription = this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
       // Store the title to a variable
       this.deletingBlogTitle = data.blog.title;
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

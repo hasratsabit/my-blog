@@ -1,0 +1,22 @@
+<div @fadeIn class="row categories">
+  <!-- Table  -->
+  <table class="table table-hover table-blue table-center custom-table">
+    <div class="custom-head">
+      <mat-icon class="custom-icon">category</mat-icon>
+      <h1 class="custom-title">Categories</h1>
+      <button (click)="toggleAddCategoryForm()" class="table-button button button-small button-blue">Create Category</button>
+    </div>
+    <thead>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of categoreis; index as i">
+        <td>{{ i + 1 }}</td>
+        <td>{{ cat.category }}</td>
+        <td><a class="edit" (click)="toggleUpdateCategory(cat._id)">Edit</a></td>
+        <td><a class="delete" (click)="toggleDeleteCategory(cat._id)">Delete</a></td>
+      </tr>
+    </tbody>
+  </table><!-- Table Ends  -->
+</div>
+  

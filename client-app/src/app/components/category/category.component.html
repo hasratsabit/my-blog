@@ -1,24 +1,38 @@
-<div class="categories">
 
-  <div @fadeIn class="row">
-    <!-- Table  -->
-    <table class="table table-hover table-green table-center custom-table">
-      <div class="custom-head">
-        <mat-icon class="custom-icon">category</mat-icon>
-        <h1 class="custom-title">Categories</h1>
-        <a class="custom-btn" mat-button [routerLink]="['/add-category']">Create Category</a>
-      </div>
-      <thead>
+<!-- CATEGORIES LIST -->
+<app-category-list 
+    #list 
+    *ngIf="!addCategoryFormIsLoaded && 
+    !updateCategoryFormIsLoaded &&
+    !deleteCategoryIsLoaded" 
+    (toggleCategory)="toggleCategoryForm()"
+    (toggleUpdate)="toggleUpdateCategory()"
+    (toggleDelete)="toggleDeleteCategory()">  
+</app-category-list>
 
-      </thead>
-      <tbody>
-        <tr *ngFor="let cat of categoreis; index as i">
-          <td>{{ i }}</td>
-          <td>{{ cat.category }}</td>
-          <td><a class="edit" [routerLink]="['/edit-category', cat._id]">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-category', cat._id]">Delete</a></td>
-        </tr>
-      </tbody>
-    </table><!-- Table Ends  -->
-  </div>
-</div>
+
+<!-- ADD CATEGORY FORM -->
+<app-add-category
+    #add
+    [addCategory]="addCategoryFormIsLoaded"
+    (toggleCategory)="toggleCategoryForm()">
+</app-add-category>
+
+
+<!-- EDIT CATEGORY FORM -->
+<app-edit-category 
+    #edit    
+    *ngIf="updateCategoryFormIsLoaded"
+    (toggleUpdate)="toggleUpdateCategory()"
+    [updateCategory]="updateCategoryFormIsLoaded"
+    [categoryId]="clickedId">
+</app-edit-category>
+
+<!-- DELETE CATEGORY -->
+<app-delete-category 
+    #delete
+    *ngIf="deleteCategoryIsLoaded"
+    (toggleDelete)="toggleDeleteCategory()"
+    [deleteCategory]="deleteCategoryIsLoaded"
+    [categoryId]="clickedId">
+</app-delete-category>

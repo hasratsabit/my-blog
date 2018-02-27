@@ -1,120 +1,18 @@
-<!-- Answer -->
- <div class="discussion__answer">
-
-	<!-- User-->
-	<div class="answer-user">
-		<img class="img img-border img-small img-circle" src="/assets/images/profile.jpg" alt="">
-		<h1 class="name">John Doe</h1>
-	</div><!-- User Ends-->
-
-	<!-- Content -->
-	<div class="answer-content">
-		<p class="text text-gray content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad</p>
-	</div><!-- Content Ends -->
-
-	<!-- Footer -->
-	<div class="answer-footer">
-		<ul>
-			<li class="footer-list"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="footer-data">33</span></li>
-			<li class="footer-list"><i class="fa fa-thumbs-down" aria-hidden="true"></i><span class="footer-data">33</span></li>
-			<li class="footer-list"><i class="fa fa-share-alt" aria-hidden="true"></i><span class="footer-data">33</span></li>
-		</ul>
-	</div><!-- Footer Ends -->
-
-</div><!-- Answer Ends -->
 
 
-<!-- Dark Layer -->
-<div [@dialogCloseOpen]="dialogIsOpened ? 'isOpened' : 'isClosed'" class="dark-layer">
-  <span (click)="openDialog()" class="dark-layer__close">X</span>
-  <!-- Row -->
-  <div class="dark-layer__modal row">
-    <!-- Col -->
-    <div class="col-2">
+1 Fix the side nav for the mobile size device.
 
+2 Fix the user image and name loaded on top of side nav upon login.
 
+3 Fix the like, comment when user is not logged in.
 
-    </div><!-- Col Ens -->
-  </div><!-- Row Ends-->
-</div><!-- Dark Layer Ens -->
+4 Delete the dark layer from profile page.
 
+5 Add the new text editor in edit blog
 
+6 Change the sub routes to sub components. 
 
+7 Add the new Form to categories and other pages.
 
+8 Fix the image upload destination folder.
 
-
-<!-- Dark Layer -->
-<div [ngClass]="{'dark-layer': editIsLoaded, 'dark-layer-is-collapsed': !editIsLoaded}">
-  <span (click)="loadEdit()" class="dark-layer__close">X</span>
-  <!-- Row -->
-  <div class="dark-layer__modal row">
-    <!-- Col -->
-    <div class="col-2">
-
-      <div [@dropDownBox]="deleteIsLoaded ? 'isOpened' : 'isClosed'"  class="edit-user box">
-
-        <!-- Success or Error Message -->
-        <div @fadeIn *ngIf="alertMessage">
-          <div [ngClass]="alertMessageClass">
-            <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i><i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i><p class="alert-text">{{ alertMessage }}</p><button class="button" (click)="closeMessage()"><i class="material-icons alert-close">clear</i></button>
-          </div>
-        </div><!-- Success or Error Message Ends -->
-
-        <form (submit)="onUpdateUser()">
-
-          <!-- Name Input -->
-          <mat-form-field class="input-field register__input">
-            <input matInput
-            #name = "ngModel"
-            [(ngModel)]="user.name"
-            type="text"
-             placeholder="Name"
-             name="name">
-          </mat-form-field><!-- Name Input Ends-->
-
-          <!-- Email Input -->
-          <mat-form-field class="input-field register__input">
-            <input matInput
-            #email = "ngModel"
-            [(ngModel)]="user.email"
-            type="email"
-             placeholder="Email"
-             name="email">
-          </mat-form-field><!-- Email Input Ends-->
-
-          <!-- Username Input -->
-          <mat-form-field class="input-field register__input">
-            <input matInput
-            #username = "ngModel"
-            [(ngModel)]="user.username"
-            type="username"
-             placeholder="Username"
-             name="username">
-          </mat-form-field><!-- Username Input Ends-->
-
-          <!-- User Role Input -->
-          <mat-form-field class="input-field register__input">
-            <input matInput
-            #userRole = "ngModel"
-            [(ngModel)]="user.userRole"
-            type="userRole"
-             placeholder="User Role"
-             name="userRole">
-          </mat-form-field><!-- User Role Input Ends-->
-          <!-- Password Input -->
-          <mat-form-field class="input-field register__input">
-            <input matInput
-            #password = "ngModel"
-            [(ngModel)]="user.password"
-            type="password"
-             placeholder="Password"
-             name="password">
-          </mat-form-field><!-- Password Input Ends-->
-
-          <button type="submit" class="button button-small button-green-clear">Update</button>
-        </form>
-      </div>
-
-    </div><!-- Col Ens -->
-  </div><!-- Row Ends-->
-</div><!-- Dark Layer Ens -->

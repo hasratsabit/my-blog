@@ -1,4 +1,4 @@
-.side-navbar {
+#side-navbar {
   position: fixed;
   left: 0;
   top: 0;
@@ -10,12 +10,15 @@
   background-repeat: no-repeat;
   background-color: rgba(black, 0.8);
   box-shadow: $shadow;
+  transform: translateX(-100%);
+  transition: all 300ms cubic-bezier(.32,.95,.38,.74);
   &:hover {
     overflow-y: scroll;
   }
   @include atSmall {
     width: 18%;
     z-index: 0;
+    transform: translateX(0);
   }
   @include atLarge {
     width: 14%;
@@ -60,6 +63,21 @@
   }
 }
 
+.openNav {
+  transform: translateX(-100%) !important;
+  @include atSmall {
+    transform: translateX(0) !important;
+  }
+}
+
+.closeNav {
+  transform: translateX(0) !important;
+  @include atSmall {
+    transform: translateX(-100%) !important;
+  }
+}
+
+
 // Private Top User Nav
 .private-nav {
   width: 100%;
@@ -99,7 +117,7 @@
   width: 100%;
   border-bottom: 1px solid rgba($white, 0.3);
   @include atSmall {
-    display: block;
+    display: none;
   }
 }
 

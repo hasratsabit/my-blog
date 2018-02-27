@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
-import { fadeIn } from '../../../animations/animation';
+import { fadeIn, expandCollapse } from '../../../animations/animation';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.scss'],
-  animations: [ fadeIn ]
+  animations: [ fadeIn, expandCollapse ]
 })
-export class AddCategoryComponent implements OnInit {
+export class AddCategoryComponent implements OnInit, OnDestroy {
 
 
 // ==========================================================
@@ -21,9 +22,7 @@ export class AddCategoryComponent implements OnInit {
   alertMessageClass;
   successIcon = false;
   processing = false;
-  categoryFormLoaded = true;
-
-
+  subscription: Subscription;
 // ==========================================================
 // 		                CONSTRUCTOR
 // ==========================================================
@@ -35,21 +34,18 @@ export class AddCategoryComponent implements OnInit {
       this.createCategoryForm();
     }
 
-  closeMessage() {
-    this.alertMessage = undefined;
-    this.alertMessageClass = undefined;
-  }
 
 // ==========================================================
-// 		                TOGGLE METHOD
+// 		                  DECORATORS
 // ==========================================================
 
-  toggleCategoryForm(){
-    this.categoryFormLoaded = !this.categoryFormLoaded;
-    setTimeout(() => {
-      this.location.back();
-    }, 500);
+  @Output('toggleCategory') toggleCategory:any = new EventEmitter();
+  @Input('addCategory')  addCategoryFormIsLoaded: Boolean = false;
+
+  toggleAddCategoryForm() {
+    this.toggleCategory.emit();
   }
+
 
 
 // ==========================================================
@@ -76,7 +72,9 @@ export class AddCategoryComponent implements OnInit {
     }
   }
 
-
+// ==========================================================
+// 		                FORM ENABLE AND DISABLE
+// ==========================================================
   disableForm(){
     this.form.controls['category'].disable();
   }
@@ -86,7 +84,7 @@ export class AddCategoryComponent implements OnInit {
   }
 
 // ==========================================================
-// 		                CREATE FORM & VALIDATION
+// 		                ADD CATEGORY
 // ==========================================================
   onCategorySubmit() {
     this.processing = true;
@@ -94,7 +92,7 @@ export class AddCategoryComponent implements OnInit {
     const category = {
       category: this.form.get('category').value
     }
-    this.categoryService.postCategory(category).subscribe(data => {
+    this.subscription = this.categoryService.postCategory(category).subscribe(data => {
       if(!data.success){
         this.processing = false;
         this.successIcon = false;
@@ -107,7 +105,12 @@ export class AddCategoryComponent implements OnInit {
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-green';
         setTimeout(() => {
-          this.toggleCategoryForm();
+          this.processing = false;
+          this.alertMessage = null;
+          this.alertMessageClass = null;
+          this.enableForm();
+          this.form.reset();
+          this.toggleAddCategoryForm();
         }, 2000);
       }
     })
@@ -115,9 +118,15 @@ export class AddCategoryComponent implements OnInit {
 
 
 
-
+// ==========================================================
+// 		                LIFE CYCLE
+// ==========================================================
   ngOnInit() {
 
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -1,8 +1,8 @@
 <!-- Top Nav -->
-<nav class="top-nav">
+<nav [ngClass]="sideNavbarIsToggled ? 'nav-is-expanded' : ''" class="top-nav">
   <!-- Menu Icon -->
   <li class="top-nav__side-nav-toggle">
-    <button class="menu-button button">
+    <button (click)="toggleSideNav()" class="menu-button button">
       <mat-icon>menu</mat-icon>
     </button>
   </li><!-- Menu Icon Ends -->
@@ -127,7 +127,7 @@
 
 
 <!-- Side Nav -->
-<div class="side-navbar">
+<div [ngClass]="sideNavbarIsToggled ? 'closeNav' : openNav" id="side-navbar">
   <!-- Nav Wrapper -->
   <div class="nav-wrapper">
 

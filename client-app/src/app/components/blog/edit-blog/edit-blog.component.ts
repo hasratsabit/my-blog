@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Subscription';
 import { fadeIn } from './../../../animations/animation';
 import { CategoryService } from './../../../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,6 +32,8 @@ export class EditBlogComponent implements OnInit {
   blogId;
   blogAuthor;
   authorUsername;
+
+  subscription: Subscription
 
 
 // ==========================================================
@@ -167,7 +170,7 @@ onUpdateBlog(){
   this.formData.append('authorUsername', this.authorUsername);
   this.formData.append('_id', this.blogId);
 
-  this.blogService.updateBlog(this.formData).subscribe(data => {
+  this.subscription = this.blogService.updateBlog(this.formData).subscribe(data => {
 
     this.processing = true;
     this.disableForm();
@@ -213,6 +216,10 @@ onUpdateBlog(){
     this.categorService.getAllCategories().subscribe(data => {
       this.categories = data.cat;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../../services/category.service';
 import { fadeIn } from '../../../animations/animation';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-delete-category',
@@ -10,38 +11,51 @@ import { fadeIn } from '../../../animations/animation';
   styleUrls: ['./delete-category.component.scss'],
   animations: [ fadeIn ]
 })
-export class DeleteCategoryComponent implements OnInit {
+export class DeleteCategoryComponent implements OnInit, OnDestroy {
 
-  deletedCategoryUrl
+
+// ==========================================================
+// 		                VARIABLES
+// ==========================================================
+
   deletingCategory;
   processing = false;
   successIcon = false;
   alertMessage;
   alertMessageClass;
-  deleteCategoryIsLoaded = true;
+  subscription: Subscription
 
+
+// ==========================================================
+// 		                CONSTRUCTORS
+// ==========================================================
   constructor(
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService
   ) { }
 
-  closeMessage() {
-    this.alertMessage = undefined;
-    this.alertMessageClass = undefined;
+// ==========================================================
+// 		                DECORATORS
+// ==========================================================
+  @Input('categoryId') categoryId;
+  @Input('deleteCategory')  deleteCategoryIsLoaded: Boolean = false;
+  @Output('toggleDelete') toggleDelete:any = new EventEmitter();
+
+// ==========================================================
+// 		                CONSTRUCTORS
+// ==========================================================
+  toggleDeleteCategory() {
+    this.toggleDelete.emit();
   }
 
-  toggleDeleteCategory(){
-    this.deleteCategoryIsLoaded = !this.deleteCategoryIsLoaded;
-    setTimeout(() => {
-      this.location.back();
-    }, 500);
-  }
 
-
+// ==========================================================
+// 		                DELETE CATEGORY
+// ==========================================================
   onDeleteCategory() {
     this.processing = true;
-    this.categoryService.deleteCategory(this.deletedCategoryUrl.id).subscribe(data => {
+    this.subscription = this.categoryService.deleteCategory(this.categoryId).subscribe(data => {
       if(!data.success){
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-red';
@@ -51,17 +65,25 @@ export class DeleteCategoryComponent implements OnInit {
         this.alertMessageClass = 'alert alert-green';
         this.successIcon = true;
         setTimeout(() => {
+          this.alertMessage = null;
+          this.alertMessageClass = null;
           this.toggleDeleteCategory();
         }, 2000);
       }
     })
   }
 
+// ==========================================================
+// 		                LIFE CYCLE
+// ==========================================================
   ngOnInit() {
-    this.deletedCategoryUrl = this.activatedRoute.snapshot.params;
-    this.categoryService.getSingleCategory(this.deletedCategoryUrl.id).subscribe(data => {
+    this.subscription = this.categoryService.getSingleCategory(this.categoryId).subscribe(data => {
       this.deletingCategory = data.cat.category;
     })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

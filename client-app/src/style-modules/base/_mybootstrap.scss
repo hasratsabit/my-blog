@@ -2257,6 +2257,7 @@ mat-option {
   .modal-box {
     background: #FFF;
     z-index: 1000000;
+    height: auto;
     @include clearfix;
 
     .modal-buttons {
@@ -2576,6 +2577,10 @@ mat-option {
   font-family: $TableFont;
   box-shadow: $MediumShadow;
   @include clearfix;
+
+  &--body-center {
+    text-align: center;
+  }
 
   &__header,
   &__body,
