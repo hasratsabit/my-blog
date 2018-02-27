@@ -92,7 +92,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     const category = {
       category: this.form.get('category').value
     }
-    this.subscription = this.categoryService.postCategory(category).subscribe(data => {
+    this.categoryService.postCategory(category).subscribe(data => {
       if(!data.success){
         this.processing = false;
         this.successIcon = false;
@@ -113,7 +113,10 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
           this.toggleAddCategoryForm();
         }, 2000);
       }
-    })
+    },
+    (err) => {
+      console.log(err);
+    }).unsubscribe();
   }
 
 
@@ -126,7 +129,6 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
 }

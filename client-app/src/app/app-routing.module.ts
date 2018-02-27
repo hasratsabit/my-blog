@@ -26,11 +26,6 @@ import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.c
 import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
 
 
-// Categories
-import { AddCategoryComponent } from './components/category/add-category/add-category.component';
-import { EditCategoryComponent } from './components/category/edit-category/edit-category.component';
-import { DeleteCategoryComponent } from './components/category/delete-category/delete-category.component';
-
 // Forum
 import { AddForumComponent } from './components/forum/add-forum/add-forum.component';
 import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
@@ -79,18 +74,6 @@ const appRoutes: Routes = [
 	{
 		path: 'category',
 		component: CategoryComponent
-	},
-	{
-		path: 'add-category',
-		component: AddCategoryComponent
-	},
-	{
-		path: 'edit-category/:id',
-		component: EditCategoryComponent
-	},
-	{
-		path: 'delete-category/:id',
-		component: DeleteCategoryComponent
 	},
 	{
 		path: 'user',
