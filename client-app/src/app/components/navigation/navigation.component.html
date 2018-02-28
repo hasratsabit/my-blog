@@ -189,39 +189,39 @@
           <a routerLink="/dashboard" [routerLinkActive]="['active']">
             <mat-icon>dashboard</mat-icon>Dashboard</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/blog" [routerLinkActive]="['active']">
             <mat-icon>description</mat-icon>Blogs</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/" [routerLinkActive]="['active']">
             <mat-icon>build</mat-icon>Projects</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/comment" [routerLinkActive]="['active']">
             <mat-icon>comment</mat-icon>Comments</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/category" [routerLinkActive]="['active']">
             <mat-icon>dns</mat-icon>Categories</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/user" [routerLinkActive]="['active']">
             <mat-icon>person</mat-icon>Users</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/email" [routerLinkActive]="['active']">
             <mat-icon>email</mat-icon>Email</a>
         </li>
-        <li>
-          <a [routerLink]="['/profile/', username]" [routerLinkActive]="['active']">
+        <li *ngIf="authService.userLoggedIn()">
+          <a [routerLink]="['/profile/', profileUsername]" [routerLinkActive]="['active']">
             <mat-icon>person</mat-icon>Profile</a>
         </li>  
-        <li *ngIf="authService.userLoggedIn()">
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/parts" [routerLinkActive]="['active']">
             <mat-icon>settings_input_component</mat-icon>Components</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/animation" [routerLinkActive]="['active']">
             <mat-icon>assessment</mat-icon>Animation</a>
         </li>

@@ -1,5 +1,6 @@
+import { ProjectComponent } from './project/project.component';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { UserService } from '../../services/user.service';
 import { expandCollapse } from '../../animations/animation';
@@ -34,11 +35,12 @@ export class ProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
+  @ViewChild(ProjectComponent) ProjectChild: ProjectComponent;
+
 
 
   onReload(e) {
     this.ngOnInit();
-    console.log('reloaded');
   }
 
 

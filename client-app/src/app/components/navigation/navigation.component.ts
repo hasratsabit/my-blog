@@ -21,6 +21,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   public isAdmin: Boolean;
   public profileName: String;
   public profileImage: String;
+  public profileUsername: String;
   subsucription: Subscription
 
   constructor(
@@ -57,9 +58,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
   
 
   ngOnInit() {
+    // Invok ngOnInit when user logs in
     this.subsucription = this.authService.triggerLogin.subscribe(() => this.ngOnInit());
     this.subsucription = this.profileService.getLoginUserProfile().subscribe(data => {
       if(data.success){
+        this.profileUsername = data.profile.username;
         this.profileName = data.profile.name;
         this.profileImage = data.profile.image;
       }else {
@@ -68,8 +71,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     })
 
     this.userService.getUserProfile().subscribe(data => {
-      console.log(data.user.adminAccess);
-      if(data.success && data.user.adminAccess){
+      if(data.success && data.user.adminAccess){ // If the admin access is true, display restricted routes.
         this.isAdmin = true;
       }else {
         this.isAdmin = false;
