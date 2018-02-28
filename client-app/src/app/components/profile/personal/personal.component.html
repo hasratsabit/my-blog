@@ -37,8 +37,8 @@
   </div>
 
     <!-- Upload Image Plate Dark Layer-->
-    <div [ngClass]="{'expand-layer': profileImageUpload, 'collapse-layer': !profileImageUpload}" class="dark-layer">
-        <div class="col-3">
+    <div [@toggleModal]="profileImageUpload ? 'expanded' : 'collapsed'" class="modal-wrapper">
+        <div class="modal-wrapper__modal col-3">
             <!-- Image Upload Plate -->
             <div class="plate">
                 <!-- Header -->
@@ -78,8 +78,8 @@
     </div><!-- Upload Image Plate Dark Layer Ends-->
 
     <!-- Delete Profile Alert-->
-    <div [ngClass]="{'expand-layer': deleteProfileIsLoaded, 'collapse-layer': !profileImageUpload}" class="dark-layer">
-        <div class="col-3">
+    <div [@toggleModal]="deleteProfileIsLoaded ? 'expanded' : 'collapsed'" class="modal-wrapper">
+        <div class="modal-wrapper__modal col-3">
             <!-- Image Upload Plate -->
             <div class="plate">
                 <!-- Header -->

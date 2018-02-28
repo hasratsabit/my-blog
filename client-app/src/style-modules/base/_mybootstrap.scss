@@ -2666,3 +2666,27 @@ mat-option {
     padding: 10px;
   }
 }
+
+
+
+// ===============
+// 	 Modal Wrapper
+// ===============
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  height: 100vh;
+  width: 100%;
+  background: rgba(black, 0.5);
+  opacity: 1;
+  display: block;
+
+  &__modal {
+    @include atSmall {
+      transform: translateX(500px) translateY(150px);
+    }
+  }
+}

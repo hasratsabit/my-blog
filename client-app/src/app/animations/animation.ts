@@ -199,3 +199,24 @@ export const dropDownBox = trigger('dropDownBox', [
     }))
   ])
 ]);
+
+
+
+// MODAL TOGGLE
+export const toggleModal = trigger('toggleModal', [
+  state('collapsed', style({
+    opacity: 0,
+    display: 'none'
+  })),
+
+  transition('collapsed => expanded', [
+    animate('200ms ease-out', style({
+      display: '*'
+    })),
+    animate('300ms', style({ opacity: 1 }))
+  ]),
+
+  transition('expanded => collapsed', [
+    animate('200ms ease-in')
+  ])
+]);

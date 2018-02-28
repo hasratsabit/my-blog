@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from './../../../services/profile.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { expandCollapse, fadeIn } from '../../../animations/animation';
+import { expandCollapse, fadeIn, toggleModal } from '../../../animations/animation';
 
 @Component({
   selector: 'app-personal',
   templateUrl: './personal.component.html',
   styleUrls: ['./personal.component.scss'],
-  animations: [expandCollapse, fadeIn]
+  animations: [expandCollapse, fadeIn, toggleModal]
 })
 export class PersonalComponent implements OnInit {
 
