@@ -200,6 +200,35 @@ module.exports = (router) => {
     });
 
 
+// ==========================================================
+// 		 		    GET LOGIN USER PROFILE
+// ==========================================================
+
+    router.get('/loginUser', (req, res) => {
+        User.findOne({ _id: req.decoded.userId })
+        .select('username')
+        .then(user => {
+            if(!user){
+                res.json({ success: false, message: 'You must be logged in to continue.'});
+            }else {
+                Profile.findOne({ username: user.username })
+                .select('name username image title')
+                .then(profile => {
+                    if(!profile){
+                        res.json({ success: false, message: 'There is no profile for the user.'});
+                    }else {
+                        res.json({ success: true, profile: profile });
+                    }
+                })
+                .catch(err => {
+                    res.json({ success: false, message: 'Error occurred finding profile. ' + err });
+                })
+            }
+        })
+        .catch(err => {
+            res.json({ success: false, message: 'Error occurred. ' + err });
+        })
+    })
 
     return router;
 }

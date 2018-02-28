@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
@@ -12,9 +13,16 @@ export class AuthService {
   authToken;
   options;
 
+  public triggerLogin = new Subject<any>(); // When user logs in, inform the components that subscribe.
+
   constructor(
     private http: Http,
   ) { }
+
+  triggerUserLogin() {
+    this.triggerLogin.next();
+  }
+
 
 // ==========================================================
 // 		                AUTHORIZATIONS
@@ -99,6 +107,5 @@ export class AuthService {
     this.user = user;
     this.authToken = token;
   }
-
 
 }

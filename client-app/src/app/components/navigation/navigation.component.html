@@ -135,9 +135,9 @@
     <ul *ngIf="authService.userLoggedIn()" class="private-nav">
 
         <div class="private-nav__img user-img user-img--md">
-            <!-- <img class="user-img__img" src="/assets/images/profile.jpg" alt=""> -->
+            <img class="user-img__img" src="{{ authService.domain }}/{{ profileImage }}" alt="">
         </div>
-      <h1 class="private-nav__title">{{ name}} </h1>
+      <h1 class="private-nav__title">{{ profileName }} </h1>
 
       <button (click)="toggleUserProfile()" class="private-nav__button button">
         <mat-icon [ngClass]="mobileNavExpanded ? 'arrowUp' : 'arrowDown'">keyboard_arrow_down</mat-icon>
@@ -185,7 +185,7 @@
           <a routerLink="/forum" [routerLinkActive]="['active']">
             <mat-icon>forum</mat-icon>Forum</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
+        <li  *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/dashboard" [routerLinkActive]="['active']">
             <mat-icon>dashboard</mat-icon>Dashboard</a>
         </li>

@@ -1,3 +1,4 @@
+import { ProfileService } from './../../services/profile.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from "@angular/animations";
@@ -37,7 +38,8 @@ export class LoginComponent implements OnInit {
     private location: Location,
     private authService: AuthService,
     private authGuard: AuthGuard,
-    private userService: UserService
+    private userService: UserService,
+    public profileService: ProfileService
   ) {
 
       this.createLoginForm();
@@ -73,6 +75,7 @@ export class LoginComponent implements OnInit {
     this.form.controls['password'].enable();
   }
 
+
 // ==========================================================
 // 		 					     LOGIN
 // ==========================================================
@@ -99,6 +102,7 @@ export class LoginComponent implements OnInit {
         this.alertMessageClass = 'alert alert-green';
         this.successIcon = true;
         this.authService.storeUserData(data.token, data.user);
+        this.authService.triggerUserLogin();
         setTimeout(() => {
           if(this.previousUrl){
             this.router.navigate([this.previousUrl]);

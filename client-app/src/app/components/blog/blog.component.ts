@@ -33,15 +33,6 @@ export class BlogComponent implements OnInit {
     this.addBlogFormIsLoaded = !this.addBlogFormIsLoaded;
   }
 
-
-
-
-
-
-
-
-
-
   ngOnInit() {
   
 

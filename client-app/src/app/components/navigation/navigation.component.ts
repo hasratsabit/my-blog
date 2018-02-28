@@ -1,4 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ProfileService } from './../../services/profile.service';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { AdminGuard } from '../../guard/admin.guard';
@@ -12,17 +14,19 @@ import { fadeIn } from '../../animations/animation';
   styleUrls: ['./navigation.component.scss'],
   animations: [fadeIn]
 })
-export class NavigationComponent implements OnInit {
+export class NavigationComponent implements OnInit, OnDestroy {
 
   loggedOutLoaded = false;
   mobileNavExpanded = false;
-  isAdmin
-  name;
-  username;
+  public isAdmin: Boolean;
+  public profileName: String;
+  public profileImage: String;
+  subsucription: Subscription
 
   constructor(
     public authService: AuthService,
     public userService: UserService,
+    public profileService: ProfileService,
     public adminGuard: AdminGuard,
     private router: Router,
   ) {
@@ -50,18 +54,31 @@ export class NavigationComponent implements OnInit {
         this.router.navigate(['/']);
       }, 3000);
     }
-
+  
 
   ngOnInit() {
-    this.userService.getUserProfile().subscribe(data => {
-     if(!data.success) {
-       return null;
-     }else {
-       this.username = data.user.username;
-      this.name = data.user.name;
-     }
-   })
+    this.subsucription = this.authService.triggerLogin.subscribe(() => this.ngOnInit());
+    this.subsucription = this.profileService.getLoginUserProfile().subscribe(data => {
+      if(data.success){
+        this.profileName = data.profile.name;
+        this.profileImage = data.profile.image;
+      }else {
+        return null;
+      }
+    })
 
+    this.userService.getUserProfile().subscribe(data => {
+      console.log(data.user.adminAccess);
+      if(data.success && data.user.adminAccess){
+        this.isAdmin = true;
+      }else {
+        this.isAdmin = false;
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    this.subsucription.unsubscribe();
   }
 
 

@@ -14,6 +14,7 @@ export class ProfileService {
     private http: Http
   ) { }
 
+
 // ==========================================================
 // 		                AUTHORIZATIONS
 // ==========================================================
@@ -252,7 +253,16 @@ deleteProject(username, id) {
 
 
 
-
-
+// ==========================================================
+// 		                GET LOGIN USER PROFILE
+// ==========================================================
+  getLoginUserProfile() {
+    this.authService.loadToken();
+    let headers = new Headers({ 'authorization': this.authService.authToken});
+    let options = new RequestOptions({ headers: headers});
+    return this.http.get(this.domain + '/profile/personal/loginUser', options)
+    .map(res => res.json());
+ 
+  }
 
 }
