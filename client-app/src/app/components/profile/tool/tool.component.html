@@ -143,7 +143,7 @@
         </div><!-- Inline Alert -->
 
         <div *ngFor="let tool of tools; index as i" class="profile-table__row">
-            <span class="profile-table__data">{{ i }}</span>
+            <span class="profile-table__data">{{ i + 1 }}</span>
             <span class="profile-table__data">{{ tool.tool }}</span>
             <span class="profile-table__data">{{ tool.level }}</span>
             <span class="profile-table__data">Since&nbsp; {{ tool.start | date: 'MMM, yyyy' }}</span>

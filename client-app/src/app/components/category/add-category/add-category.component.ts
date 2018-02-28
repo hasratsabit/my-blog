@@ -113,10 +113,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
           this.toggleAddCategoryForm();
         }, 2000);
       }
-    },
-    (err) => {
-      console.log(err);
-    }).unsubscribe();
+    })
   }
 
 

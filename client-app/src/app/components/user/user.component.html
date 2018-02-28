@@ -1,18 +1,17 @@
 <div class="user">
   <div class="row">
     <!-- Table  -->
-    <table class="table table-hover table-green table-center custom-table">
+    <table class="table table-hover table-blue table-center custom-table">
       <div class="custom-head">
         <mat-icon class="custom-icon">account_box</mat-icon>
         <h1 class="custom-title">Users</h1>
-        <a class="custom-btn" mat-button routerLink=".">Add User</a>
       </div>
       <thead>
 
       </thead>
       <tbody>
         <tr *ngFor="let user of users; index as i">
-          <td>{{ i }}</td>
+          <td>{{ i + 1}}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.userRole }}</td>
           <td> {{ user.email }}</td>

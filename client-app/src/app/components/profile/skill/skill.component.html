@@ -145,7 +145,7 @@
 
         <!-- Skill Table Rows -->
         <div *ngFor="let skill of skills; index as i" class="profile-table__row">
-            <span class="profile-table__data">{{ i }}</span>
+            <span class="profile-table__data">{{ i + 1 }}</span>
             <span class="profile-table__data">{{ skill.language }}</span>
             <span class="profile-table__data">{{ skill.level }}</span>
             <span class="profile-table__data">Since {{ skill.start | date: 'MMM, yyyy' }}</span>

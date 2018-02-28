@@ -2,23 +2,48 @@
 <div class="profile">
 
 
-    <app-personal (reloadPage)="onReload($event)" [authorizedUsername]="accessUsername" [personal]="personal" [url]="usernameUrl" ></app-personal>
+    <app-personal 
+        (reloadPage)="onReload($event)" 
+        [authorizedUsername]="accessUsername" 
+        [personal]="personal" 
+        [url]="usernameUrl" >
+    </app-personal>
 
     <!-- <app-objective></app-objective> -->
 
-    <app-about (reloadPage)="onReload($event)" [url]="usernameUrl" [authorizedUsername]="accessUsername" [profile]="abouts"></app-about> 
+    <app-about 
+        (reloadPage)="onReload($event)" 
+        [url]="usernameUrl" 
+        [authorizedUsername]="accessUsername" 
+        [profile]="abouts">
+    </app-about> 
 
     <!-- Skills and Tools Row -->
     <div class="row">
 
-        <app-skill (reloadPage)="onReload($event)" [skills]="skills" [authorizedUsername]="accessUsername" [url]="usernameUrl"></app-skill>
+        <app-skill 
+            (reloadPage)="onReload($event)" 
+            [skills]="skills" 
+            [authorizedUsername]="accessUsername" 
+            [url]="usernameUrl">
+        </app-skill>
 
-        <app-tool (reloadPage)="onReload($event)" [tools]="tools" [authorizedUsername]="accessUsername" [url]="usernameUrl"></app-tool>
+        <app-tool 
+            (reloadPage)="onReload($event)" 
+            [tools]="tools" 
+            [authorizedUsername]="accessUsername" 
+            [url]="usernameUrl">
+        </app-tool>
 
     </div><!-- Skills and Tools Row Ends-->
 
 
-    <app-project (reloadPage)="onReload($event)" [projects]="projects" [authorizedUsername]="accessUsername" [url]="usernameUrl"></app-project>
+    <app-project 
+        (reloadPage)="onReload($event)" 
+        [projects]="projects" 
+        [authorizedUsername]="accessUsername" 
+        [url]="usernameUrl">
+    </app-project>
 
     <!-- <app-experiance></app-experiance>
 
