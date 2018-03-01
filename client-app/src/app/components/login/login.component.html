@@ -1,12 +1,8 @@
 
-<div [ngClass]="{'expand-layer': loginIsLoaded, 'collapse-layer': !loginIsLoaded}" class="dark-layer">
-  <span (click)="toggleLoginForm()" class="dark-layer__close">
-		<mat-icon>clear</mat-icon>
-	</span>
-  <div class="dark-layer__modal dark-layer__login-trasnlate-left row">
+<div [@toggleModal]="loginIsLoaded ? 'expanded' : 'collapsed'" class="modal-wrapper">
     <div class="col-3">
 
-				<div [ngClass]="{'expand-dialog': loginIsLoaded, 'collapse-dialog': !loginIsLoaded}" class="modal-box">
+				<div class="modal-box">
 
 						<!-- Modal Header -->
 						<div class="modal-box-header">
@@ -83,5 +79,4 @@
 					</form>
 				</div><!-- Modal Box Ends -->
     </div>
-  </div>
 </div><!-- Dark Layer Ens -->

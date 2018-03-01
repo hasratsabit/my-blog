@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from "@angular/animations";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { fadeIn, fadeInDown } from '../../animations/animation';
+import { fadeIn, fadeInDown, toggleModal } from '../../animations/animation';
 import { UserService } from '../../services/user.service';
 
 import { AuthService } from '../../services/auth.service';
@@ -14,7 +14,7 @@ import { AuthGuard } from '../../guard/auth.guard';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  animations: [fadeIn, fadeInDown]
+  animations: [fadeIn, fadeInDown, toggleModal]
 })
 export class LoginComponent implements OnInit {
 
@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
   previousUrl;
   successIcon = false;
   proccessing = false;
-  loginIsLoaded = true;
+  
+  loginIsLoaded: Boolean = false;
 
 // ==========================================================
 // 		 					     CONSTRUCTOR
@@ -107,7 +108,7 @@ export class LoginComponent implements OnInit {
           if(this.previousUrl){
             this.router.navigate([this.previousUrl]);
           }else {
-            this.router.navigate(['/']);
+            this.router.navigate(['/profile/', user.username]);
           }
         }, 2000);
       }
@@ -115,6 +116,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loginIsLoaded = true;
 
     if(this.authGuard.redirectUrl){
       this.alertMessageClass = 'alert alert-red';

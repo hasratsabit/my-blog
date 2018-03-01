@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { UserService } from '../../services/user.service';
-import { expandCollapse } from '../../animations/animation';
+import { expandCollapse, fadeIn } from '../../animations/animation';
 
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  animations: [expandCollapse]
+  animations: [expandCollapse, fadeIn]
 })
 export class ProfileComponent implements OnInit {
 

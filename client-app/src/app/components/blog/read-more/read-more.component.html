@@ -156,7 +156,7 @@
                 <form [formGroup]="commentForm" (submit)="onPostComment(blog._id)">
                     <!-- Textarea -->
                     <mat-form-field class="input">
-                        <textarea (blur)="askForLogin()" name="comment" formControlName="comment" matInput placeholder="Leave comment here"></textarea>
+                        <textarea name="comment" formControlName="comment" matInput placeholder="Leave comment here"></textarea>
                         <mat-error *ngIf="commentForm.controls.comment.dirty && commentForm.controls.comment.errors?.required">
                             The comment field is required.
                         </mat-error>
@@ -187,7 +187,7 @@
 
 
                 <!-- Single Comment-->
-                <div *ngFor="let comment of blog.comments" class="post-comment__single-comment comment">
+                <div @fadeIn *ngFor="let comment of blog.comments" class="post-comment__single-comment comment">
                    
                    <!-- Delete Alert-->
                     <div @fadeIn  *ngIf="deleteArray.indexOf(comment._id) > -1" class="post-comment__inline-modal inline-modal">
@@ -375,3 +375,32 @@
     </div><!-- Body Ends -->
 
 </div><!-- Post Page Ends  -->
+
+
+<!-- If the user is not logged in it will be displayed -->
+<div [@toggleModal]="userIsNotLoggedIn ? 'expanded' : 'collapsed'" class="modal-wrapper">
+    <div class="modal-wrapper__modal col-3">
+        <div class="plate plate--lg-shadow">
+
+        <!-- Header -->
+        <div class="plate__header">
+            <h1 class="plate__title">Login</h1>
+            <div (click)="toogleUserLogin()" class="plate__close">
+            <mat-icon>clear</mat-icon>
+            </div>
+        </div><!-- Header -->
+
+        <!-- Body -->
+        <div class="plate__body  plate--body-center">
+            <h1 class="plate__message">You must be login to continue.</h1>
+        </div><!-- Body Ends -->
+
+        <!-- Footer -->
+        <div class="plate__footer">
+            <button [routerLink]="['/login']" class="plate__button button button-blue button-small">Login</button>
+            <button [routerLink]="['/register']" class="plate__button button button-default button-small">Create Account</button>
+        </div><!-- Footer Ends -->
+
+        </div>
+    </div>
+</div>

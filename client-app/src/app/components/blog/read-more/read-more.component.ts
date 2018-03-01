@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Subscription';
 import { ProfileService } from './../../../services/profile.service';
 import { UserService } from './../../../services/user.service';
 import { CommentService } from './../../../services/comment.service';
@@ -6,16 +7,16 @@ import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from './../../../services/blog.service';
-import { Component, OnInit } from '@angular/core';
-import { expandCollapse, fadeIn } from '../../../animations/animation';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { expandCollapse, fadeIn, toggleModal } from '../../../animations/animation';
 
 @Component({
   selector: 'app-read-more',
   templateUrl: './read-more.component.html',
   styleUrls: ['./read-more.component.scss'],
-  animations: [expandCollapse, fadeIn]
+  animations: [expandCollapse, fadeIn, toggleModal]
 })
-export class ReadMoreComponent implements OnInit {
+export class ReadMoreComponent implements OnInit, OnDestroy {
 
 // ==========================================================
 // 		 									VARIABLES 
@@ -25,6 +26,7 @@ export class ReadMoreComponent implements OnInit {
   allRepliesLoaded = false;
   blogLiked = false;
   currentBlogUrl;
+  subscription: Subscription;
 
   blog = {
     authorName: String,
@@ -69,6 +71,12 @@ export class ReadMoreComponent implements OnInit {
   }
 
 
+  public userIsNotLoggedIn: Boolean = false;
+  toogleUserLogin() {
+    this.userIsNotLoggedIn = !this.userIsNotLoggedIn;
+  }
+
+
 // ==========================================================
 // 		 				TOGGLE SECTIONS
 // ==========================================================
@@ -86,11 +94,13 @@ export class ReadMoreComponent implements OnInit {
 // 		 				LIKE BLOG
 // ==========================================================
   onLikeBlog(blogId){
-    this.blogService.likeBlog(blogId).subscribe(data => {
-      if(data.success){
+    this.subscription = this.blogService.likeBlog(blogId).subscribe(data => {
+      if(!this.authService.userLoggedIn()){
+        this.toogleUserLogin();
+      }else if(data.success){
         this.blogLiked = true;
+        this.ngOnInit();
       }
-      this.ngOnInit();
     })
   }
 
@@ -128,9 +138,11 @@ export class ReadMoreComponent implements OnInit {
     this.processing = true;
   
 
-    this.commentService.postComment(id, comment).subscribe(data => {
+    this.subscription = this.commentService.postComment(id, comment).subscribe(data => {
       // If the comment is not posted:
-      if(!data.success){
+      if(!this.authService.userLoggedIn()){
+        this.toogleUserLogin();
+      }else if(!data.success){
         this.processing = false;
         this.enableForm();
         // If the comment is posted:
@@ -151,14 +163,6 @@ export class ReadMoreComponent implements OnInit {
 // ==========================================================
 // 		 				          ASK FOR LOGIN
 // ==========================================================
-  askForLogin(){
-    if(!this.authService.userLoggedIn()){
-      this.processing = true;
-      this.disableForm();
-      this.loadAddNewComment();
-      alert('You must be logged in to comment.');
-    }
-  }
 
 
 
@@ -170,17 +174,25 @@ export class ReadMoreComponent implements OnInit {
 
   // Like comment
   likeComment(commentId){
-    this.commentService.likeComment(commentId, this.currentBlogUrl)
+   this.subscription =  this.commentService.likeComment(commentId, this.currentBlogUrl)
     .subscribe(data => {
-      this.ngOnInit();
+      if(!this.authService.userLoggedIn()){
+        this.toogleUserLogin()
+      }else {
+        this.ngOnInit();
+      }
     })
   }
 
   // Dislike Comment
   dislikeComment(commentId){
-    this.commentService.dislikeComment(commentId, this.currentBlogUrl)
+    this.subscription = this.commentService.dislikeComment(commentId, this.currentBlogUrl)
     .subscribe(data => {
-      this.ngOnInit()
+      if(!this.authService.userLoggedIn()){
+        this.toogleUserLogin()
+      }else {
+        this.ngOnInit();
+      }
     })
   }
 
@@ -228,7 +240,7 @@ export class ReadMoreComponent implements OnInit {
     this.processing = true;
     
     // Call the edit comment method.
-    this.commentService.editComment(this.currentBlogUrl, this.commentId, comment)
+   this.subscription = this.commentService.editComment(this.currentBlogUrl, this.commentId, comment)
     .subscribe(data => {
       // If the comment is successfully editted:
       if(!data.success){
@@ -267,7 +279,7 @@ export class ReadMoreComponent implements OnInit {
   onDeleteComment(){
     this.processing = true;
 
-    this.commentService.deleteComment(this.currentBlogUrl, this.deleteId)
+    this.subscription = this.commentService.deleteComment(this.currentBlogUrl, this.deleteId)
     .subscribe(data => {
       if(!data.success){
         this.processing = false;
@@ -333,9 +345,11 @@ createReplyForm(){
     this.processing = true;
 
     let replyComment = this.replyForm.get('replyComment').value;
-    this.commentService.postReply(this.currentBlogUrl, this.replyId, replyComment)
+    this.subscription = this.commentService.postReply(this.currentBlogUrl, this.replyId, replyComment)
       .subscribe(data => {
-        if(!data.success){
+        if(!this.authService.userLoggedIn()){
+          this.toogleUserLogin()
+        }else if(!data.success){
           this.processing = false;
         }else {
           this.replyForm.reset();
@@ -377,7 +391,7 @@ createReplyForm(){
 
   onDeleteReply(){
 
-    this.commentService.deleteRepliedComment(
+    this.subscription = this.commentService.deleteRepliedComment(
       this.currentBlogUrl, 
       this.parentCommentId, 
       this.deleteReplyId)
@@ -396,7 +410,7 @@ createReplyForm(){
 // ==========================================================
 
  getSingleComment(blogId, commentId){
-  this.commentService.getSingleComment(blogId, commentId)
+  this.subscription = this.commentService.getSingleComment(blogId, commentId)
   .subscribe(data => {
     this.oneComment = data.singleComment[0].comment;
   });
@@ -438,7 +452,7 @@ createReplyForm(){
 // 		                GET CURRENT BLOG
 // ==========================================================
     this.currentBlogUrl = this.activatedRoute.snapshot.params.id;
-    this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
+   this.subscription =  this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
       this.blog = data.blog;
       this.commentsLength = data.blog.comments.length
       this.usernames = data.blog.comments.map(com => com.authorUsername);
@@ -448,16 +462,18 @@ createReplyForm(){
 // ==========================================================
 // 		                GET USER PROFILE
 // ==========================================================
-    this.userService.getUserProfile().subscribe(data => {
+    this.subscription = this.userService.getUserProfile().subscribe(data => {
       if(!data.success){
         return null;
       }else {
         this.authorizedUsername = data.user.username;
       }
     });
-    
 
+  }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 
 }

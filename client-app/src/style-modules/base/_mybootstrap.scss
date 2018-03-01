@@ -2575,8 +2575,11 @@ mat-option {
   width: 100%;
   background: $white;
   font-family: $TableFont;
-  box-shadow: $MediumShadow;
   @include clearfix;
+
+  &--lg-shadow {
+    box-shadow: $largekShadow;
+  }
 
   &--body-center {
     text-align: center;
