@@ -6,8 +6,30 @@
   <!-- Table Row -->
   <div @fadeIn *ngIf="!postFormLoaded" class="row">
 
-      <app-add-blog (loadBlog)="loadAddBlogForm()" [addBlogFormIsLoaded]="addBlogFormIsLoaded"></app-add-blog>
-      <app-blog-list *ngIf="!addBlogFormIsLoaded" (loadBlog)="loadAddBlogForm()"></app-blog-list>
+    <app-blog-list
+        #list 
+        *ngIf="!addBlogFormIsLoaded && !deleteBlogIsLoaded"
+        (toggleDelete)="loadDeleteBlog()" 
+        (loadBlog)="loadAddBlogForm()">
+    </app-blog-list>
+
+      <app-add-blog 
+
+          (toggleBlog)="loadAddBlogForm()" 
+          [addBlogFormIsLoaded]="addBlogFormIsLoaded">
+
+      </app-add-blog>
+
+
+
+      <app-delete-blog
+
+        #delete
+        (toggleDelete)="loadDeleteBlog()" 
+        [loadDelete]="deleteBlogIsLoaded"
+        [blogId]="deleteBlogId">
+
+      </app-delete-blog>
 
 
   </div><!-- Table Row Ends-->  <!-- Table Row Ends-->

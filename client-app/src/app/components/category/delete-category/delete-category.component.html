@@ -1,42 +1,49 @@
 
-<div [ngClass]="{'fadeIn': deleteCategoryIsLoaded, '': !deleteCategoryIsLoaded}" class="plate">
 
-    <!-- Header -->
-    <div class="plate__header">
-      <h1 class="plate__title">Delete Category</h1>
-      <div (click)="toggleDeleteCategory()" class="plate__close">
-        <mat-icon>clear</mat-icon>
-      </div>
-    </div><!-- Header Ends -->
+<div [@toggleModal]="deleteCategoryIsLoaded ? 'expanded' : 'collapsed' " class="modal-wrapper">
+    <div class="col-3 modal-wrapper__modal">
+      <div class="plate plate--lg-shadow">
 
-    <!-- Success or Error Message -->
-    <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
-      <div [ngClass]="alertMessageClass">
-        <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
-        <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
-        <p class="alert-text">{{ alertMessage }}</p>
-      </div>
-    </div><!-- Success or Error Message Ends -->
-  
-    <!-- Body -->
-    <div class="plate__body plate--body-center">
-        <h1 class="plate__message">Are you sure you want to delete <br><strong>{{ deletingCategory }}</strong></h1>
-    </div><!-- Body Ends -->
-  
-    <!-- Footer -->
-    <div class="plate__footer">
-      <button 
-        [disabled]="processing"
-        (click)="toggleDeleteCategory()"
-        class="plate__button button button-default button-small">
-        Cancel
-      </button>
-      <button
+        <!-- Header -->
+        <div class="plate__header">
+          <h1 class="plate__title">Delete Category</h1>
+          <div (click)="toggleDeleteCategory()" class="plate__close">
+            <mat-icon>clear</mat-icon>
+          </div>
+        </div><!-- Header Ends -->
+
+        <!-- Success or Error Message -->
+        <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+          <div [ngClass]="alertMessageClass">
+            <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+            <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+            <p class="alert-text">{{ alertMessage }}</p>
+          </div>
+        </div><!-- Success or Error Message Ends -->
+
+        <!-- Body -->
+        <div class="plate__body plate--body-center">
+            <h1 class="plate__message">Are you sure you want to delete this category?</h1>
+        </div><!-- Body Ends -->
+
+        <!-- Footer -->
+        <div class="plate__footer">
+          <button 
+            [disabled]="processing"
+            (click)="toggleDeleteCategory()"
+            class="plate__button button button-default button-small">
+            Cancel
+          </button>
+          <button
             [disabled]="processing" 
             (click)="onDeleteCategory()"  
             class="plate__button button button-blue button-small">
-        Delete
-      </button>
-    </div><!-- Footer Ends -->
-    
-  </div>
+            Delete
+          </button>
+        </div><!-- Footer Ends -->
+        
+      </div>
+    </div>
+</div>
+
+

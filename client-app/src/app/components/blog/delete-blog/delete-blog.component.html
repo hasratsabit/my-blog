@@ -1,53 +1,37 @@
-<!-- Dark Layer -->
-<div [ngClass]="{'expand-layer': deleteBlogIsLoaded, 'collapse-layer': !deleteBlogIsLoaded}" class="dark-layer">
-  <span (click)="toggleDelete()" class="dark-layer__close">
-      <mat-icon>clear</mat-icon>
-  </span>
-
-  <!-- Success or Error Message -->
-  <div @fadeIn *ngIf="alertMessage">
-    <div [ngClass]="alertMessageClass">
-      <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
-      <i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
-      <p class="alert-text">{{ alertMessage }}</p>
-    </div>
-  </div><!-- Success or Error Message Ends -->
-
-  <!-- Row -->
-  <div class="dark-layer__modal row">
-    <!-- Col -->
-    <div class="col-2">
-
-      <!-- Dialog -->
-      <div [ngClass]="{'expand-dialog': deleteBlogIsLoaded, 'collapse-dialog': !deleteBlogIsLoaded}" class="dialog">
+ 
+<!-- Modal Wrapper -->
+<div [@toggleModal]="deleteBlogIsLoaded ? 'expanded' : 'collapsed' "  class="modal-wrapper">
+    <div class="modal-wrapper__modal col-3">
+        <div class="plate plate--lg-shadow">
 
         <!-- Header -->
-        <div class="dialog__header">
+        <div class="plate__header">
+            <h1 class="plate__title">Delete Blog</h1>
+            <div (click)="toggleDeleteBlog()" class="plate__close">
+            <mat-icon>clear</mat-icon>
+            </div>
+        </div><!-- Header -->
 
-          <div class="header-title"><i class="fa fa-exclamation-triangle header-warning" aria-hidden="true"></i> Confirm</div>
-
-          <span (click)="toggleDelete()" class="header-close">
-              <mat-icon>clear</mat-icon>
-          </span>
-
-        </div><!-- Header Ends -->
+        <!-- Success or Error Message -->
+        <div @fadeIn *ngIf="alertMessage">
+          <div [ngClass]="alertMessageClass">
+            <i *ngIf="successIcon" class="fa fa-thumbs-o-up icon-large alert-icon" aria-hidden="true"></i>
+            <i *ngIf="!successIcon" class="fa fa-ban icon-large alert-icon" aria-hidden="true"></i>
+            <p class="alert-text">{{ alertMessage }}</p>
+          </div>
+        </div><!-- Success or Error Message Ends -->
 
         <!-- Body -->
-        <div class="dialog__body">
-          <h3 class="body-text"> Are you sure you want to delete the following blog:</h3><br>
-          <h2 class="body-target">{{ deletingBlogTitle }}</h2>
+        <div class="plate__body  plate--body-center">
+            <h1 class="plate__message">Are you sure you want to delete this blog?</h1>
         </div><!-- Body Ends -->
 
         <!-- Footer -->
-        <div class="dialog__footer">
-
-          <button [disabled]="processing" (click)="onDeleteBlog()" class="button button-small button-red">Delete</button>
-          <button [disabled]="processing" (click)="toggleDelete()" class="button button-small button-default">Cancel</button>
-
+        <div class="plate__footer">
+            <button [disabled]="processing" (click)="onDeleteBlog()" class="plate__button button button-blue button-small">Delete</button>
+            <button [disabled]="processing" (click)="toggleDeleteBlog()" class="plate__button button button-default button-small">Cancel</button>
         </div><!-- Footer Ends -->
 
-      </div><!-- Dialog Ends -->
-
-    </div><!-- Col Ends -->
-  </div><!-- Row Ends -->
-</div><!-- Dark Layer Ens -->
+        </div>
+    </div>
+</div><!-- Modal Wrapper Ends -->

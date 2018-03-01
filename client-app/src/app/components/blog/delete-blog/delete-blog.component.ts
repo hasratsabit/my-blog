@@ -1,29 +1,25 @@
 import { Subscription } from 'rxjs';
-import { fadeIn } from './../../../animations/animation';
-import { ActivatedRoute } from '@angular/router';
+import { fadeIn, toggleModal } from './../../../animations/animation';
 import { BlogService } from './../../../services/blog.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-delete-blog',
   templateUrl: './delete-blog.component.html',
   styleUrls: ['./delete-blog.component.scss'],
-  animations: [fadeIn]
+  animations: [fadeIn, toggleModal]
 })
 export class DeleteBlogComponent implements OnInit, OnDestroy {
 
 // ==========================================================
 // 		 									VARIABLES 
 // ==========================================================
-  deleteBlogIsLoaded = true;
-  successIcon = false;
-  processing = false;
-  alertMessage;
-  alertMessageClass;
-  currentBlogUrl;
-
-  deletingBlogTitle;
+  // deleteBlogIsLoaded = true;
+  public successIcon: Boolean = false;
+  public processing: Boolean = false;
+  public alertMessage: String;
+  public alertMessageClass: String;
 
   subscription: Subscription
 
@@ -31,19 +27,21 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
 // 		 									CONSTRUCTOR 
 // ==========================================================
   constructor(
-    private location: Location,
-    private blogService: BlogService,
-    private activatedRoute: ActivatedRoute
+    private blogService: BlogService
   ) { }
+
+  @Input('blogId') deleteBlogId: String;
+  @Input('loadDelete') deleteBlogIsLoaded: Boolean = false;
+  @Output('toggleDelete') toggleDelete:any = new EventEmitter();
+
+
+
 
 // ==========================================================
 // 		 									DELETE TOGGLE
 // ==========================================================
-  toggleDelete() {
-    this.deleteBlogIsLoaded = !this.deleteBlogIsLoaded;
-    setTimeout(() => {
-      this.location.back();
-    }, 500);
+  toggleDeleteBlog(){
+    this.toggleDelete.emit();
   }
 
 // ==========================================================
@@ -51,7 +49,7 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
 // ==========================================================
   onDeleteBlog(){
     this.processing = true;
-    this.subscription = this.blogService.deleteBlog(this.currentBlogUrl).subscribe(data => {
+    this.subscription = this.blogService.deleteBlog(this.deleteBlogId).subscribe(data => {
      if(!data.success){
       this.processing = false;
       this.alertMessage = data.message;
@@ -62,10 +60,11 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
       this.alertMessageClass = 'alert alert-green'
       this.successIcon = true;
       setTimeout(() => {
-        this.location.back();
+        this.processing = false;
+        this.toggleDeleteBlog();
+        this.subscription.unsubscribe();
       }, 2000);
-     }
-      
+     } 
     })
   }
 
@@ -73,17 +72,10 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
   
 
   ngOnInit() {
-    // Grab the deleting blog url
-    this.currentBlogUrl = this.activatedRoute.snapshot.params.id;
-    // Find The deleting blog
-    this.subscription = this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
-      // Store the title to a variable
-      this.deletingBlogTitle = data.blog.title;
-    })
+
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
 }

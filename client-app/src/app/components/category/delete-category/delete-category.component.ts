@@ -2,14 +2,14 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../../services/category.service';
-import { fadeIn } from '../../../animations/animation';
+import { fadeIn, toggleModal } from '../../../animations/animation';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-delete-category',
   templateUrl: './delete-category.component.html',
   styleUrls: ['./delete-category.component.scss'],
-  animations: [ fadeIn ]
+  animations: [ fadeIn, toggleModal ]
 })
 export class DeleteCategoryComponent implements OnInit, OnDestroy {
 
@@ -18,11 +18,10 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
 // 		                VARIABLES
 // ==========================================================
 
-  deletingCategory;
-  processing = false;
-  successIcon = false;
-  alertMessage;
-  alertMessageClass;
+  public processing: Boolean = false;
+  public successIcon: Boolean = false;
+  public alertMessage: String;
+  public alertMessageClass: String;
   subscription: Subscription
 
 
@@ -65,9 +64,11 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
         this.alertMessageClass = 'alert alert-green';
         this.successIcon = true;
         setTimeout(() => {
+          this.processing = false;
           this.alertMessage = null;
           this.alertMessageClass = null;
           this.toggleDeleteCategory();
+          this.subscription.unsubscribe();
         }, 2000);
       }
     })
@@ -77,13 +78,9 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
 // 		                LIFE CYCLE
 // ==========================================================
   ngOnInit() {
-    this.subscription = this.categoryService.getSingleCategory(this.categoryId).subscribe(data => {
-      this.deletingCategory = data.cat.category;
-    })
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
 }

@@ -16,6 +16,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
   
   blogs;
   username;
+  blogId;
   isPublished: Boolean = false;
   postStatusClass;
   subscription: Subscription
@@ -28,11 +29,17 @@ export class BlogListComponent implements OnInit, OnDestroy {
   ) { }
 
 
-  @Output('loadBlog') loadBlog:any = new EventEmitter()
+  @Output('loadBlog') loadBlog:any = new EventEmitter();
+  @Output('toggleDelete') toggleDelete:any = new EventEmitter();
 
 
   loadAddBlogForm(){
     this.loadBlog.emit();
+  }
+
+  toggleDeleteBlog(id) {
+    this.blogId = id;
+    this.toggleDelete.emit();
   }
 
 
@@ -62,11 +69,11 @@ export class BlogListComponent implements OnInit, OnDestroy {
     // 		 									GET USER PROFILES
     // ==========================================================
     this.subscription = this.userService.getUserProfile().subscribe(data => {
-    if(!data.success) {
-      return null;
-    }else {
-      this.username = data.user.username;
-    }
+      if(!data.success) {
+        return null;
+      }else {
+        this.username = data.user.username;
+      }
     })
   }
 

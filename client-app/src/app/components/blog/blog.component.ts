@@ -1,6 +1,8 @@
+import { BlogListComponent } from './blog-list/blog-list.component';
+import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
 import { UserService } from './../../services/user.service';
 import { BlogService } from './../../services/blog.service';
-import { Component, OnInit, ElementRef, Output } from '@angular/core';
+import { Component, OnInit, ElementRef, Output, ViewChild } from '@angular/core';
 import { fadeInDown, fadeInLeft, fadeIn, rainFall} from '../../animations/animation';
 
 @Component({
@@ -19,6 +21,9 @@ export class BlogComponent implements OnInit {
 // ==========================================================
   constructor() { }
 
+  @ViewChild('delete') DeleteChild: DeleteBlogComponent;
+  @ViewChild('list') ListChild: BlogListComponent;
+
 
 
 
@@ -27,10 +32,19 @@ export class BlogComponent implements OnInit {
 // 		 									ADD BLOG
 // ==========================================================
 
-  addBlogFormIsLoaded = false;
+  public addBlogFormIsLoaded: Boolean = false;
+  public deleteBlogIsLoaded: Boolean = false;
+  public deleteBlogId;
 
   loadAddBlogForm() {
     this.addBlogFormIsLoaded = !this.addBlogFormIsLoaded;
+  }
+
+  loadDeleteBlog() {
+    this.deleteBlogIsLoaded = !this.deleteBlogIsLoaded;
+    if(this.deleteBlogIsLoaded){
+      this.deleteBlogId = this.ListChild.blogId;
+    }
   }
 
   ngOnInit() {

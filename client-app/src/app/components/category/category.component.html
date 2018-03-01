@@ -31,7 +31,6 @@
 <!-- DELETE CATEGORY -->
 <app-delete-category 
     #delete
-    *ngIf="deleteCategoryIsLoaded"
     (toggleDelete)="toggleDeleteCategory()"
     [deleteCategory]="deleteCategoryIsLoaded"
     [categoryId]="clickedId">
