@@ -427,6 +427,7 @@
   color: $white;
   font-family: $GeneralFont;
   text-align: left;
+  border-radius: 3px;
   i {
     color: $white;
     font-weight: 100 !important;
@@ -434,7 +435,7 @@
   }
 } // Notification Colors.
 .alert-green {
-  background: $DarkGreen
+  background: $LightGreen;
 }
 
 .alert-red {
@@ -2125,11 +2126,11 @@ mat-option {
 
 &__category,
 &__status {
-  padding: 10px;
+  padding: 8px;
   color: #FFF;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  background: rgba($LightGreen, 0.8);
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  background: rgba($DarkBlue, 0.8);
 }
 
 &__category {

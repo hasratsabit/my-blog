@@ -15,7 +15,6 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 // 		                VARIABLES
 // ==========================================================
   categoreis;
-  catId;
   subscription: Subscription
 
 
@@ -29,32 +28,25 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
 
 // ==========================================================
-// 		                DECORATORS
+// 		                SUBJECT COMMUNICTION LINE
 // ==========================================================
-  @Output('toggleCategory') toggleCategory:any = new EventEmitter();
-  @Output('toggleUpdate') toggleUpdate:any = new EventEmitter();
-  @Output('toggleDelete') toggleDelete:any = new EventEmitter();
 
 
-// ==========================================================
-// 		                EVENTS
-// ==========================================================
-  toggleAddCategoryForm() {
-    this.toggleCategory.emit();
+  toggleAddCategory(){
+    const data = { type: 'add'};
+    this.categoryService.sendDataToSibling(data);
   }
 
-
   toggleUpdateCategory(id) {
-    this.catId = id;
-    this.toggleUpdate.emit();
+    const data = { id: id, type: 'edit'}
+    this.categoryService.sendDataToSibling(data);
   }
 
 
   toggleDeleteCategory(id){
-    this.catId = id;
-    this.toggleDelete.emit();
+    const data = { id: id, type: 'delete'}
+    this.categoryService.sendDataToSibling(data);
   }
-
 
 
 // ==========================================================
@@ -65,6 +57,9 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     this.subscription = this.categoryService.getAllCategories().subscribe(data => {
       this.categoreis = data.cat;
     })
+
+    // This will update the list if any category is deleted or updated.
+    this.subscription = this.categoryService.reloadOnUpdate.subscribe(() => this.ngOnInit());
   }
 
   ngOnDestroy() {

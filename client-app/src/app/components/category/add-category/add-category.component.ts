@@ -1,15 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
-import { fadeIn, expandCollapse } from '../../../animations/animation';
+import { fadeIn, toggleModal } from '../../../animations/animation';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
   styleUrls: ['./add-category.component.scss'],
-  animations: [ fadeIn, expandCollapse ]
+  animations: [ fadeIn, toggleModal ]
 })
 export class AddCategoryComponent implements OnInit, OnDestroy {
 
@@ -22,12 +21,12 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   alertMessageClass;
   successIcon = false;
   processing = false;
+  public addCategoryIsLoaded: Boolean = false;
   subscription: Subscription;
 // ==========================================================
 // 		                CONSTRUCTOR
 // ==========================================================
   constructor(
-    private location: Location,
     private formBuilder: FormBuilder,
     private categoryService: CategoryService
   ) {
@@ -39,11 +38,8 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 // 		                  DECORATORS
 // ==========================================================
 
-  @Output('toggleCategory') toggleCategory:any = new EventEmitter();
-  @Input('addCategory')  addCategoryFormIsLoaded: Boolean = false;
-
   toggleAddCategoryForm() {
-    this.toggleCategory.emit();
+    this.addCategoryIsLoaded = !this.addCategoryIsLoaded;
   }
 
 
@@ -110,6 +106,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
           this.alertMessageClass = null;
           this.enableForm();
           this.form.reset();
+          this.categoryService.reloadSiblingOnUpdate();
           this.toggleAddCategoryForm();
         }, 2000);
       }
@@ -122,7 +119,11 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 // 		                LIFE CYCLE
 // ==========================================================
   ngOnInit() {
-
+    this.categoryService.listChannel.subscribe(data => {
+      if(data.type === 'add'){
+        this.toggleAddCategoryForm();
+      }
+    })
   }
 
   ngOnDestroy() {

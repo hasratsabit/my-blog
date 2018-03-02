@@ -17,14 +17,15 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
 // ==========================================================
 // 		                VARIABLES
 // ==========================================================
-
+  public deleteCategoryIsLoaded: Boolean = false;
   public processing: Boolean = false;
   public successIcon: Boolean = false;
   public alertMessage: String;
   public alertMessageClass: String;
+  public categoryId: String;
   subscription: Subscription
 
-
+  
 // ==========================================================
 // 		                CONSTRUCTORS
 // ==========================================================
@@ -35,18 +36,12 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
   ) { }
 
 // ==========================================================
-// 		                DECORATORS
-// ==========================================================
-  @Input('categoryId') categoryId;
-  @Input('deleteCategory')  deleteCategoryIsLoaded: Boolean = false;
-  @Output('toggleDelete') toggleDelete:any = new EventEmitter();
-
-// ==========================================================
 // 		                CONSTRUCTORS
 // ==========================================================
   toggleDeleteCategory() {
-    this.toggleDelete.emit();
+    this.deleteCategoryIsLoaded = !this.deleteCategoryIsLoaded;
   }
+
 
 
 // ==========================================================
@@ -67,6 +62,7 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
           this.processing = false;
           this.alertMessage = null;
           this.alertMessageClass = null;
+          this.categoryService.reloadSiblingOnUpdate(); // Update any component thats subscribed to this.
           this.toggleDeleteCategory();
           this.subscription.unsubscribe();
         }, 2000);
@@ -78,9 +74,18 @@ export class DeleteCategoryComponent implements OnInit, OnDestroy {
 // 		                LIFE CYCLE
 // ==========================================================
   ngOnInit() {
+    this.subscription = this.categoryService.listChannel.subscribe(data => {
+      if(data.type === 'delete'){
+        this.categoryId = data.id;
+        this.toggleDeleteCategory()
+      }else {
+        return false;
+      }
+    });
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

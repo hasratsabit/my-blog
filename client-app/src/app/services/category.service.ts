@@ -1,8 +1,8 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { AuthService } from './auth.service';
-
 
 @Injectable()
 export class CategoryService {
@@ -14,6 +14,18 @@ export class CategoryService {
     private authService: AuthService,
     private http: Http
   ) { }
+
+
+  public listChannel = new Subject<any>();
+  public reloadOnUpdate = new Subject<any>();
+
+  sendDataToSibling(data){
+    this.listChannel.next(data);
+  }
+
+  reloadSiblingOnUpdate(){
+    this.reloadOnUpdate.next();
+  }
 
 // ==========================================================
 // 		                AUTHORIZATIONS

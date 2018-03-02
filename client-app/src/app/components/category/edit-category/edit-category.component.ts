@@ -3,14 +3,14 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../../services/category.service';
-import { fadeIn, expandCollapse } from '../../../animations/animation';
+import { fadeIn, toggleModal } from '../../../animations/animation';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-category',
   templateUrl: './edit-category.component.html',
   styleUrls: ['./edit-category.component.scss'],
-  animations: [ fadeIn, expandCollapse ]
+  animations: [ fadeIn, toggleModal ]
 })
 export class EditCategoryComponent implements OnInit, OnDestroy {
 
@@ -18,11 +18,13 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
 // 		                VARIABLES
 // ==========================================================
   form;
-  processing = false;
-  successIcon = false;
-  alertMessage;
-  alertMessageClass;
+  public processing: Boolean = false;
+  public successIcon: Boolean = false;
+  public alertMessage: String;
+  public alertMessageClass: String;
   subcription: Subscription;
+
+  public updateCategoryIsLoaded: Boolean = false;
 
   categories = {
     category: String
@@ -44,13 +46,10 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
 // ==========================================================
 // 		                DECORATORS
 // ==========================================================
-   @Input('updateCategory') updateCategoryIsLoaded: Boolean = false;
-   @Input('categoryId') categoryId;
-   @Output('toggleUpdate') toggleUpdate:any = new EventEmitter();
 
 
    toggleUpdateCategory() {
-     this.toggleUpdate.emit();
+     this.updateCategoryIsLoaded = !this.updateCategoryIsLoaded;
    }
 
 
@@ -110,7 +109,10 @@ enableForm(){
         this.successIcon = true;
         setTimeout(() => {
           this.processing = false;
+          this.alertMessage = null;
+          this.alertMessageClass = null;
           this.toggleUpdateCategory();
+          this.categoryService.reloadSiblingOnUpdate();
           this.form.reset();
           this.enableForm();
         }, 2000);
@@ -119,12 +121,21 @@ enableForm(){
 
   }
 
+  getSingCategory(catId){
+    this.subcription =  this.categoryService.getSingleCategory(catId).subscribe(data => {
+      this.categories = data.cat;
+    })
+  }
+
 // ==========================================================
 // 		                LIFE CYCLE
 // ==========================================================
   ngOnInit() {
-    this.subcription =  this.categoryService.getSingleCategory(this.categoryId).subscribe(data => {
-      this.categories = data.cat;
+    this.subcription = this.categoryService.listChannel.subscribe(data => {
+      if(data.type === 'edit'){
+        this.getSingCategory(data.id); // Call this method to get the single category.
+        this.toggleUpdateCategory();
+      }
     })
   }
 

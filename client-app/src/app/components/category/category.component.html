@@ -1,37 +1,21 @@
 
 <!-- CATEGORIES LIST -->
-<app-category-list 
-    #list 
-    *ngIf="!addCategoryFormIsLoaded && 
-    !updateCategoryFormIsLoaded &&
-    !deleteCategoryIsLoaded" 
-    (toggleCategory)="toggleCategoryForm()"
-    (toggleUpdate)="toggleUpdateCategory()"
-    (toggleDelete)="toggleDeleteCategory()">  
+<app-category-list>  
 </app-category-list>
 
 
 <!-- ADD CATEGORY FORM -->
-<app-add-category
-    #add
-    [addCategory]="addCategoryFormIsLoaded"
-    (toggleCategory)="toggleCategoryForm()">
+<app-add-category>
 </app-add-category>
 
 
+
 <!-- EDIT CATEGORY FORM -->
-<app-edit-category 
-    #edit    
-    *ngIf="updateCategoryFormIsLoaded"
-    (toggleUpdate)="toggleUpdateCategory()"
-    [updateCategory]="updateCategoryFormIsLoaded"
-    [categoryId]="clickedId">
+<app-edit-category>
 </app-edit-category>
 
+
+
 <!-- DELETE CATEGORY -->
-<app-delete-category 
-    #delete
-    (toggleDelete)="toggleDeleteCategory()"
-    [deleteCategory]="deleteCategoryIsLoaded"
-    [categoryId]="clickedId">
+<app-delete-category>
 </app-delete-category>
