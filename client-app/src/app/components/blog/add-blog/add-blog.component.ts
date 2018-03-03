@@ -1,18 +1,16 @@
 import { Subscription } from 'rxjs/Subscription';
-import { Router } from '@angular/router';
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
 import { BlogService } from './../../../services/blog.service';
 import { UserService } from './../../../services/user.service';
-import { fadeIn, expandCollapse } from '../../../animations/animation';
+import { fadeIn, toggleModal } from '../../../animations/animation';
 
 @Component({
   selector: 'app-add-blog',
   templateUrl: './add-blog.component.html',
   styleUrls: ['./add-blog.component.scss'],
-  animations: [fadeIn, expandCollapse]
+  animations: [fadeIn, toggleModal]
 })
 export class AddBlogComponent implements OnInit, OnDestroy {
 
@@ -21,7 +19,6 @@ export class AddBlogComponent implements OnInit, OnDestroy {
 // ==========================================================
 
   FormGroup;
-  addBlogFormLoaded = true;
   categories;
   postForm;
   blogImage;
@@ -34,24 +31,26 @@ export class AddBlogComponent implements OnInit, OnDestroy {
 
   subscription: Subscription
 
+  public addBlogFormIsLoaded: Boolean = false;
+
 // ==========================================================
 // 		 					CONSTRUCTOR
 // ==========================================================
 
   constructor(
-    private location: Location,
     private categoryService: CategoryService,
     private blogService: BlogService,
     private userService: UserService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private formBuilder: FormBuilder
   ) { 
     this.createPostForm();
   }
 
 
-  @Input('addBlogFormIsLoaded') addBlogFormIsLoaded: Boolean;
-  @Output('loadBlog') loadBlog:any = new EventEmitter();
+  toggleAddBlogForm() {
+    this.addBlogFormIsLoaded = !this.addBlogFormIsLoaded;
+  }
+
 
 // ==========================================================
 // 		 					CREATE ADD BLOG FORM
@@ -90,11 +89,6 @@ export class AddBlogComponent implements OnInit, OnDestroy {
 
 }
 
-
-
-  loadAddBlog(){
-    this.loadBlog.emit();
-  }
 
 
 // ==========================================================
@@ -178,9 +172,13 @@ enableForm() {
         this.successIcon = true;
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-green';
-        this.postForm.reset();
         setTimeout(() => {
-          this.router.navigate(['/']);
+          this.processing = false;
+          this.alertMessage = false;
+          this.alertMessageClass = false;
+          this.toggleAddBlogForm();
+          this.blogService.updateBlogList();
+          this.postForm.reset();
         }, 2000);
       }
     })
@@ -191,6 +189,12 @@ enableForm() {
 // ==========================================================
 // 		 									GET CATEGORIES
 // ==========================================================
+
+    this.subscription = this.blogService.blogListChannel.subscribe(data => {
+      if(data.type === 'add'){
+        this.toggleAddBlogForm();
+      }
+    })
 
     // Getting Categories
     this.subscription = this.categoryService.getAllCategories().subscribe(data => {

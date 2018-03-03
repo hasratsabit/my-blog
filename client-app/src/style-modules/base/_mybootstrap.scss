@@ -2258,7 +2258,6 @@ mat-option {
   .modal-box {
     background: #FFF;
     z-index: 1000000;
-    height: auto;
     @include clearfix;
 
     .modal-buttons {
@@ -2681,16 +2680,24 @@ mat-option {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 1000;
   height: 100vh;
   width: 100%;
   background: rgba(black, 0.5);
   opacity: 1;
   display: block;
+  overflow: scroll;
 
   &__modal {
     @include atSmall {
       transform: translateX(500px) translateY(150px);
+    }
+  }
+
+  &__add-blog {
+    z-index: 10000;
+    @include atSmall {
+      transform: translateX(120px) translateY(30px);
     }
   }
 }

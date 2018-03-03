@@ -1,22 +1,13 @@
-<!-- Dark Layer -->
-<div [ngClass]="{'expand-layer': editFormLoaded, 'collapse-layer': !editFormLoaded}" class="dark-layer">
-
-  <span (click)="toggleEditBlog()" class="dark-layer__close">
-      <mat-icon>clear</mat-icon>
-  </span>
-  
-  <!-- Row -->
-  <div class="dark-layer__modal row">
-    <!-- Col -->
-      <div class="col-2">
-
-        <!-- Modal -->
-        <div [ngClass]="{'expand-dialog': editFormLoaded, 'collapse-dialog': !editFormLoaded}" class="modal-box">
+<div [@toggleModal]="updateFormIsLoaded ? 'expanded' : 'collapsed'" class="modal-wrapper">
+    
+    <div class="modal-wrapper__add-blog">
+      <!-- Modal Box -->
+      <div class="modal-box">
     
           <!-- Modal Header -->
           <div class="modal-box-header">
             <h1 class="modal-box-header__title">Edit Blog</h1>
-            <button (click)="toggleEditBlog()" class="modal-buttons modal-box-header__close">
+            <button (click)="toggleUpdateForm()" class="modal-buttons modal-box-header__close">
               <mat-icon>clear</mat-icon>
             </button>
           </div><!-- Modal Header Ends -->
@@ -66,7 +57,7 @@
       
                 <!-- Body -->
                 <mat-form-field class="modal-box-form__inputs">
-                  <textarea #body formControlName="body" [(ngModel)]="blog.body" maxlength="5000" matInput placeholder="Body"></textarea>
+                  <textarea [froalaEditor]  #body formControlName="body" [(ngModel)]="blog.body" maxlength="5000" matInput placeholder="Body"></textarea>
                   <mat-hint align="end">{{body.value?.length || 0}}/5000</mat-hint>
                   
                   <!-- Error Block -->
@@ -91,9 +82,8 @@
 
         </div><!-- Modal Ends -->
       
-      </div><!-- Col Ends -->
-  </div><!-- Row Ends -->
-</div><!-- Dark Layer Ends -->
+    </div><!-- Col Ends -->
+</div><!-- Row Ends -->
 
 
 

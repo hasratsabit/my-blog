@@ -1,9 +1,9 @@
 import { Subscription } from 'rxjs/Subscription';
-import { fadeIn } from './../../../animations/animation';
+import { fadeIn, toggleModal } from './../../../animations/animation';
 import { CategoryService } from './../../../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from './../../../services/blog.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -11,29 +11,28 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-edit-blog',
   templateUrl: './edit-blog.component.html',
   styleUrls: ['./edit-blog.component.scss'],
-  animations: [ fadeIn]
+  animations: [ fadeIn, toggleModal]
 })
-export class EditBlogComponent implements OnInit {
+export class EditBlogComponent implements OnInit, OnDestroy {
 
 // ==========================================================
 // 		                VARIABLES
 // ==========================================================
   FormGroup
   updateForm
-  editFormLoaded = true;
   processing = false;
   alertMessage: String;
   alertMessageClass: String;
   successIcon = false;
-  updatingBlogUrl;
   categories; // This gets the category list for edit form.
   blogCategory; // This is what user selects when updates the blog.
   blog = {}; // This holds the single blog coming from DB.
-  blogId;
   blogAuthor;
   authorUsername;
+  blogId;
 
   subscription: Subscription
+  public updateFormIsLoaded: Boolean = false;
 
 
 // ==========================================================
@@ -50,16 +49,11 @@ export class EditBlogComponent implements OnInit {
     this.createUpdateForm();
   }
 
-// ==========================================================
-// 		                TOGGLE EDIT
-// ==========================================================
-  toggleEditBlog() {
-    this.editFormLoaded = !this.editFormLoaded;
-    setTimeout(() => {
-      this.updatingBlogUrl = null;
-      this.location.back();
-    }, 500);
+
+  toggleUpdateForm() {
+    this.updateFormIsLoaded = !this.updateFormIsLoaded;
   }
+
 
 
 // ==========================================================
@@ -185,7 +179,11 @@ onUpdateBlog(){
       this.alertMessageClass = 'alert alert-green';
       this.successIcon = true;
       setTimeout(() => {
-        this.router.navigate(['/blog']);
+        this.alertMessage = null;
+        this.alertMessageClass = null;
+        this.processing = false;
+        this.toggleUpdateForm();
+        this.blogService.updateBlogList();
       }, 2000);
     }
   })
@@ -193,27 +191,35 @@ onUpdateBlog(){
 }
 
 
+// ==========================================================
+// 		 					GET SINGL BLOG BY ID
+// ==========================================================
+  getSingleBlog(id) {
+    this.blogService.getSingBlog(id).subscribe(data => {
+      this.blog = data.blog;
+      this.blogAuthor = data.blog.author;
+      this.authorUsername = data.blog.authorUsername;
+      this.blogId = data.blog._id;
+    })
+  }
 
 
 
 
   ngOnInit() {
   
-// ==========================================================
-// 		 					GET SINGL BLOG BY ID
-// ==========================================================
-    this.updatingBlogUrl = this.activatedRoute.snapshot.params;
-    this.blogService.getSingBlog(this.updatingBlogUrl.id).subscribe(data => {
-      this.blog = data.blog;
-      this.blogId = data.blog._id;
-      this.blogAuthor = data.blog.author;
-      this.authorUsername = data.blog.authorUsername;
-    })
+    this.subscription = this.blogService.blogListChannel.subscribe(data => {
+    if(data.type === 'edit'){
+      this.getSingleBlog(data.id);
+      this.toggleUpdateForm()
+    }
+  })
+    
 
 // ==========================================================
 // 		 					GET ALL CATEGORIES
 // ==========================================================
-    this.categorService.getAllCategories().subscribe(data => {
+    this.subscription = this.categorService.getAllCategories().subscribe(data => {
       this.categories = data.cat;
     });
   }

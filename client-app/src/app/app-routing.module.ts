@@ -20,9 +20,6 @@ import { EditUserComponent } from './components/user/edit-user/edit-user.compone
 import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
 
 // Blog
-import { AddBlogComponent } from './components/blog/add-blog/add-blog.component';
-import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';
-import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
 import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
 
 
@@ -52,20 +49,8 @@ const appRoutes: Routes = [
 		component: BlogComponent
 	},
 	{
-		path: 'add-blog',
-		component: AddBlogComponent
-	},
-	{
-		path: 'edit-blog/:id',
-		component: EditBlogComponent
-	},
-	{
 		path: 'read-more/:id',
 		component: ReadMoreComponent
-	},
-	{
-		path: 'delete-blog/:id',
-		component: DeleteBlogComponent
 	},
 	{
 		path: 'comment',

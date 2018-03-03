@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { fadeIn, toggleModal } from './../../../animations/animation';
 import { BlogService } from './../../../services/blog.service';
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 
 
 @Component({
@@ -15,11 +15,12 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
 // ==========================================================
 // 		 									VARIABLES 
 // ==========================================================
-  // deleteBlogIsLoaded = true;
+  public deleteBlogIsLoaded: Boolean = false;
   public successIcon: Boolean = false;
   public processing: Boolean = false;
   public alertMessage: String;
   public alertMessageClass: String;
+  public blogId: String;
 
   subscription: Subscription
 
@@ -30,10 +31,6 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
     private blogService: BlogService
   ) { }
 
-  @Input('blogId') deleteBlogId: String;
-  @Input('loadDelete') deleteBlogIsLoaded: Boolean = false;
-  @Output('toggleDelete') toggleDelete:any = new EventEmitter();
-
 
 
 
@@ -41,7 +38,7 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
 // 		 									DELETE TOGGLE
 // ==========================================================
   toggleDeleteBlog(){
-    this.toggleDelete.emit();
+    this.deleteBlogIsLoaded = !this.deleteBlogIsLoaded;
   }
 
 // ==========================================================
@@ -49,7 +46,7 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
 // ==========================================================
   onDeleteBlog(){
     this.processing = true;
-    this.subscription = this.blogService.deleteBlog(this.deleteBlogId).subscribe(data => {
+    this.subscription = this.blogService.deleteBlog(this.blogId).subscribe(data => {
      if(!data.success){
       this.processing = false;
       this.alertMessage = data.message;
@@ -61,8 +58,10 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
       this.successIcon = true;
       setTimeout(() => {
         this.processing = false;
+        this.alertMessage = null;
+        this.alertMessageClass = null;
         this.toggleDeleteBlog();
-        this.subscription.unsubscribe();
+        this.blogService.updateBlogList();
       }, 2000);
      } 
     })
@@ -72,10 +71,16 @@ export class DeleteBlogComponent implements OnInit, OnDestroy {
   
 
   ngOnInit() {
-
+    this.subscription = this.blogService.blogListChannel.subscribe(data => {
+      if(data.type === 'delete'){
+        this.blogId = data.id;
+        this.toggleDeleteBlog();
+      }
+    })
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

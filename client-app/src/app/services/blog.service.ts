@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -23,6 +24,19 @@ export class BlogService {
     private authService: AuthService,
     private http: Http
   ) { }
+
+
+  public blogListChannel = new Subject<any>();
+  public reloadList = new Subject<any>();
+
+  sendBlogDataToSibling(data) {
+    this.blogListChannel.next(data);
+  }
+
+  updateBlogList(){
+    this.reloadList.next();
+  }
+
 
 
 // ==========================================================

@@ -1,85 +1,89 @@
-    <!-- Modal Box -->
-    <div class="modal-box" [@expandCollapse]="addBlogFormIsLoaded ? 'expanded' : 'collapsed'">
+<div [@toggleModal]="addBlogFormIsLoaded ? 'expanded' : 'collapsed'" class="modal-wrapper">
+    
+    <div class="modal-wrapper__add-blog">
+      <!-- Modal Box -->
+      <div class="modal-box">
 
-        <!-- Modal Header -->
-        <div class="modal-box-header">
-          <h1 class="modal-box-header__title">New Blog</h1>
-          <button (click)="loadAddBlog()" class="modal-buttons modal-box-header__close">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </div>
-  
-        <!-- Success or Error Message -->
-        <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
-          <div [ngClass]="alertMessageClass">
-            <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
-            <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
-            <p class="alert-text">{{ alertMessage }}</p>
-          </div>
-        </div><!-- Success or Error Message Ends -->
-  
-        <!-- Modal Form -->
-        <form [formGroup]="postForm" (submit)="onPostBlog()">
-          <!-- Modal Inputs -->
-          <div class="modal-box-form">
-  
-            <!-- Title  -->
-            <mat-form-field class="modal-box-form__inputs">
-              <input name="title" formControlName="title" matInput type="text" placeholder="Title" #title maxlength="100" required>
-              <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
-              
-              <!-- Title Error Block -->
-              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.required">The title field is required.</mat-error>
-              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.minlength">The title must be at least 3 characters.</mat-error>
-              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.maxlength">The title must not exceed 100 characters.</mat-error>
-              <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.validTitleChecker">The title must not not contain special characters.</mat-error>
-  
-            </mat-form-field><!-- Title  Ends-->
-
-            <!-- Body  -->
-            <mat-form-field class="modal-box-form__inputs">
-              <textarea [froalaEditor] name="body" formControlName="body" maxlength="5000" matInput #body required></textarea>
-              <mat-hint align="end">{{body.value?.length || 0}}/5000</mat-hint>
-  
-              <!-- Error Block -->
-              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.required">The body field is required.</mat-error>
-              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.minlength">The body must be at least 50 characters.</mat-error>
-              <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.maxlength">The body must not exceed 5000 characters.</mat-error>
-  
-            </mat-form-field><!-- Body Ends  -->
-  
-            <!-- Categories  -->
-            <mat-form-field  class="modal-box-form__inputs">
-              <mat-select formControlName="category" #val (change)="onSelect(val.value)" placeholder="Select Category">
-                <mat-option
-                *ngFor="let cat of categories"
-                [value]="cat.category">
-                {{ cat.category }}</mat-option>
-              </mat-select>
-              <mat-error *ngIf="postForm.controls.category.touch && postForm.controls.category.errors?.required">The title field is required.</mat-error>
-            </mat-form-field><!-- Categories End  -->
-  
-            <!-- Upload  -->
-            <div class="upload">
-              <input [disabled]="processing"  class="upload__input" type="file" (change)="onFileChange($event)">
-              <mat-error *ngIf="imageMessage">{{imageMessage}}</mat-error>
-            </div><br><!-- Upload Ends  -->
-  
-          </div><!-- Modal Inputs Ends-->
-  
-          <!-- Modal Buttons -->
-          <div class="modal-box-buttons">
-            <button [disabled]="processing || !postForm.valid || !validImage" 
-                    type="submit" 
-                    class="modal-buttons modal-box-buttons__buttons">
-              <mat-icon class="modal-box-buttons__icon">mail</mat-icon>
-              Create Blog
+          <!-- Modal Header -->
+          <div class="modal-box-header">
+            <h1 class="modal-box-header__title">New Blog</h1>
+            <button (click)="toggleAddBlogForm()" class="modal-buttons modal-box-header__close">
+              <mat-icon>clear</mat-icon>
             </button>
-          </div><!-- Modal Buttons Ends-->
-  
-        </form><!-- Form Ends -->
+          </div>
+    
+          <!-- Success or Error Message -->
+          <div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+            <div [ngClass]="alertMessageClass">
+              <i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+              <i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+              <p class="alert-text">{{ alertMessage }}</p>
+            </div>
+          </div><!-- Success or Error Message Ends -->
+    
+          <!-- Modal Form -->
+          <form [formGroup]="postForm" (submit)="onPostBlog()">
+            <!-- Modal Inputs -->
+            <div class="modal-box-form">
+    
+              <!-- Title  -->
+              <mat-form-field class="modal-box-form__inputs">
+                <input name="title" formControlName="title" matInput type="text" placeholder="Title" #title maxlength="100" required>
+                <mat-hint align="end">{{title.value?.length || 0}}/100</mat-hint>
+                
+                <!-- Title Error Block -->
+                <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.required">The title field is required.</mat-error>
+                <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.minlength">The title must be at least 3 characters.</mat-error>
+                <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.maxlength">The title must not exceed 100 characters.</mat-error>
+                <mat-error *ngIf="postForm.controls.title.dirty && postForm.controls.title.errors?.validTitleChecker">The title must not not contain special characters.</mat-error>
+    
+              </mat-form-field><!-- Title  Ends-->
+
+              <!-- Body  -->
+              <mat-form-field class="modal-box-form__inputs">
+                <textarea [froalaEditor] name="body" formControlName="body" maxlength="5000" matInput #body required></textarea>
+                <mat-hint align="end">{{body.value?.length || 0}}/5000</mat-hint>
+    
+                <!-- Error Block -->
+                <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.required">The body field is required.</mat-error>
+                <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.minlength">The body must be at least 50 characters.</mat-error>
+                <mat-error *ngIf="postForm.controls.body.dirty && postForm.controls.body.errors?.maxlength">The body must not exceed 5000 characters.</mat-error>
+    
+              </mat-form-field><!-- Body Ends  -->
+    
+              <!-- Categories  -->
+              <mat-form-field  class="modal-box-form__inputs">
+                <mat-select formControlName="category" #val (change)="onSelect(val.value)" placeholder="Select Category">
+                  <mat-option
+                  *ngFor="let cat of categories"
+                  [value]="cat.category">
+                  {{ cat.category }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="postForm.controls.category.touch && postForm.controls.category.errors?.required">The title field is required.</mat-error>
+              </mat-form-field><!-- Categories End  -->
+    
+              <!-- Upload  -->
+              <div class="upload">
+                <input [disabled]="processing"  class="upload__input" type="file" (change)="onFileChange($event)">
+                <mat-error *ngIf="imageMessage">{{imageMessage}}</mat-error>
+              </div><br><!-- Upload Ends  -->
+    
+            </div><!-- Modal Inputs Ends-->
+    
+            <!-- Modal Buttons -->
+            <div class="modal-box-buttons">
+              <button [disabled]="processing || !postForm.valid || !validImage" 
+                      type="submit" 
+                      class="modal-buttons modal-box-buttons__buttons">
+                <mat-icon class="modal-box-buttons__icon">mail</mat-icon>
+                Create Blog
+              </button>
+            </div><!-- Modal Buttons Ends-->
+    
+          </form><!-- Form Ends -->
+
       </div><!-- Modal Box Ends-->
-
-
+    </div>
+</div>
 
 

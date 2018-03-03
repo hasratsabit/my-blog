@@ -1,38 +1,17 @@
 <div class="blog">
 
+  <!-- BLOG LIST -->
+  <app-blog-list></app-blog-list>
 
+  <!-- ADD BLOG -->
+  <app-add-blog></app-add-blog>
+
+  <!-- DELETE -->
+  <app-delete-blog></app-delete-blog> 
   
+  <!-- EDIT -->
+  <app-edit-blog></app-edit-blog>
 
-  <!-- Table Row -->
-  <div @fadeIn *ngIf="!postFormLoaded" class="row">
-
-    <app-blog-list
-        #list 
-        *ngIf="!addBlogFormIsLoaded && !deleteBlogIsLoaded"
-        (toggleDelete)="loadDeleteBlog()" 
-        (loadBlog)="loadAddBlogForm()">
-    </app-blog-list>
-
-      <app-add-blog 
-
-          (toggleBlog)="loadAddBlogForm()" 
-          [addBlogFormIsLoaded]="addBlogFormIsLoaded">
-
-      </app-add-blog>
-
-
-
-      <app-delete-blog
-
-        #delete
-        (toggleDelete)="loadDeleteBlog()" 
-        [loadDelete]="deleteBlogIsLoaded"
-        [blogId]="deleteBlogId">
-
-      </app-delete-blog>
-
-
-  </div><!-- Table Row Ends-->  <!-- Table Row Ends-->
 
 </div>
 
