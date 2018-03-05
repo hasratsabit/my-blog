@@ -16,17 +16,9 @@ import { LoginComponent } from "./components/login/login.component";
 import { LogoutComponent } from "./components/logout/logout.component";
 import { AnimationComponent } from "./components/animation/animation.component";
 
-import { EditUserComponent } from './components/user/edit-user/edit-user.component';
-import { DeleteUserComponent } from './components/user/delete-user/delete-user.component';
-
 // Blog
 import { ReadMoreComponent } from './components/blog/read-more/read-more.component';
 
-
-// Forum
-import { AddForumComponent } from './components/forum/add-forum/add-forum.component';
-import { EditForumComponent } from './components/forum/edit-forum/edit-forum.component';
-import { DeleteForumComponent } from './components/forum/delete-forum/delete-forum.component';
 
 // User Access
 import { AuthGuard } from './guard/auth.guard';
@@ -46,7 +38,8 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'blog',
-		component: BlogComponent
+		component: BlogComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'read-more/:id',
@@ -54,51 +47,33 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'comment',
-		component: CommentComponent
+		component: CommentComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'category',
-		component: CategoryComponent
+		component: CategoryComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'user',
-		component: UserComponent
-	},
-	{
-		path: 'user/:id',
-		component: UserComponent
-	},
-	{
-		path: 'edit-user/:id',
-		component: EditUserComponent
-	},
-	{
-		path: 'delete-user/:id',
-		component: DeleteUserComponent
+		component: UserComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'forum',
-		component: ForumComponent
-	},
-	{
-		path: 'add-forum',
-		component: AddForumComponent
-	},
-	{
-		path: 'edit-forum',
-		component: EditForumComponent
-	},
-	{
-		path: 'delete-forum',
-		component: DeleteForumComponent
+		component: ForumComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'email',
-		component: EmailComponent
+		component: EmailComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'parts',
-		component: PartsComponent
+		component: PartsComponent,
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'dashboard',
@@ -126,7 +101,8 @@ const appRoutes: Routes = [
 	},
 	{
 		path: 'animation',
-		component: AnimationComponent
+		component: AnimationComponent,
+		canActivate: [AdminGuard]
 	}
 
 ]

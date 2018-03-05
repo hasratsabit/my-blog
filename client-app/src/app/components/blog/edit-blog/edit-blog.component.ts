@@ -105,7 +105,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   onFileChange(event) {
     let fileList: FileList = event.target.files; // Get the Files array from input.
     // Check if there is a file and it matches the type of files that are allowed.
-    if(fileList.length > 0 && !fileList[0].name.match(/\.(jpg|jpeg|png)$/)){
+    if(fileList.length > 0 && !fileList[0].name.match(/\.(jpg|jpeg|png|JPEG|JPG|PNG)$/)){
       this.imageMessage = 'File type can be only .jpg/.jpeg/.png' // Respond if the type of file is not the type we ask for.
       this.validImage = false; // Keep the form invalid.
       // Check for the size of the file. 

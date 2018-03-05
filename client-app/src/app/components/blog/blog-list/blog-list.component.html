@@ -18,9 +18,9 @@
       <td>{{ blog.viewCounter }} <br> Views</td>
       <td>{{ blog.comments.length}} <br> Comments</td>
       <td><a class="view" [routerLink]="['/read-more', blog._id]">View</a></td>
-      <td *ngIf="blog.authorUsername === username"><a class="view" (click)="changeStatus(blog._id, $event)">{{ blog.blogStatus }}</a></td>
-      <td *ngIf="blog.authorUsername === username"><a class="edit" (click)="toggleEdit(blog._id)">Edit</a></td>
-      <td *ngIf="blog.authorUsername === username"><a class="delete" (click)="toggleDelete(blog._id)">Delete</a></td>
+      <td><a class="view" (click)="changeStatus(blog._id, $event)">{{ blog.blogStatus }}</a></td>
+      <td><a class="edit" (click)="toggleEdit(blog._id)">Edit</a></td>
+      <td><a class="delete" (click)="toggleDelete(blog._id)">Delete</a></td>
     </tr>
   </tbody>
 </table>

@@ -1,0 +1,103 @@
+.blog-card {
+    width: 100%;
+    background: $white;
+    border-radius: 5px;
+    font-family: $GeneralFont;
+    box-shadow: $shadow;
+    @include clearfix;
+
+
+
+    &__hero,
+    &__body,
+    &__footer {
+        float: left;
+    }
+
+
+    // HERO 
+    &__hero {
+        position: relative;
+        height: 200px;
+
+        img {
+            height: 100%;
+            width: 100%;
+            border-radius: 5px 5px 0;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 5px;
+        font-size: 0.8rem;
+        text-transform: capitalize;
+        color: #FFF;
+        background: rgba($Red, 0.8);
+        border-radius: 0 3px 3px 0;
+    }
+
+    
+    // BODY
+    &__body {
+        padding: 10px;
+    }
+        max-width: 100%;
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 900;
+        padding: 5px 0;
+        font-family: $TitleFont;
+        color: $TitleColor;
+        text-transform: capitalize;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__text {
+        font-size: 0.8rem;
+        color: $Gray;
+        text-align: justify;
+        line-height: 18px;
+    }
+
+
+    // FOOTER 
+    &__footer {
+        position: relative;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    &__read-more {
+        position: absolute;
+        right: 10px;
+        font-size: 0.8rem;
+        color: $Green;
+        cursor: pointer;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__media-list {
+        font-size: 0.8rem;
+        color: $IconsColor;
+        margin-left: 10px;
+    }
+
+    &__media-data {
+        font-size: 0.7rem;
+        font-weight: 100;
+        padding-left: 8px;
+    }
+
+
+
+}

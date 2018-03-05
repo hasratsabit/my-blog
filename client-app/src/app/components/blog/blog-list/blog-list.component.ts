@@ -1,8 +1,7 @@
 import { fadeIn } from './../../../animations/animation';
 import { Subscription } from 'rxjs/Subscription';
-import { UserService } from './../../../services/user.service';
 import { BlogService } from './../../../services/blog.service';
-import { Component, OnInit, ElementRef, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-blog-list',
@@ -17,17 +16,13 @@ export class BlogListComponent implements OnInit, OnDestroy {
 // ==========================================================
   
   blogs;
-  username;
-  blogId;
   isPublished: Boolean = false;
   postStatusClass;
   subscription: Subscription
   
 
   constructor(
-    private blogService: BlogService,
-    private userService: UserService,
-    private element: ElementRef
+    private blogService: BlogService
   ) { }
 
 
@@ -61,25 +56,14 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    // this.blogService.reloadList.subscribe(() => this.ngOnInit());
+    this.blogService.reloadList.subscribe(() => this.ngOnInit());
 
     // ==========================================================
     // 		 									GET ALL BLOGS
     // ==========================================================
     this.subscription = this.blogService.getAllBlogs().subscribe(data => {
       this.blogs = data.blogs
-    })
-
-    // ==========================================================
-    // 		 									GET USER PROFILES
-    // ==========================================================
-    this.subscription = this.userService.getUserProfile().subscribe(data => {
-      if(!data.success) {
-        return null;
-      }else {
-        this.username = data.user.username;
-      }
-    })
+    });
   }
 
   ngOnDestroy() {

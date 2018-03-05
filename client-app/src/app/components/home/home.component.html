@@ -1,53 +1,31 @@
 
 <div class="row"><!-- Row -->
-
-
-  <div *ngFor="let blog of blogs" @fadeIn class="col-2"><!-- Col -->
-
-    <!-- Blog Card  -->
+  <div *ngFor="let blog of blogs" @fadeIn class="col-3"><!-- Col -->
     <div class="blog-card">
 
-      <!-- Hero  -->
+      <!-- Hero -->
       <div class="blog-card__hero">
-        <span class="blog-card__category">{{blog.category}}</span>
-        <!-- <span  class="blog-card__status">{{blog.blogStatus}}</span> -->
-        <img class="blog-card__img img" src="{{authService.domain}}/{{blog.imagePath}}" alt="">
-      </div><!-- Hero Ends  -->
-
-      <!-- Body  -->
+          <img src="{{authService.domain}}/{{blog.imagePath}}" alt="">
+          <span class="blog-card__label">{{blog.category}}</span>
+      </div><!-- Hero -->
+    
+      <!-- Body -->
       <div class="blog-card__body">
-        <h1 (click)="updateBlogView(blog._id)" [routerLink]="['/read-more/', blog._id]" class="blog-card__title">
-          {{ blog.title }}
-        </h1>
-        <p class="blog-card__text" [innerHTML]="blog.body | blogPipe"> </p>
-      </div><!-- Body Ends  -->
-
-      <!-- Footer  -->
+          <h1 (click)="updateBlogView(blog._id)" [routerLink]="['/read-more/', blog._id]" class="blog-card__title">{{ blog.title }}</h1>
+          <p class="blog-card__text" [innerHTML]="blog.body | blogPipe"></p>
+      </div><!-- Body Ends -->
+    
+      <!-- Footer -->
       <div class="blog-card__footer">
-        <a class="blog-card__link" href="">
-          <i class="fa fa-heart" aria-hidden="true"></i>
-          <span class="blog-card__data">{{ blog.likes }}</span>
-          </a>
-          <a class="blog-card__link" href="">
-            <i class="fa fa-comment" aria-hidden="true"></i>
-            <span class="blog-card__data">{{ blog.comments.length }}</span>
-          </a>
-          <a class="blog-card__link" href="">
-            <i class="fa fa-share-alt" aria-hidden="true"></i>
-            <span class="blog-card__data"> {{ blog.shareCounter }}</span>
-          </a>
-          <a class="blog-card__link" href="">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-            <span class="blog-card__data"> {{ blog.viewCounter }}</span>
-          </a>
-          <a (click)="updateBlogView(blog._id)"  class="blog-card__button button button-small button-round button-green-clear" [routerLink]="['/read-more/', blog._id]">
-            Read More
-          </a>
-      </div><!-- Footer Ends  -->
-
-    </div><!-- Blog Card Ends  -->
-
+          <a (click)="updateBlogView(blog._id)" [routerLink]="['/read-more/', blog._id]" class="blog-card__read-more">Read More</a>
+          <span class="blog-card__media-list"><i class="fa fa-heart"></i><span class="blog-card__media-data">{{ blog.likes }}</span></span>
+          <span class="blog-card__media-list"><i class="fa fa-eye"></i><span class="blog-card__media-data">{{ blog.viewCounter }}</span></span>
+          <span class="blog-card__media-list"><i class="fa fa-share-alt"></i><span class="blog-card__media-data">{{ blog.shareCounter }}</span></span>
+          <span class="blog-card__media-list"><i class="fa fa-comment"></i><span class="blog-card__media-data">{{ blog.comments.length }}</span></span>
+      </div><!-- Footer Ends -->
+      
+    </div>
   </div><!-- Col Ends  -->
-
-
 </div><!-- Row Ends -->
+
+
