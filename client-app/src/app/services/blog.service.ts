@@ -131,4 +131,12 @@ getSingBlog(id) {
     return this.http.put(this.domain + '/public/updateView/' + id, this.options).map(res => res.json());
   }
 
+// ==========================================================
+// 		                UPDATE VIEW
+// ==========================================================
+  updateBlogShared(id) {
+    return this.http.put(this.domain + '/public/updateBlogShare/' + id, this.options)
+    .map(res => res.json());
+  }
+
 }

@@ -88,7 +88,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
     const category = {
       category: this.form.get('category').value
     }
-    this.categoryService.postCategory(category).subscribe(data => {
+    this.subscription = this.categoryService.postCategory(category).subscribe(data => {
       if(!data.success){
         this.processing = false;
         this.successIcon = false;
@@ -119,7 +119,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
 // 		                LIFE CYCLE
 // ==========================================================
   ngOnInit() {
-    this.categoryService.listChannel.subscribe(data => {
+    this.subscription = this.categoryService.listChannel.subscribe(data => {
       if(data.type === 'add'){
         this.toggleAddCategoryForm();
       }
@@ -127,6 +127,7 @@ export class AddCategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

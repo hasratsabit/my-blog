@@ -42,7 +42,7 @@ export class BlogListComponent implements OnInit, OnDestroy {
 
 
   changeStatus(blogId, event){
-    this.blogService.changeBlogStatus(blogId).subscribe(data => {
+    this.subscription = this.blogService.changeBlogStatus(blogId).subscribe(data => {
       if(event.target.innerText === 'Published'){
         this.postStatusClass = 'post-hidden';
       }else {

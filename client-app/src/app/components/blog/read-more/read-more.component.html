@@ -52,7 +52,7 @@
                     Comments
                 <span class="media__data">{{ commentsLength }} </span>
             </a>
-            <a class="media__list" href="">
+            <a (click)="toggleShareUrl()" class="media__list">
                 <i class="fa fa-share-alt" aria-hidden="true"></i>
                 Share
                 <span class="media__data"> {{ blog.shareCounter }}</span>
@@ -401,6 +401,31 @@
             <button [routerLink]="['/register']" class="plate__button button button-default button-small">Create Account</button>
         </div><!-- Footer Ends -->
 
+        </div>
+    </div>
+</div>
+
+
+<!-- Share URL -->
+<div [@toggleModal]="shareUrlIsLoaded ? 'expanded' : 'collapsed'" class="modal-wrapper">
+    <div class="modal-wrapper__modal col-3">
+        <div class="plate plate--lg-shadow">
+
+        <!-- Header -->
+        <div class="plate__header">
+            <h1 class="plate__title">Share Blog</h1>
+            <div (click)="toggleShareUrl()" class="plate__close">
+            <mat-icon>clear</mat-icon>
+            </div>
+        </div><!-- Header -->
+
+        <!-- Body -->
+        <div class="plate__body  plate--body-center">
+            <h1 class="plate__message">Copy the following url in your clipboard</h1>
+            <div class="plate__input" >
+                <input (blur)="changeShareCounter(blog._id)" matInput [(ngModel)]="url" type="text">
+            </div>
+        </div><!-- Body Ends -->
         </div>
     </div>
 </div>

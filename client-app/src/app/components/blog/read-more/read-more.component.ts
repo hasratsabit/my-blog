@@ -445,6 +445,28 @@ createReplyForm(){
     })
   }
 
+
+
+
+// ==========================================================
+// 		                TOGGLE SHARE
+// ==========================================================
+public shareUrlIsLoaded: Boolean = false;
+public url: String;
+
+  toggleShareUrl() {
+    this.url = window.location.href;
+    this.shareUrlIsLoaded = !this.shareUrlIsLoaded;
+  }
+
+
+// ==========================================================
+// 		                UPDATE SHARE 
+// ==========================================================
+  changeShareCounter(id){
+    this.subscription = this.blogService.updateBlogShared(id).subscribe()
+  }
+
   usernames
   ngOnInit() {
 

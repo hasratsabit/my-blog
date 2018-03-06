@@ -72,7 +72,7 @@ export class DeleteUserComponent implements OnInit, OnDestroy {
 // 		                ONINIT
 // ==========================================================
   ngOnInit() {
-   this.userService.userListChannel.subscribe(data => {
+   this.subscription = this.userService.userListChannel.subscribe(data => {
      if(data.type === 'delete'){
        this.toggleDeleteUser();
        this.deleteUserId = data.id;

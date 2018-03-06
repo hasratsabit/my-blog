@@ -195,7 +195,7 @@ onUpdateBlog(){
 // 		 					GET SINGL BLOG BY ID
 // ==========================================================
   getSingleBlog(id) {
-    this.blogService.getSingBlog(id).subscribe(data => {
+    this.subscription = this.blogService.getSingBlog(id).subscribe(data => {
       this.blog = data.blog;
       this.blogAuthor = data.blog.author;
       this.authorUsername = data.blog.authorUsername;

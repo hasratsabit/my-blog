@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   successIcon = false;
   proccessing = false;
   
-  loginIsLoaded: Boolean = false;
+  public loginIsLoaded: Boolean = false;
 
 // ==========================================================
 // 		 					     CONSTRUCTOR
@@ -48,9 +48,6 @@ export class LoginComponent implements OnInit {
 
   toggleLoginForm() {
     this.loginIsLoaded = !this.loginIsLoaded;
-    setTimeout(() => {
-      this.location.back();
-    }, 500);
   }
 
 // ==========================================================
@@ -117,7 +114,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginIsLoaded = true;
-
     if(this.authGuard.redirectUrl){
       this.alertMessageClass = 'alert alert-red';
       this.alertMessage = 'You must be logged in to view this message.';

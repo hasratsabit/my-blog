@@ -91,19 +91,30 @@ router.get('/allBlogs', (req, res) => {
 	});
 
 
-	// router.get('/test', (req, res) => {
-	// 	Profile.find({})
-	// 	.then(result => {
-	// 		if(!result) {
-	// 			res.json({ success: false, message: 'Profile was not found.'});
-	// 		}else {
-	// 			res.json({ success: true, message: 'successfully found.', result: result})
-	// 		}
-	// 	})
-	// 	.catch(err => {
-	// 		res.json({ success: false, message: 'Error occurred finding the profile.' + err });
-	// 	});
-	// })
+// ==========================================================
+// 		 									SHARE COUNTER
+// ==========================================================
+
+	router.put('/updateBlogShare/:id', (req, res) => {
+		Blog.findOne({ _id: req.params.id })
+		.select('shareCounter')
+		.then((blog) => {
+			if(!blog){
+				res.json({ success: false, message: 'Blog is no longer available.'});
+			}else {
+				blog.shareCounter++;
+				blog.save((err) => {
+					if(err){
+						res.json({ success: false, message: 'Error occurred saving the share counter.' + err });
+					}
+					// If no err, share counter is incremented.
+				})
+			}
+		})
+		.catch((err) => {
+			res.json({ success: false, message: 'Error occurred. ' + err });
+		})
+	})
 
 	return router;
 
