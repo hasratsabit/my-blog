@@ -1,0 +1,24 @@
+<div @fadeIn class="user">
+  <div class="row">
+    <!-- Table  -->
+    <table class="table table-hover table-blue table-center custom-table">
+      <div class="custom-head">
+        <mat-icon class="custom-icon">account_box</mat-icon>
+        <h1 class="custom-title">Users</h1>
+      </div>
+      <thead>
+
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; index as i">
+          <td>{{ i + 1}}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.userRole }}</td>
+          <td> {{ user.email }}</td>
+          <td><a class="edit">Edit</a></td>
+          <td><a class="delete" (click)="sendIdToDelete(user._id)">Delete</a></td>
+        </tr>
+      </tbody>
+    </table><!-- Table Ends  -->
+  </div><!-- Row Ends  -->
+</div>

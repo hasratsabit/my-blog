@@ -1,4 +1,6 @@
 const User = require('../model/user');
+const Profile = require('../model/profile');
+const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 const config = require('../config/database');
@@ -107,43 +109,77 @@ module.exports = (router) => {
 		}
 	});
 
-
 // ==========================================================
 // 		 									DELETE USER
 // ==========================================================
 
 	router.delete('/deleteUser/:id', (req, res) => {
-		if(!req.params.id){
-			res.json({ success: false, message: 'No user id was provided.'});
-		}else {
-			User.findOne({ _id: req.params.id }, (err, user) => {
-				if(err){
-					res.json({ success: false, message: 'Error occurred finding user:' + err });
-				}else if (!user) {
-					res.json({ success: false, message: 'No user was found.'});
-				}else {
-					User.findOne({_id: req.decoded.userId }, (err, userAccess) => {
-						if(err){
-							res.json({ success: false, message: 'Error occured finding admin.' + err});
-						}else if (!userAccess) {
-							res.json({ success: false, message: 'No user was found with admin access.'});
-						}else if(userAccess.userRole !== 'admin'|| user.username !== userAccess.username){
-							res.json({ success: false, message: 'You are not authorized to delete this user. '});
-						}else {
-							user.remove((err) => {
-								if(err){
-									res.json({ success: false, message: 'Error occured deleting user: ' + err });
-								}else {
-									res.json({ success: true, message: 'User successfully deleted.'});
-								}
-							});
-						}
-					});
-				}
-			});
+		User.findOne({ _id: req.params.id})
+		.then((user) => {
+			if(!user){
+				res.json({ success: false, message: 'User was not found. '});
+			}else {
+				User.findOne({ _id: req.decoded.userId })
+				.select('username adminAccess')
+				.then((authUser) => {
+					if(!authUser) {
+						res.json({ success: false, message: 'You must be logged in to continue.'});
+					}else if(authUser.adminAccess === false){
+						res.json({ success: false, message: 'You are not authorized to delete the user.'});
+					}else {
+						Profile.findOne({ username: user.username })
+						.then(profile => {
+							if(!profile){
+								removeUser(user);
+							}else {
+								removeImage(profile.image);
+								removeProfile(profile);
+								removeUser(user);
+							}
+						})
+					}
+				})
+			}
+		})
+		.catch(err => {
+			res.json({ success: false, message: 'Error occurred. ' + err });
+		})
+		
+		const removeImage = (image) => {
+			if(!image){
+				return null;
+			}else {
+				fs.unlink(image, (err) => {
+					if(err){
+						res.json({ success: false, message: 'Error occurred deleting image.' + err})
+					}
+				})
+			}
 		}
+	
+		const removeUser = (user) => {
+			user.remove(err => {
+				if(err){
+					res.json({ success: false, message: 'Error occurred deleting user.' + err})
+				}else {
+					res.json({ success: true, message: 'User successfully deleted.'})
+				}
+			})
+		}
+	
+		const removeProfile = (profile) => {
+			profile.remove(err => {
+				if(err){
+					res.json({ success: false, message: 'Error occurred deleting profile.' + err})
+				}
+			})
+		}
+		
 	});
 
+
+
+										
 // ==========================================================
 // 		 									DELETE USER
 // ==========================================================

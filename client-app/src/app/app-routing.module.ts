@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
@@ -103,6 +104,10 @@ const appRoutes: Routes = [
 		path: 'animation',
 		component: AnimationComponent,
 		canActivate: [AdminGuard]
+	},
+	{
+		path: "**",
+		component: NotFoundComponent
 	}
 
 ]

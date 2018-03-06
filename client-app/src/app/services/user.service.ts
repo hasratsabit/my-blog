@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -23,6 +24,17 @@ export class UserService {
     private http: Http
   ) { }
 
+
+  public userListChannel =  new Subject<any>();
+  public reloadUserTable = new Subject<any>();
+
+  sendDataToSiblings(data) {
+    this.userListChannel.next(data);
+  }
+
+  updateUserTable(){
+    this.reloadUserTable.next();
+  }
 
 // ==========================================================
 // 		                AUTHORIZATIONS

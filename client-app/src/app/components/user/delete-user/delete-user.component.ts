@@ -1,46 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../../services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { fadeIn, dropDownBox, fadeInDown } from '../../../animations/animation';
+import { toggleModal, fadeIn } from '../../../animations/animation';
 
 @Component({
   selector: 'app-delete-user',
   templateUrl: './delete-user.component.html',
   styleUrls: ['./delete-user.component.scss'],
-  animations: [fadeIn, dropDownBox, fadeInDown]
+  animations: [toggleModal, fadeIn]
 })
-export class DeleteUserComponent implements OnInit {
+export class DeleteUserComponent implements OnInit, OnDestroy {
 
 // ==========================================================
 // 		                VARIABLES
 // ==========================================================
-  deleteUserUrl;
-  deleteIsLoaded = true;
-  deletedUser; // Contains the user name.
-  alertMessage;
-  alertMessageClass;
-  processing = false;
-  successIcon = false;
+  public deleteUserIsLoaded: Boolean = false;
+  public deleteUserId: String;
+  public alertMessage: String;
+  public alertMessageClass: String;
+  public processing: Boolean = false;
+  public successIcon: Boolean = false;
+
+  subscription: Subscription;
 
 
 // ==========================================================
 // 		                CONSTRUCTOR
 // ==========================================================
   constructor(
-    private userService: UserService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private location: Location
+    private userService: UserService
   ) { }
 
 
-  toggleDelete() {
-    this.deleteIsLoaded = false;
-    setTimeout(() => {
-      this.location.back();
-    }, 500);
+  toggleDeleteUser(){
+    this.deleteUserIsLoaded = !this.deleteUserIsLoaded;
   }
+
 
 
 // ==========================================================
@@ -48,7 +43,7 @@ export class DeleteUserComponent implements OnInit {
 // ==========================================================
 
   onDeleteUser() {
-    this.userService.deleteUser(this.deleteUserUrl.id).subscribe(data => {
+    this.subscription = this.userService.deleteUser(this.deleteUserId).subscribe(data => {
       this.processing = true;
       if(!data.success) {
         this.processing = false;
@@ -61,33 +56,32 @@ export class DeleteUserComponent implements OnInit {
         this.alertMessage = data.message;
         this.alertMessageClass = 'alert alert-green';
         setTimeout(() => {
-          this.toggleDelete();
+          this.alertMessage = null;
+          this.alertMessageClass = null;
+          this.processing = false;
+          this.toggleDeleteUser();
+          this.userService.updateUserTable();
         }, 2000)
       }
     })
   }
 
-// ==========================================================
-// 		                CANCEL MODEL AND MESSAGE
-// ==========================================================
-  cancelDelete() {
-    this.toggleDelete();
-  }
 
-  closeMessage() {
-    this.alertMessage = undefined;
-    this.alertMessageClass = undefined;
-  }
 
 // ==========================================================
 // 		                ONINIT
 // ==========================================================
   ngOnInit() {
-    // Show model when the page is loaded.
-    this.deleteUserUrl = this.activatedRoute.snapshot.params;
-    this.userService.getSingleUser(this.deleteUserUrl.id).subscribe(data => {
-      this.deletedUser = data.user.name
-    })
+   this.userService.userListChannel.subscribe(data => {
+     if(data.type === 'delete'){
+       this.toggleDeleteUser();
+       this.deleteUserId = data.id;
+     }
+   })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }

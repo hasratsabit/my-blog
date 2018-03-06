@@ -1,24 +1,3 @@
-<div class="user">
-  <div class="row">
-    <!-- Table  -->
-    <table class="table table-hover table-blue table-center custom-table">
-      <div class="custom-head">
-        <mat-icon class="custom-icon">account_box</mat-icon>
-        <h1 class="custom-title">Users</h1>
-      </div>
-      <thead>
+<app-users-list></app-users-list>
 
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users; index as i">
-          <td>{{ i + 1}}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.userRole }}</td>
-          <td> {{ user.email }}</td>
-          <td (click)="loadEdit()"><a class="edit" [routerLink]="['/edit-user/', user._id]">Edit</a></td>
-          <td><a class="delete" [routerLink]="['/delete-user/', user._id]">Delete</a></td>
-        </tr>
-      </tbody>
-    </table><!-- Table Ends  -->
-  </div><!-- Row Ends  -->
-</div>
+<app-delete-user></app-delete-user>

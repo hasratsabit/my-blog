@@ -1,5 +1,5 @@
 import { ProjectComponent } from './project/project.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { UserService } from '../../services/user.service';
@@ -32,7 +32,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   @ViewChild(ProjectComponent) ProjectChild: ProjectComponent;
@@ -52,11 +53,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.usernameUrl = this.activatedRoute.snapshot.params
     this.profileService.getUserProfile(this.usernameUrl.username).subscribe(data => {
-      this.personal = data.user;
-      this.skills = data.user.skill;
-      this.tools = data.user.tool;
-      this.projects = data.user.project;
-      this.abouts = data.user;
+      if(data.success){
+        this.personal = data.user;
+        this.skills = data.user.skill;
+        this.tools = data.user.tool;
+        this.projects = data.user.project;
+        this.abouts = data.user;
+      }else {
+        this.router.navigate(['**']);
+      }
     });
 
     this.userService.getUserProfile().subscribe(data => {
