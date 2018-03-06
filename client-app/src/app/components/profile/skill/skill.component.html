@@ -148,7 +148,7 @@
             <span class="profile-table__data">{{ i + 1 }}</span>
             <span class="profile-table__data">{{ skill.language }}</span>
             <span class="profile-table__data">{{ skill.level }}</span>
-            <span class="profile-table__data">Since {{ skill.start | date: 'MMM, yyyy' }}</span>
+            <span class="profile-table__data"> {{ formatDate(skill.start) }} </span>
             <div class="profile-table__update-btn">
                 <a (click)="toggleUpdateSkill(skill._id)" class="icon-btn">
                     <i class="fa fa-pencil" aria-hidden="true"></i>

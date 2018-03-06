@@ -77,6 +77,7 @@ import { PublicationComponent } from './components/profile/publication/publicati
 import { AboutComponent } from './components/profile/about/about.component';
 import { BlogListComponent } from './components/blog/blog-list/blog-list.component';
 import { CategoryListComponent } from './components/category/category-list/category-list.component';
+import { DatePipe } from './pipes/date.pipe';
 
 
 
@@ -124,6 +125,7 @@ import { CategoryListComponent } from './components/category/category-list/categ
     AboutComponent,
     BlogListComponent,
     CategoryListComponent,
+    DatePipe,
   ],
   imports: [
     BrowserModule,

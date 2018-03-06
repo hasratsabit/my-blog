@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { expandCollapse, fadeIn } from '../../../animations/animation';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from './../../../services/profile.service';
@@ -10,7 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./skill.component.scss'],
   animations: [expandCollapse, fadeIn]
 })
-export class SkillComponent implements OnInit {
+export class SkillComponent implements OnInit, OnDestroy {
 
   FormGroup
   skillForm;
@@ -18,10 +19,12 @@ export class SkillComponent implements OnInit {
   alertMessageClass;
   successIcon = false;
   processing = false;
+  public startDate: String;
+  subcription: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
-    private profileService: ProfileService
+    private profileService: ProfileService,
   ) {
     this.createSkillForm();
    }
@@ -47,6 +50,9 @@ toggleSkillForm(){
   this.skillFormIsLoaded = !this.skillFormIsLoaded;
   this.skillForm.reset();
 }
+
+
+
 
 
 
@@ -169,7 +175,7 @@ singleSkill = {};
       start: this.skillForm.get('start').value
     }
 
-    this.profileService.updateSingleSkill(this.url.username, this.updateSkillId, skill)
+    this.subcription = this.profileService.updateSingleSkill(this.url.username, this.updateSkillId, skill)
     .subscribe(data => {
       if(!data.success){
         this.processing = false;
@@ -192,6 +198,23 @@ singleSkill = {};
     })
   }
 
+  formatDate(date):any {
+    let currentDate, startYear, splitDate, workYears;
+    currentDate = new Date();
+    splitDate = date.split('-');
+    startYear = splitDate[0];
+  
+
+    if(startYear == currentDate.getFullYear()){
+      workYears = `Less than a year`;
+    }else {
+      workYears = `${currentDate.getFullYear() - startYear} Years`;
+    }
+
+    return workYears;
+  
+  }
+
 
 // ==========================================================
 // 		 					          DELETE SKILL
@@ -207,7 +230,7 @@ singleSkill = {};
 
 
   onDeleteSkill() {
-    this.profileService.deleteSkill(this.url.username, this.deletingSkillId).subscribe((data) => {
+   this.subcription = this.profileService.deleteSkill(this.url.username, this.deletingSkillId).subscribe((data) => {
       this.refreshPage();
       this.toggleDeleteSkill(this.deletingSkillId);
     })
@@ -218,7 +241,7 @@ singleSkill = {};
 
 
   getSingleSkill(username, id){
-    this.profileService.getSingleSkill(username, id).subscribe(data => {
+    this.subcription = this.profileService.getSingleSkill(username, id).subscribe(data => {
       this.singleSkill = data.skill;
     });
   }
@@ -226,6 +249,9 @@ singleSkill = {};
 
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
 
   }
 

@@ -1,4 +1,3 @@
-import { fadeIn } from './../../../animations/animation';
 import { Subscription } from 'rxjs/Subscription';
 import { BlogService } from './../../../services/blog.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -6,8 +5,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 @Component({
   selector: 'app-blog-list',
   templateUrl: './blog-list.component.html',
-  styleUrls: ['./blog-list.component.scss'],
-  animations: [fadeIn]
+  styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit, OnDestroy {
 

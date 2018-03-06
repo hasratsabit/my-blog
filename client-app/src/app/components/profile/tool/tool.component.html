@@ -146,7 +146,7 @@
             <span class="profile-table__data">{{ i + 1 }}</span>
             <span class="profile-table__data">{{ tool.tool }}</span>
             <span class="profile-table__data">{{ tool.level }}</span>
-            <span class="profile-table__data">Since&nbsp; {{ tool.start | date: 'MMM, yyyy' }}</span>
+            <span class="profile-table__data">{{ formatDate(tool.start) }}</span>
             <div class="profile-table__update-btn">
                 <a (click)="toggleUpdateTool(tool._id)" class="icon-btn">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
