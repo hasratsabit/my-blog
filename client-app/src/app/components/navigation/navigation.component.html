@@ -213,8 +213,8 @@
           <a routerLink="/email" [routerLinkActive]="['active']">
             <mat-icon>email</mat-icon>Email</a>
         </li>
-        <li *ngIf="authService.userLoggedIn()">
-          <a [routerLink]="['/profile/', profileUsername]" [routerLinkActive]="['active']">
+        <li>
+          <a [routerLink]="['/profile/', 'hasratsabit']" [routerLinkActive]="['active']">
             <mat-icon>person</mat-icon>Profile</a>
         </li>  
         <li *ngIf="authService.userLoggedIn() && isAdmin">
