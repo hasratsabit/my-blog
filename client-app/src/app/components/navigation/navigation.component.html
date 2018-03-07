@@ -132,12 +132,12 @@
   <div class="nav-wrapper">
 
     <!-- Private Nav -->
-    <ul *ngIf="authService.userLoggedIn()" class="private-nav">
+    <ul  class="private-nav">
 
         <div class="private-nav__img user-img user-img--md">
-            <img class="user-img__img" src="{{ authService.domain }}/{{ profileImage }}" alt="">
+            <img class="user-img__img" src="assets/images/profile-pic.jpg" alt="">
         </div>
-      <h1 class="private-nav__title">{{ profileName }} </h1>
+      <h1 class="private-nav__title">Hasrat Sabit</h1>
 
       <button (click)="toggleUserProfile()" class="private-nav__button button">
         <mat-icon [ngClass]="mobileNavExpanded ? 'arrowUp' : 'arrowDown'">keyboard_arrow_down</mat-icon>
@@ -177,11 +177,11 @@
           <a routerLink="/" [routerLinkActive]="['active']">
             <mat-icon>home</mat-icon>Home</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/" [routerLinkActive]="['active']">
             <mat-icon>code</mat-icon>Tutorials</a>
         </li>
-        <li>
+        <li *ngIf="authService.userLoggedIn() && isAdmin">
           <a routerLink="/forum" [routerLinkActive]="['active']">
             <mat-icon>forum</mat-icon>Forum</a>
         </li>

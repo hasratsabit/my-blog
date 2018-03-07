@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { trigger, state, style, transition, animate } from "@angular/animations";
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { fadeIn, fadeInDown, rainFall } from '../../animations/animation';
+import { fadeIn, toggleModal } from '../../animations/animation';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  animations: [ fadeIn, fadeInDown, rainFall]
+  animations: [ fadeIn, toggleModal]
 })
 export class RegisterComponent implements OnInit {
 
@@ -46,9 +46,7 @@ export class RegisterComponent implements OnInit {
 
   toggleRegisterForm() {
     this.registerIsLoaded = !this.registerIsLoaded;
-    setTimeout(() => {
-      this.location.back();
-    }, 500)
+    this.location.back();
   }
 
 

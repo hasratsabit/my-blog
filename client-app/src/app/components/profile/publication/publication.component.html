@@ -5,11 +5,11 @@
           <h1 class="profile-table__title">Publications</h1>
           <!-- <button class="profile-table__add-btn">Add Publication</button> -->
       </div>
-      <div class="profile-table__row">
-          <span class="profile-table__data">Jan 01, 2018</span>
-          <span class="profile-table__data">Learn JavaScript Algorithm</span>
+      <div *ngFor="let blog of blogs" class="profile-table__row">
+          <span class="profile-table__data">{{ blog.date }}</span>
+          <span class="profile-table__data">{{ blog.title }} </span>
           <span class="profile-table__data">
-              <a href="" class="profile-table__link">Read</a>
+              <a [routerLink]="['/read-more', blog._id]" class="profile-table__link">Read</a>
           </span>
       </div>
   </div><!-- Projects End -->

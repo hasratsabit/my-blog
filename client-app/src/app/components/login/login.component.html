@@ -1,6 +1,6 @@
 
 <div [@toggleModal]="loginIsLoaded ? 'expanded' : 'collapsed'" class="modal-wrapper">
-    <div class="col-3">
+    <div class="modal-wrapper__login-modal col-3">
 
 				<div class="modal-box">
 
@@ -12,10 +12,10 @@
 							</button>
 						</div><!-- Modal Header Ends -->
 			
-						<span class="modal-box-title">Login with</span>
+						<!-- <span class="modal-box-title">Login with</span> -->
 			
 						<!-- Modal Media -->
-							<div class="modal-box-media">
+							<!-- <div class="modal-box-media">
 								<a href="" class="modal-box-media__links">
 								<i class="fa fa-twitter" aria-hidden="true"></i>
 								</a>
@@ -25,9 +25,10 @@
 								<a href="" class="modal-box-media__links">
 									<i class="fa fa-github" aria-hidden="true"></i>
 								</a>
-							</div><!-- Modal Media Ends -->
-			
-							<span class="modal-box-divider">Or</span>
+							</div> -->
+							<!-- Modal Media Ends -->
+
+							<!-- <span class="modal-box-divider">Or</span> -->
 
 							<!-- Success or Error Message -->
 							<div @fadeIn *ngIf="alertMessage" class="modal-box-alert">

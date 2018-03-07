@@ -1,174 +1,169 @@
-<div [ngClass]="{'expand-layer': registerIsLoaded, 'collapse-layer': !registerIsLoaded}" class="dark-layer">
-  <span (click)="toggleRegisterForm()" class="dark-layer__close">
-		<mat-icon>clear</mat-icon>
-	</span>
-  <div class="dark-layer__modal row">
-    <div class="col-2">
+<div [@toggleModal]="registerIsLoaded ? 'expanded' : 'collapsed '"  class="modal-wrapper">
+	<div class="modal-wrapper__register col-3">
 
-			<div [ngClass]="{'expand-dialog': registerIsLoaded, 'collapse-dialog': !registerIsLoaded}" class="modal-box register">
-
-      
-
-				<!-- Modal Header -->
-				<div class="modal-box-header">
-					<h1 class="modal-box-header__title">Sign Up</h1>
-					<button (click)="toggleRegisterForm()" class="modal-buttons modal-box-header__close">
-						<mat-icon>clear</mat-icon>
-					</button>
-				</div>
-	
-				<span class="modal-box-title">Login with</span>
-	
-				<!-- Modal Media -->
-				<div class="modal-box-media">
-					<a href="" class="modal-box-media__links">
-					<i class="fa fa-twitter" aria-hidden="true"></i>
-					</a>
-					<a href="" class="modal-box-media__links">
-					<i class="fa fa-facebook" aria-hidden="true"></i>
-					</a>
-					<a href="" class="modal-box-media__links">
-						<i class="fa fa-github" aria-hidden="true"></i>
-					</a>
-				</div><!-- Modal Media Ends -->
-	
-				<span class="modal-box-divider">Or</span>
-
-				<!-- Promo -->
-				<div class="register__promo">
-
-					<!-- Promo 1 -->
-					<div class="promo-widget">
-						<h2 class="promo-title"><i class="fa fa-share-alt" aria-hidden="true"></i>Network</h2>
-						<p class="promo-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
-					</div><!-- Promo 1 Ends -->
-	
-					<!-- Promo 2 -->
-					<div class="promo-widget">
-						<h2 class="promo-title"><i class="fa fa-code" aria-hidden="true"></i>Learning</h2>
-						<p class="promo-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
-					</div><!-- Promo 2 Ends -->
-	
-					<!-- Promo 3 -->
-					<div class="promo-widget">
-						<h2 class="promo-title"><i class="fa fa-comments" aria-hidden="true"></i>Participation</h2>
-						<p class="promo-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
-					</div><!-- Promo 3 Ends -->
-	
-				</div><!-- Promo Ends-->
-	
-				<!-- Modal Form -->
-				<div class="modal-box-form register__form">
-
-					<!-- Success or Error Message -->
-					<div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
-						<div [ngClass]="alertMessageClass">
-							<i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
-							<i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
-							<p class="alert-text">{{ alertMessage }}</p>
-						</div>
-					</div><!-- Success or Error Message Ends -->
-					
-					<!-- Register Form -->
-					<form [formGroup]="form" (submit)="onRegisterUser()">
-						<!-- Name Input -->
-						<mat-form-field class="modal-box-form__inputs">
-							<input matInput
-							type="text"
-							placeholder="Name"
-							formControlName="name"
-							name="name"
-							required>
-							<!-- Name Error Block -->
-							<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.required">The name field is required.</mat-error>
-							<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.minlength">The name must be at least 2 characters.</mat-error>
-							<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.maxlength">The name can not excceed 15 characters</mat-error>
-							<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.validateName">The name must not contain special characters</mat-error>
-						</mat-form-field><!-- Name Input Ends-->
-
-						<!-- Email Input -->
-						<mat-form-field class="modal-box-form__inputs">
-							<input matInput
-							(blur)="checkEmail()"
-							placeholder="Email"
-							type="email"
-							formControlName="email"
-							name="email"
-							required>
-							<!-- Email Error Block -->
-							<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.required">The email field is required.</mat-error>
-							<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.minlength">The email must be at least 3 characters.</mat-error>
-							<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.maxlength">The email can not excceed 30 characters</mat-error>
-							<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.validateEmail">It must be a valid email.</mat-error>
-							<mat-hint *ngIf="availableEmailMessage" [ngClass]="availableEmailClass">{{ availableEmailMessage }}</mat-hint>
-						</mat-form-field><!-- Email Input Ends-->
-
-						<!-- Username Input -->
-						<mat-form-field class="modal-box-form__inputs">
-							<input matInput
-							(blur)="checkUsername()"
-							type="text"
-							placeholder="Username"
-							formControlName="username"
-							name="username"
-							required>
-							<!-- Userusername Error Block -->
-							<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.required">The username field is required.</mat-error>
-							<mat-error *ngIf="form.controls.username.dirty && form.controls.username.dirty && form.controls.username.errors?.minlength">The username must be at least 5 characters.</mat-error>
-							<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.maxlength">The username can not excceed 15 characters</mat-error>
-							<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.validateUsername">The username must not contain special characters</mat-error>
-							<mat-hint *ngIf="availableUsernameMessage" [ngClass]="availableUsernameClass">{{ availableUsernameMessage }}</mat-hint>
-						</mat-form-field><!-- Username Input Ends-->
-
-
-						<!-- Password Input -->
-						<mat-form-field class="modal-box-form__inputs">
-							<input matInput
-							type="password"
-							placeholder="Password"
-							formControlName="password"
-							name="password"
-							required>
-							<!-- Password Error Block -->
-							<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.required">The password field is required.</mat-error>
-							<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.minlength">The password must be at least 5 characters.</mat-error>
-							<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.maxlength">The password can not excceed 35 characters</mat-error>
-							<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.validatePassword">The password must contain at least 1 number, 1 special character, 1 lowercase, and 1 uppercase letter</mat-error>
-						</mat-form-field><!-- Password Input Ends-->
-
-						<!-- Confirm Input -->
-						<mat-form-field class="modal-box-form__inputs">
-							<input matInput
-							type="password"
-							placeholder="Confirm"
-							formControlName="confirm"
-							name="confirm"
-							required>
-							<!-- Confirm Error Block -->
-							<mat-error *ngIf="form.controls.confirm.dirty && form.controls.confirm.errors?.required">The confirm field is required.</mat-error>
-							<mat-error *ngIf="form.controls.confirm.dirty && form.errors?.matchingPasswords">The passwords do not match</mat-error>
-						</mat-form-field><!-- Confirm Input Ends-->
-							
-						<!-- Modal Buttons -->
-							<div class="modal-box-buttons">
-								<button type="submit" 
-									[disabled]="
-									!form.valid || 
-									proccessing || 
-									!emailAvailable || 
-									!usernameAvailable" 
-									class="modal-buttons modal-box-buttons__buttons register__button">
-									<mat-icon class="modal-box-buttons__icon">lock</mat-icon>
-									Create Account
-								</button>
-							</div>
-					</form>
-				<!-- </div> Modal Form Ends -->
+		<div class="modal-box register">
 
 	
+
+			<!-- Modal Header -->
+			<div class="modal-box-header">
+				<h1 class="modal-box-header__title">Sign Up</h1>
+				<button (click)="toggleRegisterForm()" class="modal-buttons modal-box-header__close">
+					<mat-icon>clear</mat-icon>
+				</button>
 			</div>
 
+			<!-- <span class="modal-box-title">Login with</span> -->
 
-    </div>
-  </div>
-</div><!-- Dark Layer Ens -->
+			<!-- Modal Media -->
+			<!-- <div class="modal-box-media">
+				<a href="" class="modal-box-media__links">
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+				</a>
+				<a href="" class="modal-box-media__links">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+				</a>
+				<a href="" class="modal-box-media__links">
+					<i class="fa fa-github" aria-hidden="true"></i>
+				</a>
+			</div> -->
+			<!-- Modal Media Ends -->
+
+			<!-- <span class="modal-box-divider">Or</span> -->
+
+			<!-- Promo -->
+			<!-- <div class="register__promo">
+
+				<div class="promo-widget">
+					<h2 class="promo-title"><i class="fa fa-share-alt" aria-hidden="true"></i>Network</h2>
+					<p class="promo-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+				</div>
+
+				<div class="promo-widget">
+					<h2 class="promo-title"><i class="fa fa-code" aria-hidden="true"></i>Learning</h2>
+					<p class="promo-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+				</div>
+
+			
+				<div class="promo-widget">
+					<h2 class="promo-title"><i class="fa fa-comments" aria-hidden="true"></i>Participation</h2>
+					<p class="promo-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</p>
+				</div>
+
+			</div> -->
+			<!-- Promo Ends-->
+
+			<!-- Modal Form -->
+			<div class="modal-box-form register__form">
+
+				<!-- Success or Error Message -->
+				<div @fadeIn *ngIf="alertMessage" class="modal-box-alert">
+					<div [ngClass]="alertMessageClass">
+						<i *ngIf="successIcon" class="fa fa-thumbs-o-up alert-icon" aria-hidden="true"></i>
+						<i *ngIf="!successIcon" class="fa fa-ban alert-icon" aria-hidden="true"></i>
+						<p class="alert-text">{{ alertMessage }}</p>
+					</div>
+				</div><!-- Success or Error Message Ends -->
+				
+				<!-- Register Form -->
+				<form [formGroup]="form" (submit)="onRegisterUser()">
+					<!-- Name Input -->
+					<mat-form-field class="modal-box-form__inputs">
+						<input matInput
+						type="text"
+						placeholder="Name"
+						formControlName="name"
+						name="name"
+						required>
+						<!-- Name Error Block -->
+						<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.required">The name field is required.</mat-error>
+						<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.minlength">The name must be at least 2 characters.</mat-error>
+						<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.maxlength">The name can not excceed 15 characters</mat-error>
+						<mat-error *ngIf="form.controls.name.dirty && form.controls.name.errors?.validateName">The name must not contain special characters</mat-error>
+					</mat-form-field><!-- Name Input Ends-->
+
+					<!-- Email Input -->
+					<mat-form-field class="modal-box-form__inputs">
+						<input matInput
+						(blur)="checkEmail()"
+						placeholder="Email"
+						type="email"
+						formControlName="email"
+						name="email"
+						required>
+						<!-- Email Error Block -->
+						<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.required">The email field is required.</mat-error>
+						<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.minlength">The email must be at least 3 characters.</mat-error>
+						<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.maxlength">The email can not excceed 30 characters</mat-error>
+						<mat-error *ngIf="form.controls.email.dirty && form.controls.email.errors?.validateEmail">It must be a valid email.</mat-error>
+						<mat-hint *ngIf="availableEmailMessage" [ngClass]="availableEmailClass">{{ availableEmailMessage }}</mat-hint>
+					</mat-form-field><!-- Email Input Ends-->
+
+					<!-- Username Input -->
+					<mat-form-field class="modal-box-form__inputs">
+						<input matInput
+						(blur)="checkUsername()"
+						type="text"
+						placeholder="Username"
+						formControlName="username"
+						name="username"
+						required>
+						<!-- Userusername Error Block -->
+						<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.required">The username field is required.</mat-error>
+						<mat-error *ngIf="form.controls.username.dirty && form.controls.username.dirty && form.controls.username.errors?.minlength">The username must be at least 5 characters.</mat-error>
+						<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.maxlength">The username can not excceed 15 characters</mat-error>
+						<mat-error *ngIf="form.controls.username.dirty && form.controls.username.errors?.validateUsername">The username must not contain special characters</mat-error>
+						<mat-hint *ngIf="availableUsernameMessage" [ngClass]="availableUsernameClass">{{ availableUsernameMessage }}</mat-hint>
+					</mat-form-field><!-- Username Input Ends-->
+
+
+					<!-- Password Input -->
+					<mat-form-field class="modal-box-form__inputs">
+						<input matInput
+						type="password"
+						placeholder="Password"
+						formControlName="password"
+						name="password"
+						required>
+						<!-- Password Error Block -->
+						<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.required">The password field is required.</mat-error>
+						<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.minlength">The password must be at least 5 characters.</mat-error>
+						<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.maxlength">The password can not excceed 35 characters</mat-error>
+						<mat-error *ngIf="form.controls.password.dirty && form.controls.password.errors?.validatePassword">The password must contain at least 1 number, 1 special character, 1 lowercase, and 1 uppercase letter</mat-error>
+					</mat-form-field><!-- Password Input Ends-->
+
+					<!-- Confirm Input -->
+					<mat-form-field class="modal-box-form__inputs">
+						<input matInput
+						type="password"
+						placeholder="Confirm"
+						formControlName="confirm"
+						name="confirm"
+						required>
+						<!-- Confirm Error Block -->
+						<mat-error *ngIf="form.controls.confirm.dirty && form.controls.confirm.errors?.required">The confirm field is required.</mat-error>
+						<mat-error *ngIf="form.controls.confirm.dirty && form.errors?.matchingPasswords">The passwords do not match</mat-error>
+					</mat-form-field><!-- Confirm Input Ends-->
+						
+					<!-- Modal Buttons -->
+						<div class="modal-box-buttons">
+							<button type="submit" 
+								[disabled]="
+								!form.valid || 
+								proccessing || 
+								!emailAvailable || 
+								!usernameAvailable" 
+								class="modal-buttons modal-box-buttons__buttons register__button">
+								<mat-icon class="modal-box-buttons__icon">lock</mat-icon>
+								Create Account
+							</button>
+						</div>
+				</form>
+			<!-- </div> Modal Form Ends -->
+
+
+		</div>
+
+
+	</div>
+</div>

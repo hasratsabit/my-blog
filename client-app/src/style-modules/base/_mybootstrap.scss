@@ -1451,11 +1451,11 @@
   &__form {
     width: 85% !important;
     margin-left: 7%;
-    @include atSmall {
-      width: 45% !important;
-      margin-left: 0;
-      float: left;
-    }
+    // @include atSmall {
+    //   width: 45% !important;
+    //   margin-left: 0;
+    //   float: left;
+    // }
   }
 
   &__promo {
@@ -2581,6 +2581,18 @@ mat-option {
     z-index: 10000;
     @include atSmall {
       transform: translateX(120px) translateY(30px);
+    }
+  }
+
+  &__login-modal {
+    @include atSmall {
+      transform: translateX(400px) translateY(100px);
+    }
+  }
+
+  &__register {
+    @include atSmall {
+      transform: translateX(400px) translateY(50px);
     }
   }
 }
