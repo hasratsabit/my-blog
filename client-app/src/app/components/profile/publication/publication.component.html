@@ -6,7 +6,7 @@
           <!-- <button class="profile-table__add-btn">Add Publication</button> -->
       </div>
       <div *ngFor="let blog of blogs" class="profile-table__row">
-          <span class="profile-table__data">{{ blog.date }}</span>
+          <span class="profile-table__data">{{ blog.date | date: 'MMM dd, yyyy' }}</span>
           <span class="profile-table__data">{{ blog.title }} </span>
           <span class="profile-table__data">
               <a [routerLink]="['/read-more', blog._id]" class="profile-table__link">Read</a>

@@ -77,7 +77,6 @@ import { PublicationComponent } from './components/profile/publication/publicati
 import { AboutComponent } from './components/profile/about/about.component';
 import { BlogListComponent } from './components/blog/blog-list/blog-list.component';
 import { CategoryListComponent } from './components/category/category-list/category-list.component';
-import { DatePipe } from './pipes/date.pipe';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersListComponent } from './components/user/users-list/users-list.component';
 
@@ -127,7 +126,6 @@ import { UsersListComponent } from './components/user/users-list/users-list.comp
     AboutComponent,
     BlogListComponent,
     CategoryListComponent,
-    DatePipe,
     NotFoundComponent,
     UsersListComponent,
   ],
