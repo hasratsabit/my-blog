@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf public && cd client-app && ng build --prod && cd ..  && node index.js"
+    "start": "rimraf public && cd client-app && ng build --prod && cd ..  && node index.js"
   },
   "keywords": [],
   "author": "",
