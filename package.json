@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "rimraf public && cd client-app && ng build --prod && cd ..  && node index.js"
+    "start": "rimraf public && cd client-app && ng build --prod && cd ..  && node index.js",
+    "dev": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +19,8 @@
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.10.2",
-    "multer": "^1.3.0"
-  },
-  "devDependencies": {
+    "multer": "^1.3.0",
     "rimraf": "^2.6.2"
-  }
+  },
+  "devDependencies": {}
 }
