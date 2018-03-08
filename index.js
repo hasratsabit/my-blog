@@ -41,7 +41,7 @@ const profileRoute = require('./routes/profile/profile')(router);
 
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use('/uploads', express.static('uploads'));
-	app.use(express.static(__dirname + '/public')); 
+	app.use(express.static(__dirname + '/docs')); 
 	app.use(bodyParser.json());
 	
 
@@ -76,7 +76,7 @@ const profileRoute = require('./routes/profile/profile')(router);
 
 	// Other routes goes to the client side.
 	app.get('*', (req, res) => {
-	  res.sendFile(path.join(__dirname + '/public/index.html'));
+	  res.sendFile(path.join(__dirname + '/docs/index.html'));
 	});
 
 
