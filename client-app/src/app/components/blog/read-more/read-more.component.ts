@@ -28,7 +28,18 @@ export class ReadMoreComponent implements OnInit, OnDestroy {
   currentBlogUrl;
   subscription: Subscription;
 
+  body;
+  date;
   blog = {
+    title: String,
+    body: this.body,
+    imagePath: String,
+    author: String,
+    date: this.date,
+    likes: Number,
+    _id: String,
+    shareCounter: Number,
+    viewCounter: Number,
     authorName: String,
     comments: [{
       authorUsername: String,
@@ -476,6 +487,8 @@ public url: String;
     this.currentBlogUrl = this.activatedRoute.snapshot.params.id;
    this.subscription =  this.blogService.getSingBlog(this.currentBlogUrl).subscribe(data => {
       this.blog = data.blog;
+      this.body = data.blog.body;
+      this.date = data.blog.date;
       this.commentsLength = data.blog.comments.length
       this.usernames = data.blog.comments.map(com => com.authorUsername);
       this.getProfile(this.usernames);

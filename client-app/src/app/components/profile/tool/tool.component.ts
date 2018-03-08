@@ -17,7 +17,12 @@ export class ToolComponent implements OnInit {
   alertMessage: String;
   alertMessageClass: String;
   successIcon: Boolean = false;
-  singleTool = {};
+  
+  singleTool = {
+    tool: String,
+    level: String,
+    start: String
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -77,6 +82,7 @@ toolFormIsLoaded = false;
 
 toggleToolForm(){
   this.toolFormIsLoaded = !this.toolFormIsLoaded;
+  this.toolForm.reset();
 }
 
 

@@ -154,7 +154,11 @@ onSubmitSkill(){
 // ==========================================================
 updateSkillIsLoaded = false;
 updateSkillId
-singleSkill = {};
+singleSkill = {
+  language: String,
+  level: String,
+  start: String
+};
 
   toggleUpdateSkill(id){
     this.updateSkillId = id;

@@ -180,16 +180,6 @@
 
   <hr class="divider">
 
-    <!-- SELECT  -->
-  <h4>Select</h4>
-
-  <mat-form-field>
-    <mat-select placeholder="Favorite food">
-    <mat-option *ngFor="let food of foods" [value]="food.value">
-      {{ food.viewValue }}
-    </mat-option>
-  </mat-select>
-  </mat-form-field>
 
   <hr class="divider">
 
@@ -210,7 +200,7 @@
     <!-- EXPENTION PANEL  -->
   <h4>Expanding Panels</h4>
 
-  <mat-accordion>
+  <!-- <mat-accordion>
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
@@ -223,7 +213,7 @@
       </mat-expansion-panel-header>
       <p>I'm visible because I am open</p>
     </mat-expansion-panel>
-  </mat-accordion>
+  </mat-accordion> -->
 
   <hr class="divider">
 

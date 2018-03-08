@@ -99,6 +99,7 @@ enableForm(){
 
  toggleProjectForm(){
    this.projectFormIsLoaded = !this.projectFormIsLoaded;
+   this.projectForm.reset();
  }
 
 
@@ -147,7 +148,11 @@ enableForm(){
 
  updatingProjId
  updateProjFormIsLoaded = false;
- singleProj = {};
+ singleProj = {
+   title: String,
+   tech: String,
+   link: String
+ };
 
   toggleUpdateProjForm(id) {
     this.updateProjFormIsLoaded = !this.updateProjFormIsLoaded;

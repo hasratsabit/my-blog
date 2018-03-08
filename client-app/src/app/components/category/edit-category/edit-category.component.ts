@@ -18,13 +18,13 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
 // 		                VARIABLES
 // ==========================================================
   form;
-  public processing: Boolean = false;
-  public successIcon: Boolean = false;
+  public processing: boolean = false;
+  public successIcon: boolean = false;
   public alertMessage: String;
   public alertMessageClass: String;
   subcription: Subscription;
 
-  public updateCategoryIsLoaded: Boolean = false;
+  public updateCategoryIsLoaded: boolean = false;
 
   categories = {
     category: String

@@ -26,7 +26,12 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   successIcon = false;
   categories; // This gets the category list for edit form.
   blogCategory; // This is what user selects when updates the blog.
-  blog = {}; // This holds the single blog coming from DB.
+  body;
+  blog = {
+    title: String,
+    category: String,
+    body: this.body
+  }; // This holds the single blog coming from DB.
   blogAuthor;
   authorUsername;
   blogId;
@@ -197,6 +202,7 @@ onUpdateBlog(){
   getSingleBlog(id) {
     this.subscription = this.blogService.getSingBlog(id).subscribe(data => {
       this.blog = data.blog;
+      this.body = data.blog.body;
       this.blogAuthor = data.blog.author;
       this.authorUsername = data.blog.authorUsername;
       this.blogId = data.blog._id;
