@@ -41,6 +41,7 @@ const profileRoute = require('./routes/profile/profile')(router);
 
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use('/uploads', express.static('uploads'));
+	app.use(express.static(__dirname + '/public')); 
 	app.use(bodyParser.json());
 	
 
@@ -74,9 +75,9 @@ const profileRoute = require('./routes/profile/profile')(router);
 	// app.use('/contact', contactRoute)
 
 	// Other routes goes to the client side.
-	// app.get('*', (req, res) => {
-	//   res.sendFile(path.join(__dirname + '/client-app/dist/index.html'));
-	// });
+	app.get('*', (req, res) => {
+	  res.sendFile(path.join(__dirname + '/public/index.html'));
+	});
 
 
 

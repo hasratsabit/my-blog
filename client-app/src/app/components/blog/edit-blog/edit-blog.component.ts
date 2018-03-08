@@ -30,7 +30,7 @@ export class EditBlogComponent implements OnInit, OnDestroy {
   blog = {
     title: String,
     category: String,
-    body: this.body
+    body: this.body // Becasue of the text editor this property should assign to data comming from innerhtml
   }; // This holds the single blog coming from DB.
   blogAuthor;
   authorUsername;
