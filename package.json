@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "public && cd client-app && ng build --prod && cd ..  && node index.js",
+    "start": "cd client-app && ng build --prod && cd ..  && node index.js",
     "dev": "node index.js"
   },
   "keywords": [],
